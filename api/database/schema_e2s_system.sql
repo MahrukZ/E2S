@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `first_name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `ROLE` ENUM('facility energy manager', 'administrator', 'director of estates', 'third party') NOT NULL,
+  `ROLE` ENUM('facility energy manager', 'administrator', 'director of estates') NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   `org_id` INT NOT NULL,
   PRIMARY KEY (`user_id`)
@@ -79,8 +79,7 @@ CREATE TABLE IF NOT EXISTS `consumptions` (
   
   CREATE TABLE IF NOT EXISTS `sites_has_users` (
   `site_id` INT NOT NULL,
-  `user_id` INT NOT NULL,
-  PRIMARY KEY (`site_id`)
+  `user_id` INT NOT NULL
   );
 
 ALTER TABLE `organisations`
