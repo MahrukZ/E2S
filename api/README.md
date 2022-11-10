@@ -30,10 +30,10 @@ Create a new file in `/api` called `.env`
 ```
 ├── api/
 │   ├── assets/
-│	├── database/
-│	├── .env <–––
-│	├── index.ts
-│ 	└── ...
+│   ├── database/
+│   ├── .env <–––
+│   ├── index.ts
+│   └── ...
 ├── ui/
 └── ...
 ```
