@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `first_name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `ROLE` ENUM('facility energy manager', 'administrator', 'director of estates') NOT NULL,
+  `role` ENUM('facility energy manager', 'administrator', 'director of estates') NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   `org_id` INT NOT NULL,
   PRIMARY KEY (`user_id`)
@@ -115,20 +115,16 @@ ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`);
 -- VIEWS -- 
 
 CREATE VIEW user_management AS
-SELECT u.user_id, u.first_name, u.last_name, u.email, o.name, COUNT(*) as `no_sites_managed`, u.role
+SELECT u.user_id, u.first_name, u.last_name, u.email, o.name AS `organisation`, (SELECT COUNT(*) FROM sites_has_users s WHERE u.user_id = s.user_id) AS `no_sites_managed`, u.role
 FROM users u
-INNER JOIN organisations o
-ON u.org_id = o.org_id
-INNER JOIN sites_has_users s
-ON u.user_id = s.user_id;
+JOIN organisations o
+ON u.org_id = o.org_id;
 
 CREATE VIEW site_management AS
-SELECT s.site_id, s.location, o.name, COUNT(*) as `number_of_users`
+SELECT s.site_id, s.location, o.name AS `organisation`, (SELECT COUNT(*) FROM sites_has_users shu WHERE s.site_id = shu.site_id)  AS `number_of_users`
 FROM sites s
 INNER JOIN organisations o
-ON s.org_id = o.org_id
-INNER JOIN sites_has_users shu
-ON s.site_id = shu.site_id;
+ON s.org_id = o.org_id;
 
 CREATE VIEW electricity_usage AS
 SELECT c.consumption_id, c.time_interval, c.electricity_demand
