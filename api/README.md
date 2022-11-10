@@ -29,11 +29,11 @@ Create a new file in `/api` called `.env`
 
 ```
 ├── api/
-│	 ├── assets/
-│	 ├── database/
-│	 ├── .env <–––
-│	 ├── index.ts
-│ 	 └── ...
+│   ├── assets/
+│	├── database/
+│	├── .env <–––
+│	├── index.ts
+│ 	└── ...
 ├── ui/
 └── ...
 ```
