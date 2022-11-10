@@ -12,7 +12,7 @@ cd /api
 ### *Step 2*
 Copy and paste the below command to install the required dependencies:
 ```
-npm i express mysql2 cors dotenv nodemon typescript @types/cors @types/express @types/node @types/mysql --save
+npm i express mysql2 sequelize sequelize-typescript cors dotenv nodemon typescript @types/cors @types/express @types/node @types/mysql --save
 ```
 
 - `express` package - Fast, unopinionated, minimalist web framework for [Node.js](http://nodejs.org/). **Learn more [here](https://www.npmjs.com/package/express)**
