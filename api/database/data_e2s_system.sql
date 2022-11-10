@@ -1,6 +1,8 @@
 USE e2s_system;
+
+SET foreign_key_checks = 0;
 TRUNCATE TABLE `logos`;
-TRUNCATE TABLE `organizations`;
+TRUNCATE TABLE `organisations`;
 TRUNCATE TABLE `suppliers`;
 TRUNCATE TABLE `logos`;
 TRUNCATE TABLE `reports`;
@@ -30,19 +32,19 @@ INSERT INTO `organisations`
 VALUES(null, 'Empowering Energy Solutions', 4);
 
 INSERT INTO `users`
-VALUES(null, 'Martin', 'James', 'martinjames@cardiff.ac.uk', 'director of estate', 'martin12345', 1);
+VALUES(null, 'Martin', 'James', 'martinjames@cardiff.ac.uk', 'director of estates', 'martin12345', 1);
 INSERT INTO `users`
 VALUES(null, 'Rhy', 'Jones', 'rhyjones@cardiff.ac.uk', 'facility energy manager', 'rhy12345', 1);
 INSERT INTO `users`
 VALUES(null, 'James', 'Ohay', 'jamesohay@cardiff.ac.uk', 'facility energy manager', 'james12345', 1);
 INSERT INTO `users`
-VALUES(null, 'Helen', 'Wilkins', 'helenwilkins@nhs.co.uk', 'director of estate', 'helen12345', 2);
+VALUES(null, 'Helen', 'Wilkins', 'helenwilkins@nhs.co.uk', 'director of estates', 'helen12345', 2);
 INSERT INTO `users`
 VALUES(null, 'Max', 'Norris', 'maxnorris@nhs.co.uk', 'facility energy manager', 'max12345', 2);
 INSERT INTO `users`
 VALUES(null, 'Johnny', 'Bravo', 'johnnybravo@nhs.co.uk', 'facility energy manager', 'johnny12345', 2);
 INSERT INTO `users`
-VALUES(null, 'Jade', 'Pierce', 'jadepierce@ons.gov.uk', 'director of estate', 'jade12345', 3);
+VALUES(null, 'Jade', 'Pierce', 'jadepierce@ons.gov.uk', 'director of estates', 'jade12345', 3);
 INSERT INTO `users`
 VALUES(null, 'Martina', 'Schmitt', 'martinaschmitt@ons.gov.uk', 'facility energy manager', 'martina12345', 3);
 INSERT INTO `users`
@@ -131,11 +133,11 @@ INSERT INTO `bills`
 VALUES(null, './assets/bills/eon_bill.pdf', 'combined', 'valid', '2022-06-14', 7, 2);
 
 INSERT INTO `consumptions`
-VALUES(null, '01/01/2020 12:00', '2576.3', '2359.0', '43.45', '50.45', 1, 1);
+VALUES(null, '2020/01/01 12:00', '2576.3', '2359.0', '43.45', '50.45', 1, 1);
 INSERT INTO `consumptions`
-VALUES(null, '01/02/2020 15:00', '2529.7', '2351.1', '35.55', '32.55', 5, 5);
+VALUES(null, '2020/01/02 15:00', '2529.7', '2351.1', '35.55', '32.55', 5, 5);
 INSERT INTO `consumptions`
-VALUES(null, '01/03/2020 20:00', '2878.7', '2699.1', '78.55', '56.55', 8, 8);
+VALUES(null, '2020/01/03 20:00', '2878.7', '2699.1', '78.55', '56.55', 8, 8);
 
 INSERT INTO `reports`
 VALUES(null, './assets/reports/report.pdf', 1, '2022-02-20');
@@ -150,3 +152,5 @@ INSERT INTO `insight_templates`
 VALUES(null, 'Last ..., your electricity consumption increased by ...% compared to your baseline');
 INSERT INTO `insight_templates`
 VALUES(null, 'Your forecast energy costs for the next ... is £... This is an increase/decrease of ...% compared to last ... at the same period');
+
+SET foreign_key_checks = 1;

@@ -22,13 +22,13 @@ CREATE TABLE IF NOT EXISTS `organisations` (
 
 CREATE TABLE IF NOT EXISTS `logos` (
   `logo_id` INT NOT NULL AUTO_INCREMENT,
-  `link` VARCHAR(45) NOT NULL,
+  `link` VARCHAR(150) NOT NULL,
   PRIMARY KEY (`logo_id`)
   );
   
   CREATE TABLE IF NOT EXISTS `bills` (
   `bill_id` INT NOT NULL AUTO_INCREMENT,
-  `link` VARCHAR(45) NULL,
+  `link` VARCHAR(150) NULL,
   `type` ENUM('gas', 'electricity', 'combined') NULL,
   `status` ENUM('valid', 'in verification', 'invalid') NULL,
   `date` DATE NULL,
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `sites` (
   
   CREATE TABLE IF NOT EXISTS `reports` (
   `report_id` INT NOT NULL AUTO_INCREMENT,
-  `link` VARCHAR(45) NULL,
+  `link` VARCHAR(150) NULL,
   `site_id` INT NOT NULL,
   `date` DATE NOT NULL,
   PRIMARY KEY (`report_id`)
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `sites` (
 
 CREATE TABLE IF NOT EXISTS `insight_templates` (
   `insight_id` INT NOT NULL AUTO_INCREMENT,
-  `insight` VARCHAR(45) NOT NULL,
+  `insight` VARCHAR(500) NOT NULL,
   PRIMARY KEY (`insight_id`)
   );
 
