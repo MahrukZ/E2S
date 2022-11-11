@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/api/insights", async (req, res) => {
-    insightController.getInsights()
+    insightController.getAllInsights()
         .then(data => res.status(200).send({
             message: 'Success',
             'status': res.statusCode,

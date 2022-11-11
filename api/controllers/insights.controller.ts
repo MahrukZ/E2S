@@ -7,16 +7,16 @@ export class InsightController {
         this.insightService = new InsightService();
     }
 
-    async getInsights() {
-        return await this.insightService.getInsights();
-    }
-
     async createInsight(insight: any) {
         return await this.insightService.createInsight(insight);
     }
 
     async deleteInsight(insightId: number) {
         return await this.insightService.deleteInsight(insightId);
+    }
+
+    async getAllInsights() {
+        return await this.insightService.getAllInsights();
     }
 
     async updateInsight(insight: any) {

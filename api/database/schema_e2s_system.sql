@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `sites` (
 
 CREATE TABLE IF NOT EXISTS `insight_templates` (
   `insight_id` INT NOT NULL AUTO_INCREMENT,
-  `insight` VARCHAR(500) NOT NULL,
+  `description` VARCHAR(500) NOT NULL,
   PRIMARY KEY (`insight_id`)
   );
 

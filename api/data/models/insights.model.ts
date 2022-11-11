@@ -15,5 +15,5 @@ export class Insights extends Model {
     @Column({ 
         type: DataTypes.STRING, 
     })
-    insight!: string;
+    description!: string;
 }

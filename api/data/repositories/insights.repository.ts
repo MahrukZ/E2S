@@ -17,16 +17,6 @@ export class InsightRepository {
         this.insightRepository = this.db.Sequelize.getRepository(Insights);
     }
 
-    async getInsights() {
-        try {
-            const insight = await this.insightRepository.findAll();
-            return insight;
-        } catch (err) {
-            console.error(err);
-            return ['Error: Failed to connect to the repository'];
-        }
-    }
-
     async createInsight(insight: any) {
         let data = {};
         try {
@@ -51,6 +41,16 @@ export class InsightRepository {
         return data;
     }
 
+    async getAllInsights() {
+        try {
+            const insight = await this.insightRepository.findAll();
+            return insight;
+        } catch (err) {
+            console.error(err);
+            return err;
+        }
+    }
+
     async updateInsight(insight: any) {
         let data = {};
         try {
@@ -64,6 +64,4 @@ export class InsightRepository {
         }
         return data;
     }
-
-
 }
