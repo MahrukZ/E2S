@@ -1,4 +1,4 @@
-import { connect } from "../../config/db.config";
+import { connect } from "../config/db.config";
 import { Insights } from "../models/insights.model";
 
 export class InsightRepository {

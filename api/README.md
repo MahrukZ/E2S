@@ -45,12 +45,12 @@ Add you environment variables:
 ```
 PORT=8080
 
-MY_SQL_DB_HOST='localhost'
-MY_SQL_DB_USER='your user'
-MY_SQL_DB_PASSWORD='your password'
-MY_SQL_DB_PORT=3306
-MY_SQL_DB_DATABASE='e2s_system'
-MY_SQL_DB_CONNECTION_LIMIT=4
+DB_HOST='localhost'
+DB_USER='YOUR USERNAME'
+DB_PASSWORD='YOUR PASSWORD'
+DB_PORT=3306
+DB_DATABASE='YOUR DATABASE'
+DB_DIALECT='mysql'
 ```
 
 ## Available Scripts
