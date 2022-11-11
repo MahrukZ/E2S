@@ -51,5 +51,19 @@ export class InsightRepository {
         return data;
     }
 
+    async updateInsight(insight: any) {
+        let data = {};
+        try {
+            data = await this.insightRepository.update({...insight}, {
+                where: {
+                    insight_id: insight.insight_id
+                }
+            });
+        } catch(err) {
+            console.error(err);
+        }
+        return data;
+    }
+
 
 }

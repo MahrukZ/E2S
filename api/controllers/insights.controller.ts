@@ -18,4 +18,8 @@ export class InsightController {
     async deleteInsight(insightId: number) {
         return await this.insightService.deleteInsight(insightId);
     }
+
+    async updateInsight(insight: any) {
+        return await this.insightService.updateInsight(insight);
+    }
 }
