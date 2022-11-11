@@ -14,10 +14,13 @@ app.use(cors());
 
 app.use("/api/insights", async (req, res) => {
     try {
-        insightController.getInsights().then(data => res.json(data));
+        res.status(200);
+        insightController.getInsights().then(data => res.json(data))
     } catch (err) {
         console.error(err);
-        res.json(["Failed to retreive data"])
+        res.status(500).send([
+            "Server Error: Failed to fetch insights."
+        ]);
     }
 });
 

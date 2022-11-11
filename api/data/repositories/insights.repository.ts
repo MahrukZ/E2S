@@ -20,11 +20,10 @@ export class InsightRepository {
     async getInsights() {
         try {
             const insight = await this.insightRepository.findAll();
-            console.log("insights: ", insight);
             return insight;
         } catch (err) {
             console.error(err);
-            return ['Error: Failed to get insight data'];
+            return ['Error: Failed to connect to the repository'];
         }
     }
 }
