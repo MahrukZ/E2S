@@ -10,4 +10,8 @@ export class InsightController {
     async getInsights() {
         return await this.insightService.getInsights();
     }
+
+    async createInsight(insight: any) {
+        return await this.insightService.createInsight(insight);
+    }
 }

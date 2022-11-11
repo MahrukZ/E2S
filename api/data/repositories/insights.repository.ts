@@ -26,4 +26,14 @@ export class InsightRepository {
             return ['Error: Failed to connect to the repository'];
         }
     }
+
+    async createInsight(insight: any) {
+        let data = {};
+        try {
+            data = await this.insightRepository.create(insight);
+        } catch(err) {
+            console.error(err);
+        }
+        return data;
+    }
 }

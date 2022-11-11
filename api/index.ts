@@ -28,6 +28,23 @@ app.use("/api/insights", async (req, res) => {
         });
 });
 
+app.use("/api/insight", async (req, res) => {
+    console.log(req.body)
+    insightController.createInsight(req.body)
+        .then(data => res.status(201).send({
+            message: 'Created',
+            'status': res.statusCode,
+            data
+        }))
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "server error: failed to create insight.",
+                'status': res.statusCode
+            });
+            console.log(err);
+        });
+});
+
 
 app.listen(port, () => {
     console.log(`Server is running on port: http://localhost:${port}`);
