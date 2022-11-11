@@ -11,3 +11,51 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Top bar styling */
+
+#hoverContainer {
+  border: solid;
+  border-color: #73A6BA;
+  height: 50%;
+  width: 90%;
+}
+
+#colour-nav {
+  background-color: #73A6BA;
+}
+
+#dropdown-basic-button {
+  background-color:#417285;
+  border-color: #417285;
+}
+
+.dropdown-menu[aria-labelledby = dropdown-basic-button] {
+  background-color: #73A6BA;
+  border-radius: 5;
+  margin: auto;
+  min-width:auto;
+  padding-top: 4%;
+  padding-bottom: 4%;
+}
+
+#settingsDropdown {
+  color: white;
+  width: 100%;
+  margin: auto;
+  /* padding: 2%; */
+}
+
+#settingsDropdown:hover {
+  background-color: #0084CF;
+}
+
+#signOutDropdown {
+  color: white;
+  width: 100%;
+  margin: auto;
+}
+
+#signOutDropdown:hover {
+  background-color: #EC808D;
+}
