@@ -24,7 +24,7 @@ app.get("/api/insights", async (req, res) => {
                 message: err.message || "server error: failed to fetch insights.",
                 'status': res.statusCode
             });
-            console.log(err);
+            console.error(err);
         });
 });
 
@@ -40,7 +40,7 @@ app.post("/api/insight", async (req, res) => {
                 message: err.message || "server error: failed to create insight.",
                 'status': res.statusCode
             });
-            console.log(err);
+            console.error(err);
         });
 });
 
@@ -55,7 +55,7 @@ app.put("/api/insight", async (req, res) => {
                 message: err.message || "server error: failed to update insight.",
                 'status': res.statusCode
             });
-            console.log(err);
+            console.error(err);
         });
 });
 
@@ -70,7 +70,7 @@ app.delete("/api/insight/:id", async (req, res) => {
                 message: err.message || "server error: failed to delete insight.",
                 'status': res.statusCode
             });
-            console.log(err);
+            console.error(err);
         });
 });
 
