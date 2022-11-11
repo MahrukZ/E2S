@@ -28,8 +28,22 @@ app.use("/api/insights", async (req, res) => {
         });
 });
 
+app.delete("/api/insight/:id", async (req, res) => {
+    insightController.deleteInsight(parseInt(req.params.id))
+        .then(data => res.status(202).send({
+            message: `Deleted ${data} record.`,
+            'status': res.statusCode,
+        }))
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "server error: failed to delete insight.",
+                'status': res.statusCode
+            });
+            console.log(err);
+        });
+});
+
 app.use("/api/insight", async (req, res) => {
-    console.log(req.body)
     insightController.createInsight(req.body)
         .then(data => res.status(201).send({
             message: 'Created',
@@ -44,7 +58,6 @@ app.use("/api/insight", async (req, res) => {
             console.log(err);
         });
 });
-
 
 app.listen(port, () => {
     console.log(`Server is running on port: http://localhost:${port}`);

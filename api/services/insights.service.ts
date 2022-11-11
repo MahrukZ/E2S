@@ -14,4 +14,8 @@ export class InsightService {
     async createInsight(insight: any) {
         return await this.insightRepository.createInsight(insight);
     }
+
+    async deleteInsight(insightId: number) {
+        return await this.insightRepository.deleteInsight(insightId);
+    }
 }

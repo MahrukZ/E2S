@@ -14,4 +14,8 @@ export class InsightController {
     async createInsight(insight: any) {
         return await this.insightService.createInsight(insight);
     }
+
+    async deleteInsight(insightId: number) {
+        return await this.insightService.deleteInsight(insightId);
+    }
 }

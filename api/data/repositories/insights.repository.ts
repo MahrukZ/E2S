@@ -36,4 +36,20 @@ export class InsightRepository {
         }
         return data;
     }
+
+    async deleteInsight(insightId: number) {
+        let data = {};
+        try {
+            data = await this.insightRepository.destroy({
+                where: {
+                    insight_id: insightId
+                }
+            });
+        } catch(err) {
+            console.error(err);
+        }
+        return data;
+    }
+
+
 }
