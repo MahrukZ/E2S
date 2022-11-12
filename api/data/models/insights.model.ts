@@ -1,7 +1,12 @@
 import { Column, Model, Table, DataType } from "sequelize-typescript";
 
+export interface IInsight {
+    insight_id?: number;
+    description?: string;
+}
+
 @Table({ tableName: 'insight_templates' })
-export class Insights extends Model {
+export class Insights extends Model implements IInsight {
 
     @Column({
         primaryKey: true,
@@ -9,10 +14,10 @@ export class Insights extends Model {
         autoIncrement: true,
         type: DataType.INTEGER 
     })
-    insight_id!: number;
+    insight_id?: number;
 
     @Column({ 
         type: DataType.STRING, 
     })
-    description!: string;
+    description?: string;
 }

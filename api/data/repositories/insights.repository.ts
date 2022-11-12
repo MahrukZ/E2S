@@ -1,5 +1,5 @@
 import { connect } from "../config/db.config";
-import { Insights } from "../models/insights.model";
+import { Insights, IInsight } from "../models/insights.model";
 
 export class InsightRepository {
     private db: any = {};
@@ -17,7 +17,7 @@ export class InsightRepository {
         this.insightRepository = this.db.Sequelize.getRepository(Insights);
     }
 
-    async createInsight(insight: any) {
+    async createInsight(insight: IInsight) {
         let data = {};
         try {
             data = await this.insightRepository.create(insight);
@@ -51,7 +51,7 @@ export class InsightRepository {
         }
     }
 
-    async updateInsight(insight: any) {
+    async updateInsight(insight: IInsight) {
         let data = {};
         try {
             data = await this.insightRepository.update({...insight}, {

@@ -1,3 +1,4 @@
+import { IInsight } from "../data/models/insights.model";
 import { InsightService } from "../services/insights.service";
 
 export class InsightController {
@@ -7,7 +8,7 @@ export class InsightController {
         this.insightService = new InsightService();
     }
 
-    async createInsight(insight: any) {
+    async createInsight(insight: IInsight) {
         return await this.insightService.createInsight(insight);
     }
 
@@ -19,7 +20,7 @@ export class InsightController {
         return await this.insightService.getAllInsights();
     }
 
-    async updateInsight(insight: any) {
+    async updateInsight(insight: IInsight) {
         return await this.insightService.updateInsight(insight);
     }
 }
