@@ -3,77 +3,35 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { InsightController } from "./controllers/insights.controller";
 
+// config
 dotenv.config();
-
 const port = process.env.PORT || 8082;
 const app = express();
-const insightController = new InsightController();
 
 app.use(express.json());
 app.use(cors());
 
+// controllers
+const insightController = new InsightController();
+
+// routes
 app.get("/api/insights", async (req, res) => {
-    insightController.getAllInsights()
-        .then(data => res.status(200).send({
-            message: 'Success',
-            'status': res.statusCode,
-            data
-        }))
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "server error: failed to fetch insights.",
-                'status': res.statusCode
-            });
-            console.error(err);
-        });
+    insightController.getAllInsights(req, res);
 });
 
 app.post("/api/insight", async (req, res) => {
-    insightController.createInsight(req.body)
-        .then(data => res.status(201).send({
-            message: 'Created',
-            'status': res.statusCode,
-            data
-        }))
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "server error: failed to create insight.",
-                'status': res.statusCode
-            });
-            console.error(err);
-        });
+    insightController.createInsight(req, res);
 });
 
 app.put("/api/insight", async (req, res) => {
-    insightController.updateInsight(req.body)
-        .then(data => res.status(200).send({
-            message: `Updated ${data} record.`,
-            'status': res.statusCode
-        }))
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "server error: failed to update insight.",
-                'status': res.statusCode
-            });
-            console.error(err);
-        });
+    insightController.updateInsight(req, res);
 });
 
 app.delete("/api/insight/:id", async (req, res) => {
-    insightController.deleteInsight(parseInt(req.params.id))
-        .then(data => res.status(202).send({
-            message: `Deleted ${data} record.`,
-            'status': res.statusCode,
-        }))
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "server error: failed to delete insight.",
-                'status': res.statusCode
-            });
-            console.error(err);
-        });
+    insightController.deleteInsight(req, res);
 });
 
+// port listen
 app.listen(port, () => {
     console.log(`Server is running on port: http://localhost:${port}`);
 });

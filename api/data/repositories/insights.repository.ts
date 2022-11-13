@@ -17,17 +17,18 @@ export class InsightRepository {
         this.insightRepository = this.db.Sequelize.getRepository(Insights);
     }
 
-    async createInsight(insight: IInsight) {
+    async createInsight(insight: IInsight): Promise<IInsight> {
         let data = {};
         try {
             data = await this.insightRepository.create(insight);
         } catch(err) {
             console.error(err);
+            throw (err);
         }
         return data;
     }
 
-    async deleteInsight(insightId: number) {
+    async deleteInsight(insightId: number): Promise<IInsight> {
         let data = {};
         try {
             data = await this.insightRepository.destroy({
@@ -37,21 +38,23 @@ export class InsightRepository {
             });
         } catch(err) {
             console.error(err);
+            throw (err);
         }
         return data;
     }
 
-    async getAllInsights() {
+    async getAllInsights(): Promise<IInsight> {
+        let data = {};
         try {
-            const insight = await this.insightRepository.findAll();
-            return insight;
+            data = await this.insightRepository.findAll();
         } catch (err) {
             console.error(err);
-            return err;
+            throw (err);
         }
+        return data;
     }
 
-    async updateInsight(insight: IInsight) {
+    async updateInsight(insight: IInsight): Promise<IInsight> {
         let data = {};
         try {
             data = await this.insightRepository.update({...insight}, {
@@ -61,6 +64,7 @@ export class InsightRepository {
             });
         } catch(err) {
             console.error(err);
+            throw (err);
         }
         return data;
     }
