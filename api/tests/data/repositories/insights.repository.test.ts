@@ -4,28 +4,27 @@ import { Insights, IInsight } from "../../../data/models/insights.model";
 describe('InsightRepository', () => {
     const insightRepository = new InsightRepository();
 
-    const mockResponse: IInsight[] = [
-        {
-            insight_id: 1,
-            description: 'insight 1'
-        },
-        {
-            insight_id: 2,
-            description: 'insight 2'
-        },
-        {
-            insight_id: 3,
-            description: 'insight 3'
-        }
-    ];
-
-    beforeEach(() =>{
+    beforeEach(() => {
         jest.resetAllMocks();
     });
 
     describe('InsightRepository.getAllInsights', () => {
         it('should return all insights', async () => {
             // Given
+            const mockResponse: IInsight[] = [
+                {
+                    insight_id: 1,
+                    description: 'insight 1'
+                },
+                {
+                    insight_id: 2,
+                    description: 'insight 2'
+                },
+                {
+                    insight_id: 3,
+                    description: 'insight 3'
+                }
+            ];
             Insights.findAll = jest.fn().mockResolvedValue(mockResponse);
 
             // When
@@ -34,6 +33,7 @@ describe('InsightRepository', () => {
             // Then
             expect(result).toEqual(mockResponse);
             expect(Insights.findAll).toHaveBeenCalledTimes(1);
+            expect(Insights.findAll).toHaveBeenCalledWith();
         });
     });
 
