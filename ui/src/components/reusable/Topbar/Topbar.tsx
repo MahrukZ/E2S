@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { FaUserAlt, FaCog, FaSignOutAlt } from "react-icons/fa";
 import { Container, Nav, Navbar, Dropdown, DropdownButton, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css"
+import e from 'cors';
 
 
 function Topbar() {
@@ -18,20 +19,21 @@ function Topbar() {
   }
   // End of reference
   return (
-    <Navbar data-testid="account-1" className='py-0' id='colour-nav'>
+    <Navbar data-testid="topbar" className='py-0' id='colour-nav'>
       <Container className="justify-content-end">
         <Row>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Container id="hoverContainer" onMouseEnter={showDropdown} onMouseLeave={hideDropdown}>
+            <Container data-testid="dropdownButton-1" id="hoverContainer" onMouseEnter={showDropdown} onMouseLeave={hideDropdown}>
               <DropdownButton 
+                data-testid="dropdownMenu-1"
                 id="dropdown-basic-button" 
                 title={<span><FaUserAlt /> Rhys Jones </span>}
                 show={show}
                 size="sm">
-                <Dropdown.Item id='settingsDropdown' href="#"><FaCog />   SETTINGS</Dropdown.Item>
-                <Dropdown.Item id='signOutDropdown' href="#"><FaSignOutAlt />  SIGN OUT</Dropdown.Item>
+                <Dropdown.Item data-testid="settingsDropdown-1" id="settingsDropdown" href="#"><FaCog />   SETTINGS</Dropdown.Item>
+                <Dropdown.Item data-testid="signOutDropdown-1" id="signOutDropdown" href="#"><FaSignOutAlt />  SIGN OUT</Dropdown.Item>
               </DropdownButton>
             </Container>
           </Nav>
