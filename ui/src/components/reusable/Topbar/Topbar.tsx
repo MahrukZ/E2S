@@ -18,7 +18,7 @@ function Topbar() {
   }
   // End of reference
   return (
-    <Navbar className='py-0' id='colour-nav'>
+    <Navbar data-testid="account-1" className='py-0' id='colour-nav'>
       <Container className="justify-content-end">
         <Row>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
