@@ -20,8 +20,8 @@ test('dropdown elements should not be visible initially', () => {
     // Given
     render(<Topbar />);
     // When
-    const settingsElement = screen.queryByTestId("settingsDropdown-1");
-    const signOutElement = screen.queryByTestId("signOutDropdown-1");
+    const settingsElement = screen.queryByTestId("settingsDropdown");
+    const signOutElement = screen.queryByTestId("signOutDropdown");
     // Then
     expect(settingsElement).not.toBeInTheDocument();
     expect(signOutElement).not.toBeInTheDocument();
@@ -31,10 +31,10 @@ test('dropdown elements should be visible after mouse enter', () => {
     // Given
     render(<Topbar />);
     // When
-    const dropdownContainer = screen.getByTestId("dropdownButton-1");
+    const dropdownContainer = screen.getByTestId("dropdownButton");
     fireEvent.mouseEnter(dropdownContainer);
-    const settingsElement = screen.queryByTestId("settingsDropdown-1");
-    const signOutElement = screen.queryByTestId("signOutDropdown-1");
+    const settingsElement = screen.queryByTestId("settingsDropdown");
+    const signOutElement = screen.queryByTestId("signOutDropdown");
     // Then
     expect(settingsElement).toBeInTheDocument();
     expect(signOutElement).toBeInTheDocument();

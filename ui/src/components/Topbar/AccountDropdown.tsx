@@ -23,15 +23,15 @@ function AccountDropdown({ name }: AccountDropdownProps) {
   // End of reference
 
   return (
-    <Container data-testid="dropdownButton-1" id="hoverContainer" onMouseEnter={showDropdown} onMouseLeave={hideDropdown}>
+    <Container data-testid="dropdownButton" id="hoverContainer" onMouseEnter={showDropdown} onMouseLeave={hideDropdown}>
     <DropdownButton 
-      data-testid="dropdownMenu-1"
+      data-testid="dropdownMenu"
       id="dropdown-basic-button" 
-      title={<span><FaUserAlt /> {name} </span>}
+      title={<span><span id="userIcon"><FaUserAlt /></span> {name} </span>}
       show={show}
       size="sm">
-      <Dropdown.Item data-testid="settingsDropdown-1" id="settingsDropdown" href="#"><FaCog />  SETTINGS</Dropdown.Item>
-      <Dropdown.Item data-testid="signOutDropdown-1" id="signOutDropdown" href="#"><FaSignOutAlt />  SIGN OUT</Dropdown.Item>
+      <Dropdown.Item data-testid="settingsDropdown" id="settingsDropdown" href="#"><span id="settingsIcon"><FaCog /></span>  SETTINGS</Dropdown.Item>
+      <Dropdown.Item data-testid="signOutDropdown" id="signOutDropdown" href="#"><span id="signOutIcon"><FaSignOutAlt /></span>  SIGN OUT</Dropdown.Item>
     </DropdownButton>
   </Container>
   )

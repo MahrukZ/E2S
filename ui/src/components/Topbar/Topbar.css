@@ -1,54 +1,69 @@
-/* Top bar styling */
-
 #hoverContainer {
     border: solid;
     border-color: #73A6BA;
     height: 50%;
     width: fit-content;
-  }
+}
   
-  #topbar {
+#topbar {
     background-color: #73A6BA;
-  }
-  
-  #dropdown-basic-button {
+}
+
+#dropdown-basic-button {
     background-color:#417285;
     border-color: #417285;
     border-radius: 10px;
     min-width: 9em;
-  }
-  
-  .dropdown-menu[aria-labelledby = dropdown-basic-button] {
+    margin-bottom: 1px;
+}
+
+.dropdown-menu[aria-labelledby = dropdown-basic-button] {
     background-color: #73A6BA;
     border-radius: 10px;
     margin: auto;
     min-width:auto;
     padding-top: 0;
     padding-bottom: 0;
-  }
-  
-  #settingsDropdown {
+}
+
+#settingsDropdown {
     color: white;
     width: 100%;
     margin: auto;
     border-radius: 10px;
-  }
-  
-  #settingsDropdown:hover {
+}
+
+#settingsDropdown:hover {
     background-color: #0084CF;
-  }
-  
-  #signOutDropdown {
+}
+
+#signOutDropdown {
     color: white;
     width: 100%;
     margin: auto;
     border-radius: 10px;
-  }
-  
-  #signOutDropdown:hover {
+}
+
+#signOutDropdown:hover {
     background-color: #EC808D;
-  }
-  
-  #dropdown-basic-button::after{
+}
+
+#dropdown-basic-button::after{
     display: none; 
-  }
+}
+
+#userIcon {
+    position: relative;
+    bottom: 1px;
+}
+
+#settingsIcon {
+    position: relative;
+    bottom: 1px;
+}
+
+#signOutIcon {
+    position: relative;
+    bottom: 1px;
+}
+
