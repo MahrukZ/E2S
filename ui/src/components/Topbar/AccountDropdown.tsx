@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { FaUserAlt, FaCog, FaSignOutAlt } from "react-icons/fa";
-import { Container, Nav, Navbar, Dropdown, DropdownButton, Row } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css"
-import "./Topbar.css"
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useState } from 'react';
+import { Container, Dropdown, DropdownButton } from "react-bootstrap";
+import { FaCog, FaSignOutAlt, FaUserAlt } from "react-icons/fa";
+import "./Topbar.css";
 
 interface AccountDropdownProps {
     name: String;
