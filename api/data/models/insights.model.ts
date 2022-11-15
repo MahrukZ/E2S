@@ -1,19 +1,23 @@
-import { DataTypes } from "sequelize";
-import { Column, Model, Table } from "sequelize-typescript";
+import { Column, Model, Table, DataType } from "sequelize-typescript";
+
+export interface IInsight {
+    insight_id?: number;
+    description?: string;
+}
 
 @Table({ tableName: 'insight_templates' })
-export class Insights extends Model {
+export class Insights extends Model implements IInsight {
 
     @Column({
         primaryKey: true,
         allowNull: false,
         autoIncrement: true,
-        type: DataTypes.INTEGER 
+        type: DataType.INTEGER 
     })
-    insight_id!: number;
+    insight_id?: number;
 
     @Column({ 
-        type: DataTypes.STRING, 
+        type: DataType.STRING, 
     })
-    description!: string;
+    description?: string;
 }

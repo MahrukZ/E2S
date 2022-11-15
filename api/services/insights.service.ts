@@ -1,3 +1,4 @@
+import { IInsight } from "../data/models/insights.model";
 import { InsightRepository } from "../data/repositories/insights.repository";
 
 export class InsightService {
@@ -7,7 +8,7 @@ export class InsightService {
         this.insightRepository = new InsightRepository();
     }
 
-    async createInsight(insight: any) {
+    async createInsight(insight: IInsight) {
         return await this.insightRepository.createInsight(insight);
     }
 
@@ -19,7 +20,7 @@ export class InsightService {
         return await this.insightRepository.getAllInsights();
     }
 
-    async updateInsight(insight: any) {
+    async updateInsight(insight: IInsight) {
         return await this.insightRepository.updateInsight(insight);
     }
 }

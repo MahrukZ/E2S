@@ -1,5 +1,5 @@
 import { connect } from "../config/db.config";
-import { Insights } from "../models/insights.model";
+import { Insights, IInsight } from "../models/insights.model";
 
 export class InsightRepository {
     private db: any = {};
@@ -17,17 +17,18 @@ export class InsightRepository {
         this.insightRepository = this.db.Sequelize.getRepository(Insights);
     }
 
-    async createInsight(insight: any) {
+    async createInsight(insight: IInsight): Promise<IInsight> {
         let data = {};
         try {
             data = await this.insightRepository.create(insight);
         } catch(err) {
             console.error(err);
+            throw (err);
         }
         return data;
     }
 
-    async deleteInsight(insightId: number) {
+    async deleteInsight(insightId: number): Promise<IInsight> {
         let data = {};
         try {
             data = await this.insightRepository.destroy({
@@ -37,21 +38,23 @@ export class InsightRepository {
             });
         } catch(err) {
             console.error(err);
+            throw (err);
         }
         return data;
     }
 
-    async getAllInsights() {
+    async getAllInsights(): Promise<IInsight> {
+        let data = {};
         try {
-            const insight = await this.insightRepository.findAll();
-            return insight;
+            data = await this.insightRepository.findAll();
         } catch (err) {
             console.error(err);
-            return err;
+            throw (err);
         }
+        return data;
     }
 
-    async updateInsight(insight: any) {
+    async updateInsight(insight: IInsight): Promise<IInsight> {
         let data = {};
         try {
             data = await this.insightRepository.update({...insight}, {
@@ -61,6 +64,7 @@ export class InsightRepository {
             });
         } catch(err) {
             console.error(err);
+            throw (err);
         }
         return data;
     }
