@@ -5,16 +5,16 @@ function Users() {
     const [ users, setUsers ] = useState([]);
     const userService = new UserService();
 
-    const fetchData = () => {
-        userService.getUsers().then(u => {
-            setUsers(u)
-            console.log(u);            
-        })
-    }
+    // const fetchData = () => {
+    //     userService.getUsers().then(u => {
+    //         setUsers(u)
+    //         console.log(u);            
+    //     })
+    // }
 
-    useEffect(() => {
-        fetchData()
-    }, []);
+    // useEffect(() => {
+    //     fetchData()
+    // }, []);
 
     return (
         <p>User1</p>

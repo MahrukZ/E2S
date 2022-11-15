@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { InsightController } from "./controllers/insights.controller";
+import { SiteController } from "./controllers/sites.controller";
 
 // config
 dotenv.config();
@@ -13,8 +14,11 @@ app.use(cors());
 
 // controllers
 const insightController = new InsightController();
+const siteController = new SiteController();
 
 // routes
+
+// insights
 app.get("/api/insights", async (req, res) => {
     insightController.getAllInsights(req, res);
 });
@@ -29,6 +33,23 @@ app.put("/api/insight", async (req, res) => {
 
 app.delete("/api/insight/:id", async (req, res) => {
     insightController.deleteInsight(req, res);
+});
+
+//sites
+app.get("/api/sites", async (req, res) => {
+    siteController.getAllSites(req, res);
+});
+
+app.post("/api/site", async (req, res) => {
+    siteController.createSite(req, res);
+});
+
+app.put("/api/site", async (req, res) => {
+    siteController.updateSite(req, res);
+});
+
+app.delete("/api/site/:id", async (req, res) => {
+    siteController.deleteSite(req, res);
 });
 
 // port listen
