@@ -1,7 +1,7 @@
 import React from 'react'
 import '@testing-library/jest-dom'
 import { render, screen, cleanup, fireEvent, waitFor, getByTestId } from '@testing-library/react'
-import Topbar from '../../src/components/reusable/Topbar/Topbar'
+import Topbar from '../../src/components/Topbar/Topbar'
 
 afterEach(() => {
     cleanup();
@@ -40,28 +40,3 @@ test('dropdown elements should be visible after mouse enter', () => {
     expect(signOutElement).toBeInTheDocument();
 });
 
-// not working yet
-// test('dropdown elements should be invisible after mouse leave', async () => {
-//     // Given
-//     render(<Topbar />);
-//     // When
-//     const dropdownContainer = screen.getByTestId("dropdownButton-1");
-//     fireEvent.mouseEnter(dropdownContainer);
-
-//     await waitFor(() => {
-//         const settingsElement = screen.queryByTestId("settingsDropdown-1");
-//         const signOutElement = screen.queryByTestId("signOutDropdown-1");
-//         // Then
-//         expect(settingsElement).toBeInTheDocument();
-//         expect(signOutElement).toBeInTheDocument();      
-//     });
-
-//     fireEvent.mouseLeave(dropdownContainer);
-    
-//     await waitFor(() => {
-//         const dropdownMenu = screen.queryByTestId("dropdownMenu-1");
-//         // Then
-//         expect(dropdownMenu).toHaveAttribute("show", false);
-//     });
-
-// });

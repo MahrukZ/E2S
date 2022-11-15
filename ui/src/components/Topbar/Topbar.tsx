@@ -3,6 +3,7 @@ import { FaUserAlt, FaCog, FaSignOutAlt } from "react-icons/fa";
 import { Container, Nav, Navbar, Dropdown, DropdownButton, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css"
 import e from 'cors';
+import "./Topbar.css"
 
 
 function Topbar() {
