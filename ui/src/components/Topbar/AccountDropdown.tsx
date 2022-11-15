@@ -23,7 +23,7 @@ function AccountDropdown({ name }: AccountDropdownProps) {
   // End of reference
 
   return (
-    <Container data-testid="dropdownButton" id="hoverContainer" onMouseEnter={showDropdown} onMouseLeave={hideDropdown}>
+    <Container data-testid="dropdownButton" id="hoverContainer" className="mt-1 mb-1" onMouseEnter={showDropdown} onMouseLeave={hideDropdown}>
     <DropdownButton 
       data-testid="dropdownMenu"
       id="dropdown-basic-button" 

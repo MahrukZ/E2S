@@ -3,6 +3,9 @@
     border-color: #73A6BA;
     height: 50%;
     width: fit-content;
+    margin-bottom: 0;
+    position: relative;
+    bottom: 1.px;
 }
   
 #topbar {
@@ -14,7 +17,6 @@
     border-color: #417285;
     border-radius: 10px;
     min-width: 9em;
-    margin-bottom: 1px;
 }
 
 .dropdown-menu[aria-labelledby = dropdown-basic-button] {
@@ -65,5 +67,10 @@
 #signOutIcon {
     position: relative;
     bottom: 1px;
+}
+
+#siteDropdown {
+    position: relative;
+    top:2px;
 }
 

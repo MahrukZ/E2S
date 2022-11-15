@@ -1,10 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Nav, Navbar, Row } from "react-bootstrap";
 import AccountDropdown from './AccountDropdown';
+import SiteDropdown from "./SiteDropdown";
 import "./Topbar.css";
 
-
 function Topbar() {
+  const sitesList = ["Site 1", "Site 2", "Site 3"]
+
   return (
     <Navbar data-testid="topbar" className='py-0' id='topbar'>
       <Container className="justify-content-end">
@@ -12,6 +14,7 @@ function Topbar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
+            <SiteDropdown sites = {sitesList} />
             <AccountDropdown name="Rhys Jones" />
           </Nav>
         </Navbar.Collapse>
