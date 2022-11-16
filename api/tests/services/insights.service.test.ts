@@ -16,8 +16,8 @@ jest.mock('../../data/repositories/insights.repository', () => {
 
 
 describe('InsightService', () => {
-    const insightRepository = new InsightRepository();
-    const insightService = new InsightService();
+    const repository = new InsightRepository();
+    const service = new InsightService();
 
     beforeEach(() => {
         jest.resetAllMocks();
@@ -26,21 +26,21 @@ describe('InsightService', () => {
     describe('InsightService.createInsight', () => {
         it('should create an insights', async () => {
             // Given
-            const mockCreateInsight: IInsight = {
+            const mCreateInsight: IInsight = {
                 insight_id: 4,
                 description: 'new insight'
             };
             const createSpy = jest
-                .spyOn(insightRepository, 'createInsight')
-                .mockResolvedValue(mockCreateInsight);
+                .spyOn(repository, 'createInsight')
+                .mockResolvedValue(mCreateInsight);
 
             // When
-            const result = await insightService.createInsight(mockCreateInsight);
+            const result = await service.createInsight(mCreateInsight);
 
             // Then
-            expect(result).toEqual(mockCreateInsight);
+            expect(result).toEqual(mCreateInsight);
             expect(createSpy).toHaveBeenCalledTimes(1);
-            expect(createSpy).toHaveBeenCalledWith(mockCreateInsight);
+            expect(createSpy).toHaveBeenCalledWith(mCreateInsight);
         });
     });
 
@@ -48,16 +48,16 @@ describe('InsightService', () => {
         it('should delete an insights', async () => {
             // Given
             const insightId = 2;
-            const mockResponse = true;
+            const mResponse = true;
             const deleteSpy = jest
-                .spyOn(insightRepository, 'deleteInsight')
-                .mockResolvedValue(mockResponse);
+                .spyOn(repository, 'deleteInsight')
+                .mockResolvedValue(mResponse);
 
             // When
-            const result = await insightService.deleteInsight(insightId);
+            const result = await service.deleteInsight(insightId);
 
             // Then
-            expect(result).toEqual(mockResponse);
+            expect(result).toEqual(mResponse);
             expect(deleteSpy).toHaveBeenCalledTimes(1);
             expect(deleteSpy).toHaveBeenCalledWith(insightId);
         });
@@ -66,7 +66,7 @@ describe('InsightService', () => {
     describe('InsightService.getAllInsights', () => {
         it('should return all insights', async () => {
             // Given
-            const mockResponse: IInsight[] = [
+            const mInsight: IInsight[] = [
                 {
                     insight_id: 1,
                     description: 'insight 1'
@@ -80,38 +80,38 @@ describe('InsightService', () => {
                     description: 'insight 3'
                 }
             ];
-            const spy = jest
-                .spyOn(insightRepository, 'getAllInsights')
-                .mockResolvedValue(mockResponse);
+            const getSpy = jest
+                .spyOn(repository, 'getAllInsights')
+                .mockResolvedValue(mInsight);
 
             // When
-            const result = await insightService.getAllInsights();
+            const result = await service.getAllInsights();
 
             // Then
-            expect(result).toEqual(mockResponse);
-            expect(spy).toHaveBeenCalledTimes(1);
-            expect(spy).toHaveBeenCalledWith();
+            expect(result).toEqual(mInsight);
+            expect(getSpy).toHaveBeenCalledTimes(1);
+            expect(getSpy).toHaveBeenCalledWith();
         });
     });
 
     describe('InsightService.updateInsight', () => {
         it('should update an insights', async () => {
             // Given
-            const mockUpdateInsight: IInsight = {
+            const mUpdateInsight: IInsight = {
                 insight_id: 1,
                 description: 'updated insight'
             };
             const updateSpy = jest
-                .spyOn(insightRepository, 'updateInsight')
-                .mockResolvedValue(mockUpdateInsight);
+                .spyOn(repository, 'updateInsight')
+                .mockResolvedValue(mUpdateInsight);
 
             // When
-            const result = await insightService.updateInsight(mockUpdateInsight);
+            const result = await service.updateInsight(mUpdateInsight);
 
             // Then
-            expect(result).toEqual(mockUpdateInsight);
+            expect(result).toEqual(mUpdateInsight);
             expect(updateSpy).toHaveBeenCalledTimes(1);
-            expect(updateSpy).toHaveBeenCalledWith(mockUpdateInsight);
+            expect(updateSpy).toHaveBeenCalledWith(mUpdateInsight);
         }); 
     });   
 });
