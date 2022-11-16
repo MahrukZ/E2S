@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { InsightController } from "./controllers/insights.controller";
+import { UserManagementController } from "./controllers/user_management.controller";
 
 // config
 dotenv.config();
@@ -13,8 +14,11 @@ app.use(cors());
 
 // controllers
 const insightController = new InsightController();
+const userManagementController = new UserManagementController();
 
 // routes
+
+// insights
 app.get("/api/insights", async (req, res) => {
     insightController.getAllInsights(req, res);
 });
@@ -29,6 +33,11 @@ app.put("/api/insight", async (req, res) => {
 
 app.delete("/api/insight/:id", async (req, res) => {
     insightController.deleteInsight(req, res);
+});
+
+// user management
+app.get("/api/user_managements", async (req, res) => {
+    userManagementController.getAllUserManagements(req, res);
 });
 
 // port listen

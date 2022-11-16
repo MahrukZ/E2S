@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import dotenv from "dotenv";
 import { Insights } from "../models/insights.model";
+import { UserManagement } from "../models/user_management_model";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ export const connect = () => {
     });
 
     sequelize.addModels([Insights]);
+    sequelize.addModels([UserManagement]);
 
     const db:any = {};
     db.Sequelize = Sequelize;
