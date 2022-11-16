@@ -24,4 +24,21 @@ export class UserManagementController {
         });
     }
 
+    
+    async findUserManagementById(req: Request, res: Response) {
+        this.userManagementService.findUserManagementByUserId(parseInt(req.params.id))
+        .then(data => res.status(200).send({
+            message: 'Success',
+            'status': res.statusCode,
+            data
+        }))
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "server error: failed to fetch user management.",
+                'status': res.statusCode
+            });
+            console.error(err);
+        });
+    }
+
 }

@@ -28,4 +28,19 @@ export class UserManagementRepository {
         return data;
     }
 
+    async findUserManagementByUserId(userId: number): Promise<IUserManagement[]> {
+        let data = [];
+        try {
+            data = await this.userManagementRepository.findAll({
+                where: {
+                    user_id: userId,
+                  }
+              });
+        } catch (err) {
+            console.error(err);
+            throw (err);
+        }
+        return data;
+    }
+
 }

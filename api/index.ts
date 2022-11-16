@@ -40,6 +40,10 @@ app.get("/api/user_managements", async (req, res) => {
     userManagementController.getAllUserManagements(req, res);
 });
 
+app.get("/api/user_management/:id", async (req, res) => {
+    userManagementController.findUserManagementById(req, res);
+});
+
 // port listen
 app.listen(port, () => {
     console.log(`Server is running on port: http://localhost:${port}`);

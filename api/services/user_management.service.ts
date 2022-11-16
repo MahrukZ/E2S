@@ -12,4 +12,8 @@ export class UserManagementService {
         return await this.userManagementRepository.getAllUserManagements();
     }
 
+    async findUserManagementByUserId(userId: number) {
+        return await this.userManagementRepository.findUserManagementByUserId(userId);
+    }
+
 }
