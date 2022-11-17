@@ -18,10 +18,10 @@ describe("InsightController", () => {
     const service = new InsightService();
     const controller = new InsightController();
 
-    const mRequest = (body?: any, param?: any) => {
+    const mRequest = (body?: any, params?: any) => {
         const req: any = {};
         req.body = jest.fn().mockReturnValue(body || req);
-        req.param = jest.fn().mockReturnValue(param || req);
+        req.params = jest.fn().mockReturnValue(params || req);
         return req;
     };
     const mResponse = () => {
@@ -42,18 +42,18 @@ describe("InsightController", () => {
             status: 201,
             data: { 'insight_id': 4, 'description': 'new insight' }
         };
-
-        const mCreateInsight: IInsight = {
+        const mCreateBody: IInsight = {
             insight_id: 4,
             description: 'new insight'
         };
-        it('should create an insights', async () => {
+
+        it('should create an insight', async () => {
             // Given
-            const req = mRequest(mCreateInsight);
+            const req = mRequest(mCreateBody);
             const res = mResponse();
             const createSpy = jest
                 .spyOn(service, 'createInsight')
-                .mockResolvedValue(mCreateInsight);
+                .mockResolvedValue(mCreateBody);
 
             // When
             await controller.createInsight(req, res);
@@ -63,7 +63,34 @@ describe("InsightController", () => {
             expect(res.json).toHaveBeenCalledWith(mCreateSuccess);
 
             expect(createSpy).toHaveBeenCalledTimes(1);
-            // expect(createSpy).toHaveBeenCalledWith(mCreateInsight);
+            // expect(createSpy).toHaveBeenCalledWith(mCreateBody);
+        });
+    });
+
+    describe("InsightController.deleteInsight", () => {
+        const mDeleteSuccess: any = {
+            message: 'Successfully deleted 1 record.',
+            status: 202
+        };
+        const mDeleteParams: number = 1;
+
+        it('should delete an insight', async () => {
+            // Given
+            const req = mRequest('', mDeleteParams);
+            const res = mResponse();
+            const deleteSpy = jest
+                .spyOn(service, 'deleteInsight')
+                .mockResolvedValue(mDeleteParams);
+
+            // When
+            await controller.deleteInsight(req, res);
+
+            // Then
+            expect(res.status).toHaveBeenCalledWith(202);
+            expect(res.json).toHaveBeenCalledWith(mDeleteSuccess);
+
+            expect(deleteSpy).toHaveBeenCalledTimes(1);
+            // expect(deleteSpy).toHaveBeenCalledWith(mDeleteParams);
         });
     });
 
@@ -86,7 +113,6 @@ describe("InsightController", () => {
                 },
             ],
         };
-
         const mInsight: IInsight[] = [
             {
                 insight_id: 1,
@@ -101,6 +127,7 @@ describe("InsightController", () => {
                 description: 'insight 3'
             }
         ];
+
         it('should return all insights', async () => {
             // Given
             const req = mRequest();

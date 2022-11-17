@@ -29,19 +29,22 @@ export class InsightController {
     };
 
     async deleteInsight(req: Request, res: Response) {
-        this.insightService.deleteInsight(parseInt(req.params.id))
-        .then(data => res.status(202).send({
-            message: `Successfully deleted ${data} record.`,
-            'status': res.statusCode,
-        }))
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "server error: failed to delete insight.",
-                'status': res.statusCode
-            });
-            console.error(err);
-        });
-    }
+        return (this.insightService.deleteInsight(parseInt(req.params.id))
+            .then(data => {
+                res.status(202).json({
+                    message: `Successfully deleted ${data} record.`,
+                    status: 202,
+                });
+            })
+            .catch(err => {
+                res.status(500).json({
+                    message: err.message || "server error: failed to delete insight.",
+                    status: res.statusCode
+                });
+                console.error(err);
+            })
+        );
+    };
 
     async getAllInsights(req: Request, res: Response): Promise<any> {
         return (this.insightService.getAllInsights()
