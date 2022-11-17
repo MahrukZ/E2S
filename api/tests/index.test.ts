@@ -1,87 +1,87 @@
-import request from "supertest"
-import app from "../index"
-import { IInsight } from "../data/models/insights.model"
+import request from "supertest";
+import axios from "axios";
+import app from "../index";
+import { InsightController } from "../controllers/insights.controller";
+import { IInsight } from "../data/models/insights.model";
 
-describe('GET /api/insights', () => {
-    it('should get all insights', async () => {
-        // Given 
-        // When
-        const res = await request(app).get("/api/insights");
+jest.mock('axios');
 
-        // Then 
-        expect(res.body.message).toEqual('Success');
-        expect(res.statusCode).toBe(200);
-        expect(res.body.data).toEqual([
+jest.mock('../controllers/insights.controller', () => {
+    const mInsightController = { 
+        createInsight: jest.fn(),
+        deleteInsight: jest.fn(),
+        getAllInsights: jest.fn(),
+        updateInsight: jest.fn()
+    };
+    return {
+        InsightController: jest.fn(() => mInsightController)
+    };
+});
+
+describe('index', () => {
+    const controller = new InsightController();
+    const mockedAxios = axios as jest.Mocked<typeof axios>;
+
+    const mRequest = (body?: any, params?: any) => {
+        const req: any = {};
+        req.body = jest.fn().mockReturnValue(body || req);
+        req.params = jest.fn().mockReturnValue(params || req);
+        return req;
+    };
+    const mResponse = () => {
+        const res: any = {};
+        res.status = jest.fn().mockReturnValue(res);
+        res.json = jest.fn().mockReturnValue(res);
+        return res;
+    };
+
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+
+    describe('GET /api/insights', () => {
+        const mInsight: IInsight[] = [
             {
-                "insight_id": 1,
-                "description": "Considering your energy prices forecasts, your CHP units should be ran into thermal led mode. This could help you save £... on your energy bills and ... tCO2e"
+                insight_id: 1,
+                description: 'insight 1'
             },
             {
-                "insight_id": 2,
-                "description": "Last ..., your electricity consumption increased by ...% compared to your baseline"
+                insight_id: 2,
+                description: 'insight 2'
             },
             {
-                "insight_id": 3,
-                "description": "Your forecast energy costs for the next ... is £... This is an increase/decrease of ...% compared to last ... at the same period"
+                insight_id: 3,
+                description: 'insight 3'
             }
-        ]);
-    });
-});
-
-describe('POST /api/insight', () => {
-    it('should create a new insight', async () => {
-        // Given 
-        const newInsight: IInsight = {
-            description: 'Your carbon emissions have decreased by ...% for the ...week compared to the week...'
+        ];
+        const mSuccessResponse: any = {
+            message: 'Success',
+            status: 200,
+            data: mInsight
         };
-       
-        // When
-        const res = await request(app)
-            .post('/api/insight')
-            .send(newInsight);
+        mockedAxios.get.mockResolvedValue(mSuccessResponse);
+        const req = mRequest();
+        const res = mResponse();
 
-        // Then 
-        expect(res.body.message).toEqual('Created');
-        expect(res.statusCode).toEqual(201);
-        expect(res.body.data).toEqual(
-            {
-                "insight_id": 4,
-                "description": "Your carbon emissions have decreased by ...% for the ...week compared to the week..."
-            }
-        );
-    });
-});
-
-describe('PUT /api/insight', () => {
-    it('should update an insight', async () => {
-        // Given 
-        const newInsight: IInsight = {
-            insight_id: 4,
-            description: 'Your carbon emissions have decreased by ...% for the ...week compared to the week... for this month'
-        };
-       
-        // When
-        const res = await request(app)
-            .put('/api/insight')
-            .send(newInsight);
-
-        // Then
-        expect(res.body.message).toEqual('Successfully updated 1 record.');
-        expect(res.statusCode).toEqual(200);
-    });
-});
-
-describe('DELETE /api/insight/:id', () => {
-    it('should delete an insight', async () => {
-        // Given 
-        const paramId = 4;
-        
-        // When
-        const res = await request(app)
-            .delete(`/api/insight/${paramId}`)
+        it('should fetch all insights when there is data', async () => {
+            // Given
             
-        // Then
-        expect(res.body.message).toEqual('Successfully deleted 1 record.');
-        expect(res.statusCode).toEqual(202);
+            const mUrl = "/api/insights";
+            const getSpy = jest
+                .spyOn(controller, 'getAllInsights');
+
+            // When
+            const result = await axios.get(mUrl);
+            await controller.getAllInsights(req, res);
+
+            // Then
+            expect(result).toEqual(mSuccessResponse);
+
+            expect(axios.get).toHaveBeenCalledTimes(1);
+            expect(axios.get).toHaveBeenCalledWith(mUrl);
+
+            expect(getSpy).toHaveBeenCalledTimes(1);
+            expect(getSpy).toHaveBeenCalledWith(req, res);
+        });
     });
 });
