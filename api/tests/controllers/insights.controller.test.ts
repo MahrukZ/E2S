@@ -1,4 +1,3 @@
-import { Request, Response } from "express";
 import { InsightController } from "../../controllers/insights.controller";
 import { IInsight } from "../../data/models/insights.model";
 import { InsightService } from "../../services/insights.service";
@@ -35,6 +34,37 @@ describe("InsightController", () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
+    });
+
+    describe("InsightController.createInsight", () => {
+        const mCreateSuccess: any = {
+            message: 'Created',
+            status: 201,
+            data: { 'insight_id': 4, 'description': 'new insight' }
+        };
+
+        const mCreateInsight: IInsight = {
+            insight_id: 4,
+            description: 'new insight'
+        };
+        it('should create an insights', async () => {
+            // Given
+            const req = mRequest(mCreateInsight);
+            const res = mResponse();
+            const createSpy = jest
+                .spyOn(service, 'createInsight')
+                .mockResolvedValue(mCreateInsight);
+
+            // When
+            await controller.createInsight(req, res);
+
+            // Then
+            expect(res.status).toHaveBeenCalledWith(201);
+            expect(res.json).toHaveBeenCalledWith(mCreateSuccess);
+
+            expect(createSpy).toHaveBeenCalledTimes(1);
+            // expect(createSpy).toHaveBeenCalledWith(mCreateInsight);
+        });
     });
 
     describe("InsightController.getAllInsights", () => {
@@ -80,11 +110,12 @@ describe("InsightController", () => {
                 .mockResolvedValueOnce(mInsight);
 
             // When
-            await controller.getAllInsights(req as Request, res as Response);
+            await controller.getAllInsights(req, res);
 
             // Then
             expect(res.status).toHaveBeenCalledWith(200);
             expect(res.json).toHaveBeenCalledWith(mGetSuccess);
+
             expect(getSpy).toHaveBeenCalledTimes(1);
             expect(getSpy).toHaveBeenCalledWith();
         });
