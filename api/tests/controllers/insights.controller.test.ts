@@ -37,14 +37,14 @@ describe("InsightController", () => {
     });
 
     describe("InsightController.createInsight", () => {
-        const mCreateSuccess: any = {
-            message: 'Created',
-            status: 201,
-            data: { 'insight_id': 4, 'description': 'new insight' }
-        };
         const mCreateBody: IInsight = {
             insight_id: 4,
             description: 'new insight'
+        };
+        const mCreateSuccess: any = {
+            message: 'Created',
+            status: 201,
+            data: mCreateBody
         };
 
         it('should create an insight', async () => {
@@ -63,7 +63,7 @@ describe("InsightController", () => {
             expect(res.json).toHaveBeenCalledWith(mCreateSuccess);
 
             expect(createSpy).toHaveBeenCalledTimes(1);
-            // expect(createSpy).toHaveBeenCalledWith(mCreateBody);
+            expect(createSpy.mock.results[0].value).toEqual(Promise.resolve(mCreateBody));
         });
     });
 
@@ -90,29 +90,11 @@ describe("InsightController", () => {
             expect(res.json).toHaveBeenCalledWith(mDeleteSuccess);
 
             expect(deleteSpy).toHaveBeenCalledTimes(1);
-            // expect(deleteSpy).toHaveBeenCalledWith(mDeleteParams);
+            expect(deleteSpy.mock.results[0].value).toEqual(Promise.resolve(mDeleteParams));
         });
     });
 
     describe("InsightController.getAllInsights", () => {
-        const mGetSuccess: any = {
-            message: 'Success',
-            status: 200,
-            data: [
-                {
-                    'insight_id': 1,
-                    'description': 'insight 1',
-                },
-                {
-                    'insight_id': 2,
-                    'description': 'insight 2',
-                },
-                {
-                    'insight_id': 3,
-                    'description': 'insight 3',
-                },
-            ],
-        };
         const mInsight: IInsight[] = [
             {
                 insight_id: 1,
@@ -127,6 +109,11 @@ describe("InsightController", () => {
                 description: 'insight 3'
             }
         ];
+        const mGetSuccess: any = {
+            message: 'Success',
+            status: 200,
+            data: mInsight
+        };
 
         it('should return all insights', async () => {
             // Given
@@ -145,6 +132,36 @@ describe("InsightController", () => {
 
             expect(getSpy).toHaveBeenCalledTimes(1);
             expect(getSpy).toHaveBeenCalledWith();
+        });
+    });
+
+    describe("InsightController.updateInsight", () => {
+        const mUpdateSuccess: any = {
+            message: 'Successfully updated 1 record.',
+            status: 200
+        };
+        const mUpdateBody: IInsight = {
+            insight_id: 1,
+            description: 'updated insight'
+        };
+
+        it('should update an insight', async () => {
+            // Given
+            const req = mRequest(mUpdateBody);
+            const res = mResponse();
+            const updateSpy = jest
+                .spyOn(service, 'updateInsight')
+                .mockResolvedValue(mUpdateBody);
+
+            // When
+            await controller.updateInsight(req, res);
+
+            // Then
+            expect(res.status).toHaveBeenCalledWith(200);
+            expect(res.json).toHaveBeenCalledWith(mUpdateSuccess);
+
+            expect(updateSpy).toHaveBeenCalledTimes(1);
+            expect(updateSpy.mock.results[0].value).toEqual(Promise.resolve(mUpdateBody));
         });
     });
 });

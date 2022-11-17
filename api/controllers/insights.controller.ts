@@ -32,7 +32,7 @@ export class InsightController {
         return (this.insightService.deleteInsight(parseInt(req.params.id))
             .then(data => {
                 res.status(202).json({
-                    message: `Successfully deleted ${data} record.`,
+                    message: `Successfully deleted 1 record.`,
                     status: 202,
                 });
             })
@@ -66,17 +66,20 @@ export class InsightController {
     };
 
     async updateInsight(req: Request, res: Response) {
-        this.insightService.updateInsight(req.body)
-        .then(data => res.status(200).send({
-            message: `Successfully updated ${data} record.`,
-            'status': res.statusCode
-        }))
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "server error: failed to update insight.",
-                'status': res.statusCode
-            });
-            console.error(err);
-        });
-    }
+        return (this.insightService.updateInsight(req.body)
+            .then(data => {
+                res.status(200).json({
+                    message: `Successfully updated 1 record.`,
+                    status: 200,
+                });
+            })
+            .catch(err => {
+                res.status(500).json({
+                    message: err.message || "server error: failed to update insight.",
+                    status: res.statusCode
+                });
+                console.error(err);
+            })
+        );
+    };
 }
