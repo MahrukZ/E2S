@@ -1,9 +1,10 @@
+import axios from "axios"
 
 export class SitesService {
 
     public async getSites(): Promise<any> {
-        const response = await fetch('/api/sites');
-        return await response.json();
+        const response = await axios.get('/api/sites');
+        return await response.data;
     }
 
 }

@@ -7,7 +7,7 @@ interface SiteDropownProps {
 function SiteDropdown({ sites }: SiteDropownProps) {
   return (
     <div>
-      <Form.Select id="siteDropdown" size="sm" className="mt-1 mb-1">
+      <Form.Select data-testid="siteDropdown" id="siteDropdown" size="sm" className="mt-1 mb-1">
         {sites.map((site, index) => (
           <option key={index} value={index}>
             {site}

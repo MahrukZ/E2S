@@ -21,7 +21,6 @@ function Topbar() {
       const site1: String = String(sites["data"][0]["name"]);
       const site2: String = String(sites["data"][1]["name"]);
       const site3: String = String(sites["data"][2]["name"]);
-      console.log(site3);
       sitesList2.push(site1);
       sitesList2.push(site2);
       sitesList2.push(site3);
