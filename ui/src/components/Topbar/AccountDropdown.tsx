@@ -27,7 +27,7 @@ function AccountDropdown({ name }: AccountDropdownProps) {
     <DropdownButton 
       data-testid="dropdownMenu"
       id="dropdown-basic-button" 
-      title={<span><span id="userIcon"><FaUserAlt /></span> {name} </span>}
+      title={<span><span id="userIcon"><FaUserAlt /></span> <span data-testid="accountName">{name}</span></span>}
       show={show}
       size="sm">
       <Dropdown.Item data-testid="settingsDropdown" id="settingsDropdown" href="#"><span id="settingsIcon"><FaCog /></span>  SETTINGS</Dropdown.Item>
