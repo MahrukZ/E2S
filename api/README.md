@@ -12,7 +12,7 @@ cd /api
 ### *Step 2*
 Copy and paste the below command to install the required dependencies:
 ```
-npm i express mysql2 sequelize sequelize-typescript cors dotenv nodemon jest ts-jest supertest typescript @types/cors @types/express @types/node @types/mysql @types/jest @types/supertest --save
+npm i express mysql2 sequelize sequelize-typescript cors dotenv nodemon jest ts-jest axios typescript @types/cors @types/express @types/node @types/mysql @types/jest @types/supertest --save
 ```
 
 - `express` package - Fast, unopinionated, minimalist web framework for [Node.js](http://nodejs.org/). **Learn more [here](https://www.npmjs.com/package/express)**
@@ -23,7 +23,7 @@ npm i express mysql2 sequelize sequelize-typescript cors dotenv nodemon jest ts-
 - `nodemon` package - nodemon is a tool that helps develop Node.js based applications by automatically restarting the node application when file changes in the directory are detected. **Learn more [here](https://www.npmjs.com/package/nodemon)**
 - `jest` package - Jest is a delightful JavaScript Testing Framework with a focus on simplicity. **Learn more [here](https://jestjs.io/)**
 - `ts-jest` package - A Jest transformer with source map support that lets you use Jest to test projects written in TypeScript. **Learn more [here](https://www.npmjs.com/package/ts-jest)**
-- `supertest` package - The motivation with this module is to provide a high-level abstraction for testing HTTP, while still allowing you to drop down to the lower-level API provided by superagent. **Learn more [here](https://www.npmjs.com/package/supertest)**
+- `axios` package - Promise based HTTP client for the browser and Node.js. **Learn more [here](https://www.npmjs.com/package/axios)**
 - `typescript` package - [TypeScript](https://www.typescriptlang.org/) is a language for application-scale JavaScript. **Learn more [here](https://www.npmjs.com/package/typescript)** 
 
 ## Environment Variables
