@@ -8,20 +8,20 @@ import "./Topbar.css";
 
 function Topbar() {
 
-  const [userName, setUserName] = useState<String>();
+  const [user, setUser] = useState<{userId: number; name: string}>({
+    userId: 0,
+    name: ""
+  });
 
   const userManagementService = new UserManagementService();
 
   useEffect(() => {
     const getUser =async () => {
-      const user = await userManagementService.findUserManagementByUserId(3);
-      const firstName: String = String(user["data"][0]["first_name"]);
-      console.log(firstName);
-      setUserName(firstName)
+      const userJSON = await userManagementService.findUserManagementByUserId(3); // User ID of 3 until login system is implemented
+      setUser({userId:userJSON["data"][0]["user_id"], name: String(userJSON["data"][0]["first_name"]) + " " + String(userJSON["data"][0]["last_name"])});
     }
     getUser();
   }, []);
-
 
   return (
     <Navbar data-testid="topbar" className='py-0' id='topbar'>
@@ -30,7 +30,7 @@ function Topbar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <AccountDropdown name="Rhys Jones" />
+            <AccountDropdown name={user.name} />
           </Nav>
         </Navbar.Collapse>
         </Row>

@@ -5,7 +5,7 @@ import { FaCog, FaSignOutAlt, FaUserAlt } from "react-icons/fa";
 import "./Topbar.css";
 
 interface AccountDropdownProps {
-    name: String;
+    name: string;
   }
 
 function AccountDropdown({ name }: AccountDropdownProps) {
