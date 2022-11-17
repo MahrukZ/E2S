@@ -19,14 +19,10 @@ function Topbar() {
 
       const sites = await sitesAndUsersService.findSitesAndUsersByUserId(3);
 
-      console.log(sites["data"].length);
-
       for (let i = 0; i < sites["data"].length; i++ ) {
         const currentSite: string = String(sites["data"][i]["name"]);
         const currentSiteId: number = (sites["data"][i]["site_id"]);
-
         const siteToAdd: SiteAndUser = new SiteAndUser(currentSiteId, currentSite);
-
         sitesList.push(siteToAdd);
       }
 

@@ -10,7 +10,7 @@ function SiteDropdown({ sites }: SiteDropownProps) {
     <div>
       <Form.Select data-testid="siteDropdown" id="siteDropdown" size="sm" className="mt-1 mb-1">
         {sites.map((site, index) => (
-          <option key={index} value={site.siteId}>
+          <option data-testid={index} key={index} value={site.siteId}>
             {site.siteName}
           </option>
         ))}
