@@ -1,6 +1,4 @@
-import request from "supertest";
 import axios from "axios";
-import app from "../index";
 import { InsightController } from "../controllers/insights.controller";
 import { IInsight } from "../data/models/insights.model";
 
@@ -65,7 +63,6 @@ describe('index', () => {
 
         it('should fetch all insights when there is data', async () => {
             // Given
-            
             const mUrl = "/api/insights";
             const getSpy = jest
                 .spyOn(controller, 'getAllInsights');
@@ -82,6 +79,42 @@ describe('index', () => {
 
             expect(getSpy).toHaveBeenCalledTimes(1);
             expect(getSpy).toHaveBeenCalledWith(req, res);
+        });
+    });
+
+    describe('POST /api/insights', () => {
+        const mCreateBody: IInsight = {
+            insight_id: 4,
+            description: 'new insight'
+        };
+        const mSuccessReponse: any = {
+            message: 'Created',
+            status: 201,
+            data: mCreateBody
+        };
+        mockedAxios.post.mockResolvedValue(mSuccessReponse);
+        const req = mRequest(mCreateBody);
+        const res = mResponse();
+
+        it('should create an insight when request body is provided', async () => {
+            // Given
+            const mUrl = "/api/insight";
+            const createSpy = jest
+                .spyOn(controller, 'createInsight')
+                .mockResolvedValue(mCreateBody);
+
+            // When
+            const result = await axios.post(mUrl);
+            await controller.createInsight(req, res);
+
+            // Then
+            expect(result).toEqual(mSuccessReponse);
+
+            expect(axios.post).toHaveBeenCalledTimes(1);
+            expect(axios.post).toHaveBeenCalledWith(mUrl);
+
+            expect(createSpy).toHaveBeenCalledTimes(1);
+            expect(createSpy).toHaveBeenCalledWith(req, res);
         });
     });
 });
