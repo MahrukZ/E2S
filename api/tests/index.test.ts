@@ -117,4 +117,39 @@ describe('index', () => {
             expect(createSpy).toHaveBeenCalledWith(req, res);
         });
     });
+
+    describe('PUT /api/insight', () => {
+        const mSuccessResponse: any = {
+            message: 'Successfully updated 1 record.',
+            status: 200
+        };
+        const mUpdateBody: IInsight = {
+            insight_id: 1,
+            description: 'updated insight'
+        };
+        mockedAxios.put.mockResolvedValue(mSuccessResponse);
+        const req = mRequest(mUpdateBody);
+        const res = mResponse();
+
+        it('should update an insight when request body is provided', async () => {
+            // Given
+            const mUrl = "/api/insight";
+            const updateSpy = jest
+                .spyOn(controller, 'updateInsight')
+                .mockResolvedValue(mUpdateBody);
+
+            // When
+            const result = await axios.put(mUrl);
+            await controller.updateInsight(req, res);
+
+            // Then
+            expect(result).toEqual(mSuccessResponse);
+
+            expect(axios.put).toHaveBeenCalledTimes(1);
+            expect(axios.put).toHaveBeenCalledWith(mUrl);
+
+            expect(updateSpy).toHaveBeenCalledTimes(1);
+            expect(updateSpy).toHaveBeenCalledWith(req, res);
+        });
+    });
 });

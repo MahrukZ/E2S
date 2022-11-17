@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { IInsight } from "../data/models/insights.model";
 import { InsightService } from "../services/insights.service";
 
 export class InsightController {
@@ -62,7 +61,7 @@ export class InsightController {
         );
     };
 
-    async updateInsight(req: Request, res: Response) {
+    async updateInsight(req: Request, res: Response): Promise<any> {
         return (this.insightService.updateInsight(req.body)
             .then(data => {
                 res.status(200).json({
