@@ -152,4 +152,36 @@ describe('index', () => {
             expect(updateSpy).toHaveBeenCalledWith(req, res);
         });
     });
+
+    describe('DELETE /api/insight/:id', () => {
+        const mSuccessResponse: any = {
+            message: 'Successfully deleted 1 record.',
+            status: 202
+        };
+        const mDeleteParams: number = 1;
+        mockedAxios.delete.mockResolvedValue(mSuccessResponse);
+        const req = mRequest('', mDeleteParams);
+        const res = mResponse();
+
+        it('should delete an insight when request params are provided', async () => {
+            // Given
+            const mUrl = `/api/insight/${mDeleteParams}`;
+            const deleteSpy = jest
+                .spyOn(controller, 'deleteInsight')
+                .mockResolvedValue(mDeleteParams);
+
+            // When
+            const result = await axios.delete(mUrl);
+            await controller.deleteInsight(req, res);
+
+            // Then
+            expect(result).toEqual(mSuccessResponse);
+
+            expect(axios.delete).toHaveBeenCalledTimes(1);
+            expect(axios.delete).toHaveBeenCalledWith(mUrl);
+
+            expect(deleteSpy).toHaveBeenCalledTimes(1);
+            expect(deleteSpy).toHaveBeenCalledWith(req, res);
+        });
+    });
 });

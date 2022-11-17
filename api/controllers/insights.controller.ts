@@ -26,7 +26,7 @@ export class InsightController {
         );
     };
 
-    async deleteInsight(req: Request, res: Response) {
+    async deleteInsight(req: Request, res: Response): Promise<any> {
         return (this.insightService.deleteInsight(parseInt(req.params.id))
             .then(data => {
                 res.status(202).json({
