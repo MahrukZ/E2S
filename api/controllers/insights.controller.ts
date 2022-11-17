@@ -21,9 +21,8 @@ export class InsightController {
             .catch(err => {
                 res.status(500).json({
                     message: err.message || "server error: failed to create insight.",
-                    status: res.statusCode
+                    status: 500
                 });
-                console.log(err);
             })
         );
     };
@@ -39,9 +38,8 @@ export class InsightController {
             .catch(err => {
                 res.status(500).json({
                     message: err.message || "server error: failed to delete insight.",
-                    status: res.statusCode
+                    status: 500
                 });
-                console.error(err);
             })
         );
     };
@@ -56,11 +54,10 @@ export class InsightController {
                 });
             })
             .catch (err => {
-                res.status(500).send({
+                res.status(500).json({
                     message: err.message || "server error: failed to fetch insights.",
-                    status: res.statusCode
+                    status: 500
                 });
-                console.log(err);
             })
         );
     };
@@ -76,9 +73,8 @@ export class InsightController {
             .catch(err => {
                 res.status(500).json({
                     message: err.message || "server error: failed to update insight.",
-                    status: res.statusCode
+                    status: 500
                 });
-                console.error(err);
             })
         );
     };

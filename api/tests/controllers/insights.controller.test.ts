@@ -41,13 +41,17 @@ describe("InsightController", () => {
             insight_id: 4,
             description: 'new insight'
         };
-        const mCreateSuccess: any = {
+        const mSuccessReponse: any = {
             message: 'Created',
             status: 201,
             data: mCreateBody
         };
+        const mFailResponse: any = {
+            message: "server error: failed to create insight.",
+            status: 500
+        };
 
-        it('should create an insight', async () => {
+        it('should create an insight when request body is provided', async () => {
             // Given
             const req = mRequest(mCreateBody);
             const res = mResponse();
@@ -60,21 +64,43 @@ describe("InsightController", () => {
 
             // Then
             expect(res.status).toHaveBeenCalledWith(201);
-            expect(res.json).toHaveBeenCalledWith(mCreateSuccess);
+            expect(res.json).toHaveBeenCalledWith(mSuccessReponse);
 
             expect(createSpy).toHaveBeenCalledTimes(1);
             expect(createSpy.mock.results[0].value).toEqual(Promise.resolve(mCreateBody));
         });
+
+        it('should not create an insight when request body is not provided', async () => {
+            // Given
+            const req = mRequest();
+            const res = mResponse();
+            const createSpy = jest
+                .spyOn(service, 'createInsight')
+                .mockRejectedValue({});
+
+            // When
+            await controller.createInsight(req, res);
+
+            // Then
+            expect(res.status).toHaveBeenCalledWith(500);
+            expect(res.json).toHaveBeenCalledWith(mFailResponse);
+
+            expect(createSpy).toHaveBeenCalledTimes(1);
+        });
     });
 
     describe("InsightController.deleteInsight", () => {
-        const mDeleteSuccess: any = {
+        const mSuccessResponse: any = {
             message: 'Successfully deleted 1 record.',
             status: 202
         };
+        const mFailResponse: any = {
+            message: "server error: failed to delete insight.",
+            status: 500
+        };
         const mDeleteParams: number = 1;
 
-        it('should delete an insight', async () => {
+        it('should delete an insight when request params are provided', async () => {
             // Given
             const req = mRequest('', mDeleteParams);
             const res = mResponse();
@@ -87,10 +113,28 @@ describe("InsightController", () => {
 
             // Then
             expect(res.status).toHaveBeenCalledWith(202);
-            expect(res.json).toHaveBeenCalledWith(mDeleteSuccess);
+            expect(res.json).toHaveBeenCalledWith(mSuccessResponse);
 
             expect(deleteSpy).toHaveBeenCalledTimes(1);
             expect(deleteSpy.mock.results[0].value).toEqual(Promise.resolve(mDeleteParams));
+        });
+
+        it('should not delete an insight when request params are not provided', async () => {
+            // Given
+            const req = mRequest();
+            const res = mResponse();
+            const deleteSpy = jest
+                .spyOn(service, 'deleteInsight')
+                .mockRejectedValue({});
+
+            // When
+            await controller.deleteInsight(req, res);
+
+            // Then
+            expect(res.status).toHaveBeenCalledWith(500);
+            expect(res.json).toHaveBeenCalledWith(mFailResponse);
+
+            expect(deleteSpy).toHaveBeenCalledTimes(1);
         });
     });
 
@@ -109,13 +153,17 @@ describe("InsightController", () => {
                 description: 'insight 3'
             }
         ];
-        const mGetSuccess: any = {
+        const mSuccessResponse: any = {
             message: 'Success',
             status: 200,
             data: mInsight
         };
+        const mFailResponse: any = {
+            message: "server error: failed to fetch insights.",
+            status: 500
+        };
 
-        it('should return all insights', async () => {
+        it('should fetch all insights when there is data in the database', async () => {
             // Given
             const req = mRequest();
             const res = mResponse();
@@ -128,24 +176,46 @@ describe("InsightController", () => {
 
             // Then
             expect(res.status).toHaveBeenCalledWith(200);
-            expect(res.json).toHaveBeenCalledWith(mGetSuccess);
+            expect(res.json).toHaveBeenCalledWith(mSuccessResponse);
 
             expect(getSpy).toHaveBeenCalledTimes(1);
             expect(getSpy).toHaveBeenCalledWith();
         });
+
+        it('should not fetch insights when there is no data in the database', async () => {
+            // Given
+            const req = mRequest();
+            const res = mResponse();
+            const getSpy = jest
+                .spyOn(service, 'getAllInsights')
+                .mockRejectedValue({});
+
+            // When
+            await controller.getAllInsights(req, res);
+
+            // Then
+            expect(res.status).toHaveBeenCalledWith(500);
+            expect(res.json).toHaveBeenCalledWith(mFailResponse);
+
+            expect(getSpy).toHaveBeenCalledTimes(1);
+        });
     });
 
     describe("InsightController.updateInsight", () => {
-        const mUpdateSuccess: any = {
+        const mSuccessResponse: any = {
             message: 'Successfully updated 1 record.',
             status: 200
+        };
+        const mFailResponse: any = {
+            message: "server error: failed to update insight.",
+            status: 500
         };
         const mUpdateBody: IInsight = {
             insight_id: 1,
             description: 'updated insight'
         };
 
-        it('should update an insight', async () => {
+        it('should update an insight when request body is provided', async () => {
             // Given
             const req = mRequest(mUpdateBody);
             const res = mResponse();
@@ -158,10 +228,28 @@ describe("InsightController", () => {
 
             // Then
             expect(res.status).toHaveBeenCalledWith(200);
-            expect(res.json).toHaveBeenCalledWith(mUpdateSuccess);
+            expect(res.json).toHaveBeenCalledWith(mSuccessResponse);
 
             expect(updateSpy).toHaveBeenCalledTimes(1);
             expect(updateSpy.mock.results[0].value).toEqual(Promise.resolve(mUpdateBody));
+        });
+
+        it('should not update an insight when request body is not provided', async () => {
+            // Given
+            const req = mRequest();
+            const res = mResponse();
+            const updateSpy = jest
+                .spyOn(service, 'updateInsight')
+                .mockRejectedValue({});
+
+            // When
+            await controller.updateInsight(req, res);
+
+            // Then
+            expect(res.status).toHaveBeenCalledWith(500);
+            expect(res.json).toHaveBeenCalledWith(mFailResponse);
+
+            expect(updateSpy).toHaveBeenCalledTimes(1);
         });
     });
 });
