@@ -3,28 +3,34 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Nav, Navbar, Row } from "react-bootstrap";
 import AccountDropdown from './AccountDropdown';
 import SiteDropdown from "./SiteDropdown";
-import { SitesService } from "../../services/topbar/sites";
+import { SitesAndUsersService } from "../../services/topbar/sites_and_users";
 import "./Topbar.css";
-
+import SiteAndUser from "../../data/SiteAndUser";
 
 function Topbar() {
 
-  const [siteList, setSiteList] = useState<String[]>([])
+  const [siteList, setSiteList] = useState<SiteAndUser[]>([])
 
-  const sitesService = new SitesService();
-
-  let sitesList2: String[] = [];
+  const sitesAndUsersService = new SitesAndUsersService();
 
   useEffect(() => {
     const getAllSites =async () => {
-      const sites = await sitesService.getSites();
-      const site1: String = String(sites["data"][0]["name"]);
-      const site2: String = String(sites["data"][1]["name"]);
-      const site3: String = String(sites["data"][2]["name"]);
-      sitesList2.push(site1);
-      sitesList2.push(site2);
-      sitesList2.push(site3);
-      setSiteList(sitesList2)
+      let sitesList: SiteAndUser[] = [];
+
+      const sites = await sitesAndUsersService.findSitesAndUsersByUserId(3);
+
+      console.log(sites["data"].length);
+
+      for (let i = 0; i < sites["data"].length; i++ ) {
+        const currentSite: string = String(sites["data"][i]["name"]);
+        const currentSiteId: number = (sites["data"][i]["site_id"]);
+
+        const siteToAdd: SiteAndUser = new SiteAndUser(currentSiteId, currentSite);
+
+        sitesList.push(siteToAdd);
+      }
+
+      setSiteList(sitesList)
     }
     getAllSites();
   }, []);

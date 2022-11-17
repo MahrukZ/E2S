@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { InsightController } from "./controllers/insights.controller";
 import { SiteController } from "./controllers/sites.controller";
+import { SitesAndUsersController } from "./controllers/sites_and_users.controller";
 
 // config
 dotenv.config();
@@ -15,6 +16,7 @@ app.use(cors());
 // controllers
 const insightController = new InsightController();
 const siteController = new SiteController();
+const sitesAndUsersController = new SitesAndUsersController();
 
 // routes
 
@@ -50,6 +52,16 @@ app.put("/api/site", async (req, res) => {
 
 app.delete("/api/site/:id", async (req, res) => {
     siteController.deleteSite(req, res);
+});
+
+//sites_and_users
+
+app.get("/api/sites_and_users", async (req, res) => {
+    sitesAndUsersController.getAllSitesAndUsers(req, res);
+});
+
+app.get("/api/sites_and_users/:id", async (req, res) => {
+    sitesAndUsersController.findSitesAndUsersByUserId(req, res);
 });
 
 // port listen
