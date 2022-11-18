@@ -22,8 +22,7 @@ export class InsightRepository {
         try {
             data = await this.insightRepository.create(insight);
         } catch(err) {
-            console.error(err);
-            throw (err);
+            throw new Error("Failed to create insight." || err);
         }
         return data;
     }
@@ -47,7 +46,7 @@ export class InsightRepository {
         try {
             data = await this.insightRepository.findAll();
         } catch (err) {
-            throw new Error("Failed to fetch all insights.");
+            throw new Error("Failed to fetch all insights." || err);
         }
         return data;
     }
@@ -61,8 +60,7 @@ export class InsightRepository {
                 }
             });
         } catch(err) {
-            console.error(err);
-            throw (err);
+            throw new Error("Failed to update insight." || err);
         }
         return data;
     }

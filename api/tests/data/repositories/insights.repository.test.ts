@@ -84,7 +84,7 @@ describe('InsightRepository', () => {
     });
 
     describe('InsightRepository.createInsight', () => {
-        it('should create an insight', async () => {
+        it('should create an insight when there is insight data being passed', async () => {
             // Given
             const mockCreateInsight: IInsight = {
                 insight_id: 4,
@@ -101,10 +101,22 @@ describe('InsightRepository', () => {
             expect(Insights.create).toHaveBeenCalledTimes(1);
             expect(Insights.create).toHaveBeenCalledWith(mockCreateInsight);
         });
+
+        it('should not create an insight when there is no insight data being passed', async () => {
+            // Given 
+            // When
+            const mErrorMessage = new Error("Failed to create insight.");
+            insightRepository.createInsight = jest.fn().mockRejectedValue(mErrorMessage);
+            
+            // Then
+            expect(insightRepository.createInsight).rejects.toMatchObject(mErrorMessage);
+            expect(insightRepository.createInsight).toHaveBeenCalledTimes(1);
+            expect(insightRepository.createInsight).toHaveBeenCalledWith();
+        });
     });
 
     describe('InsightRepository.updateInsight', () => {
-        it('should update an insight', async () => {
+        it('should update an insight when there is insight data being passed', async () => {
             // Given
             const mockUpdateInsight: IInsight = {
                 insight_id: 2,
@@ -130,6 +142,18 @@ describe('InsightRepository', () => {
                     }
                 }      
             );
+        });
+
+        it('should not update an insight when there is insight data being passed', async () => {
+            // Given 
+            // When
+            const mErrorMessage = new Error("Failed to update insight.");
+            insightRepository.updateInsight = jest.fn().mockRejectedValue(mErrorMessage);
+            
+            // Then
+            expect(insightRepository.updateInsight).rejects.toMatchObject(mErrorMessage);
+            expect(insightRepository.updateInsight).toHaveBeenCalledTimes(1);
+            expect(insightRepository.updateInsight).toHaveBeenCalledWith();
         });
     });
     
