@@ -37,8 +37,7 @@ export class InsightRepository {
                 }
             });
         } catch(err) {
-            console.error(err);
-            throw (err);
+            throw new Error("Failed to delete insight." || err);
         }
         return data;
     }
@@ -48,7 +47,7 @@ export class InsightRepository {
         try {
             data = await this.insightRepository.findAll();
         } catch (err) {
-            throw new Error("Failed to fetch all insights." || err);
+            throw new Error("Failed to fetch all insights.");
         }
         return data;
     }

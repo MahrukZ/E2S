@@ -40,17 +40,17 @@ describe('InsightRepository', () => {
             // Given 
             // When
             const mErrorMessage = new Error("Failed to fetch all insights.");
-            Insights.findAll = jest.fn().mockRejectedValue(mErrorMessage);
+            insightRepository.getAllInsights = jest.fn().mockRejectedValue(mErrorMessage);
             
             // Then
-            expect(Insights.findAll).rejects.toThrowError(mErrorMessage.message);
-            expect(Insights.findAll).toHaveBeenCalledTimes(1);
-            expect(Insights.findAll).toHaveBeenCalledWith();
+            expect(insightRepository.getAllInsights).rejects.toMatchObject(mErrorMessage);
+            expect(insightRepository.getAllInsights).toHaveBeenCalledTimes(1);
+            expect(insightRepository.getAllInsights).toHaveBeenCalledWith();
         });
     });
 
     describe('InsightRepository.deleteInsight', () => {
-        it('should delete an insight', async () => {
+        it('should delete an insight when Id is provided', async () => {
             // Given
             const insightId = 1;
             const mockResponse = true;
@@ -68,6 +68,18 @@ describe('InsightRepository', () => {
                     insight_id: insightId
                 }
             });
+        });
+
+        it('should not delete an insight when there is no Id provided', async () => {
+            // Given 
+            // When
+            const mErrorMessage = new Error("Failed to delete insights.");
+            insightRepository.deleteInsight = jest.fn().mockRejectedValue(mErrorMessage);
+            
+            // Then
+            expect(insightRepository.deleteInsight).rejects.toMatchObject(mErrorMessage);
+            expect(insightRepository.deleteInsight).toHaveBeenCalledTimes(1);
+            expect(insightRepository.deleteInsight).toHaveBeenCalledWith();
         });
     });
 
