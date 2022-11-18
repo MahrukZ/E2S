@@ -162,7 +162,7 @@ describe("InsightController", () => {
             status: 500
         };
 
-        it('should fetch all insights when there is data in the database', async () => {
+        it('should fetch all insights when there is data in the response', async () => {
             // Given
             const req = mRequest();
             const res = mResponse();
@@ -181,7 +181,7 @@ describe("InsightController", () => {
             expect(getSpy).toHaveBeenCalledWith();
         });
 
-        it('should not fetch insights when there is no data in the database', async () => {
+        it('should not fetch insights when there is no data in the response', async () => {
             // Given
             const req = mRequest();
             const res = mResponse();

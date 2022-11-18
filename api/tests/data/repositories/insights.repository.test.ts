@@ -9,7 +9,7 @@ describe('InsightRepository', () => {
     });
 
     describe('InsightRepository.getAllInsights', () => {
-        it('should return all insights', async () => {
+        it('should fetch all insights when there is data in the database', async () => {
             // Given
             const mockResponse: IInsight[] = [
                 {
@@ -32,6 +32,18 @@ describe('InsightRepository', () => {
 
             // Then
             expect(result).toEqual(mockResponse);
+            expect(Insights.findAll).toHaveBeenCalledTimes(1);
+            expect(Insights.findAll).toHaveBeenCalledWith();
+        });
+
+        it('should not fetch insights when there is no data in the database', async () => {
+            // Given 
+            // When
+            const mErrorMessage = new Error("Failed to fetch all insights.");
+            Insights.findAll = jest.fn().mockRejectedValue(mErrorMessage);
+            
+            // Then
+            expect(Insights.findAll).rejects.toThrowError(mErrorMessage.message);
             expect(Insights.findAll).toHaveBeenCalledTimes(1);
             expect(Insights.findAll).toHaveBeenCalledWith();
         });

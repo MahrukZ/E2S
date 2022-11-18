@@ -48,8 +48,7 @@ export class InsightRepository {
         try {
             data = await this.insightRepository.findAll();
         } catch (err) {
-            console.error(err);
-            throw (err);
+            throw new Error("Failed to fetch all insights." || err);
         }
         return data;
     }
