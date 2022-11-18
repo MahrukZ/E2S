@@ -9,38 +9,40 @@ export class SitesAndUsersController {
     }
 
     async getAllSitesAndUsers(req: Request, res: Response) {
-        this.sitesAndUsersService.getAllSitesAndUsers()
-        .then(data => res.status(200).send({
-            message: 'Success',
-            'status': res.statusCode,
-            data
-        }))
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "server error: failed to fetch sites and users.",
-                'status': res.statusCode
-            });
-            console.error(err);
+        return (this.sitesAndUsersService.getAllSitesAndUsers()
+        .then(data => {
+            res.status(200).json({
+                message: 'Success',
+                status: 200,
+                data
         });
-    }
+    })
+        .catch(err => {
+            res.status(500).json({
+                message: err.message || "server error: failed to fetch sites and users.",
+                status: 500
+            });
+        })
+        );
+    };
 
     async findSitesAndUsersByUserId(req: Request, res: Response) {
 
-        this.sitesAndUsersService.findSitesAndUsersByUserId(parseInt(req.params.id))
-
-        .then(data => res.status(200).send({
-            message: 'Success',
-            'status': res.statusCode,
-            data
-        }))
+        return (this.sitesAndUsersService.findSitesAndUsersByUserId(parseInt(req.params.id))
+            .then(data => {
+                res.status(200).json({
+                    message: 'Success',
+                    status: 200,
+                    data    
+            });
+        })
 
         .catch(err => {
-            res.status(500).send({
+            res.status(500).json({
                 message: err.message || "server error: failed to fetch sites and users.",
-                'status': res.statusCode
+                status: 500
             });
-            console.error(err);
-        });
-
-    }
+        })
+        );
+    };
 }

@@ -17,8 +17,8 @@ export class SitesAndUsersRepository {
         this.sitesAndUsersRepository = this.db.Sequelize.getRepository(SitesAndUsers);
     }
 
-    async getAllSitesAndUsers(): Promise<ISitesAndUsers> {
-        let data = {};
+    async getAllSitesAndUsers(): Promise<ISitesAndUsers[]> {
+        let data = [];
         try {
             data = await this.sitesAndUsersRepository.findAll();
         } catch (err) {

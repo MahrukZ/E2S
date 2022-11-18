@@ -28,7 +28,7 @@ export class InsightRepository {
         return data;
     }
 
-    async deleteInsight(insightId: number): Promise<IInsight> {
+    async deleteInsight(insightId: number) {
         let data = {};
         try {
             data = await this.insightRepository.destroy({
@@ -43,8 +43,8 @@ export class InsightRepository {
         return data;
     }
 
-    async getAllInsights(): Promise<IInsight> {
-        let data = {};
+    async getAllInsights(): Promise<IInsight[]> {
+        let data = [];
         try {
             data = await this.insightRepository.findAll();
         } catch (err) {
