@@ -29,22 +29,17 @@ export class SitesAndUsersRepository {
     }
 
     async findSitesAndUsersByUserId(userId: number): Promise<ISitesAndUsers[]> {
-
         let data = [];
-
         try {
             data = await this.sitesAndUsersRepository.findAll({
                 where: {
                     user_id: userId,
                   }
               });
-
         } catch (err) {
             console.error(err);
             throw (err);
         }
-
         return data;
-
     }
 }
