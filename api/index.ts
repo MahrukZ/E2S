@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { InsightController } from "./controllers/insights.controller";
+import { ConsumptionController } from "./controllers/consumptions.controller";
 
 // config
 dotenv.config();
@@ -13,8 +14,11 @@ app.use(cors());
 
 // controllers
 const insightController = new InsightController();
+const consumptionController = new ConsumptionController();
 
-// routes
+// routes 
+
+//insights
 app.get("/api/insights", async (req, res) => {
     insightController.getAllInsights(req, res);
 });
@@ -29,6 +33,15 @@ app.put("/api/insight", async (req, res) => {
 
 app.delete("/api/insight/:id", async (req, res) => {
     insightController.deleteInsight(req, res);
+});
+
+// consumptions
+app.get("/api/consumptions", async (req, res) => {
+    consumptionController.getAllConsumptions(req, res);
+});
+
+app.post("/api/consumption", async (req, res) => {
+    consumptionController.createConsumption(req, res);
 });
 
 // port listen
