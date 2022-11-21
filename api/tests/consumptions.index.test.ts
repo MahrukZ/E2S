@@ -51,20 +51,20 @@ describe('index', () => {
             {
                 consumption_id: 2,
                 time_interval: mockDateObject,
-                heat_demand: 2897,
-                electricity_demand: 2699,
-                electricity_price: 98,
-                gas_price: 65,
+                heat_demand: 2513,
+                electricity_demand: 2450,
+                electricity_price: 78,
+                gas_price: 95,
                 site_id: 5,
                 org_id: 5
             },
             {
                 consumption_id: 3,
                 time_interval: mockDateObject,
-                heat_demand: 2897,
-                electricity_demand: 2699,
-                electricity_price: 98,
-                gas_price: 65,
+                heat_demand: 2315,
+                electricity_demand: 2216,
+                electricity_price: 88,
+                gas_price: 85,
                 site_id: 8,
                 org_id: 8
             }
