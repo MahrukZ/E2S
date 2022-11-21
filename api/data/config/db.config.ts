@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import dotenv from "dotenv";
 import { Insights } from "../models/insights.model";
+import { Consumptions } from "../models/consumptions.model";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ export const connect = () => {
     });
 
     sequelize.addModels([Insights]);
+    sequelize.addModels([Consumptions]);
 
     const db:any = {};
     db.Sequelize = Sequelize;
