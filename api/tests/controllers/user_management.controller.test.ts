@@ -112,16 +112,6 @@ describe("UserManagementController", () => {
     });
 
     describe("UserManagementController.findUserManagementByUserId", () => {
-        const mSuccessResponse: any = {
-            message: 'Success',
-            status: 200
-        };
-        const mFailResponse: any = {
-            message: "server error: failed to fetch user management data.",
-            status: 500
-        };
-        const mParameter : number = 1;
-
         const mUserManagement: IUserManagement[] = [
             {
                 user_id: 1,
@@ -151,6 +141,16 @@ describe("UserManagementController", () => {
                 role: "facility energy manager"
             }
         ];
+        const mSuccessResponse: any = {
+            message: 'Success',
+            status: 200,
+            data: mUserManagement
+        };
+        const mFailResponse: any = {
+            message: "server error: failed to fetch user management data.",
+            status: 500
+        };
+        const mParameter : number = 1;
 
         it('should fetch when parameter is provided', async () => {
             // Given
@@ -165,17 +165,17 @@ describe("UserManagementController", () => {
 
             // Then
             expect(res.status).toHaveBeenCalledWith(200);
-            expect(res.json).toHaveBeenCalledWith(expect.objectContaining(mSuccessResponse));
+            expect(res.json).toHaveBeenCalledWith(mSuccessResponse);
 
         });
 
         it('should not fetch when parameter is not provided', async () => {
            // Given
-           const req = mRequest("");
+           const req = mRequest();
            const res = mResponse();
            const fetchSpy = jest
            .spyOn(service, 'findUserManagementByUserId')
-           .mockResolvedValue(mUserManagement);
+           .mockRejectedValue({});
 
            // When
            await controller.findUserManagementByUserId(req, res);
@@ -183,7 +183,6 @@ describe("UserManagementController", () => {
            // Then
            expect(res.status).toHaveBeenCalledWith(500);
            expect(res.json).toHaveBeenCalledWith(mFailResponse);
-
         });
     });
 });
