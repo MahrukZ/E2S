@@ -62,8 +62,8 @@ describe('ConsumptionService', () => {
                     electricity_demand: 2699,
                     electricity_price: 98,
                     gas_price: 65,
-                    site_id: 10,
-                    org_id: 9
+                    site_id: 1,
+                    org_id: 1
                 },
                 {
                     consumption_id: 2,
@@ -72,8 +72,8 @@ describe('ConsumptionService', () => {
                     electricity_demand: 2699,
                     electricity_price: 98,
                     gas_price: 65,
-                    site_id: 11,
-                    org_id: 12
+                    site_id: 5,
+                    org_id: 5
                 },
                 {
                     consumption_id: 3,
@@ -82,8 +82,8 @@ describe('ConsumptionService', () => {
                     electricity_demand: 2699,
                     electricity_price: 98,
                     gas_price: 65,
-                    site_id: 13,
-                    org_id: 14
+                    site_id: 8,
+                    org_id: 8
                 }
             ];
             const getSpy = jest

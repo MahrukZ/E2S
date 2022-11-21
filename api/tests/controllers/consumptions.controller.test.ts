@@ -92,4 +92,85 @@ describe("ConsumptionController", () => {
             expect(createSpy).toHaveBeenCalledTimes(1);
         });
     });
+
+    describe("ConsumptionController.getAllConsumptions", () => {
+        const mConsumption: IConsumption[] = [
+            {
+                consumption_id: 1,
+                time_interval: mockDateObject,
+                heat_demand: 2897,
+                electricity_demand: 2699,
+                electricity_price: 98,
+                gas_price: 65,
+                site_id: 1,
+                org_id: 1
+            },
+            {
+                consumption_id: 2,
+                time_interval: mockDateObject,
+                heat_demand: 2897,
+                electricity_demand: 2699,
+                electricity_price: 98,
+                gas_price: 65,
+                site_id: 5,
+                org_id: 5
+            },
+            {
+                consumption_id: 3,
+                time_interval: mockDateObject,
+                heat_demand: 2897,
+                electricity_demand: 2699,
+                electricity_price: 98,
+                gas_price: 65,
+                site_id: 8,
+                org_id: 8
+            }
+        ];
+        const mSuccessResponse: any = {
+            message: 'Success',
+            status: 200,
+            data: mConsumption
+        };
+        const mFailResponse: any = {
+            message: "server error: failed to fetch consumptions.",
+            status: 500
+        };
+
+        it('should fetch all consumptions when there is data in the response', async () => {
+            // Given
+            const req = mRequest();
+            const res = mResponse();
+            const getSpy = jest
+                .spyOn(service, 'getAllConsumptions')
+                .mockResolvedValueOnce(mConsumption);
+
+            // When
+            await controller.getAllConsumptions(req, res);
+
+            // Then
+            expect(res.status).toHaveBeenCalledWith(200);
+            expect(res.json).toHaveBeenCalledWith(mSuccessResponse);
+
+            expect(getSpy).toHaveBeenCalledTimes(1);
+            expect(getSpy).toHaveBeenCalledWith();
+        });
+
+        it('should not fetch consumptions when there is no data in the response', async () => {
+            // Given
+            const req = mRequest();
+            const res = mResponse();
+            const getSpy = jest
+                .spyOn(service, 'getAllConsumptions')
+                .mockRejectedValue({});
+
+            // When
+            await controller.getAllConsumptions(req, res);
+
+            // Then
+            expect(res.status).toHaveBeenCalledWith(500);
+            expect(res.json).toHaveBeenCalledWith(mFailResponse);
+
+            expect(getSpy).toHaveBeenCalledTimes(1);
+        });
+    });
 });
