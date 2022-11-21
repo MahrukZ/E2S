@@ -9,7 +9,7 @@ describe('InsightRepository', () => {
     });
 
     describe('InsightRepository.getAllInsights', () => {
-        it('should return all insights', async () => {
+        it('should fetch all insights when there is data in the database', async () => {
             // Given
             const mockResponse: IInsight[] = [
                 {
@@ -35,10 +35,22 @@ describe('InsightRepository', () => {
             expect(Insights.findAll).toHaveBeenCalledTimes(1);
             expect(Insights.findAll).toHaveBeenCalledWith();
         });
+
+        it('should not fetch insights when there is no data in the database', async () => {
+            // Given 
+            // When
+            const mErrorMessage = new Error("Failed to fetch all insights.");
+            insightRepository.getAllInsights = jest.fn().mockRejectedValue(mErrorMessage);
+            
+            // Then
+            expect(insightRepository.getAllInsights).rejects.toMatchObject(mErrorMessage);
+            expect(insightRepository.getAllInsights).toHaveBeenCalledTimes(1);
+            expect(insightRepository.getAllInsights).toHaveBeenCalledWith();
+        });
     });
 
     describe('InsightRepository.deleteInsight', () => {
-        it('should delete an insight', async () => {
+        it('should delete an insight when Id is provided', async () => {
             // Given
             const insightId = 1;
             const mockResponse = true;
@@ -57,10 +69,22 @@ describe('InsightRepository', () => {
                 }
             });
         });
+
+        it('should not delete an insight when there is no Id provided', async () => {
+            // Given 
+            // When
+            const mErrorMessage = new Error("Failed to delete insights.");
+            insightRepository.deleteInsight = jest.fn().mockRejectedValue(mErrorMessage);
+            
+            // Then
+            expect(insightRepository.deleteInsight).rejects.toMatchObject(mErrorMessage);
+            expect(insightRepository.deleteInsight).toHaveBeenCalledTimes(1);
+            expect(insightRepository.deleteInsight).toHaveBeenCalledWith();
+        });
     });
 
     describe('InsightRepository.createInsight', () => {
-        it('should create an insight', async () => {
+        it('should create an insight when there is insight data being passed', async () => {
             // Given
             const mockCreateInsight: IInsight = {
                 insight_id: 4,
@@ -77,10 +101,22 @@ describe('InsightRepository', () => {
             expect(Insights.create).toHaveBeenCalledTimes(1);
             expect(Insights.create).toHaveBeenCalledWith(mockCreateInsight);
         });
+
+        it('should not create an insight when there is no insight data being passed', async () => {
+            // Given 
+            // When
+            const mErrorMessage = new Error("Failed to create insight.");
+            insightRepository.createInsight = jest.fn().mockRejectedValue(mErrorMessage);
+            
+            // Then
+            expect(insightRepository.createInsight).rejects.toMatchObject(mErrorMessage);
+            expect(insightRepository.createInsight).toHaveBeenCalledTimes(1);
+            expect(insightRepository.createInsight).toHaveBeenCalledWith();
+        });
     });
 
     describe('InsightRepository.updateInsight', () => {
-        it('should update an insight', async () => {
+        it('should update an insight when there is insight data being passed', async () => {
             // Given
             const mockUpdateInsight: IInsight = {
                 insight_id: 2,
@@ -106,6 +142,18 @@ describe('InsightRepository', () => {
                     }
                 }      
             );
+        });
+
+        it('should not update an insight when there is insight data being passed', async () => {
+            // Given 
+            // When
+            const mErrorMessage = new Error("Failed to update insight.");
+            insightRepository.updateInsight = jest.fn().mockRejectedValue(mErrorMessage);
+            
+            // Then
+            expect(insightRepository.updateInsight).rejects.toMatchObject(mErrorMessage);
+            expect(insightRepository.updateInsight).toHaveBeenCalledTimes(1);
+            expect(insightRepository.updateInsight).toHaveBeenCalledWith();
         });
     });
     
