@@ -4,6 +4,7 @@
 dist/
 client
 node_modules/
+coverage/
 
 # misc
 .DS_Store
