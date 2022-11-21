@@ -100,16 +100,6 @@ describe("SitesAndUsersController", () => {
     });
 
     describe("SitesAndUsersController.findSitesAndUsersByUserId", () => {
-        const mSuccessResponse: any = {
-            message: 'Success',
-            status: 200
-        };
-        const mFailResponse: any = {
-            message: "server error: failed to fetch sites and users.",
-            status: 500
-        };
-        const mParameter : number = 1;
-
         const mSitesAndUsers: ISitesAndUsers[] = [
             {
                 site_id: 1,
@@ -127,6 +117,16 @@ describe("SitesAndUsersController", () => {
                 user_id: 1
             }
         ];
+        const mSuccessResponse: any = {
+            message: 'Success',
+            status: 200,
+            data: mSitesAndUsers
+        };
+        const mFailResponse: any = {
+            message: "server error: failed to fetch sites and users.",
+            status: 500
+        };
+        const mParameter : number = 1;
 
         it('should fetch when parameter is provided', async () => {
             // Given
@@ -147,8 +147,11 @@ describe("SitesAndUsersController", () => {
 
         it('should not fetch when parameter is not provided', async () => {
            // Given
-           const req = mRequest("", mParameter);
+           const req = mRequest();
            const res = mResponse();
+           const updateSpy = jest
+           .spyOn(service, 'findSitesAndUsersByUserId')
+           .mockRejectedValue({});
 
            // When
            await controller.findSitesAndUsersByUserId(req, res);
