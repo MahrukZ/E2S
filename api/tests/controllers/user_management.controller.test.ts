@@ -156,7 +156,7 @@ describe("UserManagementController", () => {
             // Given
             const req = mRequest("", mParameter);
             const res = mResponse();
-            const updateSpy = jest
+            const fetchSpy = jest
             .spyOn(service, 'findUserManagementByUserId')
             .mockResolvedValue(mUserManagement);
 
@@ -165,14 +165,17 @@ describe("UserManagementController", () => {
 
             // Then
             expect(res.status).toHaveBeenCalledWith(200);
-            expect(res.json).toHaveBeenCalledWith(mSuccessResponse);
+            expect(res.json).toHaveBeenCalledWith(expect.objectContaining(mSuccessResponse));
 
         });
 
         it('should not fetch when parameter is not provided', async () => {
            // Given
-           const req = mRequest("", mParameter);
+           const req = mRequest("");
            const res = mResponse();
+           const fetchSpy = jest
+           .spyOn(service, 'findUserManagementByUserId')
+           .mockResolvedValue(mUserManagement);
 
            // When
            await controller.findUserManagementByUserId(req, res);
