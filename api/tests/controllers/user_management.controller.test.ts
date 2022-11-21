@@ -1,0 +1,186 @@
+import { UserManagementController } from "../../controllers/user_management.controller";
+import { IUserManagement } from "../../data/models/user_management.model";
+import { UserManagementService } from "../../services/user_management.service";
+
+jest.mock('../../services/user_management.service', () => {
+    const mUserManagementService = { 
+        getAllUserManagements: jest.fn(),
+        findUserManagementByUserId: jest.fn(),
+    };
+    return {
+        UserManagementService: jest.fn(() => mUserManagementService)
+    };
+});
+
+describe("UserManagementController", () => {    
+    const service = new UserManagementService();
+    const controller = new UserManagementController();
+
+    const mRequest = (body?: any, params?: any) => {
+        const req: any = {};
+        req.body = jest.fn().mockReturnValue(body || req);
+        req.params = jest.fn().mockReturnValue(params || req);
+        return req;
+    };
+    const mResponse = () => {
+        const res: any = {};
+        res.status = jest.fn().mockReturnValue(res);
+        res.json = jest.fn().mockReturnValue(res);
+        return res;
+    };
+
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+
+    describe("UserManagementController.getAllUserManagements", () => {
+        const mUserManagement: IUserManagement[] = [
+            {
+                user_id: 1,
+                first_name: "Martin",
+                last_name: "James",
+                email: "martinjames@cardiff.ac.uk",
+                organisation: "Cardiff University",
+                no_sites_managed: 3,
+                role: "director of estates"
+            },
+            {
+                user_id: 2,
+                first_name: "Rhy",
+                last_name: "Jones",
+                email: "rhyjones@cardiff.ac.uk",
+                organisation: "Cardiff University",
+                no_sites_managed: 1,
+                role: "facility energy manager"
+            },
+            {
+                user_id: 3,
+                first_name: "James",
+                last_name: "Ohay",
+                email: "jamesohay@cardiff.ac.uk",
+                organisation: "Cardiff University",
+                no_sites_managed: 3,
+                role: "facility energy manager"
+            }
+        ];
+        const mSuccessResponse: any = {
+            message: 'Success',
+            status: 200,
+            data: mUserManagement
+        };
+        const mFailResponse: any = {
+            message: "server error: failed to fetch user management data.",
+            status: 500
+        };
+
+        it('should fetch all user management data when there is data in the database', async () => {
+            // Given
+            const req = mRequest();
+            const res = mResponse();
+            const getSpy = jest
+                .spyOn(service, 'getAllUserManagements')
+                .mockResolvedValueOnce(mUserManagement);
+
+            // When
+            await controller.getAllUserManagements(req, res);
+
+            // Then
+            expect(res.status).toHaveBeenCalledWith(200);
+            expect(res.json).toHaveBeenCalledWith(mSuccessResponse);
+
+            expect(getSpy).toHaveBeenCalledTimes(1);
+            expect(getSpy).toHaveBeenCalledWith();
+        });
+
+        it('should not fetch user management data when there is no data in the database', async () => {
+            // Given
+            const req = mRequest();
+            const res = mResponse();
+            const getSpy = jest
+                .spyOn(service, 'getAllUserManagements')
+                .mockRejectedValue({});
+
+            // When
+            await controller.getAllUserManagements(req, res);
+
+            // Then
+            expect(res.status).toHaveBeenCalledWith(500);
+            expect(res.json).toHaveBeenCalledWith(mFailResponse);
+
+            expect(getSpy).toHaveBeenCalledTimes(1);
+        });
+    });
+
+    describe("UserManagementController.findUserManagementByUserId", () => {
+        const mSuccessResponse: any = {
+            message: 'Success',
+            status: 200
+        };
+        const mFailResponse: any = {
+            message: "server error: failed to fetch user management data.",
+            status: 500
+        };
+        const mParameter : number = 1;
+
+        const mUserManagement: IUserManagement[] = [
+            {
+                user_id: 1,
+                first_name: "Martin",
+                last_name: "James",
+                email: "martinjames@cardiff.ac.uk",
+                organisation: "Cardiff University",
+                no_sites_managed: 3,
+                role: "director of estates"
+            },
+            {
+                user_id: 2,
+                first_name: "Rhy",
+                last_name: "Jones",
+                email: "rhyjones@cardiff.ac.uk",
+                organisation: "Cardiff University",
+                no_sites_managed: 1,
+                role: "facility energy manager"
+            },
+            {
+                user_id: 3,
+                first_name: "James",
+                last_name: "Ohay",
+                email: "jamesohay@cardiff.ac.uk",
+                organisation: "Cardiff University",
+                no_sites_managed: 3,
+                role: "facility energy manager"
+            }
+        ];
+
+        it('should fetch when parameter is provided', async () => {
+            // Given
+            const req = mRequest("", mParameter);
+            const res = mResponse();
+            const updateSpy = jest
+            .spyOn(service, 'findUserManagementByUserId')
+            .mockResolvedValue(mUserManagement);
+
+            // When
+            await controller.findUserManagementByUserId(req, res);
+
+            // Then
+            expect(res.status).toHaveBeenCalledWith(200);
+            expect(res.json).toHaveBeenCalledWith(mSuccessResponse);
+
+        });
+
+        it('should not fetch when parameter is not provided', async () => {
+           // Given
+           const req = mRequest("", mParameter);
+           const res = mResponse();
+
+           // When
+           await controller.findUserManagementByUserId(req, res);
+
+           // Then
+           expect(res.status).toHaveBeenCalledWith(500);
+           expect(res.json).toHaveBeenCalledWith(mFailResponse);
+
+        });
+    });
+});

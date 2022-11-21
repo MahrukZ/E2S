@@ -1,4 +1,4 @@
-import { IUserManagement } from "../data/models/user_management_model";
+import { IUserManagement } from "../data/models/user_management.model";
 import { UserManagementRepository } from "../data/repositories/user_management.repository";
 
 export class UserManagementService {

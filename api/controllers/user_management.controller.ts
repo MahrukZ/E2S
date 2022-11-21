@@ -8,37 +8,42 @@ export class UserManagementController {
         this.userManagementService = new UserManagementService();
     }
 
-    async getAllUserManagements(req: Request, res: Response) {
-        this.userManagementService.getAllUserManagements()
-        .then(data => res.status(200).send({
-            message: 'Success',
-            'status': res.statusCode,
-            data
-        }))
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "server error: failed to fetch insights.",
-                'status': res.statusCode
-            });
-            console.error(err);
-        });
-    }
+    async getAllUserManagements(req: Request, res: Response): Promise<any> {
+        return (this.userManagementService.getAllUserManagements()
+            .then(data => {
+                res.status(200).json({
+                    message: 'Success',
+                    status: 200,
+                    data
+                });
+            })
+            .catch (err => {
+                res.status(500).json({
+                    message: err.message || "server error: failed to fetch user management data.",
+                    status: 500
+                });
+            })
+        );
+    };
 
-    
-    async findUserManagementById(req: Request, res: Response) {
-        this.userManagementService.findUserManagementByUserId(parseInt(req.params.id))
-        .then(data => res.status(200).send({
-            message: 'Success',
-            'status': res.statusCode,
-            data
-        }))
+
+    async findUserManagementByUserId(req: Request, res: Response): Promise<any> {
+        return (this.userManagementService.findUserManagementByUserId(parseInt(req.params.id))
+            .then(data => {
+                res.status(200).json({
+                    message: 'Success',
+                    status: 200,
+                    data
+                });
+        })
         .catch(err => {
-            res.status(500).send({
-                message: err.message || "server error: failed to fetch user management.",
-                'status': res.statusCode
+            res.status(500).json({
+                message: err.message || "server error: failed to fetch user management data.",
+                status: 500
             });
-            console.error(err);
-        });
-    }
+        })
+        );
+    };
+
 
 }

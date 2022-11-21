@@ -1,5 +1,5 @@
 import { connect } from "../config/db.config";
-import { UserManagement, IUserManagement } from "../models/user_management_model";
+import { UserManagement, IUserManagement } from "../models/user_management.model";
 
 export class UserManagementRepository {
     private db: any = {};
