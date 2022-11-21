@@ -19,7 +19,7 @@ export class ConsumptionController {
             })
             .catch(err => {
                 res.status(500).json({
-                    message: err.message || "server error: failed to create consumption.",
+                    message: err.message || "server error: failed to create a consumption.",
                     status: 500
                 });
             })
