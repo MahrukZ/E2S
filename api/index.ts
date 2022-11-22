@@ -41,7 +41,7 @@ app.get("/api/user_managements", async (req, res) => {
 });
 
 app.get("/api/user_management/:id", async (req, res) => {
-    userManagementController.findUserManagementById(req, res);
+    userManagementController.findUserManagementByUserId(req, res);
 });
 
 // port listen

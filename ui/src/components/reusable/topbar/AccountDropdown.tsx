@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from 'react';
 import { Container, Dropdown, DropdownButton } from "react-bootstrap";
 import { FaCog, FaSignOutAlt, FaUserAlt } from "react-icons/fa";
-import "./Topbar.css";
+import "./AccountDropdown.css";
 
 interface AccountDropdownProps {
     name: string;

@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Users from './components/dashboard/Users';
-import Topbar from './components/Topbar/Topbar';
+import Topbar from './components/reusable/topbar/Topbar';
 
 function App() {
   return (

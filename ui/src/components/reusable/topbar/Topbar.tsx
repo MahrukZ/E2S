@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Nav, Navbar, Row } from "react-bootstrap";
 import AccountDropdown from './AccountDropdown';
-import { UserManagementService } from "../../services/dashboard/topbar/user_management";
+import { UserManagementService } from "../../../services/dashboard/topbar/user_management";
 import "./Topbar.css";
 
 

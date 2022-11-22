@@ -1,14 +1,3 @@
-#hoverContainer {
-    border: solid;
-    border-color: #73A6BA;
-    height: 50%;
-    width: fit-content;
-}
-  
-#topbar {
-    background-color: #73A6BA;
-}
-
 #dropdown-basic-button {
     background-color:#417285;
     border-color: #417285;
@@ -67,3 +56,9 @@
     bottom: 1px;
 }
 
+#hoverContainer {
+    border: solid;
+    border-color: #73A6BA;
+    height: 50%;
+    width: fit-content;
+}

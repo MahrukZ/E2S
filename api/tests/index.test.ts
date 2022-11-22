@@ -1,6 +1,8 @@
 import axios from "axios";
 import { InsightController } from "../controllers/insights.controller";
 import { IInsight } from "../data/models/insights.model";
+import { SitesAndUsersController } from "../controllers/sites_and_users.controller";
+import { ISitesAndUsers } from "../data/models/sites_and_users.model";
 
 jest.mock('axios');
 
@@ -16,9 +18,21 @@ jest.mock('../controllers/insights.controller', () => {
     };
 });
 
+jest.mock('../controllers/sites_and_users.controller', () => {
+    const mSitesAndUsersController = { 
+        getAllSitesAndUsers: jest.fn(),
+        findSitesAndUsersByUserId: jest.fn()
+    };
+    return {
+        SitesAndUsersController: jest.fn(() => mSitesAndUsersController)
+    };
+});
+
 describe('index', () => {
-    const controller = new InsightController();
+    const insightController = new InsightController();
+    const sitesAndUsersController = new SitesAndUsersController();
     const mockedAxios = axios as jest.Mocked<typeof axios>;
+    const mockedSitesAndUsersAxios = axios as jest.Mocked<typeof axios>;
 
     const mRequest = (body?: any, params?: any) => {
         const req: any = {};
@@ -31,6 +45,18 @@ describe('index', () => {
         res.status = jest.fn().mockReturnValue(res);
         res.json = jest.fn().mockReturnValue(res);
         return res;
+    };
+    const mSitesAndUsersRequest = (body1?: any, params1?: any) => {
+        const req1: any = {};
+        req1.body1 = jest.fn().mockReturnValue(body1 || req1);
+        req1.params1 = jest.fn().mockReturnValue(params1 || req1);
+        return req1;
+    };
+    const mSitesAndUsersResponse = () => {
+        const res1: any = {};
+        res1.status = jest.fn().mockReturnValue(res1);
+        res1.json = jest.fn().mockReturnValue(res1);
+        return res1;
     };
 
     beforeEach(() => {
@@ -65,11 +91,11 @@ describe('index', () => {
             // Given
             const mUrl = "/api/insights";
             const getSpy = jest
-                .spyOn(controller, 'getAllInsights');
+                .spyOn(insightController, 'getAllInsights');
 
             // When
-            const result = await axios.get(mUrl);
-            await controller.getAllInsights(req, res);
+            const result = await mockedAxios.get(mUrl);
+            await insightController.getAllInsights(req, res);
 
             // Then
             expect(result).toEqual(mSuccessResponse);
@@ -100,12 +126,12 @@ describe('index', () => {
             // Given
             const mUrl = "/api/insight";
             const createSpy = jest
-                .spyOn(controller, 'createInsight')
+                .spyOn(insightController, 'createInsight')
                 .mockResolvedValue(mCreateBody);
 
             // When
             const result = await axios.post(mUrl);
-            await controller.createInsight(req, res);
+            await insightController.createInsight(req, res);
 
             // Then
             expect(result).toEqual(mSuccessReponse);
@@ -135,12 +161,12 @@ describe('index', () => {
             // Given
             const mUrl = "/api/insight";
             const updateSpy = jest
-                .spyOn(controller, 'updateInsight')
+                .spyOn(insightController, 'updateInsight')
                 .mockResolvedValue(mUpdateBody);
 
             // When
             const result = await axios.put(mUrl);
-            await controller.updateInsight(req, res);
+            await insightController.updateInsight(req, res);
 
             // Then
             expect(result).toEqual(mSuccessResponse);
@@ -167,12 +193,12 @@ describe('index', () => {
             // Given
             const mUrl = `/api/insight/${mDeleteParams}`;
             const deleteSpy = jest
-                .spyOn(controller, 'deleteInsight')
+                .spyOn(insightController, 'deleteInsight')
                 .mockResolvedValue(mDeleteParams);
 
             // When
             const result = await axios.delete(mUrl);
-            await controller.deleteInsight(req, res);
+            await insightController.deleteInsight(req, res);
 
             // Then
             expect(result).toEqual(mSuccessResponse);
@@ -184,4 +210,53 @@ describe('index', () => {
             expect(deleteSpy).toHaveBeenCalledWith(req, res);
         });
     });
+
+    describe('GET /api/sites_and_users', () => {
+        const mSitesAndUsers: ISitesAndUsers[] = [
+            {
+                site_id: 1,
+                name: 'Abacws',
+                user_id: 1
+            },
+            {
+                site_id: 1,
+                name: 'Abacws',
+                user_id: 3
+            },
+            {
+                site_id: 2,
+                name: 'National Software Academy',
+                user_id: 1
+            }
+        ];
+        const mSuccessResponse1: any = {
+            message: 'Success',
+            status: 201,
+            data: mSitesAndUsers
+        };
+        mockedSitesAndUsersAxios.get.mockResolvedValue(mSuccessResponse1);
+        const req1 = mSitesAndUsersRequest();
+        const res1 = mSitesAndUsersResponse();
+
+        it('should fetch all sites and users when there is data', async () => {
+            // Given
+            const mUrl1 = "/api/sites_and_users";
+            const getSpy1 = jest
+                .spyOn(sitesAndUsersController, 'getAllSitesAndUsers');
+
+            // When
+            const result1 = await mockedSitesAndUsersAxios.get(mUrl1);
+            await sitesAndUsersController.getAllSitesAndUsers(req1, res1);
+
+            // Then
+            expect(result1).toEqual(mSuccessResponse1);
+
+            expect(axios.get).toHaveBeenCalledTimes(1);
+            expect(axios.get).toHaveBeenCalledWith(mUrl1);
+
+            expect(getSpy1).toHaveBeenCalledTimes(1);
+            expect(getSpy1).toHaveBeenCalledWith(req1, res1);
+        });
+    });
+
 });
