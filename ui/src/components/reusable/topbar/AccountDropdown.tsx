@@ -16,9 +16,15 @@ function AccountDropdown({ name }: AccountDropdownProps) {
 
   const showDropdown = (_e: any)=>{
     setShow(!show);
+    const el: any = document.getElementById('dropdown-basic-button');
+    el.style.borderBottomLeftRadius = '0';
+    el.style.borderBottomRightRadius = '0';
   }
   const hideDropdown = (_e: any) => {
     setShow(false);
+    const el: any = document.getElementById('dropdown-basic-button');
+    el.style.borderBottomLeftRadius = '10px';
+    el.style.borderBottomRightRadius = '10px';
   }
   // End of reference
 

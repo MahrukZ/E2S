@@ -4,11 +4,26 @@
     border-radius: 10px;
     min-width: 9em;
     margin-bottom: 1px;
+    /* border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0; */
 }
+
+/* #hoverContainer:hover ~ #dropdown-basic-button {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+} */
+
+/* #hoverContainer:hover > #dropdown-basic-button { 
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+} */
 
 .dropdown-menu[aria-labelledby = dropdown-basic-button] {
     background-color: #73A6BA;
-    border-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
     margin: auto;
     min-width:auto;
     padding-top: 0;
@@ -19,7 +34,7 @@
     color: white;
     width: 100%;
     margin: auto;
-    border-radius: 10px;
+    border-radius: 0;
 }
 
 #settingsDropdown:hover {
@@ -30,7 +45,10 @@
     color: white;
     width: 100%;
     margin: auto;
-    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 #signOutDropdown:hover {
