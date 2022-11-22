@@ -1,8 +1,8 @@
 import { UserManagementController } from "../../controllers/userManagement.controller";
 import { IUserManagement } from "../../data/models/userManagement.model";
-import { UserManagementService } from "../../services/topbar/userManagement.service";
+import { UserManagementService } from "../../services/userManagement.service";
 
-jest.mock('../../services/topbar/userManagement.service', () => {
+jest.mock('../../services/userManagement.service', () => {
     const mUserManagementService = { 
         getAllUserManagements: jest.fn(),
         findUserManagementByUserId: jest.fn(),

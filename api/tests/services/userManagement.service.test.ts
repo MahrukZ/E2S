@@ -1,6 +1,6 @@
 import { IUserManagement } from "../../data/models/userManagement.model";
 import { UserManagementRepository } from "../../data/repositories/userManagement.repository";
-import { UserManagementService } from "../../services/topbar/userManagement.service";
+import { UserManagementService } from "../../services/userManagement.service";
 
 jest.mock('../../data/repositories/userManagement.repository', () => {
     const mUserManagementRepo = { 

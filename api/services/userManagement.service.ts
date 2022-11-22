@@ -1,5 +1,5 @@
-import { IUserManagement } from "../../data/models/userManagement.model";
-import { UserManagementRepository } from "../../data/repositories/userManagement.repository";
+import { IUserManagement } from "../data/models/userManagement.model";
+import { UserManagementRepository } from "../data/repositories/userManagement.repository";
 
 export class UserManagementService {
     private userManagementRepository: UserManagementRepository;
