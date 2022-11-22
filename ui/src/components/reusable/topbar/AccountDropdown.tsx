@@ -25,8 +25,8 @@ function AccountDropdown({ name }: AccountDropdownProps) {
   const hideDropdown = (_e: any) => {
     setShow(false);
     if (dropdownButton) {
-      dropdownButton.style.borderBottomLeftRadius = '0';
-      dropdownButton.style.borderBottomRightRadius = '0';
+      dropdownButton.style.borderBottomLeftRadius = '10px';
+      dropdownButton.style.borderBottomRightRadius = '10px';
     }
   }
   // End of reference
