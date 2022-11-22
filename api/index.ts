@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { InsightController } from "./controllers/insights.controller";
 import { UserManagementController } from "./controllers/user_management.controller";
+import { ConsumptionController } from "./controllers/consumptions.controller";
 
 // config
 dotenv.config();
@@ -19,6 +20,11 @@ const userManagementController = new UserManagementController();
 // routes
 
 // insights
+const consumptionController = new ConsumptionController();
+
+// routes 
+
+//insights
 app.get("/api/insights", async (req, res) => {
     insightController.getAllInsights(req, res);
 });
@@ -42,6 +48,14 @@ app.get("/api/user_managements", async (req, res) => {
 
 app.get("/api/user_management/:id", async (req, res) => {
     userManagementController.findUserManagementByUserId(req, res);
+});
+// consumptions
+app.get("/api/consumptions", async (req, res) => {
+    consumptionController.getAllConsumptions(req, res);
+});
+
+app.post("/api/consumption", async (req, res) => {
+    consumptionController.createConsumption(req, res);
 });
 
 // port listen
