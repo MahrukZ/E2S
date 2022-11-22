@@ -10,21 +10,26 @@ cd /api
 ```
 
 ### *Step 2*
-Copy and paste the below command to install the required dependencies:
+Run the following command to install the required dependencies:
 ```
-npm i express mysql2 sequelize sequelize-typescript cors dotenv nodemon jest ts-jest axios typescript @types/cors @types/express @types/node @types/mysql @types/jest --save
+npm i
 ```
 
+##### Installed NPM Packages
+
+###### _Core Dependencies:_
 - `express` package - Fast, unopinionated, minimalist web framework for [Node.js](http://nodejs.org/). **Learn more [here](https://www.npmjs.com/package/express)**
 - `mysql2` package - MySQL client for Node.js with focus on performance. Supports prepared statements, non-utf8 encodings, binary log protocol, compression, ssl [much more](https://github.com/sidorares/node-mysql2/tree/master/documentation). **Learn more [here](https://www.npmjs.com/package/mysql2)**
 - `sequelize` package - Sequelize is an easy-to-use and promise-based Node.js ORM tool. It features solid transaction support, relations, eager and lazy loading, read replication and more. **Learn more [here](https://www.npmjs.com/package/sequelize)**
 - `cors` package - CORS is a node.js package for providing a [Connect](http://www.senchalabs.org/connect/)/[Express](http://expressjs.com/) middleware that can be used to enable [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing) with various options. **Learn more [here](https://www.npmjs.com/package/cors)**
 -`dotenv` package - Dotenv is a zero-dependency module that loads environment variables from a `.env` file into [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env). **Learn more [here](https://www.npmjs.com/package/dotenv)**
+- `typescript` package - [TypeScript](https://www.typescriptlang.org/) is a language for application-scale JavaScript. **Learn more [here](https://www.npmjs.com/package/typescript)** 
+
+###### _devDependencies:_
 - `nodemon` package - nodemon is a tool that helps develop Node.js based applications by automatically restarting the node application when file changes in the directory are detected. **Learn more [here](https://www.npmjs.com/package/nodemon)**
 - `jest` package - Jest is a delightful JavaScript Testing Framework with a focus on simplicity. **Learn more [here](https://jestjs.io/)**
 - `ts-jest` package - A Jest transformer with source map support that lets you use Jest to test projects written in TypeScript. **Learn more [here](https://www.npmjs.com/package/ts-jest)**
 - `axios` package - Promise based HTTP client for the browser and Node.js. **Learn more [here](https://www.npmjs.com/package/axios)**
-- `typescript` package - [TypeScript](https://www.typescriptlang.org/) is a language for application-scale JavaScript. **Learn more [here](https://www.npmjs.com/package/typescript)** 
 
 ## Environment Variables
 
@@ -75,7 +80,10 @@ In the `/api` directory, you can run:
 - You will also see any lint errors in the console.
 
 ### `npm test`
+##### (or `npm t`)
+- Launches the test runner.
+- Generates and displays a test coverage report after tests are run.
 
-Launches the test runner in the interactive watch mode.\
-
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `npm install`
+##### (or `npm i`)
+- Installs the required dependencies for development.
