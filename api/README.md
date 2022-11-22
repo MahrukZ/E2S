@@ -1,5 +1,8 @@
 
 # Getting Started
+- [Installing NPM Packages](#installing-npm-packages)
+- [Setting up Environment Variables](#setting-up-environment-variables)
+- [Available Scripts](#available-scripts)
 
 ## Installing NPM Packages
 
@@ -31,7 +34,7 @@ npm i
 - `ts-jest` package - A Jest transformer with source map support that lets you use Jest to test projects written in TypeScript. **Learn more [here](https://www.npmjs.com/package/ts-jest)**
 - `axios` package - Promise based HTTP client for the browser and Node.js. **Learn more [here](https://www.npmjs.com/package/axios)**
 
-## Environment Variables
+## Setting up Environment Variables
 
 ### *Step 1*
 Create a new file in `/api` called `.env`
