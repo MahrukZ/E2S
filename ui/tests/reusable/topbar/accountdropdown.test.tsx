@@ -1,7 +1,7 @@
-import React from 'react'
-import '@testing-library/jest-dom'
-import { render, screen, cleanup, fireEvent, waitFor, getByTestId } from '@testing-library/react'
-import AccountDropdown from '../../src/components/Topbar/AccountDropdown';
+import '@testing-library/jest-dom';
+import { cleanup, render, screen } from '@testing-library/react';
+import React from 'react';
+import AccountDropdown from '../../../src/components/reusable/topbar/AccountDropdown';
 
 afterEach(() => {
     cleanup();
