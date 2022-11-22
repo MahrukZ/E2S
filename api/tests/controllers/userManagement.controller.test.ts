@@ -167,7 +167,7 @@ describe("UserManagementController", () => {
             expect(res.status).toHaveBeenCalledWith(200);
             expect(res.json).toHaveBeenCalledWith(mSuccessResponse);
 
-            expect(fetchSpy).toBeCalledTimes(1);
+            expect(fetchSpy).toHaveBeenCalledTimes(1);
         });
 
         it('should not fetch when parameter is not provided', async () => {
@@ -185,7 +185,7 @@ describe("UserManagementController", () => {
            expect(res.status).toHaveBeenCalledWith(500);
            expect(res.json).toHaveBeenCalledWith(mFailResponse);
 
-           expect(fetchSpy).toBeCalledTimes(1);
+           expect(fetchSpy).toHaveBeenCalledTimes(1);
         });
     });
 });

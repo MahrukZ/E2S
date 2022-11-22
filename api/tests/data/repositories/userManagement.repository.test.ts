@@ -65,11 +65,10 @@ describe('UserManagementRepository', () => {
     });
 
     describe('UserManagementRepository.findUserManagementByUserId', () => {
-        it('should find user managements when Id is provided', async () => {
+        it('should find user management when Id is provided', async () => {
             // Given
             const userId = 1;
-            const mockResponse: IUserManagement[] = [
-                {
+            const mockResponse: IUserManagement = {
                     user_id: 1,
                     first_name: 'Martin',
                     last_name: 'James',
@@ -77,26 +76,8 @@ describe('UserManagementRepository', () => {
                     organisation: 'Cardiff University',
                     no_sites_managed: 3,
                     role: 'director of estates'
-                },
-                {
-                    user_id: 2,
-                    first_name: 'Rhy',
-                    last_name: 'Jones',
-                    email: 'rhyjones@cardiff.ac.uk',
-                    organisation: 'Cardiff University',
-                    no_sites_managed: 1,
-                    role: 'facility energy manager'
-                },
-                {
-                    user_id: 3,
-                    first_name: 'James',
-                    last_name: 'Ohay',
-                    email: 'jamesohay@cardiff.ac.uk',
-                    organisation: 'Cardiff University',
-                    no_sites_managed: 3,
-                    role: 'facility energy manager'
                 }
-            ]
+            
             UserManagement.findAll = jest.fn().mockResolvedValue(mockResponse);
 
             // When

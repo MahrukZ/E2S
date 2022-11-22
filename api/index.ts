@@ -45,6 +45,7 @@ app.get("/api/user-managements", async (req, res) => {
 app.get("/api/user-management/:id", async (req, res) => {
     userManagementController.findUserManagementByUserId(req, res);
 });
+
 // consumptions
 app.get("/api/consumptions", async (req, res) => {
     consumptionController.getAllConsumptions(req, res);

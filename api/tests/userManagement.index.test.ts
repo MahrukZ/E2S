@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios'
 import { UserManagementController } from "../controllers/userManagement.controller";
 import { IUserManagement } from "../data/models/userManagement.model";
 
@@ -35,69 +35,8 @@ describe('index', () => {
         jest.clearAllMocks();
     });
 
-    describe('GET /api/user-managements', () => {
-        const mUserManagement: IUserManagement[] = [
-            {
-                user_id: 1,
-                first_name: 'Martin',
-                last_name: 'James',
-                email: 'martinjames@cardiff.ac.uk',
-                organisation: 'Cardiff University',
-                no_sites_managed: 3,
-                role: 'director of estates'
-            },
-            {
-                user_id: 2,
-                first_name: 'Rhy',
-                last_name: 'Jones',
-                email: 'rhyjones@cardiff.ac.uk',
-                organisation: 'Cardiff University',
-                no_sites_managed: 1,
-                role: 'facility energy manager'
-            },
-            {
-                user_id: 3,
-                first_name: 'James',
-                last_name: 'Ohay',
-                email: 'jamesohay@cardiff.ac.uk',
-                organisation: 'Cardiff University',
-                no_sites_managed: 3,
-                role: 'facility energy manager'
-            }
-        ];
-        const mSuccessResponse: any = {
-            message: 'Success',
-            status: 200,
-            data: mUserManagement
-        };
-        mockedAxios.get.mockResolvedValue(mSuccessResponse);
-        const req = mRequest();
-        const res = mResponse();
-
-        it('should fetch all user managements when there is data', async () => {
-            // Given
-            const mUrl = "/api/user-managements";
-            const getSpy = jest
-                .spyOn(controller, 'getAllUserManagements');
-
-            // When
-            const result = await axios.get(mUrl);
-            await controller.getAllUserManagements(req, res);
-
-            // Then
-            expect(result).toEqual(mSuccessResponse);
-
-            expect(axios.get).toHaveBeenCalledTimes(1);
-            expect(axios.get).toHaveBeenCalledWith(mUrl);
-
-            expect(getSpy).toHaveBeenCalledTimes(1);
-            expect(getSpy).toHaveBeenCalledWith(req, res);
-        });
-    });
-
     describe('GET /api/user-management/:id', () => {
-        const mUserManagement: IUserManagement[] = [
-            {
+        const mUserManagement1: IUserManagement = {
                 user_id: 1,
                 first_name: 'Martin',
                 last_name: 'James',
@@ -105,33 +44,14 @@ describe('index', () => {
                 organisation: 'Cardiff University',
                 no_sites_managed: 3,
                 role: 'director of estates'
-            },
-            {
-                user_id: 2,
-                first_name: 'Rhy',
-                last_name: 'Jones',
-                email: 'rhyjones@cardiff.ac.uk',
-                organisation: 'Cardiff University',
-                no_sites_managed: 1,
-                role: 'facility energy manager'
-            },
-            {
-                user_id: 3,
-                first_name: 'James',
-                last_name: 'Ohay',
-                email: 'jamesohay@cardiff.ac.uk',
-                organisation: 'Cardiff University',
-                no_sites_managed: 3,
-                role: 'facility energy manager'
             }
-        ];
-        const mSuccessResponse: any = {
+        const mSuccessResponse1: any = {
             message: 'Success',
             status: 200,
-            data: mUserManagement
+            data: mUserManagement1
         };
         const mFetchParams: number = 1;
-        mockedAxios.get.mockResolvedValue(mSuccessResponse);
+        mockedAxios.get.mockResolvedValue(mSuccessResponse1);
         const req = mRequest('', mFetchParams);
         const res = mResponse();
 
@@ -147,7 +67,7 @@ describe('index', () => {
             await controller.findUserManagementByUserId(req, res);
 
             // Then
-            expect(result).toEqual(mSuccessResponse);
+            expect(result).toEqual(mSuccessResponse1);
 
             expect(axios.get).toHaveBeenCalledTimes(1);
             expect(axios.get).toHaveBeenCalledWith(mUrl);
