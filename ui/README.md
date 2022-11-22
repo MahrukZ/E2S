@@ -24,11 +24,17 @@ npm i
 - `react` package - React is a JavaScript library for creating user interfaces. **Learn more [here](https://www.npmjs.com/package/react)**
 - `react-dom` package - This package serves as the entry point to the DOM and server renderers for React. It is intended to be paired with the generic React package, which is shipped as react to npm. **Learn more [here](https://www.npmjs.com/package/react-dom)**
 - `react-scripts` package - This package includes scripts and configuration used by Create React App. **Learn more [here](https://www.npmjs.com/package/react-scripts)**
+- `react-icons` package - Include popular icons in your React projects easily. **Learn more [here](https://www.npmjs.com/package/react-icons)**
 - `typescript` package - [TypeScript](https://www.typescriptlang.org/) is a language for application-scale JavaScript. **Learn more [here](https://www.npmjs.com/package/typescript)** 
 - `web-vitals` package - The web-vitals library is a tiny modular library for measuring all the Web Vitals metrics on real users. **Learn more [here](https://www.npmjs.com/package/web-vitals)**
+- `axios` package - Promise based HTTP client for the browser and Node.js. **Learn more [here](https://www.npmjs.com/package/axios)**
+- `bootstrap` package - Sleek, intuitive, and powerful front-end framework for faster and easier web development. **Learn more [here](https://www.npmjs.com/package/bootstrap)**
 
 ###### _devDependencies:_
 - `jest` package - Jest is a delightful JavaScript Testing Framework with a focus on simplicity. **Learn more [here](https://jestjs.io/)**
+- `ts-jest` package - A Jest transformer with source map support that lets you use Jest to test projects written in TypeScript. **Learn more [here](https://www.npmjs.com/package/ts-jest)**
+- `jest-environment-jsdom` package - **Learn more [here](https://www.npmjs.com/package/jest-environment-jsdom)**
+ 
 
 ## Available Scripts
 
@@ -36,7 +42,7 @@ In the `/ui` directory, you can run:
 
 ### `npm run build`
 
-- Builds the app for production.
+- Builds the app for production to the `build` folder.
 - It correctly bundles React in production mode and optimizes the build for the best performance.
 - Your app is ready to be deployed!
 
