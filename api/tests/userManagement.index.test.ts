@@ -1,10 +1,10 @@
 import axios from "axios";
-import { UserManagementController } from "../controllers/user_management.controller";
-import { IUserManagement } from "../data/models/user_management.model";
+import { UserManagementController } from "../controllers/userManagement.controller";
+import { IUserManagement } from "../data/models/userManagement.model";
 
 jest.mock('axios');
 
-jest.mock('../controllers/user_management.controller', () => {
+jest.mock('../controllers/userManagement.controller', () => {
     const mUserManagementController = { 
         getAllUserManagements: jest.fn(),
         findUserManagementByUserId: jest.fn()
@@ -35,7 +35,7 @@ describe('index', () => {
         jest.clearAllMocks();
     });
 
-    describe('GET /api/user_managements', () => {
+    describe('GET /api/user-managements', () => {
         const mUserManagement: IUserManagement[] = [
             {
                 user_id: 1,
@@ -76,7 +76,7 @@ describe('index', () => {
 
         it('should fetch all user managements when there is data', async () => {
             // Given
-            const mUrl = "/api/user_managements";
+            const mUrl = "/api/user-managements";
             const getSpy = jest
                 .spyOn(controller, 'getAllUserManagements');
 
@@ -95,7 +95,7 @@ describe('index', () => {
         });
     });
 
-    describe('GET /api/user_management/:id', () => {
+    describe('GET /api/user-management/:id', () => {
         const mUserManagement: IUserManagement[] = [
             {
                 user_id: 1,
@@ -137,7 +137,7 @@ describe('index', () => {
 
         it('should find user managements when request params are provided', async () => {
             // Given
-            const mUrl = `/api/user_managment/${mFetchParams}`;
+            const mUrl = `/api/user-managment/${mFetchParams}`;
             const getSpy = jest
                 .spyOn(controller, 'findUserManagementByUserId')
                 .mockResolvedValue(mFetchParams);

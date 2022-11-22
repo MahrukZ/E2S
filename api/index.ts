@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { InsightController } from "./controllers/insights.controller";
-import { UserManagementController } from "./controllers/user_management.controller";
+import { UserManagementController } from "./controllers/userManagement.controller";
 import { ConsumptionController } from "./controllers/consumptions.controller";
 
 // config
@@ -16,13 +16,9 @@ app.use(cors());
 // controllers
 const insightController = new InsightController();
 const userManagementController = new UserManagementController();
-
-// routes
-
-// insights
 const consumptionController = new ConsumptionController();
 
-// routes 
+// routes
 
 //insights
 app.get("/api/insights", async (req, res) => {
@@ -42,11 +38,11 @@ app.delete("/api/insight/:id", async (req, res) => {
 });
 
 // user management
-app.get("/api/user_managements", async (req, res) => {
+app.get("/api/user-managements", async (req, res) => {
     userManagementController.getAllUserManagements(req, res);
 });
 
-app.get("/api/user_management/:id", async (req, res) => {
+app.get("/api/user-management/:id", async (req, res) => {
     userManagementController.findUserManagementByUserId(req, res);
 });
 // consumptions

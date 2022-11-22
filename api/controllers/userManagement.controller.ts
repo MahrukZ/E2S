@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UserManagementService } from "../services/user_management.service";
+import { UserManagementService } from "../services/topbar/userManagement.service";
 
 export class UserManagementController {
     private userManagementService: UserManagementService;

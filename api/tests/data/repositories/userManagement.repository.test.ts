@@ -1,5 +1,5 @@
-import { UserManagementRepository } from "../../../data/repositories/user_management.repository";
-import { UserManagement, IUserManagement } from "../../../data/models/user_management.model";
+import { UserManagementRepository } from "../../../data/repositories/userManagement.repository";
+import { UserManagement, IUserManagement } from "../../../data/models/userManagement.model";
 
 describe('UserManagementRepository', () => {
     const userManagementRepository = new UserManagementRepository();
@@ -68,8 +68,35 @@ describe('UserManagementRepository', () => {
         it('should find user managements when Id is provided', async () => {
             // Given
             const userId = 1;
-            const mockResponse = true;
-
+            const mockResponse: IUserManagement[] = [
+                {
+                    user_id: 1,
+                    first_name: 'Martin',
+                    last_name: 'James',
+                    email: 'martinjames@cardiff.ac.uk',
+                    organisation: 'Cardiff University',
+                    no_sites_managed: 3,
+                    role: 'director of estates'
+                },
+                {
+                    user_id: 2,
+                    first_name: 'Rhy',
+                    last_name: 'Jones',
+                    email: 'rhyjones@cardiff.ac.uk',
+                    organisation: 'Cardiff University',
+                    no_sites_managed: 1,
+                    role: 'facility energy manager'
+                },
+                {
+                    user_id: 3,
+                    first_name: 'James',
+                    last_name: 'Ohay',
+                    email: 'jamesohay@cardiff.ac.uk',
+                    organisation: 'Cardiff University',
+                    no_sites_managed: 3,
+                    role: 'facility energy manager'
+                }
+            ]
             UserManagement.findAll = jest.fn().mockResolvedValue(mockResponse);
 
             // When

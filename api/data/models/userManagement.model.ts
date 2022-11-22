@@ -42,7 +42,7 @@ export class UserManagement extends Model implements IUserManagement {
     organisation?: string;
 
     @Column({ 
-        type: DataType.STRING, 
+        type: DataType.INTEGER, 
     })
     no_sites_managed?: number;
 

@@ -1,5 +1,5 @@
 import { connect } from "../config/db.config";
-import { UserManagement, IUserManagement } from "../models/user_management.model";
+import { UserManagement, IUserManagement } from "../models/userManagement.model";
 
 export class UserManagementRepository {
     private db: any = {};
@@ -22,23 +22,21 @@ export class UserManagementRepository {
         try {
             data = await this.userManagementRepository.findAll();
         } catch (err) {
-            console.error(err);
-            throw (err);
+            throw new Error("Failed to get user managements." || err);
         }
         return data;
     }
 
-    async findUserManagementByUserId(userId: number): Promise<IUserManagement[]> {
+    async findUserManagementByUserId(user_id: number): Promise<IUserManagement[]> {
         let data = [];
         try {
             data = await this.userManagementRepository.findAll({
                 where: {
-                    user_id: userId,
+                    user_id
                   }
               });
         } catch (err) {
-            console.error(err);
-            throw (err);
+            throw new Error("Failed to find user managements." || err);
         }
         return data;
     }

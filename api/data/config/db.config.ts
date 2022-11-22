@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import dotenv from "dotenv";
 import { Insights } from "../models/insights.model";
-import { UserManagement } from "../models/user_management.model";
+import { UserManagement } from "../models/userManagement.model";
 import { Consumptions } from "../models/consumptions.model";
 
 dotenv.config();

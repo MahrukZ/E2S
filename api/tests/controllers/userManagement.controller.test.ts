@@ -1,8 +1,8 @@
-import { UserManagementController } from "../../controllers/user_management.controller";
-import { IUserManagement } from "../../data/models/user_management.model";
-import { UserManagementService } from "../../services/user_management.service";
+import { UserManagementController } from "../../controllers/userManagement.controller";
+import { IUserManagement } from "../../data/models/userManagement.model";
+import { UserManagementService } from "../../services/topbar/userManagement.service";
 
-jest.mock('../../services/user_management.service', () => {
+jest.mock('../../services/topbar/userManagement.service', () => {
     const mUserManagementService = { 
         getAllUserManagements: jest.fn(),
         findUserManagementByUserId: jest.fn(),
@@ -167,6 +167,7 @@ describe("UserManagementController", () => {
             expect(res.status).toHaveBeenCalledWith(200);
             expect(res.json).toHaveBeenCalledWith(mSuccessResponse);
 
+            expect(fetchSpy).toBeCalledTimes(1);
         });
 
         it('should not fetch when parameter is not provided', async () => {
@@ -183,6 +184,8 @@ describe("UserManagementController", () => {
            // Then
            expect(res.status).toHaveBeenCalledWith(500);
            expect(res.json).toHaveBeenCalledWith(mFailResponse);
+
+           expect(fetchSpy).toBeCalledTimes(1);
         });
     });
 });

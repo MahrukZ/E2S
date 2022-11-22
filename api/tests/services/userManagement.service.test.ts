@@ -1,8 +1,8 @@
-import { IUserManagement } from "../../data/models/user_management.model";
-import { UserManagementRepository } from "../../data/repositories/user_management.repository";
-import { UserManagementService } from "../../services/user_management.service";
+import { IUserManagement } from "../../data/models/userManagement.model";
+import { UserManagementRepository } from "../../data/repositories/userManagement.repository";
+import { UserManagementService } from "../../services/topbar/userManagement.service";
 
-jest.mock('../../data/repositories/user_management.repository', () => {
+jest.mock('../../data/repositories/userManagement.repository', () => {
     const mUserManagementRepo = { 
         getAllUserManagements: jest.fn(),
         findUserManagementByUserId: jest.fn()
