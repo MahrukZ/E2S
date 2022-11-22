@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from "axios"
 import { UserManagementController } from "../controllers/userManagement.controller";
 import { IUserManagement } from "../data/models/userManagement.model";
 
