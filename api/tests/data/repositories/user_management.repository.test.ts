@@ -51,10 +51,10 @@ describe('UserManagementRepository', () => {
             expect(UserManagement.findAll).toHaveBeenCalledWith();
         });
 
-        it('should not fetch insights when there is no data in the database', async () => {
+        it('should not fetch user management data when there is no data in the database', async () => {
             // Given 
             // When
-            const mErrorMessage = new Error("Failed to fetch all insights.");
+            const mErrorMessage = new Error("Failed to fetch all user managements.");
             userManagementRepository.getAllUserManagements = jest.fn().mockRejectedValue(mErrorMessage);
             
             // Then

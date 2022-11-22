@@ -7,7 +7,6 @@ import "./Topbar.css";
 
 
 function Topbar() {
-
   const [user, setUser] = useState<{userId: number; name: string}>({
     userId: 0,
     name: ""
@@ -24,7 +23,7 @@ function Topbar() {
   }, []);
 
   return (
-    <Navbar data-testid="topbar" className='py-0' id='topbar'>
+    <Navbar data-testid="topbar" className="py-0" id="topbar">
       <Container className="justify-content-end">
         <Row>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

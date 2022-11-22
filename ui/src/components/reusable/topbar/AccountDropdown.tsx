@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState } from 'react';
+import { useState } from "react";
 import { Container, Dropdown, DropdownButton } from "react-bootstrap";
 import { FaCog, FaSignOutAlt, FaUserAlt } from "react-icons/fa";
 import "./AccountDropdown.css";
@@ -9,22 +9,25 @@ interface AccountDropdownProps {
   }
 
 function AccountDropdown({ name }: AccountDropdownProps) {
-
+  const dropdownButton: HTMLElement | null = document.getElementById('dropdown-basic-button');
   // Reference - Set dropdown to appear on hover
   // Taken from https://stackoverflow.com/a/63371122
   const [show, setShow] = useState(false);
 
   const showDropdown = (_e: any)=>{
     setShow(!show);
-    const el: any = document.getElementById('dropdown-basic-button');
-    el.style.borderBottomLeftRadius = '0';
-    el.style.borderBottomRightRadius = '0';
+    if (dropdownButton) {
+      dropdownButton.style.borderBottomLeftRadius = '0';
+      dropdownButton.style.borderBottomRightRadius = '0';
+    }
   }
+
   const hideDropdown = (_e: any) => {
     setShow(false);
-    const el: any = document.getElementById('dropdown-basic-button');
-    el.style.borderBottomLeftRadius = '10px';
-    el.style.borderBottomRightRadius = '10px';
+    if (dropdownButton) {
+      dropdownButton.style.borderBottomLeftRadius = '0';
+      dropdownButton.style.borderBottomRightRadius = '0';
+    }
   }
   // End of reference
 

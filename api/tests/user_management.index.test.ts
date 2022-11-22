@@ -137,7 +137,7 @@ describe('index', () => {
 
         it('should find user managements when request params are provided', async () => {
             // Given
-            const mUrl = `/api/insight/${mFetchParams}`;
+            const mUrl = `/api/user_managment/${mFetchParams}`;
             const getSpy = jest
                 .spyOn(controller, 'findUserManagementByUserId')
                 .mockResolvedValue(mFetchParams);
