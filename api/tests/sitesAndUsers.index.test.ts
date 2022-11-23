@@ -1,6 +1,6 @@
 import axios from "axios"
 import { SitesAndUsersController } from "../controllers/sitesAndUsers.controller";
-import { ISitesAndUsers } from "../data/models/sitesAndUsers.model";
+import { ISitesAndUser } from "../data/models/sitesAndUsers.model";
 
 jest.mock('axios');
 
@@ -36,7 +36,7 @@ describe('index', () => {
     });
 
     describe('GET /api/sites_and_users', () => {
-        const mSitesAndUser: ISitesAndUsers[] = [
+        const mSitesAndUser: ISitesAndUser[] = [
             {
                 site_id: 1,
                 name: 'Abacws',
@@ -84,7 +84,7 @@ describe('index', () => {
     });
 
     describe('GET /api/sites_and_users/:id', () => {
-        const mSitesAndUser: ISitesAndUsers[] = [
+        const mSitesAndUser: ISitesAndUser[] = [
             {
                 site_id: 1,
                 name: 'Abacws',

@@ -1,5 +1,5 @@
 import { SitesAndUsersRepository } from "../../../data/repositories/sitesAndUsers.repository";
-import { SitesAndUsers, ISitesAndUsers } from "../../../data/models/sitesAndUsers.model";
+import { SitesAndUsers, ISitesAndUser } from "../../../data/models/sitesAndUsers.model";
 
 describe('SitesAndUsersRepository', () => {
     const sitesAndUsersRepository = new SitesAndUsersRepository();
@@ -11,7 +11,7 @@ describe('SitesAndUsersRepository', () => {
     describe('SitesAndUsersRepository.getAllSitesAndUsers', () => {
         it('should fetch all sites and users when there is data in the database', async () => {
             // Given
-            const mockResponse: ISitesAndUsers[] = [
+            const mockResponse: ISitesAndUser[] = [
                 {
                     site_id: 1,
                     name: 'Abacws',

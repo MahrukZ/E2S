@@ -1,5 +1,5 @@
 import { connect } from "../config/db.config";
-import { SitesAndUsers, ISitesAndUsers } from "../models/sitesAndUsers.model";
+import { SitesAndUsers, ISitesAndUser } from "../models/sitesAndUsers.model";
 
 export class SitesAndUsersRepository {
     private db: any = {};
@@ -17,7 +17,7 @@ export class SitesAndUsersRepository {
         this.sitesAndUsersRepository = this.db.Sequelize.getRepository(SitesAndUsers);
     }
 
-    async getAllSitesAndUsers(): Promise<ISitesAndUsers[]> {
+    async getAllSitesAndUsers(): Promise<ISitesAndUser[]> {
         let data = [];
         try {
             data = await this.sitesAndUsersRepository.findAll();
@@ -27,7 +27,7 @@ export class SitesAndUsersRepository {
         return data;
     }
 
-    async findSitesAndUsersByUserId(user_id: number): Promise<ISitesAndUsers[]> {
+    async findSitesAndUsersByUserId(user_id: number): Promise<ISitesAndUser[]> {
         let data = [];
         try {
             data = await this.sitesAndUsersRepository.findAll({

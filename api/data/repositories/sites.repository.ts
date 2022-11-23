@@ -22,8 +22,7 @@ export class SiteRepository {
         try {
             data = await this.siteRepository.create(site);
         } catch(err) {
-            console.error(err);
-            throw (err);
+            throw new Error("Failed to create site." || err);
         }
         return data;
     }
@@ -37,8 +36,7 @@ export class SiteRepository {
                 }
             });
         } catch(err) {
-            console.error(err);
-            throw (err);
+            throw new Error("Failed to delete site." || err);
         }
         return data;
     }
@@ -48,8 +46,7 @@ export class SiteRepository {
         try {
             data = await this.siteRepository.findAll();
         } catch (err) {
-            console.error(err);
-            throw (err);
+            throw new Error("Failed to get all sites." || err);
         }
         return data;
     }

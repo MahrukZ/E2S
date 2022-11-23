@@ -1,4 +1,3 @@
-import { ISitesAndUsers } from "../data/models/sitesAndUsers.model";
 import { SitesAndUsersRepository } from "../data/repositories/sitesAndUsers.repository";
 
 export class SitesAndUsersService {
@@ -15,5 +14,4 @@ export class SitesAndUsersService {
     async findSitesAndUsersByUserId(userId: number) {
         return await this.sitesAndUsersRepository.findSitesAndUsersByUserId(userId);
     }
-
 }

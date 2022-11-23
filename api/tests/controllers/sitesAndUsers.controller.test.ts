@@ -1,5 +1,5 @@
 import { SitesAndUsersController } from "../../controllers/sitesAndUsers.controller";
-import { ISitesAndUsers } from "../../data/models/sitesAndUsers.model";
+import { ISitesAndUser } from "../../data/models/sitesAndUsers.model";
 import { SitesAndUsersService } from "../../services/sitesAndUsers.service";
 
 jest.mock('../../services/sitesAndUsers.service', () => {
@@ -34,7 +34,7 @@ describe("SitesAndUsersController", () => {
     });
 
     describe("SitesAndUsersController.getAllSitesAndUsers", () => {
-        const mSitesAndUsers: ISitesAndUsers[] = [
+        const mSitesAndUsers: ISitesAndUser[] = [
             {
                 site_id: 1,
                 name: "Abacws",
@@ -100,7 +100,7 @@ describe("SitesAndUsersController", () => {
     });
 
     describe("SitesAndUsersController.findSitesAndUsersByUserId", () => {
-        const mSitesAndUsers: ISitesAndUsers[] = [
+        const mSitesAndUsers: ISitesAndUser[] = [
             {
                 site_id: 1,
                 name: "Abacws",
@@ -132,7 +132,7 @@ describe("SitesAndUsersController", () => {
             // Given
             const req = mRequest("", mParameter);
             const res = mResponse();
-            const updateSpy = jest
+            const fetchSpy = jest
             .spyOn(service, 'findSitesAndUsersByUserId')
             .mockResolvedValue(mSitesAndUsers);
 
@@ -143,13 +143,14 @@ describe("SitesAndUsersController", () => {
             expect(res.status).toHaveBeenCalledWith(200);
             expect(res.json).toHaveBeenCalledWith(mSuccessResponse);
 
+            expect(fetchSpy).toHaveBeenCalledTimes(1);
         });
 
         it('should not fetch when parameter is not provided', async () => {
            // Given
            const req = mRequest();
            const res = mResponse();
-           const updateSpy = jest
+           const fetchSpy = jest
            .spyOn(service, 'findSitesAndUsersByUserId')
            .mockRejectedValue({});
 
@@ -160,6 +161,7 @@ describe("SitesAndUsersController", () => {
            expect(res.status).toHaveBeenCalledWith(500);
            expect(res.json).toHaveBeenCalledWith(mFailResponse);
 
+           expect(fetchSpy).toHaveBeenCalledTimes(1);
         });
     });
 });

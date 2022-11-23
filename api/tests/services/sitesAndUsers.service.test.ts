@@ -1,4 +1,4 @@
-import { ISitesAndUsers } from "../../data/models/sitesAndUsers.model";
+import { ISitesAndUser } from "../../data/models/sitesAndUsers.model";
 import { SitesAndUsersRepository } from "../../data/repositories/sitesAndUsers.repository";
 import { SitesAndUsersService } from "../../services/sitesAndUsers.service";
 
@@ -24,7 +24,7 @@ describe('SitesAndUsersService', () => {
     describe('SitesAndUsersService.getAllSitesAndUsers', () => {
         it('should return all sites and users', async () => {
             // Given
-            const mSitesAndUsers: ISitesAndUsers[] = [
+            const mSitesAndUsers: ISitesAndUser[] = [
                 {
                     site_id: 1,
                     name: 'Abacws',
@@ -58,7 +58,7 @@ describe('SitesAndUsersService', () => {
     describe('SitesAndUsersService.findSitesAndUsersByUserId', () => {
         it('should find sites and users by user id', async () => {
             // Given
-            const mSitesAndUsers: ISitesAndUsers[] = [
+            const mSitesAndUsers: ISitesAndUser[] = [
                 {
                     site_id: 1,
                     name: 'Abacws',

@@ -1,13 +1,13 @@
 import { Column, Model, Table, DataType } from "sequelize-typescript";
 
-export interface ISitesAndUsers {
+export interface ISitesAndUser {
     site_id?: number;
     name?: string;
     user_id?: number;
 }
 
 @Table({ tableName: 'sites_and_users' })
-export class SitesAndUsers extends Model implements ISitesAndUsers {
+export class SitesAndUsers extends Model implements ISitesAndUser {
 
     @Column({
         primaryKey: true,
