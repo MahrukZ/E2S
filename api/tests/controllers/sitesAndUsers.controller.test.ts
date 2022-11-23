@@ -1,8 +1,8 @@
-import { SitesAndUsersController } from "../../controllers/sites_and_users.controller";
-import { ISitesAndUsers } from "../../data/models/sites_and_users.model";
-import { SitesAndUsersService } from "../../services/sites_and_users.service";
+import { SitesAndUsersController } from "../../controllers/sitesAndUsers.controller";
+import { ISitesAndUsers } from "../../data/models/sitesAndUsers.model";
+import { SitesAndUsersService } from "../../services/sitesAndUsers.service";
 
-jest.mock('../../services/sites_and_users.service', () => {
+jest.mock('../../services/sitesAndUsers.service', () => {
     const mSitesAndUsersService = { 
         getAllSitesAndUsers: jest.fn(),
         findSitesAndUsersByUserId: jest.fn(),

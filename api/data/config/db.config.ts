@@ -2,7 +2,7 @@ import { Sequelize } from "sequelize-typescript";
 import dotenv from "dotenv";
 import { Insights } from "../models/insights.model";
 import { Sites } from "../models/sites.model";
-import { SitesAndUsers } from "../models/sites_and_users.model";
+import { SitesAndUsers } from "../models/sitesAndUsers.model";
 import { UserManagement } from "../models/userManagement.model";
 import { Consumptions } from "../models/consumptions.model";
 

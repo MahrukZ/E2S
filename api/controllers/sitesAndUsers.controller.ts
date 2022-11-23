@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { SitesAndUsersService } from "../services/sites_and_users.service";
+import { SitesAndUsersService } from "../services/sitesAndUsers.service";
 
 export class SitesAndUsersController {
     private sitesAndUsersService: SitesAndUsersService;

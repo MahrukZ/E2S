@@ -1,5 +1,5 @@
-import { ISitesAndUsers } from "../data/models/sites_and_users.model";
-import { SitesAndUsersRepository } from "../data/repositories/sites_and_users.repository";
+import { ISitesAndUsers } from "../data/models/sitesAndUsers.model";
+import { SitesAndUsersRepository } from "../data/repositories/sitesAndUsers.repository";
 
 export class SitesAndUsersService {
     private sitesAndUsersRepository: SitesAndUsersRepository;

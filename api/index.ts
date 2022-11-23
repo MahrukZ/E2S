@@ -3,7 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { InsightController } from "./controllers/insights.controller";
 import { SiteController } from "./controllers/sites.controller";
-import { SitesAndUsersController } from "./controllers/sites_and_users.controller";
+import { SitesAndUsersController } from "./controllers/sitesAndUsers.controller";
 import { UserManagementController } from "./controllers/userManagement.controller";
 import { ConsumptionController } from "./controllers/consumptions.controller";
 
@@ -60,11 +60,11 @@ app.delete("/api/site/:id", async (req, res) => {
 
 //sites_and_users
 
-app.get("/api/sites_and_users", async (req, res) => {
+app.get("/api/sites-and-users", async (req, res) => {
     sitesAndUsersController.getAllSitesAndUsers(req, res);
 });
 
-app.get("/api/sites_and_users/:id", async (req, res) => {
+app.get("/api/sites-and-users/:id", async (req, res) => {
     sitesAndUsersController.findSitesAndUsersByUserId(req, res);
 });
 

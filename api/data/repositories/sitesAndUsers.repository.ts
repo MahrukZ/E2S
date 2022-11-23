@@ -1,5 +1,5 @@
 import { connect } from "../config/db.config";
-import { SitesAndUsers, ISitesAndUsers } from "../models/sites_and_users.model";
+import { SitesAndUsers, ISitesAndUsers } from "../models/sitesAndUsers.model";
 
 export class SitesAndUsersRepository {
     private db: any = {};
@@ -22,23 +22,21 @@ export class SitesAndUsersRepository {
         try {
             data = await this.sitesAndUsersRepository.findAll();
         } catch (err) {
-            console.error(err);
-            throw (err);
+            throw new Error("Failed to get sites and users." || err);
         }
         return data;
     }
 
-    async findSitesAndUsersByUserId(userId: number): Promise<ISitesAndUsers[]> {
+    async findSitesAndUsersByUserId(user_id: number): Promise<ISitesAndUsers[]> {
         let data = [];
         try {
             data = await this.sitesAndUsersRepository.findAll({
                 where: {
-                    user_id: userId,
+                    user_id
                   }
               });
         } catch (err) {
-            console.error(err);
-            throw (err);
+            throw new Error("Failed to get sites and users." || err);
         }
         return data;
     }

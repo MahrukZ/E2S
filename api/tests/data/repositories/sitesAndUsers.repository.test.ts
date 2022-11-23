@@ -1,5 +1,5 @@
-import { SitesAndUsersRepository } from "../../../data/repositories/sites_and_users.repository";
-import { SitesAndUsers, ISitesAndUsers } from "../../../data/models/sites_and_users.model";
+import { SitesAndUsersRepository } from "../../../data/repositories/sitesAndUsers.repository";
+import { SitesAndUsers, ISitesAndUsers } from "../../../data/models/sitesAndUsers.model";
 
 describe('SitesAndUsersRepository', () => {
     const sitesAndUsersRepository = new SitesAndUsersRepository();

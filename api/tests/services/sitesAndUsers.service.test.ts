@@ -1,8 +1,8 @@
-import { ISitesAndUsers } from "../../data/models/sites_and_users.model";
-import { SitesAndUsersRepository } from "../../data/repositories/sites_and_users.repository";
-import { SitesAndUsersService } from "../../services/sites_and_users.service";
+import { ISitesAndUsers } from "../../data/models/sitesAndUsers.model";
+import { SitesAndUsersRepository } from "../../data/repositories/sitesAndUsers.repository";
+import { SitesAndUsersService } from "../../services/sitesAndUsers.service";
 
-jest.mock('../../data/repositories/sites_and_users.repository', () => {
+jest.mock('../../data/repositories/sitesAndUsers.repository', () => {
     const mSitesAndUsersRepo = { 
         getAllSitesAndUsers: jest.fn(),
         findSitesAndUsersByUserId: jest.fn()
