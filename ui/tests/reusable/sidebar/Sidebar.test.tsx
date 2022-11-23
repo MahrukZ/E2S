@@ -1,6 +1,6 @@
 import React from 'react'
 import '@testing-library/jest-dom'
-import { render, screen, cleanup, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import App from '../../../src/App'
 
 //Cannot render Sidebar independently due to routes, App is rendered to test Sidebar
