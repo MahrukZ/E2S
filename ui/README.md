@@ -29,11 +29,15 @@ npm i
 - `web-vitals` package - The web-vitals library is a tiny modular library for measuring all the Web Vitals metrics on real users. **Learn more [here](https://www.npmjs.com/package/web-vitals)**
 - `axios` package - Promise based HTTP client for the browser and Node.js. **Learn more [here](https://www.npmjs.com/package/axios)**
 - `bootstrap` package - Sleek, intuitive, and powerful front-end framework for faster and easier web development. **Learn more [here](https://www.npmjs.com/package/bootstrap)**
+- `react-router-dom` package - The react-router-dom package contains bindings for using React Router in web applications. **Learn more [here](https://www.npmjs.com/package/react-router-dom)**
+- `styled-components` package - Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress. **Learn more [here](https://www.npmjs.com/package/styled-components)**
+
 
 ###### _devDependencies:_
 - `jest` package - Jest is a delightful JavaScript Testing Framework with a focus on simplicity. **Learn more [here](https://jestjs.io/)**
 - `ts-jest` package - A Jest transformer with source map support that lets you use Jest to test projects written in TypeScript. **Learn more [here](https://www.npmjs.com/package/ts-jest)**
 - `jest-environment-jsdom` package - **Learn more [here](https://www.npmjs.com/package/jest-environment-jsdom)**
+- `jsx-runtime` package - **Learn more [here](https://www.npmjs.com/package/jsx-runtime)**
  
 
 ## Available Scripts
