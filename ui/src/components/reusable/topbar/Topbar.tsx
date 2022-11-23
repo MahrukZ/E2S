@@ -5,7 +5,7 @@ import AccountDropdown from './AccountDropdown';
 import SiteDropdown from "./SiteDropdown";
 import { SitesAndUsersService } from "../../../services/sitesAndUsers.service";
 import "./Topbar.css";
-import SiteAndUser from "../../../data/SiteAndUser";
+import SiteAndUser from "../../../dtos/SiteAndUser";
 import { UserManagementService } from "../../../services/userManagement.service";
 
 
