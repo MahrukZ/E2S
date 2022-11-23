@@ -59,7 +59,6 @@ app.delete("/api/site/:id", async (req, res) => {
 });
 
 //sites_and_users
-
 app.get("/api/sites-and-users", async (req, res) => {
     sitesAndUsersController.getAllSitesAndUsers(req, res);
 });

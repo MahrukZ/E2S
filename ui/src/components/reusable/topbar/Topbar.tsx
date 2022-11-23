@@ -3,10 +3,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Nav, Navbar, Row } from "react-bootstrap";
 import AccountDropdown from './AccountDropdown';
 import SiteDropdown from "./SiteDropdown";
-import { SitesAndUsersService } from "../../../services/sitesAndUsers";
+import { SitesAndUsersService } from "../../../services/sitesAndUsers.service";
 import "./Topbar.css";
 import SiteAndUser from "../../../data/SiteAndUser";
-import { UserManagementService } from "../../../services/userManagement";
+import { UserManagementService } from "../../../services/userManagement.service";
 
 
 function Topbar() {
