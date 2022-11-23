@@ -1,12 +1,20 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Nav, Navbar, Row } from "react-bootstrap";
 import AccountDropdown from './AccountDropdown';
-import { UserManagementService } from "../../../services/userManagement";
+import SiteDropdown from "./SiteDropdown";
+import { SitesAndUsersService } from "../../../services/sitesAndUsers.service";
 import "./Topbar.css";
+import SiteAndUser from "../../../dtos/SiteAndUser";
+import { UserManagementService } from "../../../services/userManagement.service";
 
 
 function Topbar() {
+  
+  const [siteList, setSiteList] = useState<SiteAndUser[]>([])
+
+  const sitesAndUsersService = new SitesAndUsersService();
+
   const [user, setUser] = useState<{userId: number; name: string}>({
     userId: 0,
     name: ""
@@ -15,6 +23,23 @@ function Topbar() {
   const userManagementService = new UserManagementService();
 
   useEffect(() => {
+
+    const getAllSites =async () => {
+      let sitesList: SiteAndUser[] = [];
+
+      const sites = await sitesAndUsersService.findSitesAndUsersByUserId(3);
+
+      for (let i = 0; i < sites["data"].length; i++ ) {
+        const currentSite: string = String(sites["data"][i]["name"]);
+        const currentSiteId: number = (sites["data"][i]["site_id"]);
+        const siteToAdd: SiteAndUser = new SiteAndUser(currentSiteId, currentSite);
+        sitesList.push(siteToAdd);
+      }
+
+      setSiteList(sitesList)
+    }
+    getAllSites();
+
     const getUser =async () => {
       const userJSON = await userManagementService.findUserManagementByUserId(3); // User ID of 3 until login system is implemented
       setUser({userId:userJSON["data"][0]["user_id"], name: String(userJSON["data"][0]["first_name"]) + " " + String(userJSON["data"][0]["last_name"])});
@@ -29,7 +54,8 @@ function Topbar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <AccountDropdown name={user.name} />
+          <SiteDropdown sites = {siteList} />
+          <AccountDropdown name={user.name} />
           </Nav>
         </Navbar.Collapse>
         </Row>

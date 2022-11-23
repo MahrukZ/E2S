@@ -137,3 +137,23 @@ FROM consumptions c;
 CREATE VIEW costs AS
 SELECT c.consumption_id, (c.electricity_price + c.gas_price) as total_costs
 FROM consumptions c;
+
+CREATE VIEW sites_and_users AS
+SELECT s.site_id, s.name, shu.user_id FROM sites s
+JOIN sites_has_users shu
+ON s.site_id = shu.site_id;
+
+-- STORED PROCEDURES --
+
+DROP PROCEDURE IF EXISTS SitesByUserId;
+DELIMITER //
+CREATE PROCEDURE SitesByUserId(
+	IN InputUserID INT
+)
+BEGIN
+SELECT * FROM sites s
+JOIN sites_has_users shu
+ON s.site_id = shu.site_id
+WHERE shu.user_id = InputUserID;
+END //
+DELIMITER ;

@@ -1,6 +1,8 @@
 import { Sequelize } from "sequelize-typescript";
 import dotenv from "dotenv";
 import { Insights } from "../models/insights.model";
+import { Sites } from "../models/sites.model";
+import { SitesAndUsers } from "../models/sitesAndUsers.model";
 import { UserManagement } from "../models/userManagement.model";
 import { Consumptions } from "../models/consumptions.model";
 
@@ -23,6 +25,8 @@ export const connect = () => {
     });
 
     sequelize.addModels([Insights]);
+    sequelize.addModels([Sites]);
+    sequelize.addModels([SitesAndUsers]);
     sequelize.addModels([UserManagement]);
     sequelize.addModels([Consumptions]);
 
