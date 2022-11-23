@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import { InsightController } from "./controllers/insights.controller";
 import { SiteController } from "./controllers/sites.controller";
 import { SitesAndUsersController } from "./controllers/sites_and_users.controller";
+import { UserManagementController } from "./controllers/userManagement.controller";
+import { ConsumptionController } from "./controllers/consumptions.controller";
 
 // config
 dotenv.config();
@@ -17,10 +19,12 @@ app.use(cors());
 const insightController = new InsightController();
 const siteController = new SiteController();
 const sitesAndUsersController = new SitesAndUsersController();
+const userManagementController = new UserManagementController();
+const consumptionController = new ConsumptionController();
 
 // routes
 
-// insights
+//insights
 app.get("/api/insights", async (req, res) => {
     insightController.getAllInsights(req, res);
 });
@@ -62,6 +66,24 @@ app.get("/api/sites_and_users", async (req, res) => {
 
 app.get("/api/sites_and_users/:id", async (req, res) => {
     sitesAndUsersController.findSitesAndUsersByUserId(req, res);
+});
+
+// user management
+app.get("/api/user-managements", async (req, res) => {
+    userManagementController.getAllUserManagements(req, res);
+});
+
+app.get("/api/user-management/:id", async (req, res) => {
+    userManagementController.findUserManagementByUserId(req, res);
+});
+
+// consumptions
+app.get("/api/consumptions", async (req, res) => {
+    consumptionController.getAllConsumptions(req, res);
+});
+
+app.post("/api/consumption", async (req, res) => {
+    consumptionController.createConsumption(req, res);
 });
 
 // port listen

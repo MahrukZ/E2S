@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
 import { cleanup, render, screen } from '@testing-library/react';
 import React from 'react';
-import SiteDropdown from '../../src/components/Topbar/SiteDropdown';
-import SiteAndUser from '../../src/data/SiteAndUser';
+import SiteDropdown from '../../../src/components/reusable/topbar/SiteDropdown';
+import SiteAndUser from '../../../src/data/SiteAndUser';
 
 afterEach(() => {
     cleanup();

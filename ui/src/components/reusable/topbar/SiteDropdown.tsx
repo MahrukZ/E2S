@@ -1,5 +1,5 @@
 import Form from 'react-bootstrap/Form';
-import SiteAndUser from "../../data/SiteAndUser";
+import SiteAndUser from "../../../data/SiteAndUser";
 
 interface SiteDropownProps {
     sites: SiteAndUser[];
