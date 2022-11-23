@@ -1,11 +1,11 @@
 import '@testing-library/jest-dom'
 import { SitesAndUsersService } from '../../src/services/sitesAndUsers.service'
 
-const sitesAndUsersService = new SitesAndUsersService;
+const service = new SitesAndUsersService;
 
 it('Returns correct sites from api', async () => {
 
-    const sites = await sitesAndUsersService.findSitesAndUsersByUserId(1);
+    const sites = await service.findSitesAndUsersByUserId(1);
     console.log(sites);
     const currentSite: string = String(sites["data"][1]["name"]);
     expect(currentSite).toEqual("National Software Academy");
@@ -36,7 +36,7 @@ it('Returns correct sites from api', async () => {
 //     ]
 //   });
 
-//   const title = await sitesAndUsersService.findSitesAndUsersByUserId(1);
+//   const title = await service.findSitesAndUsersByUserId(1);
 //   const siteOneName = title[0]["name"];
 //   expect(siteOneName).toEqual("Abacws");
 // });
