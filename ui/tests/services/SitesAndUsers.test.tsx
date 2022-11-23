@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { SitesAndUsersService } from '../../src/services/topbar/sites_and_users'
+import { SitesAndUsersService } from '../../src/services/sitesAndUsers'
 
 const sitesAndUsersService = new SitesAndUsersService;
 
