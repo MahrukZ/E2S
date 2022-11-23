@@ -26,7 +26,7 @@ export class SitesAndUsersController {
         );
     };
 
-    async findSitesAndUsersByUserId(req: Request, res: Response) {
+    async findSitesAndUsersByUserId(req: Request, res: Response): Promise<any> {
 
         return (this.sitesAndUsersService.findSitesAndUsersByUserId(parseInt(req.params.id))
             .then(data => {
