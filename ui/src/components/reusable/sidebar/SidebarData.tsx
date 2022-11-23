@@ -23,4 +23,4 @@ export const SidebarData = [
         path: '/costforecast',
         icon: <FaIcons.FaChartLine size='35' />
     }
-]
+];
