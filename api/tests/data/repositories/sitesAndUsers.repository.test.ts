@@ -56,7 +56,23 @@ describe('SitesAndUsersRepository', () => {
         it('should find sites and users when Id is provided', async () => {
             // Given
             const userId = 1;
-            const mockResponse = true;
+            const mockResponse: ISitesAndUser[] = [
+                {
+                    site_id: 1,
+                    name: 'Abacws',
+                    user_id: 1
+                },
+                {
+                    site_id: 1,
+                    name: 'Abacws',
+                    user_id: 3
+                },
+                {
+                    site_id: 2,
+                    name: 'National Software Academy',
+                    user_id: 1
+                }
+            ];
 
             SitesAndUsers.findAll = jest.fn().mockResolvedValue(mockResponse);
 
