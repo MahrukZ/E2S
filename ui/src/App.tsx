@@ -30,8 +30,6 @@ const App: React.FunctionComponent = () => {
       </Router> 
     </>
   );
-
-  
 }
 
 export default App;
