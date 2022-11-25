@@ -1,12 +1,12 @@
-import { useState, useEffect, useRef } from "react"
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useEffect, useState } from "react";
 import { Container, Nav, Navbar, Row } from "react-bootstrap";
+import SiteAndUser from "../../../dtos/SiteAndUser";
+import { SitesAndUsersService } from "../../../services/sitesAndUsers.service";
+import { UserManagementService } from "../../../services/userManagement.service";
 import AccountDropdown from './AccountDropdown';
 import SiteDropdown from "./SiteDropdown";
-import { SitesAndUsersService } from "../../../services/sitesAndUsers.service";
 import "./Topbar.css";
-import SiteAndUser from "../../../dtos/SiteAndUser";
-import { UserManagementService } from "../../../services/userManagement.service";
 
 
 function Topbar() {
