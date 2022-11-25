@@ -1,5 +1,5 @@
-import { Form, Button } from 'react-bootstrap';
-import { FaUpload } from "react-icons/fa"
+import { Form } from 'react-bootstrap';
+import UploadButton from './UploadButton';
 
 function Upload() {
   return (
@@ -7,7 +7,7 @@ function Upload() {
         <Form.Group controlId="formFile" className="mb-3">
             <Form.Control type="file" accept=".csv" />
         </Form.Group>
-        <Button variant="outline-primary"><FaUpload /> Upload Data</Button>{' '}
+        <UploadButton />
     </div>
   );
 };
