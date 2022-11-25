@@ -2,13 +2,21 @@ import { useState } from "react";
 import { Button } from 'react-bootstrap';
 import { FaUpload } from "react-icons/fa";
 
+interface IUploadData {
+  timeInterval: string,
+  heatDemand: number,
+  electricityDemand: number,
+  electricityPrice: number,
+  gasPrice: number
+}
+
 interface UploadButtonProps {
   file: any;
 }
 
 function UploadButton({ file }: UploadButtonProps) {
 
-  const [csvData, setCsvData] = useState<any[]>([]);
+  const [csvData, setCsvData] = useState<IUploadData[]>([]);
   const [error, setError] = useState("");
 
   const fileReader = new FileReader();
@@ -17,16 +25,24 @@ function UploadButton({ file }: UploadButtonProps) {
     const csvHeader = string.slice(0, string.indexOf("\n")).split(",");
     const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
 
-    const array:any[] = csvRows.map(i => {
+    const array:IUploadData[] = csvRows.map(i => {
       const values = i.split(",");
+      // console.log("values=",values)
+
       const obj = csvHeader.reduce((object:any, header:string, index:number) => {
+        console.log("object=",object)
+        console.log("header=",header)
+        console.log("index=",index)
+        const dataObj: IUploadData = object;
         object[header] = values[index];
         return object;
       }, {});
+      // console.log("obj=",obj)
       return obj;
     });
-    console.log(array);
+    // console.log(array);
     setCsvData(array);
+    // console.log(csvData);
   };
 
   const handleParse = (e:any) => {
