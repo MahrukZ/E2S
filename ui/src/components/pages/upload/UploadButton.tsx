@@ -8,10 +8,26 @@ interface UploadButtonProps {
 
 function UploadButton({ file }: UploadButtonProps) {
 
-  const [csvData, setCsvData] = useState([]);
+  const [csvData, setCsvData] = useState<any[]>([]);
   const [error, setError] = useState("");
 
   const fileReader = new FileReader();
+
+  const csvFileToArray = (string:string) => {
+    const csvHeader = string.slice(0, string.indexOf("\n")).split(",");
+    const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
+
+    const array:any[] = csvRows.map(i => {
+      const values = i.split(",");
+      const obj = csvHeader.reduce((object:any, header:string, index:number) => {
+        object[header] = values[index];
+        return object;
+      }, {});
+      return obj;
+    });
+
+    setCsvData(array);
+  };
 
   const handleParse = (e:any) => {
     console.log("handling parse");
@@ -20,15 +36,38 @@ function UploadButton({ file }: UploadButtonProps) {
     if (file) {
       fileReader.onload = function (event:any) {
           const csvOutput = event.target.result;
-          console.log(csvOutput);
+          csvFileToArray(csvOutput);
       };
       fileReader.readAsText(file);
     }
-
   };
 
+  const headerKeys = Object.keys(Object.assign({}, ...csvData));
+
   return (
-    <Button variant="outline-primary" onClick={handleParse}><FaUpload /> Upload Data</Button>
+    <div className="container">
+      <Button variant="outline-primary" onClick={handleParse}><FaUpload /> Upload Data</Button>
+      <table>
+        <thead>
+          <tr key={"header"}>
+            {headerKeys.map((key) => (
+              <th>{key}</th>
+            ))}
+          </tr>
+        </thead>
+
+        <tbody>
+          {csvData.map((item) => (
+            <tr key={item.id}>
+              {Object.values(item).map((val:any) => (
+                <td>{val}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
     );
 };
 
