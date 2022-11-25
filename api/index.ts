@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { InsightController } from "./controllers/insights.controller";
+import { SiteController } from "./controllers/sites.controller";
+import { SitesAndUsersController } from "./controllers/sitesAndUsers.controller";
 import { UserManagementController } from "./controllers/userManagement.controller";
 import { ConsumptionController } from "./controllers/consumptions.controller";
 
@@ -15,6 +17,8 @@ app.use(cors());
 
 // controllers
 const insightController = new InsightController();
+const siteController = new SiteController();
+const sitesAndUsersController = new SitesAndUsersController();
 const userManagementController = new UserManagementController();
 const consumptionController = new ConsumptionController();
 
@@ -35,6 +39,32 @@ app.put("/api/insight", async (req, res) => {
 
 app.delete("/api/insight/:id", async (req, res) => {
     insightController.deleteInsight(req, res);
+});
+
+//sites
+app.get("/api/sites", async (req, res) => {
+    siteController.getAllSites(req, res);
+});
+
+app.post("/api/site", async (req, res) => {
+    siteController.createSite(req, res);
+});
+
+app.put("/api/site", async (req, res) => {
+    siteController.updateSite(req, res);
+});
+
+app.delete("/api/site/:id", async (req, res) => {
+    siteController.deleteSite(req, res);
+});
+
+//sites_and_users
+app.get("/api/sites-and-users", async (req, res) => {
+    sitesAndUsersController.getAllSitesAndUsers(req, res);
+});
+
+app.get("/api/sites-and-users/:id", async (req, res) => {
+    sitesAndUsersController.findSitesAndUsersByUserId(req, res);
 });
 
 // user management
