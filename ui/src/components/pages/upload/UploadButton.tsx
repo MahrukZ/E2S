@@ -25,7 +25,7 @@ function UploadButton({ file }: UploadButtonProps) {
       }, {});
       return obj;
     });
-
+    console.log(array);
     setCsvData(array);
   };
 
@@ -47,7 +47,7 @@ function UploadButton({ file }: UploadButtonProps) {
   return (
     <div className="container">
       <Button variant="outline-primary" onClick={handleParse}><FaUpload /> Upload Data</Button>
-      <table>
+      {/* <table>
         <thead>
           <tr key={"header"}>
             {headerKeys.map((key) => (
@@ -65,7 +65,7 @@ function UploadButton({ file }: UploadButtonProps) {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
     </div>
 
     );
