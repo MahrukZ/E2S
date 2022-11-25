@@ -8,6 +8,10 @@ import AccountDropdown from './AccountDropdown';
 import SiteDropdown from "./SiteDropdown";
 import "./Topbar.css";
 
+export interface IUser {
+  userId: number,
+  name: string
+}
 
 function Topbar() {
   
@@ -15,7 +19,7 @@ function Topbar() {
 
   const sitesAndUsersService = new SitesAndUsersService();
 
-  const [user, setUser] = useState<{userId: number; name: string}>({
+  const [user, setUser] = useState<IUser>({
     userId: 0,
     name: ""
   });
@@ -35,7 +39,6 @@ function Topbar() {
         const siteToAdd: SiteAndUser = new SiteAndUser(currentSiteId, currentSite);
         sitesList.push(siteToAdd);
       }
-
       setSiteList(sitesList)
     }
     getAllSites();
@@ -55,7 +58,7 @@ function Topbar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
           <SiteDropdown sites = {siteList} />
-          <AccountDropdown name={user.name} />
+          <AccountDropdown user={user} />
           </Nav>
         </Navbar.Collapse>
         </Row>
