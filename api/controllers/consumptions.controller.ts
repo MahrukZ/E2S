@@ -43,4 +43,22 @@ export class ConsumptionController {
             })
         );
     };
+
+    async bulkCreateConsumption(req: Request, res: Response): Promise<any> {
+        return (this.consumptionService.bulkCreateConsumption(req.body)
+            .then(data => {
+                res.status(201).json({
+                    message: 'Created',
+                    status: 201,
+                    data
+                });
+            })
+            .catch(err => {
+                res.status(500).json({
+                    message: err.message || "server error: failed to create consumptions.",
+                    status: 500
+                });
+            })
+        );
+    };
 }

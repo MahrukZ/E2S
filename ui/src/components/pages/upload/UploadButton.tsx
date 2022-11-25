@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Button } from 'react-bootstrap';
+import { Button } from "react-bootstrap";
 import { FaUpload } from "react-icons/fa";
+import { ConsumptionsService } from "../../../services/consumptions.service";
 
-interface IUploadData {
+export interface IUploadData {
   timeInterval: string,
   heatDemand: number,
   electricityDemand: number,
@@ -16,6 +17,8 @@ interface UploadButtonProps {
 
 function UploadButton({ file }: UploadButtonProps) {
 
+  const consumptionsService = new ConsumptionsService();
+
   const [csvData, setCsvData] = useState<IUploadData[]>([]);
   const [error, setError] = useState("");
 
@@ -27,26 +30,18 @@ function UploadButton({ file }: UploadButtonProps) {
 
     const array:IUploadData[] = csvRows.map(i => {
       const values = i.split(",");
-      // console.log("values=",values)
-
       const obj = csvHeader.reduce((object:any, header:string, index:number) => {
-        console.log("object=",object)
-        console.log("header=",header)
-        console.log("index=",index)
-        const dataObj: IUploadData = object;
         object[header] = values[index];
         return object;
       }, {});
-      // console.log("obj=",obj)
       return obj;
     });
-    // console.log(array);
     setCsvData(array);
-    // console.log(csvData);
+    console.log(array);
+    consumptionsService.bulkCreateConsumptions(array);
   };
 
   const handleParse = (e:any) => {
-    console.log("handling parse");
     e.preventDefault();
 
     if (file) {
