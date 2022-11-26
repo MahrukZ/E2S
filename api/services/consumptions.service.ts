@@ -16,7 +16,7 @@ export class ConsumptionService {
         return await this.consumptionRepository.getAllConsumptions();
     }
 
-    async bulkCreateConsumption(consumptions: IConsumption[]) {
-        return await this.consumptionRepository.bulkCreateConsumption(consumptions);
+    async bulkCreateConsumptions(consumptions: IConsumption[]) {
+        return await this.consumptionRepository.bulkCreateConsumptions(consumptions);
     }
 }

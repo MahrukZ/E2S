@@ -86,7 +86,7 @@ app.post("/api/consumption", async (req, res) => {
 });
 
 app.post("/api/consumption/bulk-create", async (req, res) => {
-    consumptionController.bulkCreateConsumption(req, res);
+    consumptionController.bulkCreateConsumptions(req, res);
 });
 
 // port listen

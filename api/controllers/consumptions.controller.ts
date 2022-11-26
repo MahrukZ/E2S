@@ -44,8 +44,8 @@ export class ConsumptionController {
         );
     };
 
-    async bulkCreateConsumption(req: Request, res: Response): Promise<any> {
-        return (this.consumptionService.bulkCreateConsumption(req.body)
+    async bulkCreateConsumptions(req: Request, res: Response): Promise<any> {
+        return (this.consumptionService.bulkCreateConsumptions(req.body)
             .then(data => {
                 res.status(201).json({
                     message: 'Created',
