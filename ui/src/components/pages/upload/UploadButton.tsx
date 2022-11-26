@@ -31,17 +31,18 @@ function UploadButton({ file }: UploadButtonProps) {
     const array:IUploadData[] = csvRows.map(i => {
       const values = i.split(",");
       const obj = csvHeader.reduce((object:any, header:string, index:number) => {
-        if (header === "time_interval") {
-          object[header] = values[index];
-        } else if (header === "heat_demand" || header === "electricity_demand" || header === "electricity_price" || header === "gas_price") {
-          object[header] = parseFloat(values[index]);
-        }
-        object['site_id'] = 1;
-        object['org_id'] = 1;
-        return object;
+      if (header === "time_interval") {
+        object[header] = values[index];
+      } else if (header === "heat_demand" || header === "electricity_demand" || header === "electricity_price" || header === "gas_price") {
+        object[header] = parseFloat(values[index]);
+      }
+      object['site_id'] = 1;
+      object['org_id'] = 1;
+      return object;
       }, {});
       return obj;
     });
+    
     setCsvData(array);
     // console.log(array);
     consumptionsService.bulkCreateConsumptions(array);
