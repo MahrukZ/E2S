@@ -5,13 +5,13 @@ import { ConsumptionsService } from "../../../services/consumptions.service";
 import Message from "../../reusable/alerts/Message";
 
 export interface IUploadData {
-  time_interval: string,
-  heat_demand: number,
-  electricity_demand: number,
-  electricity_price: number,
-  gas_price: number,
-  org_id: number,
-  site_id: number
+  timeInterval: string,
+  heatDemand: number,
+  electricityDemand: number,
+  electricityPrice: number,
+  gasPrice: number,
+  orgId: number,
+  siteId: number
 }
 
 interface UploadButtonProps {
@@ -34,13 +34,13 @@ function UploadButton({ file }: UploadButtonProps) {
       const array:IUploadData[] = csvRows.map(i => {
         const values = i.split(",");
         const obj = csvHeader.reduce((object:any, header:string, index:number) => {
-          if (header === "time_interval") {
+          if (header === "timeInterval") {
             object[header] = values[index];
-          } else if (header === "heat_demand" || header === "electricity_demand" || header === "electricity_price" || header === "gas_price") {
+          } else if (header === "heatDemand" || header === "electricityDemand" || header === "electricityPrice" || header === "gasPrice") {
             object[header] = parseFloat(values[index]);
           }
-          object['site_id'] = 1;
-          object['org_id'] = 1;
+          object['siteId'] = 1;
+          object['orgId'] = 1;
           return object;
         }, {});
         return obj;
