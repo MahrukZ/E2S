@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Dashboard from './components/pages/Dashboard';
+import Dashboard from './components/pages/dashboard/Dashboard';
 import Reports from './components/pages/Reports';
 import BillValidation from './components/pages/BillValidation';
 import CostForecast from './components/pages/CostForecast';
