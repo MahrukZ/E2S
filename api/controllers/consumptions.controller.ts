@@ -8,6 +8,24 @@ export class ConsumptionController {
         this.consumptionService = new ConsumptionService();
     }
 
+    async bulkCreateConsumptions(req: Request, res: Response): Promise<any> {
+        return (this.consumptionService.bulkCreateConsumptions(req.body)
+            .then(data => {
+                res.status(201).json({
+                    message: 'Created',
+                    status: 201,
+                    data
+                });
+            })
+            .catch(err => {
+                res.status(500).json({
+                    message: err.message || "server error: failed to bulk create consumptions.",
+                    status: 500
+                });
+            })
+        );
+    };
+
     async createConsumption(req: Request, res: Response): Promise<any> {
         return (this.consumptionService.createConsumption(req.body)
             .then(data => {
@@ -38,24 +56,6 @@ export class ConsumptionController {
             .catch (err => {
                 res.status(500).json({
                     message: err.message || "server error: failed to fetch consumptions.",
-                    status: 500
-                });
-            })
-        );
-    };
-
-    async bulkCreateConsumptions(req: Request, res: Response): Promise<any> {
-        return (this.consumptionService.bulkCreateConsumptions(req.body)
-            .then(data => {
-                res.status(201).json({
-                    message: 'Created',
-                    status: 201,
-                    data
-                });
-            })
-            .catch(err => {
-                res.status(500).json({
-                    message: err.message || "server error: failed to create consumptions.",
                     status: 500
                 });
             })

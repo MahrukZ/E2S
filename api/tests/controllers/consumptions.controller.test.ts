@@ -4,8 +4,9 @@ import { ConsumptionService } from "../../services/consumptions.service";
 
 jest.mock('../../services/consumptions.service', () => {
     const mConsumptionService = { 
+        bulkCreateConsumptions: jest.fn(),
         createConsumption: jest.fn(),
-        getAllConsumptions: jest.fn(),
+        getAllConsumptions: jest.fn()
     };
     return {
         ConsumptionService: jest.fn(() => mConsumptionService)
@@ -32,6 +33,85 @@ describe("ConsumptionController", () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
+    });
+
+    describe("ConsumptionController.bulkCreateConsumptions", () => {
+        const mBulkCreateBody: IConsumption[] = [{
+            consumption_id: 1,
+            time_interval: mockDateObject,
+            heat_demand: 1897,
+            electricity_demand: 1699,
+            electricity_price: 18,
+            gas_price: 65,
+            site_id: 1,
+            org_id: 1
+        },
+        {
+            consumption_id: 2,
+            time_interval: mockDateObject,
+            heat_demand: 2897,
+            electricity_demand: 2699,
+            electricity_price: 28,
+            gas_price: 65,
+            site_id: 2,
+            org_id: 2 
+        },
+        {
+            consumption_id: 3,
+            time_interval: mockDateObject,
+            heat_demand: 3897,
+            electricity_demand: 3699,
+            electricity_price: 38,
+            gas_price: 65,
+            site_id: 3,
+            org_id: 3 
+        }];
+        const mSuccessReponse: any = {
+            message: 'Created',
+            status: 201,
+            data: mBulkCreateBody
+        };
+        const mFailResponse: any = {
+            message: "server error: failed to bulk create consumptions.",
+            status: 500
+        };
+
+        it('should bulk create consumptions when request body is provided', async () => {
+            // Given
+            const req = mRequest(mBulkCreateBody);
+            const res = mResponse();
+            const bulkCreateSpy = jest
+                .spyOn(service, 'bulkCreateConsumptions')
+                .mockResolvedValue(mBulkCreateBody);
+
+            // When
+            await controller.bulkCreateConsumptions(req, res);
+
+            // Then
+            expect(res.status).toHaveBeenCalledWith(201);
+            expect(res.json).toHaveBeenCalledWith(mSuccessReponse);
+
+            expect(bulkCreateSpy).toHaveBeenCalledTimes(1);
+            expect(bulkCreateSpy.mock.results[0].value).toEqual(Promise.resolve(mBulkCreateBody));
+        });
+
+        it('should not bulk create consumptions when request body is not provided', async () => {
+            // Given
+            const req = mRequest();
+            const res = mResponse();
+            const bulkCreateSpy = jest
+                .spyOn(service, 'bulkCreateConsumptions')
+                .mockRejectedValue({});
+
+            // When
+            await controller.bulkCreateConsumptions(req, res);
+
+            // Then
+            expect(res.status).toHaveBeenCalledWith(500);
+            expect(res.json).toHaveBeenCalledWith(mFailResponse);
+
+            expect(bulkCreateSpy).toHaveBeenCalledTimes(1);
+        });
     });
 
     describe("ConsumptionController.createConsumption", () => {
