@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Container, Nav, Navbar, Row } from "react-bootstrap";
-import SiteAndUser from "../../../dtos/SiteAndUser";
 import { SitesAndUsersService } from "../../../services/sitesAndUsers.service";
 import { UserManagementService } from "../../../services/userManagement.service";
 import AccountDropdown from './AccountDropdown';
@@ -13,33 +12,39 @@ export interface IUser {
   name: string
 }
 
+export interface ISiteAndUser {
+  siteId: number,
+  siteName: string
+}
+
 function Topbar() {
   
-  const [siteList, setSiteList] = useState<SiteAndUser[]>([])
-
-  const sitesAndUsersService = new SitesAndUsersService();
-
+  const [siteList, setSiteList] = useState<ISiteAndUser[]>([]);
   const [user, setUser] = useState<IUser>({
     userId: 0,
     name: ""
   });
 
+  const sitesAndUsersService = new SitesAndUsersService();
   const userManagementService = new UserManagementService();
 
   useEffect(() => {
 
     const getAllSites =async () => {
-      let sitesList: SiteAndUser[] = [];
+      let sitesList: ISiteAndUser[] = [];
 
       const sites = await sitesAndUsersService.findSitesAndUsersByUserId(3);
 
       for (let i = 0; i < sites["data"].length; i++ ) {
         const currentSite: string = String(sites["data"][i]["name"]);
         const currentSiteId: number = (sites["data"][i]["site_id"]);
-        const siteToAdd: SiteAndUser = new SiteAndUser(currentSiteId, currentSite);
+        const siteToAdd: ISiteAndUser = {
+          siteId: currentSiteId,
+          siteName: currentSite
+        };
         sitesList.push(siteToAdd);
       }
-      setSiteList(sitesList)
+      setSiteList(sitesList);
     }
     getAllSites();
 
