@@ -1,17 +1,18 @@
 import { Alert } from "react-bootstrap";
 
-interface ErrorMessageProps {
+interface MessageProps {
     message: string;
+    type: string
 }
 
-function ErrorMessage({ message }: ErrorMessageProps) {
+function Message({ message, type }: MessageProps) {
   return (
     <div className="container mt-3">
-        <Alert key={'danger'} variant={'danger'}>
+        <Alert key={type} variant={type}>
             { message }
         </Alert>
     </div>
   );
 };
 
-export default ErrorMessage;
+export default Message;

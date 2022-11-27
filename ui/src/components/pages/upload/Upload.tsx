@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form } from 'react-bootstrap';
-import ErrorMessage from "./ErrorMessage";
+import Message from "../../reusable/alerts/Message";
 import UploadButton from './UploadButton';
 
 function Upload() {
@@ -35,7 +35,7 @@ function Upload() {
         </Form.Group>
         <UploadButton file={csvFile}/>
         {error.length > 0 && (
-          <ErrorMessage message={error}/>
+          <Message message={error} type='danger'/>
         )}
     </div>
   );
