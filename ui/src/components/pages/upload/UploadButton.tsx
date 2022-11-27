@@ -5,6 +5,7 @@ import { ConsumptionsService } from "../../../services/consumptions.service";
 import Message from "../../reusable/alerts/Message";
 
 export interface IUploadData {
+  consumptionId?: number,
   timeInterval: string,
   heatDemand: number,
   electricityDemand: number,
