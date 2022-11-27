@@ -3,7 +3,7 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import UploadButton from '../../../src/components/pages/upload/UploadButton'
 
-test('should render form element', () => {
+test('should render upload button element', () => {
     // Given
     render(<UploadButton file=""/>);
 
