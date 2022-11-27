@@ -68,7 +68,7 @@ function UploadButton({ file }: UploadButtonProps) {
 
   return (
     <div className="container">
-      <Button variant="outline-primary" onClick={handleUpload}>
+      <Button data-testid="uploadBtn" variant="outline-primary" onClick={handleUpload}>
         <FaUpload /> Upload Data
       </Button>
       {error.length > 0 && (
