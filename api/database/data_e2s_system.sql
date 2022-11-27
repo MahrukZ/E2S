@@ -133,11 +133,33 @@ INSERT INTO `bills`
 VALUES(null, './assets/bills/eon_bill.pdf', 'combined', 'valid', '2022-06-14', 7, 2);
 
 INSERT INTO `consumptions`
-VALUES(null, '2020/01/01 12:00', '2576.3', '2359.0', '43.45', '50.45', 1, 1);
+VALUES(null, '2022/11/13 12:00', '2576.3', '2359.0', '43.45', '50.45', 1, 1);
 INSERT INTO `consumptions`
-VALUES(null, '2020/01/02 15:00', '2529.7', '2351.1', '35.55', '32.55', 5, 5);
+VALUES(null, '2022/11/14 12:00', '2359.2', '2359.0', '43.45', '50.45', 1, 1);
 INSERT INTO `consumptions`
-VALUES(null, '2020/01/03 20:00', '2878.7', '2699.1', '78.55', '56.55', 8, 8);
+VALUES(null, '2022/11/15 12:00', '2344.1', '2359.0', '43.45', '50.45', 1, 1);
+INSERT INTO `consumptions`
+VALUES(null, '2022/11/16 12:00', '2348.5', '2359.0', '43.45', '50.45', 1, 1);
+INSERT INTO `consumptions`
+VALUES(null, '2022/11/17 12:00', '2342.0', '2359.0', '43.45', '50.45', 1, 1);
+INSERT INTO `consumptions`
+VALUES(null, '2022/11/18 12:00', '2411.1', '2359.0', '43.45', '50.45', 1, 1);
+INSERT INTO `consumptions`
+VALUES(null, '2022/11/19 12:00', '2429.5', '2359.0', '43.45', '50.45', 1, 1);
+INSERT INTO `consumptions`
+VALUES(null, '2022/11/20 12:00', '2391.8', '2359.0', '43.45', '50.45', 1, 1);
+INSERT INTO `consumptions`
+VALUES(null, '2022/11/21 12:00', '2370.4', '2359.0', '43.45', '50.45', 1, 1);
+INSERT INTO `consumptions`
+VALUES(null, '2022/11/22 12:00', '2328.3', '2359.0', '43.45', '50.45', 1, 1);
+INSERT INTO `consumptions`
+VALUES(null, '2022/11/23 12:00', '1925.1', '2359.0', '43.45', '50.45', 1, 1);
+INSERT INTO `consumptions`
+VALUES(null, '2022/11/24 12:00', '1936.7', '2359.0', '43.45', '50.45', 1, 1);
+INSERT INTO `consumptions`
+VALUES(null, '2022/11/25 12:00', '1972.9', '2359.0', '43.45', '50.45', 1, 1);
+INSERT INTO `consumptions`
+VALUES(null, '2022/11/26 12:00', '2033.6', '2359.0', '43.45', '50.45', 1, 1);
 
 INSERT INTO `reports`
 VALUES(null, './assets/reports/report.pdf', 1, '2022-02-20');
