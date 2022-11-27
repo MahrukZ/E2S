@@ -18,12 +18,10 @@ export class ConsumptionRepository {
     }
     
     async bulkCreateConsumptions(consumptions: IConsumption[]): Promise<IConsumption[]> {
-        console.log("consumptions: ", consumptions)
         let data = [];
         try {
             data = await this.consumptionRepository.bulkCreate(consumptions);
         } catch(err) {
-            console.log(err);
             throw new Error("Failed to bulk create consumptions." || err);
         }
         return data;
