@@ -6,8 +6,9 @@ jest.mock('axios');
 
 jest.mock('../controllers/consumptions.controller', () => {
     const mConsumptionController = { 
+        bulkCreateConsumptions: jest.fn(),
         createConsumption: jest.fn(),
-        getAllConsumptions: jest.fn(),
+        getAllConsumptions: jest.fn()
     };
     return {
         ConsumptionController: jest.fn(() => mConsumptionController)
@@ -99,36 +100,100 @@ describe('index', () => {
         });
     });
 
-    describe('POST /api/consumption', () => {
-        const mCreateBody: IConsumption = {
-            consumption_id: 4,
+    // commented out for now as it is not being used and we cannot mock two post requests in
+    // same test file
+    // describe('POST /api/consumption', () => {
+    //     const mCreateBody: IConsumption = {
+    //         consumption_id: 4,
+    //         time_interval: mockDateObject,
+    //         heat_demand: 2897,
+    //         electricity_demand: 2699,
+    //         electricity_price: 98,
+    //         gas_price: 65,
+    //         site_id: 11,
+    //         org_id: 11
+    //     };
+    //     const mSuccessReponse: any = {
+    //         message: 'Created',
+    //         status: 201,
+    //         data: mCreateBody
+    //     };
+    //     mockedAxios.post.mockResolvedValue(mSuccessReponse);
+    //     const req = mRequest(mCreateBody);
+    //     const res = mResponse();
+
+    //     it('should create a consumption when request body is provided', async () => {
+    //         // Given
+    //         const mUrl = "/api/consumption";
+    //         const createSpy = jest
+    //             .spyOn(controller, 'createConsumption')
+    //             .mockResolvedValue(mCreateBody);
+
+    //         // When
+    //         const result = await axios.post(mUrl);
+    //         await controller.createConsumption(req, res);
+
+    //         // Then
+    //         expect(result).toEqual(mSuccessReponse);
+
+    //         expect(axios.post).toHaveBeenCalledTimes(1);
+    //         expect(axios.post).toHaveBeenCalledWith(mUrl);
+
+    //         expect(createSpy).toHaveBeenCalledTimes(1);
+    //         expect(createSpy).toHaveBeenCalledWith(req, res);
+    //     });
+    // });
+
+    describe('POST /api/consumption/bulk-create', () => {
+        const mBulkCreateBody: IConsumption[] = [{
+            consumption_id: 1,
+            time_interval: mockDateObject,
+            heat_demand: 1897,
+            electricity_demand: 1699,
+            electricity_price: 18,
+            gas_price: 65,
+            site_id: 1,
+            org_id: 1
+        },
+        {
+            consumption_id: 2,
             time_interval: mockDateObject,
             heat_demand: 2897,
             electricity_demand: 2699,
-            electricity_price: 98,
+            electricity_price: 28,
             gas_price: 65,
-            site_id: 11,
-            org_id: 11
-        };
+            site_id: 2,
+            org_id: 2 
+        },
+        {
+            consumption_id: 3,
+            time_interval: mockDateObject,
+            heat_demand: 3897,
+            electricity_demand: 3699,
+            electricity_price: 38,
+            gas_price: 65,
+            site_id: 3,
+            org_id: 3 
+        }];
         const mSuccessReponse: any = {
             message: 'Created',
             status: 201,
-            data: mCreateBody
+            data: mBulkCreateBody
         };
         mockedAxios.post.mockResolvedValue(mSuccessReponse);
-        const req = mRequest(mCreateBody);
+        const req = mRequest(mBulkCreateBody);
         const res = mResponse();
 
-        it('should create a consumption when request body is provided', async () => {
+        it('should bulk create consumptions when request body is provided', async () => {
             // Given
-            const mUrl = "/api/consumption";
-            const createSpy = jest
-                .spyOn(controller, 'createConsumption')
-                .mockResolvedValue(mCreateBody);
+            const mUrl = "/api/consumption/bulk-create";
+            const bulkCreateSpy = jest
+                .spyOn(controller, 'bulkCreateConsumptions')
+                .mockResolvedValue(mBulkCreateBody);
 
             // When
             const result = await axios.post(mUrl);
-            await controller.createConsumption(req, res);
+            await controller.bulkCreateConsumptions(req, res);
 
             // Then
             expect(result).toEqual(mSuccessReponse);
@@ -136,8 +201,8 @@ describe('index', () => {
             expect(axios.post).toHaveBeenCalledTimes(1);
             expect(axios.post).toHaveBeenCalledWith(mUrl);
 
-            expect(createSpy).toHaveBeenCalledTimes(1);
-            expect(createSpy).toHaveBeenCalledWith(req, res);
+            expect(bulkCreateSpy).toHaveBeenCalledTimes(1);
+            expect(bulkCreateSpy).toHaveBeenCalledWith(req, res);
         });
     });
 });
