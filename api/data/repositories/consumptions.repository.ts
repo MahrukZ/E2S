@@ -16,6 +16,18 @@ export class ConsumptionRepository {
             });   
         this.consumptionRepository = this.db.Sequelize.getRepository(Consumptions);
     }
+    
+    async bulkCreateConsumptions(consumptions: IConsumption[]): Promise<IConsumption[]> {
+        console.log("consumptions: ", consumptions)
+        let data = [];
+        try {
+            data = await this.consumptionRepository.bulkCreate(consumptions);
+        } catch(err) {
+            console.log(err);
+            throw new Error("Failed to bulk create consumptions." || err);
+        }
+        return data;
+    }
 
     async createConsumption(consumption: IConsumption): Promise<IConsumption> {
         let data = {};
@@ -33,18 +45,6 @@ export class ConsumptionRepository {
             data = await this.consumptionRepository.findAll();
         } catch (err) {
             throw new Error("Failed to fetch all consumptions." || err);
-        }
-        return data;
-    }
-
-    async bulkCreateConsumptions(consumptions: IConsumption[]): Promise<IConsumption[]> {
-        console.log("consumptions: ", consumptions)
-        let data = [];
-        try {
-            data = await this.consumptionRepository.bulkCreate(consumptions);
-        } catch(err) {
-            console.log(err);
-            throw new Error("Failed to bulk create consumptions." || err);
         }
         return data;
     }
