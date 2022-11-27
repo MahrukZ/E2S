@@ -4,8 +4,9 @@ import { ConsumptionService } from "../../services/consumptions.service";
 
 jest.mock('../../data/repositories/consumptions.repository', () => {
     const mConsumptionRepo = { 
+        bulkCreateConsumptions: jest.fn(),
         createConsumption: jest.fn(),
-        getAllConsumptions: jest.fn(),
+        getAllConsumptions: jest.fn()
     };
     return {
         ConsumptionRepository: jest.fn(() => mConsumptionRepo)
@@ -19,6 +20,53 @@ describe('ConsumptionService', () => {
 
     beforeEach(() => {
         jest.resetAllMocks();
+    });
+
+    describe('ConsumptionService.bulkCreateConsumptions', () => {
+        it('should bulk create consumptions', async () => {
+            // Given
+            const mBulkCreateConsumptions: IConsumption[] = [{
+                consumption_id: 1,
+                time_interval: mockDateObject,
+                heat_demand: 1897,
+                electricity_demand: 1699,
+                electricity_price: 18,
+                gas_price: 65,
+                site_id: 1,
+                org_id: 1
+            },
+            {
+                consumption_id: 2,
+                time_interval: mockDateObject,
+                heat_demand: 2897,
+                electricity_demand: 2699,
+                electricity_price: 28,
+                gas_price: 65,
+                site_id: 2,
+                org_id: 2 
+            },
+            {
+                consumption_id: 3,
+                time_interval: mockDateObject,
+                heat_demand: 3897,
+                electricity_demand: 3699,
+                electricity_price: 38,
+                gas_price: 65,
+                site_id: 3,
+                org_id: 3 
+            }];
+            const bulkCreateSpy = jest
+                .spyOn(repository, 'bulkCreateConsumptions')
+                .mockResolvedValue(mBulkCreateConsumptions);
+
+            // When
+            const result = await service.bulkCreateConsumptions(mBulkCreateConsumptions);
+
+            // Then
+            expect(result).toEqual(mBulkCreateConsumptions);
+            expect(bulkCreateSpy).toHaveBeenCalledTimes(1);
+            expect(bulkCreateSpy).toHaveBeenCalledWith(mBulkCreateConsumptions);
+        });
     });
 
     describe('ConsumptionService.createConsumption', () => {
