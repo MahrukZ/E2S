@@ -1,34 +1,32 @@
 import { useState } from "react";
 import { Form } from 'react-bootstrap';
+import ErrorMessage from "./ErrorMessage";
 import UploadButton from './UploadButton';
 
 function Upload() {
-
   const [csvFile, setCsvFile] = useState();
   const [error, setError] = useState("");
 
   const allowedExtensions = ["csv"];
 
+  // Adapted from https://www.geeksforgeeks.org/how-to-read-csv-files-in-react-js/ 
   const handleFileChange = (e:any) => {
     setError("");
-     
-    // Check if user has entered the file
-    if (e.target.files.length) {
-        const inputFile = e.target.files[0];
-         
-        // Check the file extensions, if it not
-        // included in the allowed extensions
-        // we show the error
-        const fileExtension = inputFile?.type.split("/")[1];
-        if (!allowedExtensions.includes(fileExtension)) {
-            setError("Please input a csv file");
-            return;
-        }
 
-        // If input type is correct set the state
+    if (e.target.files.length) {
+      const inputFile = e.target.files[0];
+      const fileExtension = inputFile?.type.split("/")[1];
+
+      if (!allowedExtensions.includes(fileExtension)) {
+          setError("Please input a csv file");
+          return;
+      } else {
+        setError("");
         setCsvFile(inputFile);
-    }
+      }
+    };
   };
+  // End of reference
 
   return (
     <div className="container">
@@ -36,6 +34,9 @@ function Upload() {
             <Form.Control type="file" accept=".csv" onChange={handleFileChange} />
         </Form.Group>
         <UploadButton file={csvFile}/>
+        {error.length > 0 && (
+          <ErrorMessage message={error}/>
+        )}
     </div>
   );
 }

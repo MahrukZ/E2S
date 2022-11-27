@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { FaUpload } from "react-icons/fa";
 import { ConsumptionsService } from "../../../services/consumptions.service";
@@ -18,12 +17,10 @@ interface UploadButtonProps {
 }
 
 function UploadButton({ file }: UploadButtonProps) {
-  const [csvData, setCsvData] = useState<IUploadData[]>([]);
-  const [error, setError] = useState("");
-
   const consumptionsService = new ConsumptionsService();
   const fileReader = new FileReader();
 
+  // Adapted from https://dev.to/refine/how-to-import-csv-file-with-react-4pj2
   const csvFileToArray = (str:string) => {
     const csvHeader = str.slice(0, str.indexOf("\n")).split(",");
     const csvRows = str.slice(str.indexOf("\n") + 1).split("\n");
@@ -43,12 +40,10 @@ function UploadButton({ file }: UploadButtonProps) {
       return obj;
     });
     
-    setCsvData(array);
-    // console.log(array);
     consumptionsService.bulkCreateConsumptions(array);
   };
 
-  const handleParse = (e:any) => {
+  const handleUpload = (e:any) => {
     e.preventDefault();
 
     if (file) {
@@ -59,33 +54,14 @@ function UploadButton({ file }: UploadButtonProps) {
       fileReader.readAsText(file);
     }
   };
-
-  const headerKeys = Object.keys(Object.assign({}, ...csvData));
+  // End of reference
 
   return (
     <div className="container">
-      <Button variant="outline-primary" onClick={handleParse}><FaUpload /> Upload Data</Button>
-      {/* <table>
-        <thead>
-          <tr key={"header"}>
-            {headerKeys.map((key) => (
-              <th>{key}</th>
-            ))}
-          </tr>
-        </thead>
-
-        <tbody>
-          {csvData.map((item) => (
-            <tr key={item.id}>
-              {Object.values(item).map((val:any) => (
-                <td>{val}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table> */}
+      <Button variant="outline-primary" onClick={handleUpload}>
+        <FaUpload /> Upload Data
+      </Button>
     </div>
-
     );
 };
 
