@@ -71,7 +71,6 @@ describe('ConsumptionService', () => {
 
     describe('ConsumptionService.createConsumption', () => {
         it('should create consumption', async () => {
-
             // Given
             const mCreateConsumption: IConsumption = {
                 consumptionId: 4,
@@ -99,7 +98,6 @@ describe('ConsumptionService', () => {
 
     describe('ConsumptionService.getAllConsumptions', () => {
         it('should return all consumptions', async () => {
-
             // Given
             const mConsumption: IConsumption[] = [{
                 consumptionId: 1,
