@@ -26,11 +26,13 @@ function Graph() {
 
   const graphData = async () => {
     const consumptions = await consumptionsService.getAllConsumptions();
+    const weekNumber: any = [];
+    const electricityDemand: any = [];
     const currentWeekNumber = getWeekNumberByDate(new Date());
     const previousWeekNumber = currentWeekNumber - 1;
 
     const weekConsumptionArray: Array<WeekConsumption> = [];
-    
+
     consumptions.data.forEach((element: Consumptions) => {
       const weekNumber = getWeekNumberByDate(element.time_interval);
       if (weekNumber === currentWeekNumber || weekNumber === previousWeekNumber) {
@@ -43,7 +45,13 @@ function Graph() {
         else weekConsumptionArray.push(obj);
       }
     });
-    };
+
+    weekConsumptionArray.forEach((data: WeekConsumption) => {
+      weekNumber.push(data.weekNumber);
+      electricityDemand.push(data.consumption);
+
+    });
+  };
 
   return (
     <>
