@@ -33,6 +33,7 @@ function Upload() {
   return (
     <div className="container">
         <Form.Group controlId="formFile" className="mb-3">
+            <Form.Label>Choose a CSV file</Form.Label>
             <Form.Control type="file" accept=".csv" onChange={handleFileChange} />
         </Form.Group>
         {allowedExtensions.includes(fileExt) && (
