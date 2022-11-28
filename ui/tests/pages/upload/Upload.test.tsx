@@ -1,6 +1,6 @@
 import React from "react";
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import Upload from '../../../src/components/pages/upload/Upload'
 
 test('should render form element', () => {
