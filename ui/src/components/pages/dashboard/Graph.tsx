@@ -51,6 +51,8 @@ function Graph() {
       electricityDemand.push(data.consumption);
 
     });
+    setConsumption({ ...weekConsumptionArray, weekNumber: weekNumber, electricityDemand: electricityDemand });
+    return weekConsumptionArray;
   };
 
   return (
