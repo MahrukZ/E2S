@@ -22,6 +22,7 @@ interface UploadButtonProps {
 function UploadButton({ file }: UploadButtonProps) {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [isDisabled, setDisabled] = useState(false);
 
   const consumptionsService = new ConsumptionsService();
   const fileReader = new FileReader();
@@ -51,6 +52,7 @@ function UploadButton({ file }: UploadButtonProps) {
         consumptionsService.bulkCreateConsumptions(array);
         setError("");
         setSuccess("Successfully uploaded data!");
+        setDisabled(true);
       } else {
         setSuccess("");
         setError("The format of your CSV file is incorrect! Unable to upload data.");
@@ -76,7 +78,7 @@ function UploadButton({ file }: UploadButtonProps) {
 
   return (
     <div className="container">
-      <Button data-testid="uploadBtn" variant="outline-primary" onClick={handleUpload}>
+      <Button data-testid="uploadBtn" variant="outline-primary" disabled={isDisabled} onClick={handleUpload}>
         <FaUpload /> Upload Data
       </Button>
       {error.length > 0 && (
