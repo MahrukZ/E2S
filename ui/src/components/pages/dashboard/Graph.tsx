@@ -3,6 +3,17 @@ import "./Graph.css";
 import { ConsumptionsService } from "../../../services/consumptions.service";
 import { getWeekNumberByDate } from "../../../utils/utils";
 
+interface Consumptions {
+  consumption_id: number;
+  time_interval: Date;
+  heat_demand: number;
+  electricity_demand: number;
+  electricity_price: number;
+  gas_price: number;
+  site_id: number;
+  org_id: number;
+}
+
 interface WeekConsumption {
   weekNumber: number;
   consumption: number;
