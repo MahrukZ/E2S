@@ -5,6 +5,7 @@ import UploadButton from './UploadButton';
 
 function Upload() {
   const [csvFile, setCsvFile] = useState();
+  const [fileExt, setFileExt] = useState("");
   const [error, setError] = useState("");
 
   const allowedExtensions = ["csv"];
@@ -16,6 +17,7 @@ function Upload() {
     if (e.target.files.length) {
       const inputFile = e.target.files[0];
       const fileExtension = inputFile?.type.split("/")[1];
+      setFileExt(fileExtension);
 
       if (!allowedExtensions.includes(fileExtension)) {
           setError("Please input a csv file");
@@ -33,7 +35,9 @@ function Upload() {
         <Form.Group controlId="formFile" className="mb-3">
             <Form.Control type="file" accept=".csv" onChange={handleFileChange} />
         </Form.Group>
-        <UploadButton file={csvFile}/>
+        {allowedExtensions.includes(fileExt) && (
+          <UploadButton file={csvFile}/>
+        )}
         {error.length > 0 && (
           <Message message={error} type='danger'/>
         )}
