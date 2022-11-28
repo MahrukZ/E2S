@@ -1,9 +1,10 @@
-import React from "react";
+import UserTable from "./UserTable";
 
 function UserManagementPage() {
   return (
     <div className="container">
         <h1>User Management</h1>
+        <UserTable />
     </div>
   );
 };
