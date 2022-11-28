@@ -46,11 +46,18 @@ function UploadButton({ file }: UploadButtonProps) {
         }, {});
         return obj;
       });
-      
-      consumptionsService.bulkCreateConsumptions(array);
-      setSuccess("Successfully uploaded data!")
+
+      if (array[0].timeInterval && array[0].orgId && array[0].siteId) {
+        consumptionsService.bulkCreateConsumptions(array);
+        setError("");
+        setSuccess("Successfully uploaded data!");
+      } else {
+        setSuccess("");
+        setError("The format of your CSV file is incorrect! Unable to upload data.");
+      }
     } catch (e) {
-      setError("Failed to upload data.")
+      setSuccess("");
+      setError("Failed to upload data.");
     }
   };
 
