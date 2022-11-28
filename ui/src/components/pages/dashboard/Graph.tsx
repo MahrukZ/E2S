@@ -30,6 +30,19 @@ function Graph() {
     const previousWeekNumber = currentWeekNumber - 1;
 
     const weekConsumptionArray: Array<WeekConsumption> = [];
+    
+    consumptions.data.forEach((element: Consumptions) => {
+      const weekNumber = getWeekNumberByDate(element.time_interval);
+      if (weekNumber === currentWeekNumber || weekNumber === previousWeekNumber) {
+        const obj: WeekConsumption = {
+          weekNumber: weekNumber,
+          consumption: element.electricity_demand
+        }
+        const result = weekConsumptionArray.find((x: WeekConsumption) => x.weekNumber == weekNumber);
+        if (result) result.consumption += element.electricity_demand;
+        else weekConsumptionArray.push(obj);
+      }
+    });
     };
 
   return (
