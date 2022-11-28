@@ -11,6 +11,7 @@ function Graph() {
   const graphData = async () => {
     const consumptions = await consumptionsService.getAllConsumptions();
     const currentWeekNumber = getWeekNumberByDate(new Date());
+    const previousWeekNumber = currentWeekNumber - 1;
   };
   return (
     <>
