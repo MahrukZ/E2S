@@ -77,7 +77,7 @@ function UploadButton({ file }: UploadButtonProps) {
   // End of reference
 
   return (
-    <div className="container">
+    <>
       <Button data-testid="uploadBtn" variant="outline-primary" disabled={isDisabled} onClick={handleUpload}>
         <FaUpload /> Upload Data
       </Button>
@@ -87,7 +87,7 @@ function UploadButton({ file }: UploadButtonProps) {
       {success.length > 0 && (
           <Message message={success} type='success'/>
       )}
-    </div>
+    </>
     );
 };
 
