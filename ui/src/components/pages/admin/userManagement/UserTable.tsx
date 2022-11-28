@@ -14,44 +14,18 @@ interface IUserManagement {
 
 function UserTable() {
     const [usersList, setUsersList] = useState<IUserManagement[]>([]);
-
-    const mUsers: IUserManagement[] = [
-        {
-            userId: 1,
-            firstName: "John",
-            lastName: "Doe",
-            email: "john.doe@gmail.com",
-            organisation: "Cardiff University",
-            noSitesManaged: 3,
-            role: "facility energy manager"
-        },
-        {
-            userId: 3,
-            firstName: "Blake",
-            lastName: "Green",
-            email: "blake.green@gmail.com",
-            organisation: "E2S",
-            noSitesManaged: 0,
-            role: "admin"
-        },
-        {
-            userId: 1,
-            firstName: "Sofie",
-            lastName: "O'hare",
-            email: "sofie.o@gmail.com",
-            organisation: "NHS",
-            noSitesManaged: 5,
-            role: "director of estates"
-        }
-    ];
-    
+    const userManagementService = new UserManagementService();
 
     useEffect(() => {
-        setUsersList(mUsers);
+        const getAllUsers = async () => {
+            const users = await userManagementService.getAllUserManagements();
+            setUsersList(users.data);
+        }
+        getAllUsers();
     }, []);
 
-    const u = usersList.map((data, id) => {
-        return <tr>
+    const userManagementData = usersList.map((data, id) => {
+        return <tr key={id}>
             <td>{data.userId}</td>
             <td>{data.firstName}</td>
             <td>{data.lastName}</td>
@@ -59,9 +33,10 @@ function UserTable() {
             <td>{data.organisation}</td>
             <td>{data.noSitesManaged}</td>
             <td>{data.role}</td>
+            <td>EDIT</td>
+            <td>DELETE</td>
         </tr>
     });
-    console.log(usersList);
 
     return (
         <>
@@ -76,12 +51,12 @@ function UserTable() {
                         <th>Organisation</th>
                         <th>No Of Sites Managed</th>
                         <th>Role</th>
-                        <th>Actions</th>
+                        <th colSpan={2}>Actions</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    {u}
+                    {userManagementData}
                 </tbody>
             </Table>
         </div>
