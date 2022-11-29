@@ -3,8 +3,22 @@
     margin: 15px;
     padding: 10px;
     align-items:center;
+    background-color: #73A6BA;
+    color: #FFFFFF;
 }
 
 .insightsCol {
     margin-left: 100px;
+}
+
+.percentageGood {
+    background-color: green;
+    color: white;
+    padding:2px;
+}
+
+.percentageBad {
+    background-color: red;
+    padding:2px;
+    color: white;
 }
