@@ -52,15 +52,15 @@ describe("UserManagementService", () => {
   //     },
   //     {
   //       userId: 2,
-  //       firstName: "John",
-  //       lastName: "Doe",
-  //       email: "john.doe@cardiff.ac.uk",
+  //       firstName: "Johnny",
+  //       lastName: "Bravo",
+  //       email: "johnny.bravo@nhs.gov.uk",
   //       organisation: "National Health Service",
   //       noSitesManaged: 7,
   //       role: "director of estates"
   //     },
   //     {
-  //       userId: 11,
+  //       userId: 3,
   //       firstName: "Cai",
   //       lastName: "Robert",
   //       email: "cairobert@e2s.co.uk",
