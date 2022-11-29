@@ -3,12 +3,13 @@ import { useState } from "react";
 import { Container, Dropdown, DropdownButton } from "react-bootstrap";
 import { FaCog, FaSignOutAlt, FaUserAlt } from "react-icons/fa";
 import "./AccountDropdown.css";
+import { IUser } from "./Topbar"
 
 interface AccountDropdownProps {
-    name: string;
+    user: IUser
   }
 
-function AccountDropdown({ name }: AccountDropdownProps) {
+function AccountDropdown({ user }: AccountDropdownProps) {
   const dropdownButton: HTMLElement | null = document.getElementById('dropdown-basic-button');
   // Reference - Set dropdown to appear on hover
   // Taken from https://stackoverflow.com/a/63371122
@@ -36,7 +37,7 @@ function AccountDropdown({ name }: AccountDropdownProps) {
     <DropdownButton 
       data-testid="dropdownMenu"
       id="dropdown-basic-button" 
-      title={<span><span id="userIcon"><FaUserAlt /></span> <span data-testid="accountName">{name}</span></span>}
+      title={<span><span id="userIcon"><FaUserAlt /></span> <span data-testid="accountName">{user.name}</span></span>}
       show={show}
       size="sm">
       <Dropdown.Item data-testid="settingsDropdown" id="settingsDropdown" href="#"><span id="settingsIcon"><FaCog /></span>  SETTINGS</Dropdown.Item>

@@ -1,8 +1,8 @@
 import Form from 'react-bootstrap/Form';
-import SiteAndUser from "../../../dtos/SiteAndUser";
+import { ISiteAndUser } from './Topbar';
 
 interface SiteDropownProps {
-    sites: SiteAndUser[];
+    sites: ISiteAndUser[];
 }
 
 function SiteDropdown({ sites }: SiteDropownProps) {
