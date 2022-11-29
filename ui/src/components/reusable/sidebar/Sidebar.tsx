@@ -30,6 +30,9 @@ const MenuIconOpen = styled(Link)`
     margin-top: 1.25rem;
     margin-bottom: 1rem;
     color: #ffffff;
+    &:hover {
+        color: #0F242C;
+    }
 
 `
 
@@ -37,6 +40,9 @@ const MenuIconClose = styled(Link)`
     font-size: 2.5rem;
     color: #ffffff;
     margin-left: 6.5rem;
+    &:hover {
+        color: #0F242C;
+    }
 `
 
 const TopSideBarClose = styled.div`
@@ -116,7 +122,7 @@ const Sidebar: React.FunctionComponent = () => {
         <>
 
             {/*The collapsed sidebar which only shows the icons*/}
-            <CollapsedSideBar data-testid="collapsedSideBar">
+            <CollapsedSideBar data-testid="collapsedSideBar" className='onTop'>
             
             <MenuIconOpen data-testid="menuIconOpen" to="#" onClick={showSidebar}>
                     <FaIcons.FaBars />
@@ -136,7 +142,7 @@ const Sidebar: React.FunctionComponent = () => {
             </CollapsedSideBar>
 
             {/*The expanded sidebar which shows the icons, text and picture*/}
-            <SidebarMenu data-testid="sidebarMenu" close={close}>
+            <SidebarMenu data-testid="sidebarMenu" className='onTop' close={close}>
 
                 <TopSideBarClose>
                 

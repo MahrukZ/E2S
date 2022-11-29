@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { InsightsService } from "../../../services/insights.service";
 import { SitesService } from "../../../services/sites.service";
-import { Container, Dropdown, DropdownButton } from "react-bootstrap";
+import { Container, Card, Col } from "react-bootstrap";
 import "./insights.css";
 
 function Insights() {
@@ -34,16 +34,15 @@ function Insights() {
             for (let i = 0; i < insightsList.length; i++ ) {
                 const currentInsight1: string = String(insightsList[i]);
 
-                let dataForTemplate: String[] = ["8", "-7.9", "12"];
+                const splitted = currentInsight1.split("[data]");
 
-                const currentData = String(dataForTemplate[i]);
-
-                const insightToAdd1 = currentInsight1.replace("[data]", currentData);
-
-                finalInsights.push(insightToAdd1);
+                finalInsights.push(splitted[0]);
+                finalInsights.push(splitted[1]);
             }
             
             setInsightsList(finalInsights);
+
+
 
         }
         getAllInsights();
@@ -56,15 +55,40 @@ function Insights() {
 
       }, []);
     
-
+      let placeholderData: String[] = ["+8", "-14.5", "+13"];
 
   return (
       <Container className="justify-content-end">
-            <div id="insights">
-                    <h1>{insightsList[0]}</h1>
-                    <h1>{insightsList[1]}</h1>
-                    <h1>{insightsList[2]}</h1>
-            </div>
+            <Col className="d-flex insightsCol">
+
+            <Card className="insightsCard flex-fill">
+                <Card.Title>Total Costs</Card.Title>
+                <Card.Text>{insightsList[0]} 
+                    {placeholderData[0]}
+                    {insightsList[1]}
+                </Card.Text>
+
+            </Card>
+
+            <Card className="insightsCard flex-fill">
+            <Card.Title>Electricity Insight</Card.Title>
+                <Card.Text>
+                    {insightsList[2]} 
+                    {placeholderData[1]}
+                    {insightsList[3]}
+                </Card.Text>
+            </Card>
+
+            <Card className="insightsCard flex-fill">
+            <Card.Title>Gas Insight</Card.Title>
+                <Card.Text>
+                    {insightsList[4]} 
+                    {placeholderData[2]}
+                    {insightsList[5]}
+                </Card.Text>
+            </Card>
+
+            </Col>
       </Container>
 
   )

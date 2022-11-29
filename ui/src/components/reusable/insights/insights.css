@@ -1,3 +1,10 @@
-#insights {
+.insightsCard {
+    width: 40px;
+    margin: 15px;
+    padding: 10px;
+    align-items:center;
+}
+
+.insightsCol {
     margin-left: 100px;
 }
