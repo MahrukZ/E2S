@@ -133,7 +133,7 @@ describe('InsightRepository', () => {
             expect(Insights.update).toHaveBeenCalledTimes(1);
             expect(Insights.update).toBeCalledWith(
                 {
-                    insight_id: mockUpdateInsight.insightId,
+                    insightId: mockUpdateInsight.insightId,
                     description: mockUpdateInsight.description
                 },
                 {
