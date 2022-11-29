@@ -41,7 +41,7 @@ function UserTable() {
     return (
         <>
         <div className="container">
-            <Table striped bordered hover>
+            <Table id="userTable" striped bordered hover>
                 <thead>
                     <tr>
                         <th>#</th>
