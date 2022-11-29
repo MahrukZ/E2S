@@ -40,15 +40,15 @@ describe('index', () => {
     describe('GET /api/insights', () => {
         const mInsight: IInsight[] = [
             {
-                insight_id: 1,
+                insightId: 1,
                 description: 'insight 1'
             },
             {
-                insight_id: 2,
+                insightId: 2,
                 description: 'insight 2'
             },
             {
-                insight_id: 3,
+                insightId: 3,
                 description: 'insight 3'
             }
         ];
@@ -84,7 +84,7 @@ describe('index', () => {
 
     describe('POST /api/insights', () => {
         const mCreateBody: IInsight = {
-            insight_id: 4,
+            insightId: 4,
             description: 'new insight'
         };
         const mSuccessReponse: any = {
@@ -124,7 +124,7 @@ describe('index', () => {
             status: 200
         };
         const mUpdateBody: IInsight = {
-            insight_id: 1,
+            insightId: 1,
             description: 'updated insight'
         };
         mockedAxios.put.mockResolvedValue(mSuccessResponse);

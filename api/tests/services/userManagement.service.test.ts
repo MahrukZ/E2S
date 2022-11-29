@@ -25,31 +25,31 @@ describe('UserManagementService', () => {
             // Given
             const mUserManagement: IUserManagement[] = [
                 {
-                    user_id: 1,
-                    first_name: 'Martin',
-                    last_name: 'James',
-                    email: 'martinjames@cardiff.ac.uk',
-                    organisation: 'Cardiff University',
-                    no_sites_managed: 3,
-                    role: 'director of estates'
+                    userId: 1,
+                    firstName: "Martin",
+                    lastName: "James",
+                    email: "martinjames@cardiff.ac.uk",
+                    organisation: "Cardiff University",
+                    noSitesManaged: 3,
+                    role: "director of estates"
                 },
                 {
-                    user_id: 2,
-                    first_name: 'Rhy',
-                    last_name: 'Jones',
-                    email: 'rhyjones@cardiff.ac.uk',
-                    organisation: 'Cardiff University',
-                    no_sites_managed: 1,
-                    role: 'facility energy manager'
+                    userId: 2,
+                    firstName: "Rhy",
+                    lastName: "Jones",
+                    email: "rhyjones@cardiff.ac.uk",
+                    organisation: "Cardiff University",
+                    noSitesManaged: 1,
+                    role: "facility energy manager"
                 },
                 {
-                    user_id: 3,
-                    first_name: 'James',
-                    last_name: 'Ohay',
-                    email: 'jamesohay@cardiff.ac.uk',
-                    organisation: 'Cardiff University',
-                    no_sites_managed: 3,
-                    role: 'facility energy manager'
+                    userId: 3,
+                    firstName: "James",
+                    lastName: "Ohay",
+                    email: "jamesohay@cardiff.ac.uk",
+                    organisation: "Cardiff University",
+                    noSitesManaged: 3,
+                    role: "facility energy manager"
                 }
             ];
             const getSpy = jest
@@ -71,31 +71,31 @@ describe('UserManagementService', () => {
             // Given
             const mUserManagement: IUserManagement[] = [
                 {
-                    user_id: 1,
-                    first_name: 'Martin',
-                    last_name: 'James',
-                    email: 'martinjames@cardiff.ac.uk',
-                    organisation: 'Cardiff University',
-                    no_sites_managed: 3,
-                    role: 'director of estates'
+                    userId: 1,
+                    firstName: "Martin",
+                    lastName: "James",
+                    email: "martinjames@cardiff.ac.uk",
+                    organisation: "Cardiff University",
+                    noSitesManaged: 3,
+                    role: "director of estates"
                 },
                 {
-                    user_id: 2,
-                    first_name: 'Rhy',
-                    last_name: 'Jones',
-                    email: 'rhyjones@cardiff.ac.uk',
-                    organisation: 'Cardiff University',
-                    no_sites_managed: 1,
-                    role: 'facility energy manager'
+                    userId: 2,
+                    firstName: "Rhy",
+                    lastName: "Jones",
+                    email: "rhyjones@cardiff.ac.uk",
+                    organisation: "Cardiff University",
+                    noSitesManaged: 1,
+                    role: "facility energy manager"
                 },
                 {
-                    user_id: 3,
-                    first_name: 'James',
-                    last_name: 'Ohay',
-                    email: 'jamesohay@cardiff.ac.uk',
-                    organisation: 'Cardiff University',
-                    no_sites_managed: 3,
-                    role: 'facility energy manager'
+                    userId: 3,
+                    firstName: "James",
+                    lastName: "Ohay",
+                    email: "jamesohay@cardiff.ac.uk",
+                    organisation: "Cardiff University",
+                    noSitesManaged: 3,
+                    role: "facility energy manager"
                 }
             ];
             const userId = 1;

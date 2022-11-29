@@ -13,30 +13,30 @@ describe('UserManagementRepository', () => {
             // Given
             const mockResponse: IUserManagement[] = [
                 {
-                    user_id: 1,
-                    first_name: 'Martin',
-                    last_name: 'James',
+                    userId: 1,
+                    firstName: 'Martin',
+                    lastName: 'James',
                     email: 'martinjames@cardiff.ac.uk',
                     organisation: 'Cardiff University',
-                    no_sites_managed: 3,
+                    noSitesManaged: 3,
                     role: 'director of estates'
                 },
                 {
-                    user_id: 2,
-                    first_name: 'Rhy',
-                    last_name: 'Jones',
+                    userId: 2,
+                    firstName: 'Rhy',
+                    lastName: 'Jones',
                     email: 'rhyjones@cardiff.ac.uk',
                     organisation: 'Cardiff University',
-                    no_sites_managed: 1,
+                    noSitesManaged: 1,
                     role: 'facility energy manager'
                 },
                 {
-                    user_id: 3,
-                    first_name: 'James',
-                    last_name: 'Ohay',
+                    userId: 3,
+                    firstName: 'James',
+                    lastName: 'Ohay',
                     email: 'jamesohay@cardiff.ac.uk',
                     organisation: 'Cardiff University',
-                    no_sites_managed: 3,
+                    noSitesManaged: 3,
                     role: 'facility energy manager'
                 }
             ];
@@ -69,12 +69,12 @@ describe('UserManagementRepository', () => {
             // Given
             const userId = 1;
             const mockResponse: IUserManagement = {
-                    user_id: 1,
-                    first_name: 'Martin',
-                    last_name: 'James',
+                    userId: 1,
+                    firstName: 'Martin',
+                    lastName: 'James',
                     email: 'martinjames@cardiff.ac.uk',
                     organisation: 'Cardiff University',
-                    no_sites_managed: 3,
+                    noSitesManaged: 3,
                     role: 'director of estates'
                 }
             

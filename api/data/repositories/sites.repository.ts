@@ -56,7 +56,7 @@ export class SiteRepository {
         try {
             data = await this.siteRepository.update({...site}, {
                 where: {
-                    site_id: site.site_id
+                    site_id: site.siteId
                 }
             });
         } catch(err) {

@@ -37,13 +37,13 @@ describe('index', () => {
 
     describe('GET /api/user-management/:id', () => {
         const mUserManagement1: IUserManagement = {
-                user_id: 1,
-                first_name: 'Martin',
-                last_name: 'James',
-                email: 'martinjames@cardiff.ac.uk',
-                organisation: 'Cardiff University',
-                no_sites_managed: 3,
-                role: 'director of estates'
+                userId: 1,
+                firstName: "Martin",
+                lastName: "James",
+                email: "martinjames@cardiff.ac.uk",
+                organisation: "Cardiff University",
+                noSitesManaged: 3,
+                role: "director of estates"
             }
         const mSuccessResponse1: any = {
             message: 'Success',

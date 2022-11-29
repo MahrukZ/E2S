@@ -31,7 +31,7 @@ function Topbar() {
 
       for (let i = 0; i < sites["data"].length; i++ ) {
         const currentSite: string = String(sites["data"][i]["name"]);
-        const currentSiteId: number = (sites["data"][i]["site_id"]);
+        const currentSiteId: number = (sites["data"][i]["siteId"]);
         const siteToAdd: SiteAndUser = new SiteAndUser(currentSiteId, currentSite);
         sitesList.push(siteToAdd);
       }
@@ -42,7 +42,7 @@ function Topbar() {
 
     const getUser =async () => {
       const userJSON = await userManagementService.findUserManagementByUserId(3); // User ID of 3 until login system is implemented
-      setUser({userId:userJSON["data"][0]["user_id"], name: String(userJSON["data"][0]["first_name"]) + " " + String(userJSON["data"][0]["last_name"])});
+      setUser({userId:userJSON["data"][0]["userId"], name: String(userJSON["data"][0]["firstName"]) + " " + String(userJSON["data"][0]["lastName"])});
     }
     getUser();
   }, []);
