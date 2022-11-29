@@ -94,6 +94,10 @@ app.post("/api/consumption/bulk-create", async (req, res) => {
     consumptionController.bulkCreateConsumptions(req, res);
 });
 
+app.get("/api/consumption/findBySiteAndTime/:start/:end/:id", async (req, res) => {
+    consumptionController.findAllConsumptionsBySiteAndTime(req, res);
+});
+
 // port listen
 app.listen(port, () => {
     console.log(`Server is running on port: http://localhost:${port}`);

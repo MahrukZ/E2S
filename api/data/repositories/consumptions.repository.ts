@@ -46,4 +46,18 @@ export class ConsumptionRepository {
         }
         return data;
     }
+
+    async findAllConsumptionsBySiteAndTime(startTime: String, endTime: String, siteId: number): Promise<IConsumption[]> {
+        let data = [];
+        try {
+            data = await this.consumptionRepository.findAll({
+                where: {
+                    siteId
+                  }
+              });
+        } catch (err) {
+            throw new Error("Failed to fetch all consumptions." || err);
+        }
+        return data;
+    }
 }

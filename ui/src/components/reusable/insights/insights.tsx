@@ -66,7 +66,7 @@ function Insights() {
       // Calculate the sum of consumptions/costs for the first 30 days and the last 30 days
       // Compare to get a percentage increase/decrease
 
-      let placeholderData: String[] = ["+8%", "-14.5%", "+13%"];
+      let placeholderData: String[] = [" + 8%", " - 14.5%", " + 13%"];
 
   return (
       <Container className="justify-content-end">

@@ -61,4 +61,22 @@ export class ConsumptionController {
             })
         );
     };
+
+    async findAllConsumptionsBySiteAndTime(req: Request, res: Response): Promise<any> {
+        return (this.consumptionService.findAllConsumptionsBySiteAndTime(req.params.start, req.params.end, parseInt(req.params.id))
+            .then(data => {
+                res.status(200).json({
+                    message: 'Success',
+                    status: 200,
+                    data
+                });
+            })
+            .catch (err => {
+                res.status(500).json({
+                    message: err.message || "server error: failed to fetch consumptions.",
+                    status: 500
+                });
+            })
+        );
+    };
 }
