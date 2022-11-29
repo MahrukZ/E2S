@@ -4,11 +4,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Sidebar from './components/reusable/sidebar/Sidebar';
 import Topbar from './components/reusable/topbar/Topbar';
+
 import Dashboard from './components/pages/Dashboard';
 import Reports from './components/pages/Reports';
 import BillValidation from './components/pages/BillValidation';
 import CostForecast from './components/pages/CostForecast';
-import UploadPage from './components/pages/upload/UploadPage';
+
+import UploadPage from './components/pages/admin/upload/UploadPage';
 import UserManagementPage from './components/pages/admin/userManagement/UserManagementPage';
 
 const App: React.FunctionComponent = () => {
