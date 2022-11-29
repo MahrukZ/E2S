@@ -65,4 +65,18 @@ export class SiteRepository {
         }
         return data;
     }
+
+    async findSiteBySiteId(site_id: number): Promise<ISite> {
+        let data = [];
+        try {
+            data = await this.siteRepository.findAll({
+                where: {
+                    site_id
+                  }
+              });
+        } catch (err) {
+            throw new Error("Failed to get sites and users." || err);
+        }
+        return data;
+    }
 }

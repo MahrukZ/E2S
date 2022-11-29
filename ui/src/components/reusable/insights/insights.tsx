@@ -18,6 +18,8 @@ function Insights() {
             let insightsList: String[] = [];
 
             const insightsTemplates = await insightsService.getInsights();
+            const sites = await sitesService.getSites();
+
 
             for (let i = 0; i < insightsTemplates["data"].length; i++ ) {
                 const currentInsight0: string = String(insightsTemplates["data"][i]["description"]);

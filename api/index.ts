@@ -58,6 +58,10 @@ app.delete("/api/site/:id", async (req, res) => {
     siteController.deleteSite(req, res);
 });
 
+app.get("/api/sites/:id", async (req, res) => {
+    siteController.findSiteBySiteId(req, res);
+});
+
 //sites_and_users
 app.get("/api/sites-and-users", async (req, res) => {
     sitesAndUsersController.getAllSitesAndUsers(req, res);
