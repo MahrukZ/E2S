@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { UserManagementService } from '../../../../services/userManagement.service';
 
-interface IUserManagement {
+export interface IUserManagement {
     userId: number,
     firstName: string,
     lastName: string,

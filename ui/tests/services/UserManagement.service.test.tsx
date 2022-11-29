@@ -1,38 +1,87 @@
 import axios from 'axios';
 import '@testing-library/jest-dom';
 import { UserManagementService } from '../../src/services/userManagement.service';
+import { IUserManagement } from '../../src/components/pages/admin/userManagement/UserTable';
 
 jest.mock('axios');
 
-describe("userManagement.service", () => {
+describe("UserManagementService", () => {
 
   const mockService = new UserManagementService();
   const mockedAxios = axios as jest.Mocked<typeof axios>;
 
-  it('should return correct user when function is called', async () => {
+  describe('UserManagementService.findUserManagementByUserId', () => {
     // Given
-    const mUser = [
-      {
-        user_id: 1,
-        first_name: "Rhys",
-        last_name: "Jones",
-        email: "rhys.jones@cardiff.ac.uk",
-        organisation: "Cardiff University",
-        no_sites_managed: 3,
-        role: "facility energy manager"
-      }
-    ];
+    const mUser: IUserManagement = {
+      userId: 1,
+      firstName: "Rhys",
+      lastName: "Jones",
+      email: "rhys.jones@cardiff.ac.uk",
+      organisation: "Cardiff University",
+      noSitesManaged: 3,
+      role: "facility energy manager"
+    };
     mockedAxios.get.mockResolvedValue({
       data: mUser
     });
 
-    // When
-    const result = await mockService.findUserManagementByUserId(1);
+    it('should return correct user when function is called', async () => {
+      // When
+      const result = await mockService.findUserManagementByUserId(1);
 
-    // Then
-    expect(result).toEqual(mUser);
+      // Then
+      expect(result).toEqual(mUser);
 
-    expect(axios.get).toHaveBeenCalledTimes(1);
-    expect(axios.get).toHaveBeenCalledWith("/api/user-management/1");
+      expect(axios.get).toHaveBeenCalledTimes(1);
+      expect(axios.get).toHaveBeenCalledWith("/api/user-management/1");
+    });
   });
+
+  // Commented out since you can only mock one axios get request
+  // describe('UserManagementService.getAllUserManagements', () => {
+  //   // Given
+  //   const mUser: IUserManagement[] = [
+  //     {
+  //       userId: 1,
+  //       firstName: "Rhys",
+  //       lastName: "Jones",
+  //       email: "rhys.jones@cardiff.ac.uk",
+  //       organisation: "Cardiff University",
+  //       noSitesManaged: 3,
+  //       role: "facility energy manager"
+  //     },
+  //     {
+  //       userId: 2,
+  //       firstName: "John",
+  //       lastName: "Doe",
+  //       email: "john.doe@cardiff.ac.uk",
+  //       organisation: "National Health Service",
+  //       noSitesManaged: 7,
+  //       role: "director of estates"
+  //     },
+  //     {
+  //       userId: 11,
+  //       firstName: "Cai",
+  //       lastName: "Robert",
+  //       email: "cairobert@e2s.co.uk",
+  //       organisation: "Empowering Energy Solutions",
+  //       noSitesManaged: 0,
+  //       role: "administrator"
+  //     }
+  //   ];
+  //   mockedAxios.get.mockResolvedValue({
+  //     data: mUser
+  //   });
+
+  //   it('should return correct list of users when function is called', async () => {
+  //     // When
+  //     const result = await mockService.getAllUserManagements();
+
+  //     // Then
+  //     expect(result).toEqual(mUser);
+
+  //     expect(axios.get).toHaveBeenCalledTimes(1);
+  //     expect(axios.get).toHaveBeenCalledWith("/api/user-managements");
+  //   });
+  // });
 });
