@@ -1,13 +1,14 @@
 import React from 'react';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import Sidebar from './components/reusable/sidebar/Sidebar';
+import Topbar from './components/reusable/topbar/Topbar';
 import Dashboard from './components/pages/Dashboard';
 import Reports from './components/pages/Reports';
 import BillValidation from './components/pages/BillValidation';
 import CostForecast from './components/pages/CostForecast';
-import Sidebar from './components/reusable/sidebar/Sidebar';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import './App.css';
-import Topbar from './components/reusable/topbar/Topbar';
+import UploadPage from './components/pages/upload/UploadPage';
 import UserManagementPage from './components/pages/admin/userManagement/UserManagementPage';
 
 const App: React.FunctionComponent = () => {
@@ -29,6 +30,7 @@ const App: React.FunctionComponent = () => {
           <Route path='/costforecast' element={<CostForecast />} />
 
           {/* admin routes */}
+          <Route path='/admin/upload' element={<UploadPage />} />
           <Route path='/admin/user-management' element={<UserManagementPage />} />
         </Routes>
       </Router> 
