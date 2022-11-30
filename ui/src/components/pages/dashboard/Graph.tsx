@@ -29,6 +29,7 @@ function Graph() {
     const weekNumber: any = [];
     const electricityDemand: any = [];
     const currentWeekNumber = getWeekNumberByDate(new Date());
+    console.log(currentWeekNumber);
     const previousWeekNumber = currentWeekNumber - 1;
     const weekConsumptionArray: Array<IWeekConsumption> = [];
 
@@ -102,8 +103,9 @@ function Graph() {
 };
 
 function getWeekNumberByDate(date: any) {
+  date = new Date(date).toLocaleDateString();
   date = new Date(date);
-  const firstJanuary: any = new Date(date.getFullYear(), 0, 1);
+  const firstJanuary: any = new Date(date.getFullYear(), 0, 4);
   const dayNumber: number = Math.ceil((date - firstJanuary) / (24 * 60 * 60 * 1000));
   const weekNumber: number = Math.ceil((dayNumber + firstJanuary.getDay()) / 7);
   return weekNumber;

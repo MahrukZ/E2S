@@ -68,10 +68,10 @@ CREATE TABLE IF NOT EXISTS `insight_templates` (
 CREATE TABLE IF NOT EXISTS `consumptions` (
   `consumption_id` INT NOT NULL AUTO_INCREMENT,
   `time_interval` DATETIME NOT NULL,
-  `heat_demand` INT NOT NULL,
-  `electricity_demand` INT NOT NULL,
-  `electricity_price` INT NOT NULL,
-  `gas_price` INT NOT NULL,
+  `heat_demand` DECIMAL(19,6),
+  `electricity_demand` DECIMAL(19,6),
+  `electricity_price` DECIMAL(19,2),
+  `gas_price` DECIMAL(19,2),
   `site_id` INT NOT NULL,
   `org_id` INT NOT NULL,
   PRIMARY KEY (`consumption_id`)
