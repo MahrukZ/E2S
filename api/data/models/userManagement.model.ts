@@ -10,7 +10,7 @@ export interface IUserManagement {
     role?: string;
 }
 
-@Table({ tableName: 'user_management' })
+@Table({ tableName: 'user_management', underscored: true })
 export class UserManagement extends Model implements IUserManagement {
 
     @Column({

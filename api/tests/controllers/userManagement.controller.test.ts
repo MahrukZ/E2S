@@ -37,30 +37,30 @@ describe("UserManagementController", () => {
         const mUserManagement: IUserManagement[] = [
             {
                 userId: 1,
-                firstName: "Martin",
-                lastName: "James",
-                email: "martinjames@cardiff.ac.uk",
+                firstName: "Rhys",
+                lastName: "Jones",
+                email: "rhys.jones@cardiff.ac.uk",
                 organisation: "Cardiff University",
                 noSitesManaged: 3,
-                role: "director of estates"
+                role: "facility energy manager"
             },
             {
                 userId: 2,
-                firstName: "Rhy",
-                lastName: "Jones",
-                email: "rhyjones@cardiff.ac.uk",
-                organisation: "Cardiff University",
-                noSitesManaged: 1,
-                role: "facility energy manager"
+                firstName: "Johnny",
+                lastName: "Bravo",
+                email: "johnny.bravo@nhs.gov.uk",
+                organisation: "National Health Service",
+                noSitesManaged: 7,
+                role: "director of estates"
             },
             {
                 userId: 3,
-                firstName: "James",
-                lastName: "Ohay",
-                email: "jamesohay@cardiff.ac.uk",
-                organisation: "Cardiff University",
-                noSitesManaged: 3,
-                role: "facility energy manager"
+                firstName: "Cai",
+                lastName: "Robert",
+                email: "cairobert@e2s.co.uk",
+                organisation: "Empowering Energy Solutions",
+                noSitesManaged: 0,
+                role: "administrator"
             }
         ];
         const mSuccessResponse: any = {
@@ -115,30 +115,30 @@ describe("UserManagementController", () => {
         const mUserManagement: IUserManagement[] = [
             {
                 userId: 1,
-                firstName: "Martin",
-                lastName: "James",
-                email: "martinjames@cardiff.ac.uk",
+                firstName: "Rhys",
+                lastName: "Jones",
+                email: "rhys.jones@cardiff.ac.uk",
                 organisation: "Cardiff University",
                 noSitesManaged: 3,
-                role: "director of estates"
+                role: "facility energy manager"
             },
             {
                 userId: 2,
-                firstName: "Rhy",
-                lastName: "Jones",
-                email: "rhyjones@cardiff.ac.uk",
-                organisation: "Cardiff University",
-                noSitesManaged: 1,
-                role: "facility energy manager"
+                firstName: "Johnny",
+                lastName: "Bravo",
+                email: "johnny.bravo@nhs.gov.uk",
+                organisation: "National Health Service",
+                noSitesManaged: 7,
+                role: "director of estates"
             },
             {
                 userId: 3,
-                firstName: "James",
-                lastName: "Ohay",
-                email: "jamesohay@cardiff.ac.uk",
-                organisation: "Cardiff University",
-                noSitesManaged: 3,
-                role: "facility energy manager"
+                firstName: "Cai",
+                lastName: "Robert",
+                email: "cairobert@e2s.co.uk",
+                organisation: "Empowering Energy Solutions",
+                noSitesManaged: 0,
+                role: "administrator"
             }
         ];
         const mSuccessResponse: any = {

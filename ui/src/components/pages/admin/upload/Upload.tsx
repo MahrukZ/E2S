@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form } from 'react-bootstrap';
-import Message from "../../reusable/alerts/Message";
+import Message from "../../../reusable/alerts/Message";
 import UploadButton from './UploadButton';
 
 function Upload() {
