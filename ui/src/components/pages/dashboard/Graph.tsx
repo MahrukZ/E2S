@@ -68,8 +68,8 @@ function Graph() {
     , [])
 
   return (
-    <div className="graph" >
-      <Plot data-testid="electricityGraph"
+    <div className="graph" data-testid="electricityGraph">
+      <Plot 
         data={[
           {
             x: consumption.weekNumber,
