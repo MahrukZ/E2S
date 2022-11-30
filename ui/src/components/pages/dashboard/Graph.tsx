@@ -87,9 +87,17 @@ function Graph() {
             title: 'Electricity Usage',
             xaxis: {
               title: 'Week',
+              titlefont: {
+                family: 'Ariel',
+                size: 13
+              }
             },
             yaxis: {
-              title: 'Electricity Consumption'
+              title: 'Electricity Consumption',
+              titlefont: {
+                family: 'Ariel',
+                size: 13
+              }
             }
           }
         }
