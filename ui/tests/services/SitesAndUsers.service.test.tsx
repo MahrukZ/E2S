@@ -1,6 +1,7 @@
 import axios from 'axios';
 import '@testing-library/jest-dom'
 import { SitesAndUsersService } from '../../src/services/sitesAndUsers.service'
+import "@types/jest"
 
 jest.mock('axios');
 

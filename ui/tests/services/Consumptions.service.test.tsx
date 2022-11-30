@@ -1,6 +1,7 @@
 import axios from 'axios';
 import '@testing-library/jest-dom'
 import { ConsumptionsService } from '../../src/services/consumptions.service'
+import "@types/jest"
 
 jest.mock('axios');
 
