@@ -5,14 +5,14 @@ import { ConsumptionsService } from "../../../services/consumptions.service";
 import { getWeekNumberByDate } from "../../../utils/utils";
 
 interface Consumptions {
-  consumption_id: number;
-  time_interval: Date;
-  heat_demand: number;
-  electricity_demand: number;
-  electricity_price: number;
-  gas_price: number;
-  site_id: number;
-  org_id: number;
+  consumptionId: number;
+  timeInterval: Date;
+  heatDemand: number;
+  electricityDemand: number;
+  electricityPrice: number;
+  gasPrice: number;
+  siteId: number;
+  orgId: number;
 }
 
 interface WeekConsumption {
@@ -35,14 +35,14 @@ function Graph() {
 
     const weekConsumptionArray: Array<WeekConsumption> = [];
     consumptions.data.forEach((element: Consumptions) => {
-      const weekNumber = getWeekNumberByDate(element.time_interval);
+      const weekNumber = getWeekNumberByDate(element.timeInterval);
       if (weekNumber === currentWeekNumber || weekNumber === previousWeekNumber) {
         const obj: WeekConsumption = {
           weekNumber: weekNumber,
-          consumption: element.electricity_demand
+          consumption: element.electricityDemand
         }
         const result = weekConsumptionArray.find((x: WeekConsumption) => x.weekNumber == weekNumber);
-        if (result) result.consumption += element.electricity_demand;
+        if (result) result.consumption += element.electricityDemand;
         else weekConsumptionArray.push(obj);
       }
     });
@@ -87,7 +87,6 @@ function Graph() {
             title: 'Electricity Usage',
             xaxis: {
               title: 'Week',
-              dtick: 1,
               titlefont: {
                 family: 'Ariel',
                 size: 13
@@ -95,7 +94,6 @@ function Graph() {
             },
             yaxis: {
               title: 'Electricity Consumption',
-              dtick: 1,
               titlefont: {
                 family: 'Ariel',
                 size: 13
