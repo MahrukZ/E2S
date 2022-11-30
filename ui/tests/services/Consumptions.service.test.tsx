@@ -1,7 +1,7 @@
 import axios from 'axios';
-import '@testing-library/jest-dom'
-import { ConsumptionsService } from '../../src/services/consumptions.service'
-import { IUploadData } from '../../src/components/pages/upload/UploadButton';
+import '@testing-library/jest-dom';
+import { ConsumptionsService } from '../../src/services/consumptions.service';
+import { IUploadData } from '../../src/components/pages/admin/upload/UploadButton';
 
 jest.mock('axios');
 

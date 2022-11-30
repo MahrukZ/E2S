@@ -1,5 +1,5 @@
 import axios from "axios"
-import { IUploadData } from "../components/pages/upload/UploadButton";
+import { IUploadData } from "../components/pages/admin/upload/UploadButton";
 
 export class ConsumptionsService {
 

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { FaUpload } from "react-icons/fa";
-import { ConsumptionsService } from "../../../services/consumptions.service";
-import Message from "../../reusable/alerts/Message";
+import { ConsumptionsService } from "../../../../services/consumptions.service";
+import Message from "../../../reusable/alerts/Message";
 
 export interface IUploadData {
   consumptionId?: number,
