@@ -8,6 +8,10 @@ export class ConsumptionService {
         this.consumptionRepository = new ConsumptionRepository();
     }
 
+    async bulkCreateConsumptions(consumptions: IConsumption[]) {
+        return await this.consumptionRepository.bulkCreateConsumptions(consumptions);
+    }
+
     async createConsumption(consumption: IConsumption) {
         return await this.consumptionRepository.createConsumption(consumption);
     }

@@ -1,0 +1,12 @@
+import axios from "axios"
+import { IUploadData } from "../components/pages/upload/UploadButton";
+
+export class ConsumptionsService {
+
+    public async bulkCreateConsumptions(consumptions: IUploadData[]): Promise<any> {
+        // Last record comes back as undefined. This line gets all data without last record.
+        const consumptionsData = consumptions.slice(0, -1);
+        const response = await axios.post(`/api/consumption/bulk-create`, consumptionsData);
+        return await response.data;
+    }
+}
