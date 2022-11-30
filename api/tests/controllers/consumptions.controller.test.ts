@@ -4,8 +4,9 @@ import { ConsumptionService } from "../../services/consumptions.service";
 
 jest.mock('../../services/consumptions.service', () => {
     const mConsumptionService = { 
+        bulkCreateConsumptions: jest.fn(),
         createConsumption: jest.fn(),
-        getAllConsumptions: jest.fn(),
+        getAllConsumptions: jest.fn()
     };
     return {
         ConsumptionService: jest.fn(() => mConsumptionService)
@@ -36,14 +37,14 @@ describe("ConsumptionController", () => {
 
     describe("ConsumptionController.createConsumption", () => {
         const mCreateBody: IConsumption = {
-            consumption_id: 4,
-            time_interval: mockDateObject,
-            heat_demand: 2897,
-            electricity_demand: 2699,
-            electricity_price: 98,
-            gas_price: 65,
-            site_id: 11,
-            org_id: 11
+            consumptionId: 1,
+            timeInterval: mockDateObject,
+            heatDemand: 1897,
+            electricityDemand: 1699,
+            electricityPrice: 18,
+            gasPrice: 15,
+            siteId: 1,
+            orgId: 1
         };
         const mSuccessReponse: any = {
             message: 'Created',
@@ -94,38 +95,36 @@ describe("ConsumptionController", () => {
     });
 
     describe("ConsumptionController.getAllConsumptions", () => {
-        const mConsumption: IConsumption[] = [
-            {
-                consumption_id: 1,
-                time_interval: mockDateObject,
-                heat_demand: 2897,
-                electricity_demand: 2699,
-                electricity_price: 98,
-                gas_price: 65,
-                site_id: 1,
-                org_id: 1
-            },
-            {
-                consumption_id: 2,
-                time_interval: mockDateObject,
-                heat_demand: 2513,
-                electricity_demand: 2450,
-                electricity_price: 78,
-                gas_price: 95,
-                site_id: 5,
-                org_id: 5
-            },
-            {
-                consumption_id: 3,
-                time_interval: mockDateObject,
-                heat_demand: 2315,
-                electricity_demand: 2216,
-                electricity_price: 88,
-                gas_price: 85,
-                site_id: 8,
-                org_id: 8
-            }
-        ];
+        const mConsumption: IConsumption[] = [{
+            consumptionId: 1,
+            timeInterval: mockDateObject,
+            heatDemand: 1897,
+            electricityDemand: 1699,
+            electricityPrice: 18,
+            gasPrice: 15,
+            siteId: 1,
+            orgId: 1
+        },
+        {
+            consumptionId: 2,
+            timeInterval: mockDateObject,
+            heatDemand: 2897,
+            electricityDemand: 2699,
+            electricityPrice: 28,
+            gasPrice: 25,
+            siteId: 2,
+            orgId: 2
+        },
+        {
+            consumptionId: 3,
+            timeInterval: mockDateObject,
+            heatDemand: 3897,
+            electricityDemand: 3699,
+            electricityPrice: 38,
+            gasPrice: 35,
+            siteId: 3,
+            orgId: 3
+        }];
         const mSuccessResponse: any = {
             message: 'Success',
             status: 200,
@@ -174,3 +173,4 @@ describe("ConsumptionController", () => {
         });
     });
 });
+
