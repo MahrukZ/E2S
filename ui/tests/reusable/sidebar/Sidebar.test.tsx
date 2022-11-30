@@ -2,6 +2,7 @@ import React from 'react'
 import '@testing-library/jest-dom'
 import { render, screen, fireEvent } from '@testing-library/react'
 import App from '../../../src/App'
+import "@types/jest"
 
 //Cannot render Sidebar independently due to routes, App is rendered to test Sidebar
 
