@@ -74,7 +74,10 @@ function Graph() {
           {
             x: consumption.weekNumber,
             y: consumption.electricityDemand,
-            type: "bar"
+            type: 'bar',
+            marker: {
+              color: ['rgba(1, 93, 251, 0.8)', 'rgba(248, 119, 16, 0.8)']
+            }
           },
         ]}
         layout={
