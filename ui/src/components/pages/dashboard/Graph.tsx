@@ -68,8 +68,8 @@ function Graph() {
     , [])
 
   return (
-    <div className="graph">
-      <Plot
+    <div className="graph" >
+      <Plot data-testid="electricityGraph"
         data={[
           {
             x: consumption.weekNumber,
@@ -95,6 +95,7 @@ function Graph() {
             },
             yaxis: {
               title: 'Electricity Consumption',
+              dtick: 1,
               titlefont: {
                 family: 'Ariel',
                 size: 13
