@@ -132,11 +132,7 @@ describe('InsightRepository', () => {
             expect(result).toEqual(mockUpdateInsight);
             expect(Insights.update).toHaveBeenCalledTimes(1);
             expect(Insights.update).toBeCalledWith(
-                {
-                    insightId: mockUpdateInsight.insightId,
-                    description: mockUpdateInsight.description
-                },
-                {
+                mockUpdateInsight, {
                     where: {
                         insight_id: mockUpdateInsight.insightId
                     }
