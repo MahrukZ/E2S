@@ -29,7 +29,6 @@ function Graph() {
     const weekNumber: any = [];
     const electricityDemand: any = [];
     const currentWeekNumber = getWeekNumberByDate(new Date());
-    console.log(currentWeekNumber);
     const previousWeekNumber = currentWeekNumber - 1;
     const weekConsumptionArray: Array<IWeekConsumption> = [];
 
