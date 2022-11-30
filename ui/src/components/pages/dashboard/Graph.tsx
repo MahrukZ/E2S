@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Plot from "react-plotly.js";
 import "./Graph.css";
 import { ConsumptionsService } from "../../../services/consumptions.service";
 import { getWeekNumberByDate } from "../../../utils/utils";
@@ -28,11 +29,11 @@ function Graph() {
     const consumptions = await consumptionsService.getAllConsumptions();
     const weekNumber: any = [];
     const electricityDemand: any = [];
+
     const currentWeekNumber = getWeekNumberByDate(new Date());
     const previousWeekNumber = currentWeekNumber - 1;
 
     const weekConsumptionArray: Array<WeekConsumption> = [];
-
     consumptions.data.forEach((element: Consumptions) => {
       const weekNumber = getWeekNumberByDate(element.time_interval);
       if (weekNumber === currentWeekNumber || weekNumber === previousWeekNumber) {
@@ -47,13 +48,23 @@ function Graph() {
     });
 
     weekConsumptionArray.forEach((data: WeekConsumption) => {
-      weekNumber.push(data.weekNumber);
+      if(data.weekNumber == currentWeekNumber){
+        weekNumber.push("Current Week");
+      }
+      else{
+        weekNumber.push("Previous Week");
+      }
       electricityDemand.push(data.consumption);
-
     });
+
     setConsumption({ ...weekConsumptionArray, weekNumber: weekNumber, electricityDemand: electricityDemand });
     return weekConsumptionArray;
-  };
+  }
+
+  useEffect(() => {
+    graphData();
+  }
+    , [])
 
   return (
     <>
@@ -62,4 +73,3 @@ function Graph() {
 };
 
 export default Graph;
-
