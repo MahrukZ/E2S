@@ -4,11 +4,11 @@ import "./Dashboard.css";
 
 const Dashboard: React.FunctionComponent = () => {
   return (
-    <div className='dashboard'>
-      <div className='row'>
-        <div className='col-12'><Graph /></div>
+      <div className='dashboard'>
+        <div className='row'>
+          <div className='col-12'><Graph /></div>
+        </div>
       </div>
-    </div>
   );
 };
 

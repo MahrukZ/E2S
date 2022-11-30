@@ -12,7 +12,8 @@ dotenv.config();
 const port = process.env.PORT || 8082;
 const app = express();
 
-app.use(express.json());
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 app.use(cors());
 
 // controllers
@@ -83,6 +84,10 @@ app.get("/api/consumptions", async (req, res) => {
 
 app.post("/api/consumption", async (req, res) => {
     consumptionController.createConsumption(req, res);
+});
+
+app.post("/api/consumption/bulk-create", async (req, res) => {
+    consumptionController.bulkCreateConsumptions(req, res);
 });
 
 // port listen

@@ -1,16 +1,18 @@
 import axios from 'axios';
-import '@testing-library/jest-dom'
-import { SitesAndUsersService } from '../../src/services/sitesAndUsers.service'
-import "@types/jest"
+import '@testing-library/jest-dom';
+import { SitesAndUsersService } from '../../src/services/sitesAndUsers.service';
+
 
 jest.mock('axios');
 
-it('Returns correct name of site', async () => {
+describe("sitesAndUsers.service", () => {
 
-    const mockService = new SitesAndUsersService;
+  const mockService = new SitesAndUsersService();
+  const mockedAxios = axios as jest.Mocked<typeof axios>;
 
-    (axios.get as jest.Mock).mockResolvedValue({
-    data: [
+  it('should return correct name of site when function is called', async () => {
+    // Given
+    const mSitesAndUsers = [
       {
         site_id: 1,
         name: "Abacws",
@@ -26,11 +28,18 @@ it('Returns correct name of site', async () => {
         name: "Queens Building",
         user_id: 1
       }
-    ]
+    ];
+    mockedAxios.get.mockResolvedValue({
+      data: mSitesAndUsers
     });
 
-    const title = await mockService.findSitesAndUsersByUserId(1);
-    const siteOneName = title[0]["name"];
-    expect(siteOneName).toEqual("Abacws");
-});
+    // When
+    const result = await mockService.findSitesAndUsersByUserId(1);
 
+    // Then
+    expect(result).toEqual(mSitesAndUsers);
+
+    expect(axios.get).toHaveBeenCalledTimes(1);
+    expect(axios.get).toHaveBeenCalledWith("/api/sites-and-users/1");
+  });
+});

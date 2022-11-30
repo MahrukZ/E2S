@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from "axios";
 
 export class UserManagementService {
 
@@ -7,4 +7,8 @@ export class UserManagementService {
         return await response.data;
     }
 
+    public async getAllUserManagements(): Promise<any> {
+        const response = await axios.get("/api/user-managements");
+        return await response.data;
+    }
 }

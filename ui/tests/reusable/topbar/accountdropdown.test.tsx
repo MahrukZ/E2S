@@ -2,29 +2,21 @@ import '@testing-library/jest-dom';
 import { cleanup, render, screen } from '@testing-library/react';
 import React from 'react';
 import AccountDropdown from '../../../src/components/reusable/topbar/AccountDropdown';
+import { IUser } from '../../../src/components/reusable/topbar/Topbar';
 
-afterEach(() => {
-    cleanup();
-});
-
-test('should render account dropdown element', () => {
+test('should render account dropdown element with user props', () => {
     // Given
-    render(<AccountDropdown name='test' />);
+    const testUser: IUser = {
+        userId: 1,
+        name: "Test Name"
+    }
+    render(<AccountDropdown user={testUser} />);
 
     // When
     const dropDownElement = screen.getByTestId("dropdownButton");
+    const accountElement = screen.getByTestId("accountName");
 
     // Then
     expect(dropDownElement).toBeInTheDocument();
-});
-
-test('should render props in name section', () => {
-    // Given
-    render(<AccountDropdown name="Test Name" />);
-
-    // When
-    const accountElement = screen.getByTestId("accountName");
-    
-    // Then
     expect(accountElement).toHaveTextContent("Test Name");
 });

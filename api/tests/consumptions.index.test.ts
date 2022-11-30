@@ -141,4 +141,69 @@ describe('index', () => {
     //         expect(createSpy).toHaveBeenCalledWith(req, res);
     //     });
     // });
+
+    describe('POST /api/consumption/bulk-create', () => {
+        const mBulkCreateBody: IConsumption[] = [{
+            consumptionId: 1,
+            timeInterval: mockDateObject,
+            heatDemand: 1897,
+            electricityDemand: 1699,
+            electricityPrice: 18,
+            gasPrice: 15,
+            siteId: 1,
+            orgId: 1
+        },
+        {
+            consumptionId: 2,
+            timeInterval: mockDateObject,
+            heatDemand: 2897,
+            electricityDemand: 2699,
+            electricityPrice: 28,
+            gasPrice: 25,
+            siteId: 2,
+            orgId: 2
+        },
+        {
+            consumptionId: 3,
+            timeInterval: mockDateObject,
+            heatDemand: 3897,
+            electricityDemand: 3699,
+            electricityPrice: 38,
+            gasPrice: 35,
+            siteId: 3,
+            orgId: 3
+        }];
+        const mSuccessReponse: any = {
+            message: 'Created',
+            status: 201,
+            data: mBulkCreateBody
+        };
+        mockedAxios.post.mockResolvedValue(mSuccessReponse);
+        const req = mRequest(mBulkCreateBody);
+        const res = mResponse();
+
+        it('should bulk create consumptions when request body is provided', async () => {
+            // Given
+            const mUrl = "/api/consumption/bulk-create";
+            const bulkCreateSpy = jest
+                .spyOn(controller, 'bulkCreateConsumptions')
+                .mockResolvedValue(mBulkCreateBody);
+
+            // When
+            const result = await axios.post(mUrl);
+            await controller.bulkCreateConsumptions(req, res);
+    //         // When
+    //         const result = await axios.post(mUrl);
+    //         await controller.createConsumption(req, res);
+
+    //         // Then
+    //         expect(result).toEqual(mSuccessReponse);
+
+    //         expect(axios.post).toHaveBeenCalledTimes(1);
+    //         expect(axios.post).toHaveBeenCalledWith(mUrl);
+
+            expect(bulkCreateSpy).toHaveBeenCalledTimes(1);
+            expect(bulkCreateSpy).toHaveBeenCalledWith(req, res);
+        });
+    });
 });

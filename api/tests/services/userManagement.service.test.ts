@@ -25,31 +25,31 @@ describe('UserManagementService', () => {
             // Given
             const mUserManagement: IUserManagement[] = [
                 {
-                    user_id: 1,
-                    first_name: 'Martin',
-                    last_name: 'James',
-                    email: 'martinjames@cardiff.ac.uk',
-                    organisation: 'Cardiff University',
-                    no_sites_managed: 3,
-                    role: 'director of estates'
+                    userId: 1,
+                    firstName: "Rhys",
+                    lastName: "Jones",
+                    email: "rhys.jones@cardiff.ac.uk",
+                    organisation: "Cardiff University",
+                    noSitesManaged: 3,
+                    role: "facility energy manager"
                 },
                 {
-                    user_id: 2,
-                    first_name: 'Rhy',
-                    last_name: 'Jones',
-                    email: 'rhyjones@cardiff.ac.uk',
-                    organisation: 'Cardiff University',
-                    no_sites_managed: 1,
-                    role: 'facility energy manager'
+                    userId: 2,
+                    firstName: "Johnny",
+                    lastName: "Bravo",
+                    email: "johnny.bravo@nhs.gov.uk",
+                    organisation: "National Health Service",
+                    noSitesManaged: 7,
+                    role: "director of estates"
                 },
                 {
-                    user_id: 3,
-                    first_name: 'James',
-                    last_name: 'Ohay',
-                    email: 'jamesohay@cardiff.ac.uk',
-                    organisation: 'Cardiff University',
-                    no_sites_managed: 3,
-                    role: 'facility energy manager'
+                    userId: 3,
+                    firstName: "Cai",
+                    lastName: "Robert",
+                    email: "cairobert@e2s.co.uk",
+                    organisation: "Empowering Energy Solutions",
+                    noSitesManaged: 0,
+                    role: "administrator"
                 }
             ];
             const getSpy = jest
@@ -71,31 +71,13 @@ describe('UserManagementService', () => {
             // Given
             const mUserManagement: IUserManagement[] = [
                 {
-                    user_id: 1,
-                    first_name: 'Martin',
-                    last_name: 'James',
-                    email: 'martinjames@cardiff.ac.uk',
-                    organisation: 'Cardiff University',
-                    no_sites_managed: 3,
-                    role: 'director of estates'
-                },
-                {
-                    user_id: 2,
-                    first_name: 'Rhy',
-                    last_name: 'Jones',
-                    email: 'rhyjones@cardiff.ac.uk',
-                    organisation: 'Cardiff University',
-                    no_sites_managed: 1,
-                    role: 'facility energy manager'
-                },
-                {
-                    user_id: 3,
-                    first_name: 'James',
-                    last_name: 'Ohay',
-                    email: 'jamesohay@cardiff.ac.uk',
-                    organisation: 'Cardiff University',
-                    no_sites_managed: 3,
-                    role: 'facility energy manager'
+                    userId: 1,
+                    firstName: "Rhys",
+                    lastName: "Jones",
+                    email: "rhys.jones@cardiff.ac.uk",
+                    organisation: "Cardiff University",
+                    noSitesManaged: 3,
+                    role: "facility energy manager"
                 }
             ];
             const userId = 1;

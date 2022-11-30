@@ -2,7 +2,6 @@ import React from 'react'
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import CostForecast from '../../src/components/pages/CostForecast'
-import "@types/jest";
 
 
 test('should render costforecast title element', () => {
