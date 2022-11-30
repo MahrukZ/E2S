@@ -84,7 +84,13 @@ function Graph() {
           {
             width: 450,
             height: 450,
-            title: 'Electricity Usage'
+            title: 'Electricity Usage',
+            xaxis: {
+              title: 'Week',
+            },
+            yaxis: {
+              title: 'Electricity Consumption'
+            }
           }
         }
       />
