@@ -1,17 +1,17 @@
 import { Column, Model, Table, DataType } from "sequelize-typescript";
 
 export interface IConsumption {
-    consumption_id?: number;
-    time_interval?: Date;
-    heat_demand?: number;
-    electricity_demand?: number;
-    electricity_price?: number;
-    gas_price?: number;
-    site_id?: number;
-    org_id?: number;
+    consumptionId?: number;
+    timeInterval?: Date;
+    heatDemand?: number;
+    electricityDemand?: number;
+    electricityPrice?: number;
+    gasPrice?: number;
+    siteId?: number;
+    orgId?: number;
 }
 
-@Table({ tableName: 'consumptions' })
+@Table({ tableName: 'consumptions', underscored: true })
 export class Consumptions extends Model implements IConsumption {
 
     @Column({
@@ -20,41 +20,41 @@ export class Consumptions extends Model implements IConsumption {
         autoIncrement: true,
         type: DataType.INTEGER 
     })
-    consumption_id?: number; 
+    consumptionId?: number; 
 
     @Column({ 
         type: DataType.DATE,
         defaultValue: DataType.NOW
     })
-    time_interval?: Date;
+    timeInterval?: Date;
 
     @Column({ 
         type: DataType.INTEGER
     })
-    heat_demand?: number;
+    heatDemand?: number;
 
     @Column({ 
         type: DataType.INTEGER
     })
-    electricity_demand?: number;
+    electricityDemand?: number;
 
     @Column({ 
         type: DataType.INTEGER
     })
-    electricity_price?: number;
+    electricityPrice?: number;
 
     @Column({ 
         type: DataType.INTEGER
     })
-    gas_price?: number;
+    gasPrice?: number;
 
     @Column({ 
         type: DataType.INTEGER
     })
-    site_id?: number;
+    siteId?: number;
 
     @Column({ 
         type: DataType.INTEGER
     })
-    org_id?: number;
+    orgId?: number;
 }
