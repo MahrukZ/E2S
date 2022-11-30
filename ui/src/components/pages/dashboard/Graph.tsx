@@ -23,18 +23,18 @@ interface WeekConsumption {
 const consumptionsService = new ConsumptionsService();
 
 function Graph() {
-  const [consumption, setConsumption] = useState({ weekNumber: [], electricityDemand: [] });
+  const [consumption, setConsumption] = useState({weekNumber:[], electricityDemand:[]});
 
   const graphData = async () => {
     const consumptions = await consumptionsService.getAllConsumptions();
     const weekNumber: any = [];
     const electricityDemand: any = [];
-
     const currentWeekNumber = getWeekNumberByDate(new Date());
     const previousWeekNumber = currentWeekNumber - 1;
-
     const weekConsumptionArray: Array<WeekConsumption> = [];
+
     consumptions.data.forEach((element: Consumptions) => {
+      console.log(typeof(element.electricityDemand));
       const weekNumber = getWeekNumberByDate(element.timeInterval);
       if (weekNumber === currentWeekNumber || weekNumber === previousWeekNumber) {
         const obj: WeekConsumption = {
@@ -48,7 +48,6 @@ function Graph() {
     });
 
     weekConsumptionArray.forEach((data: WeekConsumption) => {
-
       if (data.weekNumber == currentWeekNumber) {
         weekNumber.push("Current Week");
       }
