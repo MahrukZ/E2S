@@ -48,6 +48,7 @@ function Graph() {
     });
 
     weekConsumptionArray.forEach((data: WeekConsumption) => {
+
       if(data.weekNumber == currentWeekNumber){
         weekNumber.push("Current Week");
       }
@@ -67,8 +68,9 @@ function Graph() {
     , [])
 
   return (
-    <>
-    </>
+    <div className="graph">
+      
+    </div>
   )
 };
 
