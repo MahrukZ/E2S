@@ -3,7 +3,11 @@ import Graph from './Graph';
 
 const Dashboard: React.FunctionComponent = () => {
   return (
-    <div><Graph /></div>
+    <div className='dashboard'>
+      <div className='row'>
+        <div className='col-12'><Graph /></div>
+      </div>
+    </div>
   );
 };
 
