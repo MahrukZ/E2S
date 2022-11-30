@@ -37,7 +37,7 @@ describe("InsightController", () => {
 
     describe("InsightController.createInsight", () => {
         const mCreateBody: IInsight = {
-            insight_id: 4,
+            insightId: 4,
             description: 'new insight'
         };
         const mSuccessReponse: any = {
@@ -140,15 +140,15 @@ describe("InsightController", () => {
     describe("InsightController.getAllInsights", () => {
         const mInsight: IInsight[] = [
             {
-                insight_id: 1,
+                insightId: 1,
                 description: 'insight 1'
             },
             {
-                insight_id: 2,
+                insightId: 2,
                 description: 'insight 2'
             },
             {
-                insight_id: 3,
+                insightId: 3,
                 description: 'insight 3'
             }
         ];
@@ -210,7 +210,7 @@ describe("InsightController", () => {
             status: 500
         };
         const mUpdateBody: IInsight = {
-            insight_id: 1,
+            insightId: 1,
             description: 'updated insight'
         };
 

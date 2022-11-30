@@ -13,15 +13,15 @@ describe('InsightRepository', () => {
             // Given
             const mockResponse: IInsight[] = [
                 {
-                    insight_id: 1,
+                    insightId: 1,
                     description: 'insight 1'
                 },
                 {
-                    insight_id: 2,
+                    insightId: 2,
                     description: 'insight 2'
                 },
                 {
-                    insight_id: 3,
+                    insightId: 3,
                     description: 'insight 3'
                 }
             ];
@@ -87,7 +87,7 @@ describe('InsightRepository', () => {
         it('should create an insight when there is insight data being passed', async () => {
             // Given
             const mockCreateInsight: IInsight = {
-                insight_id: 4,
+                insightId: 4,
                 description: 'new insight'
             }
 
@@ -119,7 +119,7 @@ describe('InsightRepository', () => {
         it('should update an insight when there is insight data being passed', async () => {
             // Given
             const mockUpdateInsight: IInsight = {
-                insight_id: 2,
+                insightId: 2,
                 description: 'updated insight'
             }
 
@@ -132,13 +132,9 @@ describe('InsightRepository', () => {
             expect(result).toEqual(mockUpdateInsight);
             expect(Insights.update).toHaveBeenCalledTimes(1);
             expect(Insights.update).toBeCalledWith(
-                {
-                    insight_id: mockUpdateInsight.insight_id,
-                    description: mockUpdateInsight.description
-                },
-                {
+                mockUpdateInsight, {
                     where: {
-                        insight_id: mockUpdateInsight.insight_id
+                        insight_id: mockUpdateInsight.insightId
                     }
                 }      
             );

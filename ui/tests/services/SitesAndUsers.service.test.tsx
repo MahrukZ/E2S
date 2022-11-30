@@ -13,19 +13,19 @@ describe("sitesAndUsers.service", () => {
     // Given
     const mSitesAndUsers = [
       {
-        site_id: 1,
+        siteId: 1,
         name: "Abacws",
-        user_id: 1
+        userId: 1
       },
       {
-        site_id: 2,
+        siteId: 2,
         name: "National Software Academy",
-        user_id: 1
+        userId: 1
       },
       {
-        site_id: 3,
+        siteId: 3,
         name: "Queens Building",
-        user_id: 1
+        userId: 1
       }
     ];
     mockedAxios.get.mockResolvedValue({
