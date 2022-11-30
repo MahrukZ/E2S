@@ -79,6 +79,8 @@ function Graph() {
         ]}
         layout={
           {
+            width: 450,
+            height: 450,
             title: 'Electricity Usage'
           }
         }
