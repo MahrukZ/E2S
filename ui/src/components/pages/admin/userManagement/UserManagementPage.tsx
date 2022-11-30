@@ -2,7 +2,7 @@ import UserTable from "./UserTable";
 
 function UserManagementPage() {
   return (
-    <div className="container">
+    <div className="text-center">
         <h1>User Management</h1>
         <UserTable />
     </div>
