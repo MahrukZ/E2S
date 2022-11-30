@@ -3,6 +3,7 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Graph from '../../../src/components/pages/dashboard/Graph'
 import "jest";
+import 'jest-canvas-mock';
 
 
 test('should render graph plot element', () => {
