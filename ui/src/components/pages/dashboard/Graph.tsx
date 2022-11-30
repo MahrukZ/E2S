@@ -49,10 +49,10 @@ function Graph() {
 
     weekConsumptionArray.forEach((data: WeekConsumption) => {
 
-      if(data.weekNumber == currentWeekNumber){
+      if (data.weekNumber == currentWeekNumber) {
         weekNumber.push("Current Week");
       }
-      else{
+      else {
         weekNumber.push("Previous Week");
       }
       electricityDemand.push(data.consumption);
@@ -69,7 +69,20 @@ function Graph() {
 
   return (
     <div className="graph">
-      
+      <Plot
+        data={[
+          {
+            x: consumption.weekNumber,
+            y: consumption.electricityDemand,
+            type: "bar"
+          },
+        ]}
+        layout={
+          {
+            title: 'Electricity Usage'
+          }
+        }
+      />
     </div>
   )
 };
