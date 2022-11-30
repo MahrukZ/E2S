@@ -87,6 +87,7 @@ function Graph() {
             title: 'Electricity Usage',
             xaxis: {
               title: 'Week',
+              dtick: 1,
               titlefont: {
                 family: 'Ariel',
                 size: 13
