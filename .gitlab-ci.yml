@@ -12,7 +12,7 @@ ui build:
   #   - pwd
   #   - npm i
   script:
-    - cd /ui
+    - cd ui/
     - pwd
     - echo "This is a build job for ui"
     # - npm run build
