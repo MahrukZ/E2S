@@ -9,4 +9,9 @@ export class ConsumptionsService {
         const response = await axios.post(`/api/consumption/bulk-create`, consumptionsData);
         return await response.data;
     }
+
+    public async findAllConsumptionsBySiteAndTime(startTime: string, endTime: string, siteId: number): Promise<any> {
+        const response = await axios.get(`/api/consumption/findBySiteAndTime/${startTime}/${endTime}/${siteId}`);
+        return await response.data;
+    }
 }
