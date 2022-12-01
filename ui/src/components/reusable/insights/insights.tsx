@@ -136,7 +136,7 @@ function Insights() {
                 <Card.Title>Total Costs</Card.Title>
                 <Card.Body>
                     {insightsList[0]} 
-                    <b className="percentagNeutral" 
+                    <b className="percentageNeutral" 
                     style={{
                         backgroundColor: isCostPositive ? 'green' : 'darkred',
                     }}>
