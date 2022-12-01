@@ -7,7 +7,7 @@ interface IConsumption {
   consumptionId: number;
   timeInterval: Date;
   heatDemand: number;
-  electricityDemand: number;
+  electricityDemand: string;
   electricityPrice: number;
   gasPrice: number;
   siteId: number;
@@ -16,7 +16,7 @@ interface IConsumption {
 
 interface IWeekConsumption {
   weekNumber: number;
-  consumption: number;
+  consumption: string;
 }
 
 const consumptionsService = new ConsumptionsService();
@@ -34,13 +34,14 @@ function Graph() {
 
     consumptions.data.forEach((element: IConsumption) => {
       const weekNumber = getWeekNumberByDate(element.timeInterval);
+      const consumption = Number(element.electricityDemand);
       if (weekNumber === currentWeekNumber || weekNumber === previousWeekNumber) {
-        const obj: IWeekConsumption = {
+        const obj: any = {
           weekNumber: weekNumber,
-          consumption: element.electricityDemand
+          consumption: consumption
         }
         const result = weekConsumptionArray.find((x: IWeekConsumption) => x.weekNumber == weekNumber);
-        if (result) result.consumption += element.electricityDemand;
+        if (result) result.consumption += consumption;
         else weekConsumptionArray.push(obj);
       }
     });

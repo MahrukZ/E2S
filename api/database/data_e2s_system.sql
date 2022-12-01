@@ -133,49 +133,11 @@ INSERT INTO `bills`
 VALUES(null, './assets/bills/eon_bill.pdf', 'combined', 'valid', '2022-06-14', 7, 2);
 
 INSERT INTO `consumptions`
-VALUES(null, '2022/11/13 11:00', '2576.3', '2500.3', '43.45', '50.45', 1, 1);
+VALUES(null, '2020/01/01 12:00', '2576.3', '2359.0', '43.45', '50.45', 1, 1);
 INSERT INTO `consumptions`
-VALUES(null, '2022/11/14 11:00', '2359.2', '2300.2', '43.45', '50.45', 1, 1);
+VALUES(null, '2020/01/02 15:00', '2529.7', '2351.1', '35.55', '32.55', 5, 5);
 INSERT INTO `consumptions`
-VALUES(null, '2022/11/15 11:00', '2344.1', '2344.1', '43.45', '50.45', 1, 1);
-INSERT INTO `consumptions`
-VALUES(null, '2022/11/16 11:00', '2348.5', '2200.5', '43.45', '50.45', 1, 1);
-INSERT INTO `consumptions`
-VALUES(null, '2022/11/17 11:00', '2342.0', '3000.0', '43.45', '50.45', 1, 1);
-INSERT INTO `consumptions`
-VALUES(null, '2022/11/18 11:00', '2411.1', '3500.0', '43.45', '50.45', 1, 1);
-INSERT INTO `consumptions`
-VALUES(null, '2022/11/19 11:00', '2429.5', '2429.5', '43.45', '50.45', 1, 1);
-INSERT INTO `consumptions`
-VALUES(null, '2022/11/20 11:00', '2391.8', '2391.8', '43.45', '50.45', 1, 1);
-INSERT INTO `consumptions`
-VALUES(null, '2022/11/21 11:00', '2370.4', '2370.4', '43.45', '50.45', 1, 1);
-INSERT INTO `consumptions`
-VALUES(null, '2022/11/22 11:00', '2328.3', '2328.3', '43.45', '50.45', 1, 1);
-INSERT INTO `consumptions`
-VALUES(null, '2022/11/23 11:00', '1925.1', '1925.1', '43.45', '50.45', 1, 1);
-INSERT INTO `consumptions`
-VALUES(null, '2022/11/24 11:00', '1936.7', '1936.7', '43.45', '50.45', 1, 1);
-INSERT INTO `consumptions`
-VALUES(null, '2022/11/25 11:00', '1972.9', '1972.9', '43.45', '50.45', 1, 1);
-INSERT INTO `consumptions`
-VALUES(null, '2022/11/26 11:00', '2033.6', '1950.9', '43.45', '50.45', 1, 1);
-INSERT INTO `consumptions`
-VALUES(null, '2022/11/27 11:00', '2033.6', '1800.9', '43.45', '50.45', 1, 1);
-INSERT INTO `consumptions`
-VALUES(null, '2022/11/28 11:00', '2033.6', '1500.9', '43.45', '50.45', 1, 1);
-INSERT INTO `consumptions`
-VALUES(null, '2022/11/29 11:00', '2033.6', '1329.9', '43.45', '50.45', 1, 1);
-INSERT INTO `consumptions`
-VALUES(null, '2022/11/30 11:00', '2033.6', '1329.9', '43.45', '50.45', 1, 1);
-INSERT INTO `consumptions`
-VALUES(null, '2022/12/01 11:00', '2033.6', '1329.9', '43.45', '50.45', 1, 1);
-INSERT INTO `consumptions`
-VALUES(null, '2022/12/02 11:00', '2033.6', '1329.9', '43.45', '50.45', 1, 1);
-INSERT INTO `consumptions`
-VALUES(null, '2022/12/03 11:00', '2033.6', '1329.9', '43.45', '50.45', 1, 1);
-INSERT INTO `consumptions`
-VALUES(null, '2022/12/04 11:00', '2033.6', '1329.9', '43.45', '50.45', 1, 1);
+VALUES(null, '2020/01/03 20:00', '2878.7', '2699.1', '78.55', '56.55', 8, 8);
 
 INSERT INTO `reports`
 VALUES(null, './assets/reports/report.pdf', 1, '2022-02-20');
