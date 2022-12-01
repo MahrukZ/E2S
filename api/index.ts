@@ -6,6 +6,7 @@ import { SiteController } from "./controllers/sites.controller";
 import { SitesAndUsersController } from "./controllers/sitesAndUsers.controller";
 import { UserManagementController } from "./controllers/userManagement.controller";
 import { ConsumptionController } from "./controllers/consumptions.controller";
+import { UserController } from "./controllers/users.controller";
 
 // config
 dotenv.config();
@@ -22,6 +23,7 @@ const siteController = new SiteController();
 const sitesAndUsersController = new SitesAndUsersController();
 const userManagementController = new UserManagementController();
 const consumptionController = new ConsumptionController();
+const userController = new UserController();
 
 // routes
 
@@ -88,6 +90,15 @@ app.post("/api/consumption", async (req, res) => {
 
 app.post("/api/consumption/bulk-create", async (req, res) => {
     consumptionController.bulkCreateConsumptions(req, res);
+});
+
+// users
+app.get("/api/users", async (req, res) => {
+    userController.getAllUsers(req, res);
+});
+
+app.get("/api/users/:email/:password", async (req, res) => {
+    userController.findUserByEmailAndPassword(req, res);
 });
 
 // port listen

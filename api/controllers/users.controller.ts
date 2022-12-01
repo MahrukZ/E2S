@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
-import { UserManagementService } from "../services/userManagement.service";
+import { UserService } from "../services/users.service";
 
-export class UserManagementController {
-    private userManagementService: UserManagementService;
+export class UserController {
+    private userService: UserService;
 
     constructor() {
-        this.userManagementService = new UserManagementService();
+        this.userService = new UserService();
     }
 
-    async getAllUserManagements(req: Request, res: Response): Promise<any> {
-        return (this.userManagementService.getAllUserManagements()
+    async getAllUsers(req: Request, res: Response): Promise<any> {
+        return (this.userService.getAllUsers()
             .then(data => {
                 res.status(200).json({
                     message: 'Success',
@@ -19,7 +19,7 @@ export class UserManagementController {
             })
             .catch (err => {
                 res.status(500).json({
-                    message: err.message || "server error: failed to fetch user management data.",
+                    message: err.message || "server error: failed to fetch user data.",
                     status: 500
                 });
             })
@@ -27,8 +27,8 @@ export class UserManagementController {
     };
 
 
-    async findUserManagementByUserId(req: Request, res: Response): Promise<any> {
-        return (this.userManagementService.findUserManagementByUserId(parseInt(req.params.id))
+    async findUserByEmailAndPassword(req: Request, res: Response): Promise<any> {
+        return (this.userService.findUserByEmailAndPassword(req.params.email, req.params.password)
             .then(data => {
                 res.status(200).json({
                     message: 'Success',
@@ -38,7 +38,7 @@ export class UserManagementController {
         })
         .catch(err => {
             res.status(500).json({
-                message: err.message || "server error: failed to fetch user management data.",
+                message: err.message || "server error: failed to fetch user.",
                 status: 500
             });
         })

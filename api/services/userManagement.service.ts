@@ -1,4 +1,3 @@
-import { IUserManagement } from "../data/models/userManagement.model";
 import { UserManagementRepository } from "../data/repositories/userManagement.repository";
 
 export class UserManagementService {
@@ -15,5 +14,4 @@ export class UserManagementService {
     async findUserManagementByUserId(userId: number) {
         return await this.userManagementRepository.findUserManagementByUserId(userId);
     }
-
 }
