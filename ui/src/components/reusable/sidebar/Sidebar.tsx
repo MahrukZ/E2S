@@ -18,6 +18,7 @@ const CollapsedSideBar = styled.div`
     background-color: #417285;
     position: fixed;
     top: 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
 `
 
 const MenuIconOpen = styled(Link)`
@@ -46,14 +47,14 @@ const MenuIconClose = styled(Link)`
 `
 
 const TopSideBarClose = styled.div`
-display: flex;
-// justify-content: end;
-margin-left: 2rem;
-font-size: 2.5rem;
-margin-top: 0.75rem;
-margin-right: 1rem;
-margin-bottom: 1rem;
-color: #ffffff;
+    display: flex;
+    // justify-content: end;
+    margin-left: 2rem;
+    font-size: 2.5rem;
+    margin-top: 0.75rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
 `
 
 const SidebarMenu = styled.div<{close: boolean}>`
@@ -64,6 +65,7 @@ const SidebarMenu = styled.div<{close: boolean}>`
     top: 0;
     left: ${({ close}) => close ? '0' : '-100%'};
     transition: .3s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
 `
 
 const MenuItems = styled.li`
