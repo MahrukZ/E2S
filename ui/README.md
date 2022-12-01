@@ -31,6 +31,7 @@ npm i
 - `bootstrap` package - Sleek, intuitive, and powerful front-end framework for faster and easier web development. **Learn more [here](https://www.npmjs.com/package/bootstrap)**
 - `react-router-dom` package - The react-router-dom package contains bindings for using React Router in web applications. **Learn more [here](https://www.npmjs.com/package/react-router-dom)**
 - `styled-components` package - Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress. **Learn more [here](https://www.npmjs.com/package/styled-components)**
+- `plotly` package - Plotly is a Javascript data visualization library. **Learn more [here](https://plotly.com/javascript/react/)**
 
 
 ###### _devDependencies:_
@@ -38,8 +39,7 @@ npm i
 - `ts-jest` package - A Jest transformer with source map support that lets you use Jest to test projects written in TypeScript. **Learn more [here](https://www.npmjs.com/package/ts-jest)**
 - `jest-environment-jsdom` package - **Learn more [here](https://www.npmjs.com/package/jest-environment-jsdom)**
 - `jsx-runtime` package - **Learn more [here](https://www.npmjs.com/package/jsx-runtime)**
-- `jest-canvas-mock` package - Mock canvas when run unit test cases with jest. **Learn more [here](https://jestjs.io/)**
-- `plotly` package - Plotly is a Javascript data visualization library. **Learn more [here](https://plotly.com/javascript/react/)**
+- `jest-canvas-mock` package - Mock canvas when run unit test cases with jest. **Learn more [here](https://www.npmjs.com/package/jest-canvas-mock)**
 
 ## Available Scripts
 
