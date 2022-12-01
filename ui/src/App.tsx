@@ -9,6 +9,7 @@ import Dashboard from './components/pages/dashboard/Dashboard';
 import Reports from './components/pages/Reports';
 import BillValidation from './components/pages/BillValidation';
 import CostForecast from './components/pages/CostForecast';
+import SignIn from './components/pages/signIn/SignIn';
 
 import UploadPage from './components/pages/admin/upload/UploadPage';
 import UserManagementPage from './components/pages/admin/userManagement/UserManagementPage';
@@ -30,6 +31,7 @@ const App: React.FunctionComponent = () => {
           <Route path='/reports' element={<Reports />} />            
           <Route path='/billvalidation' element={<BillValidation />} />    
           <Route path='/costforecast' element={<CostForecast />} />
+          <Route path='/sign-in' element={<SignIn />} />
 
           {/* admin routes */}
           <Route path='/admin/upload' element={<UploadPage />} />
