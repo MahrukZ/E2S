@@ -59,7 +59,7 @@ function Insights() {
         }
         getAllInsights();
 
-      }, []);
+    }, []);
     
     useEffect(() => {
         const findAllConsumptionsBySiteAndTime =async () => {
@@ -76,43 +76,13 @@ function Insights() {
             const currentConsumptionsData = currentConsumptionsResponse["data"];
             const previousConsumptionsData = previousConsumptionsResponse["data"];
 
-            console.log(currentConsumptionsData);
+            const totalCurrentElectricityDemand = currentConsumptionsData[0];
+            const totalCurrentGasDemand = currentConsumptionsData[1];
+            const totalCurrentCosts = currentConsumptionsData[2];
 
-            // Sum up demands
-            let totalCurrentElectricityDemand: number = currentConsumptionsData.reduce( 
-            (a: number, b: { electricityDemand: string; }) => a + parseFloat(b.electricityDemand), 0);
-
-            let totalCurrentGasDemand: number = currentConsumptionsData.reduce( 
-            (a: number, b: { heatDemand: string; }) => a + parseFloat(b.heatDemand), 0);
-
-            let totalPreviousElectricityDemand: number = previousConsumptionsData.reduce( 
-            (a: number, b: { electricityDemand: string; }) => a + parseFloat(b.electricityDemand), 0);
-                
-            let totalPreviousGasDemand: number = previousConsumptionsData.reduce( 
-            (a: number, b: { heatDemand: string; }) => a + parseFloat(b.heatDemand), 0);
-
-            let totalCurrentElectricityCosts: number = currentConsumptionsData.reduce( 
-                (a: number, b: { electricityPrice: string; electricityDemand: string; }) => 
-                a + (parseFloat(b.electricityPrice) * parseFloat(b.electricityDemand)), 0
-            );
-
-            let totalCurrentGasCosts: number = currentConsumptionsData.reduce( 
-                (a: number, b: { gasPrice: string; heatDemand: string; }) => 
-                a + (parseFloat(b.gasPrice) * parseFloat(b.heatDemand)), 0
-            );           
-            
-            let totalPreviousElectricityCosts: number = previousConsumptionsData.reduce( 
-                (a: number, b: { electricityPrice: string; electricityDemand: string; }) => 
-                a + (parseFloat(b.electricityPrice) * parseFloat(b.electricityDemand)), 0
-            );
-
-            let totalPreviousGasCosts: number = previousConsumptionsData.reduce( 
-                (a: number, b: { gasPrice: string; heatDemand: string; }) => 
-                a + (parseFloat(b.gasPrice) * parseFloat(b.heatDemand)), 0
-            );            
-
-            const totalCurrentCosts = totalCurrentElectricityCosts + totalCurrentGasCosts;
-            const totalPreviousCosts = totalPreviousElectricityCosts + totalPreviousGasCosts;
+            const totalPreviousElectricityDemand = previousConsumptionsData[0];
+            const totalPreviousGasDemand = previousConsumptionsData[1];
+            const totalPreviousCosts = previousConsumptionsData[2];
 
             // calculate percentage
             const electricityPercentage = Math.round(
