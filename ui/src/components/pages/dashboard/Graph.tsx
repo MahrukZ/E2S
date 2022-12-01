@@ -83,14 +83,14 @@ function Graph() {
             xaxis: {
               title: 'Week',
               titlefont: {
-                family: 'Ariel',
+                family: 'Arial',
                 size: 13
               }
             },
             yaxis: {
-              title: 'Electricity Consumption',
+              title: 'Electricity Consumption (kW)',
               titlefont: {
-                family: 'Ariel',
+                family: 'Arial',
                 size: 13
               }
             }
