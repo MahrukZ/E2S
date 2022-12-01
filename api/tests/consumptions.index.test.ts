@@ -192,15 +192,12 @@ describe('index', () => {
             // When
             const result = await axios.post(mUrl);
             await controller.bulkCreateConsumptions(req, res);
-    //         // When
-    //         const result = await axios.post(mUrl);
-    //         await controller.createConsumption(req, res);
 
-    //         // Then
-    //         expect(result).toEqual(mSuccessReponse);
+            // Then
+            expect(result).toEqual(mSuccessReponse);
 
-    //         expect(axios.post).toHaveBeenCalledTimes(1);
-    //         expect(axios.post).toHaveBeenCalledWith(mUrl);
+            expect(axios.post).toHaveBeenCalledTimes(1);
+            expect(axios.post).toHaveBeenCalledWith(mUrl);
 
             expect(bulkCreateSpy).toHaveBeenCalledTimes(1);
             expect(bulkCreateSpy).toHaveBeenCalledWith(req, res);
