@@ -23,4 +23,5 @@ build:
     - sudo apt-get install build-essential
     - npm i
   script:
+    - pwd
     - npm run build
