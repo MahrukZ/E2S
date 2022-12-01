@@ -8,11 +8,15 @@
     margin-left:100px;
   }
   
-  #sidebarHeadings {
-    margin-left: 16px;
-    font-size: large;
-  }
+#sidebarHeadings {
+  margin-left: 16px;
+  font-size: large;
+}
 
-  .onTop {
-    z-index: 999;
-  }
+.onTop {
+  z-index: 999;
+}
+
+.imageLogo {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
+}

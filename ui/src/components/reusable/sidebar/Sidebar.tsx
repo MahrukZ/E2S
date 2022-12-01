@@ -150,7 +150,7 @@ const Sidebar: React.FunctionComponent = () => {
                 
                 {/* Image placed inside ui/src so that it is accessible */}
                 <ImageLink to={'/'} >
-                <img width={50} height={50} src={logo} alt="logo" />
+                <img className="imageLogo" width={50} height={50} src={logo} alt="logo" />
                 </ImageLink>
 
                 <MenuIconClose data-testid="menuIconClose" to="#" onClick={showSidebar}>
