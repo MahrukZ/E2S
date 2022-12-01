@@ -97,7 +97,7 @@ export class ConsumptionRepository {
         return data;
     }
 
-    async findAllConsumptionsBySiteAndTime(startTime: string, endTime: string, siteId: number): Promise<number[]> {
+    async findAllConsumptionsBySiteAndTime(startTime: string, endTime: string, siteId: number): Promise<IConsumption[]> {
         let data = [];
 
         // Convert start/end to Dates from Strings

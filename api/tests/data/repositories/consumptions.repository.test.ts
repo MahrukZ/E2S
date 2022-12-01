@@ -161,4 +161,87 @@ describe('ConsumptionRepository', () => {
             expect(consumptionRepository.getAllConsumptions).toHaveBeenCalledWith();
         });
     });
+
+    describe('ConsumptionRepository.findAllConsumptionsBySiteAndTime', () => {
+        it('should fetch some consumptions when there is data in the database', async () => {
+            // Given
+            const mockResponse: IConsumption[] = [{
+                consumptionId: 1,
+                timeInterval: mockDateObject,
+                heatDemand: 1897,
+                electricityDemand: 1699,
+                electricityPrice: 18,
+                gasPrice: 15,
+                siteId: 1,
+                orgId: 1
+            },
+            {
+                consumptionId: 2,
+                timeInterval: mockDateObject,
+                heatDemand: 2897,
+                electricityDemand: 2699,
+                electricityPrice: 28,
+                gasPrice: 25,
+                siteId: 2,
+                orgId: 2
+            },
+            {
+                consumptionId: 3,
+                timeInterval: mockDateObject,
+                heatDemand: 3897,
+                electricityDemand: 3699,
+                electricityPrice: 38,
+                gasPrice: 35,
+                siteId: 3,
+                orgId: 3
+            }];
+            Consumptions.findAll = jest.fn().mockResolvedValue(mockResponse);
+
+            // When
+            const result = await consumptionRepository.findAllConsumptionsBySiteAndTime("","",1);
+
+            // Then
+            expect(result).toEqual(mockResponse);
+            expect(Consumptions.findAll).toHaveBeenCalledTimes(1);
+        });
+
+        it('should not fetch consumptions when there is no data in the database', async () => {
+            // Given 
+            // When
+            const mErrorMessage = new Error("Failed to fetch all consumptions.");
+            consumptionRepository.findAllConsumptionsBySiteAndTime = jest.fn().mockRejectedValue(mErrorMessage);
+            
+            // Then
+            expect(consumptionRepository.findAllConsumptionsBySiteAndTime).rejects.toMatchObject(mErrorMessage);
+            expect(consumptionRepository.findAllConsumptionsBySiteAndTime).toHaveBeenCalledTimes(1);
+            expect(consumptionRepository.findAllConsumptionsBySiteAndTime).toHaveBeenCalledWith();
+        });
+    });
+
+    describe('ConsumptionRepository.findSumsOfGasElectricityCostsBySiteAndTimes', () => {
+        it('should fetch some numbers when there is data in the database', async () => {
+            // Given
+            const mockResponse: number[] = [1, 2, 3];
+            Consumptions.findAll = jest.fn().mockResolvedValue(mockResponse);
+
+            // When
+            const result = await consumptionRepository.findSumsOfGasElectricityCostsBySiteAndTime("2022-11-30 15:30:00","2022-12-01 2015:30:00",1);
+
+            // Then
+            expect(Consumptions.findAll).toHaveBeenCalledTimes(1);
+        });
+
+        it('should not fetch consumptions when there is no data in the database', async () => {
+            // Given 
+            // When
+            const mErrorMessage = new Error("Failed to fetch all consumptions.");
+            consumptionRepository.findSumsOfGasElectricityCostsBySiteAndTime = jest.fn().mockRejectedValue(mErrorMessage);
+            
+            // Then
+            expect(consumptionRepository.findSumsOfGasElectricityCostsBySiteAndTime).rejects.toMatchObject(mErrorMessage);
+            expect(consumptionRepository.findSumsOfGasElectricityCostsBySiteAndTime).toHaveBeenCalledTimes(1);
+            expect(consumptionRepository.findSumsOfGasElectricityCostsBySiteAndTime).toHaveBeenCalledWith();
+        });
+    });
+    
 });
