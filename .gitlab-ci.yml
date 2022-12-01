@@ -14,10 +14,22 @@ build:
     - apt-get update -qy
     - apt-get install --no-install-recommends -y npm
     - npm --version
-    - cd api/ 
+    - cd ui/ 
     - pwd
-    - rm -rf node_modules
     - npm i
   script:
     - pwd
     - npm run build
+
+test:
+  stage: test
+  before_script:
+    - apt-get update -qy
+    - apt-get install --no-install-recommends -y npm
+    - npm --version
+    - cd ui/ 
+    - pwd
+    - npm i
+  script:
+    - pwd
+    - npm test
