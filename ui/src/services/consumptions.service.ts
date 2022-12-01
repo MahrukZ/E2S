@@ -14,4 +14,9 @@ export class ConsumptionsService {
         const response = await axios.get(`/api/consumption/findBySiteAndTime/${startTime}/${endTime}/${siteId}`);
         return await response.data;
     }
+
+    public async findSumsOfGasElectricityCostsBySiteAndTime(startTime: Date, endTime: Date, siteId: number): Promise<any> {
+        const response = await axios.get(`/api/consumption/findSumsOfGasElectricityCostsBySiteAndTime/${startTime}/${endTime}/${siteId}`);
+        return await response.data;
+    }
 }

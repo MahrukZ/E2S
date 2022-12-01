@@ -62,7 +62,7 @@ function Insights() {
     }, []);
     
     useEffect(() => {
-        const findAllConsumptionsBySiteAndTime =async () => {
+        const findSumsOfGasElectricityCostsBySiteAndTime =async () => {
             let finalConsumptions: String[] = [];
             let consumptionsList: String[] = [];
 
@@ -70,8 +70,8 @@ function Insights() {
             const priorDate = new Date(new Date().setDate(now.getDate() - 7));
             const priorPriorDate = new Date(new Date().setDate(now.getDate() - 14));
 
-            const currentConsumptionsResponse = await consumptionsService.findAllConsumptionsBySiteAndTime(priorDate, now, currentSiteId);
-            const previousConsumptionsResponse = await consumptionsService.findAllConsumptionsBySiteAndTime(priorPriorDate, priorDate, currentSiteId);
+            const currentConsumptionsResponse = await consumptionsService.findSumsOfGasElectricityCostsBySiteAndTime(priorDate, now, currentSiteId);
+            const previousConsumptionsResponse = await consumptionsService.findSumsOfGasElectricityCostsBySiteAndTime(priorPriorDate, priorDate, currentSiteId);
             
             const currentConsumptionsData = currentConsumptionsResponse["data"];
             const previousConsumptionsData = previousConsumptionsResponse["data"];
@@ -129,7 +129,7 @@ function Insights() {
             setConsumptionsList(finalConsumptions);
         }
 
-        findAllConsumptionsBySiteAndTime();
+        findSumsOfGasElectricityCostsBySiteAndTime();
     }, [])
 
   return (

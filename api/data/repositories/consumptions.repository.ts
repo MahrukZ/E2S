@@ -49,7 +49,7 @@ export class ConsumptionRepository {
         return data;
     }
 
-    async findAllConsumptionsBySiteAndTime(startTime: string, endTime: string, siteId: number): Promise<number[]> {
+    async findSumsOfGasElectricityCostsBySiteAndTime(startTime: string, endTime: string, siteId: number): Promise<number[]> {
         let data = [];
         let transitData = [];
         let finalData = [];
@@ -93,6 +93,29 @@ export class ConsumptionRepository {
         finalData.push(totalElectricityDemand, totalGasDemand, totalCosts);
 
         data = finalData;
+
+        return data;
+    }
+
+    async findAllConsumptionsBySiteAndTime(startTime: string, endTime: string, siteId: number): Promise<number[]> {
+        let data = [];
+
+        // Convert start/end to Dates from Strings
+        const startTimeDate = new Date(startTime);
+        const endTimeDate = new Date(endTime);
+
+        try {
+            data = await this.consumptionRepository.findAll({
+                where: {
+                    siteId,
+                    timeInterval: {
+                        [Op.between]: [startTimeDate, endTimeDate]
+                    }
+                  }
+              });
+        } catch (err) {
+            throw new Error("Failed to fetch all consumptions." || err);
+        }
 
         return data;
     }
