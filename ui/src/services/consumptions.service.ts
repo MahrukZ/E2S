@@ -10,7 +10,7 @@ export class ConsumptionsService {
         return await response.data;
     }
 
-    public async findAllConsumptionsBySiteAndTime(startTime: string, endTime: string, siteId: number): Promise<any> {
+    public async findAllConsumptionsBySiteAndTime(startTime: Date, endTime: Date, siteId: number): Promise<any> {
         const response = await axios.get(`/api/consumption/findBySiteAndTime/${startTime}/${endTime}/${siteId}`);
         return await response.data;
     }

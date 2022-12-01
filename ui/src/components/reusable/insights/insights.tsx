@@ -2,15 +2,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { InsightsService } from "../../../services/insights.service";
 import { SitesService } from "../../../services/sites.service";
+import { ConsumptionsService } from "../../../services/consumptions.service";
 import { Container, Card, Col } from "react-bootstrap";
 import "./insights.css";
 
 function Insights() {
   
-    const [insightsList, setInsightsList] = useState<String[]>([]);
+    const currentSiteId = 1;
 
+    const [insightsList, setInsightsList] = useState<String[]>([]);
+    const [consumptionsList, setConsumptionsList] = useState<String[]>([]);
+
+    // Initialize services
     const insightsService = new InsightsService;
     const sitesService = new SitesService;
+    const consumptionsService = new ConsumptionsService;
 
     useEffect(() => {
         // This will only work with 3 insight templates in the database
@@ -20,7 +26,7 @@ function Insights() {
 
             const insightsTemplates = await insightsService.getInsights();
             // Currently just has 1 as the siteId, this will need to be changed
-            const siteData = await sitesService.findSiteBySiteID(1);
+            const siteData = await sitesService.findSiteBySiteID(currentSiteId);
 
             const currentSite = siteData["data"][0]["name"];
 
@@ -50,23 +56,70 @@ function Insights() {
         }
         getAllInsights();
 
-        // Placeholder before consumptions service/backend implemented
-        // const getConsumptions =async () => {
-        //   const consumptionData = await consumptionsService.findConsumptionsBySite(3);
-        // }
-        // getConsumptions();
-
       }, []);
     
-      // Consumptions data code
+    useEffect(() => {
+        const findAllConsumptionsBySiteAndTime =async () => {
+            let finalConsumptions: String[] = [];
+            let consumptionsList: String[] = [];
 
-      // Get consumptions data of last 60 days from database
-      // Calculate total costs (Gas x Gas Price & Electricity x Electricity Price)
-      // Split into Electricity Consumption, Gas Consumption, Total Costs
-      // Calculate the sum of consumptions/costs for the first 30 days and the last 30 days
-      // Compare to get a percentage increase/decrease
+            const now = new Date();
+            const priorDate = new Date(new Date().setDate(now.getDate() - 7));
+            const priorPriorDate = new Date(new Date().setDate(now.getDate() - 14));
 
-      let placeholderData: String[] = [" + 8%", " - 14.5%", " + 13%"];
+            const currentConsumptionsResponse = await consumptionsService.findAllConsumptionsBySiteAndTime(priorDate, now, currentSiteId);
+            const previousConsumptionsResponse = await consumptionsService.findAllConsumptionsBySiteAndTime(priorPriorDate, priorDate, currentSiteId);
+            
+            const currentConsumptionsData = currentConsumptionsResponse["data"];
+            const previousConsumptionsData = previousConsumptionsResponse["data"];
+
+            // Sum up demands
+            let totalCurrentElectricityDemand: number = currentConsumptionsData.reduce( 
+            (a: number, b: { electricityDemand: string; }) => a + parseFloat(b.electricityDemand), 0);
+            
+            let totalCurrentGasDemand: number = currentConsumptionsData.reduce( 
+            (a: number, b: { heatDemand: string; }) => a + parseFloat(b.heatDemand), 0);
+
+            let totalPreviousElectricityDemand: number = previousConsumptionsData.reduce( 
+            (a: number, b: { electricityDemand: string; }) => a + parseFloat(b.electricityDemand), 0);
+                
+            let totalPreviousGasDemand: number = previousConsumptionsData.reduce( 
+            (a: number, b: { heatDemand: string; }) => a + parseFloat(b.heatDemand), 0);
+
+            // calculate percentage
+            const electricityPercentage = Math.round(
+                (totalCurrentElectricityDemand - totalPreviousElectricityDemand) / totalPreviousElectricityDemand * 100
+            );
+            const gasPercentage = Math.round(
+                (totalCurrentGasDemand - totalPreviousGasDemand) / totalPreviousGasDemand * 100
+            );
+
+            // add plus or minus symbol - this will also contain logic to change colour
+            if (electricityPercentage < 0) {
+                const stringElectricityPercentage = String(electricityPercentage);
+                finalConsumptions.push(stringElectricityPercentage);
+            }
+            else {
+                const stringElectricityPercentage = "+" + String(electricityPercentage);
+                finalConsumptions.push(stringElectricityPercentage);
+            };
+
+            if (gasPercentage < 0) {
+                const stringGasPercentage = String(gasPercentage);
+                finalConsumptions.push(stringGasPercentage);
+            }
+            else {
+                const stringGasPercentage = "+" + String(gasPercentage);
+                finalConsumptions.push(stringGasPercentage);
+            };
+
+            setConsumptionsList(finalConsumptions);
+        }
+
+        findAllConsumptionsBySiteAndTime();
+    }, [])
+
+      let placeholderData: String[] = [" +8%", " -14.5%", " +13%"];
 
   return (
       <Container className="justify-content-end">
@@ -89,7 +142,7 @@ function Insights() {
                 <Card.Body>
                     {insightsList[2]} 
                     <b className="percentageGood">
-                    {placeholderData[1]}
+                    {consumptionsList[0]}%
                     </b>
                     {insightsList[3]}
                 </Card.Body>
@@ -100,7 +153,7 @@ function Insights() {
                 <Card.Body>
                     {insightsList[4]} 
                     <b className="percentageBad">
-                    {placeholderData[2]}
+                    {consumptionsList[1]}%
                     </b>
                     {insightsList[5]}
                 </Card.Body>

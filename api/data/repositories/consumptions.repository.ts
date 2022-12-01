@@ -1,7 +1,7 @@
 import { start } from "repl";
 import { connect } from "../config/db.config";
 import { Consumptions, IConsumption } from "../models/consumptions.model";
-import { Sequelize } from "sequelize"; 
+import { Op } from "sequelize"; 
 
 export class ConsumptionRepository {
     private db: any = {};
@@ -51,9 +51,6 @@ export class ConsumptionRepository {
 
     async findAllConsumptionsBySiteAndTime(startTime: string, endTime: string, siteId: number): Promise<IConsumption[]> {
         let data = [];
-
-        //Op to do between in SQL functions
-        const { Op } = require('sequelize');
 
         // Convert start/end to Dates from String
         const startTimeDate = new Date(startTime);
