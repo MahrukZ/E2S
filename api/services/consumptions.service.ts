@@ -20,7 +20,7 @@ export class ConsumptionService {
         return await this.consumptionRepository.getAllConsumptions();
     }
 
-    async findAllConsumptionsBySiteAndTime(startTime: String, endTime: String, siteId: number) {
+    async findAllConsumptionsBySiteAndTime(startTime: string, endTime: string, siteId: number) {
         return await this.consumptionRepository.findAllConsumptionsBySiteAndTime(startTime, endTime, siteId);
     }
 }
