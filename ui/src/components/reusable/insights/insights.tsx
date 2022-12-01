@@ -136,7 +136,7 @@ function Insights() {
       <Container className="justify-content-end">
             <Col className="d-flex insightsCol">
 
-            <Card className="insightsCard flex-fill">
+            <Card className="insightsCard flex-fill" data-testid="insightsCost">
                 <Card.Title>Total Costs</Card.Title>
                 <Card.Body>
                     {insightsList[0]} 
