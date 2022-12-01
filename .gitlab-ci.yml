@@ -1,27 +1,23 @@
-# This file is a template, and might need editing before it works on your project.
-# To contribute improvements to CI/CD templates, please follow the Development guide at:
-# https://docs.gitlab.com/ee/development/cicd/templates.html
-# This specific template is located at:
-# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/npm.gitlab-ci.yml
-
 stages:
   - build
   - test
 
-# build:
-#   stage: build
-#   before_script:
-#     - apt-get update -qy
-#     - apt-get install --no-install-recommends -y npm
-#     - npm --version
-#     - cd ui/ 
-#     - pwd
-#     - npm i
-#   script:
-#     - pwd
-#     - npm run build
+ui build:
+  stage: build
+  # before_script:
+  #   - apt-get update -qy
+  #   - apt-get install --no-install-recommends -y npm
+  #   - npm --version
+  #   - cd ui/ 
+  #   - pwd
+  #   - npm i
+  script:
+    - cd /ui
+    - pwd
+    - echo "This is a build job for ui"
+    # - npm run build
 
-test:
+ui unit test:
   stage: test
   # before_script:
   #   - apt-get update -qy
@@ -31,6 +27,7 @@ test:
   #   - pwd
   #   - npm i
   script:
+    - cd ui/ 
     - pwd
-    - echo "Hello Test"
+    - echo "This is a test job for ui"
     # - npm test
