@@ -13,6 +13,7 @@ stages:
 build:
   stage: build
   before_script:
+    - apt-get update -qy
     - apt-get install --no-install-recommends -y npm
     - npm --version
   script:
