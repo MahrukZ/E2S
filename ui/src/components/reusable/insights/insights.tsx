@@ -13,6 +13,11 @@ function Insights() {
     const [insightsList, setInsightsList] = useState<String[]>([]);
     const [consumptionsList, setConsumptionsList] = useState<String[]>([]);
 
+    // Sets the colour based on whether the change or positive or negative
+    const [isElectricityPositive, setIsElectricityPositive] = useState(false);
+    const [isGasPositive, setIsGasPositive] = useState(false);
+    const [isCostPositive, setIsCostPositive] = useState(false);
+
     // Initialize services
     const insightsService = new InsightsService;
     const sitesService = new SitesService;
@@ -102,6 +107,7 @@ function Insights() {
             else {
                 const stringElectricityPercentage = "+" + String(electricityPercentage);
                 finalConsumptions.push(stringElectricityPercentage);
+                setIsElectricityPositive(true);
             };
 
             if (gasPercentage < 0) {
@@ -111,6 +117,7 @@ function Insights() {
             else {
                 const stringGasPercentage = "+" + String(gasPercentage);
                 finalConsumptions.push(stringGasPercentage);
+                setIsGasPositive(true);
             };
 
             setConsumptionsList(finalConsumptions);
@@ -129,8 +136,11 @@ function Insights() {
                 <Card.Title>Total Costs</Card.Title>
                 <Card.Body>
                     {insightsList[0]} 
-                    <b className="percentageBad">
-                    {placeholderData[0]}
+                    <b className="percentagNeutral" 
+                    style={{
+                        backgroundColor: isCostPositive ? 'green' : 'darkred',
+                    }}>
+                        {placeholderData[0]}
                     </b>
                     {insightsList[1]}
                 </Card.Body>
@@ -141,8 +151,11 @@ function Insights() {
             <Card.Title>Electricity Insight</Card.Title>
                 <Card.Body>
                     {insightsList[2]} 
-                    <b className="percentageGood">
-                    {consumptionsList[0]}%
+                    <b className="percentageNeutral" 
+                    style={{
+                        backgroundColor: isElectricityPositive ? 'green' : 'darkred',
+                    }}>
+                        {consumptionsList[0]}%
                     </b>
                     {insightsList[3]}
                 </Card.Body>
@@ -152,8 +165,11 @@ function Insights() {
             <Card.Title>Gas Insight</Card.Title>
                 <Card.Body>
                     {insightsList[4]} 
-                    <b className="percentageBad">
-                    {consumptionsList[1]}%
+                    <b className="percentageNeutral" 
+                    style={{
+                        backgroundColor: isGasPositive ? 'green' : 'darkred',
+                    }}>
+                        {consumptionsList[1]}%
                     </b>
                     {insightsList[5]}
                 </Card.Body>
