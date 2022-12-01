@@ -56,8 +56,6 @@ function Insights() {
             
             setInsightsList(finalInsights);
 
-
-
         }
         getAllInsights();
 
@@ -78,10 +76,12 @@ function Insights() {
             const currentConsumptionsData = currentConsumptionsResponse["data"];
             const previousConsumptionsData = previousConsumptionsResponse["data"];
 
+            console.log(currentConsumptionsData);
+
             // Sum up demands
             let totalCurrentElectricityDemand: number = currentConsumptionsData.reduce( 
             (a: number, b: { electricityDemand: string; }) => a + parseFloat(b.electricityDemand), 0);
-            
+
             let totalCurrentGasDemand: number = currentConsumptionsData.reduce( 
             (a: number, b: { heatDemand: string; }) => a + parseFloat(b.heatDemand), 0);
 
@@ -91,6 +91,29 @@ function Insights() {
             let totalPreviousGasDemand: number = previousConsumptionsData.reduce( 
             (a: number, b: { heatDemand: string; }) => a + parseFloat(b.heatDemand), 0);
 
+            let totalCurrentElectricityCosts: number = currentConsumptionsData.reduce( 
+                (a: number, b: { electricityPrice: string; electricityDemand: string; }) => 
+                a + (parseFloat(b.electricityPrice) * parseFloat(b.electricityDemand)), 0
+            );
+
+            let totalCurrentGasCosts: number = currentConsumptionsData.reduce( 
+                (a: number, b: { gasPrice: string; heatDemand: string; }) => 
+                a + (parseFloat(b.gasPrice) * parseFloat(b.heatDemand)), 0
+            );           
+            
+            let totalPreviousElectricityCosts: number = previousConsumptionsData.reduce( 
+                (a: number, b: { electricityPrice: string; electricityDemand: string; }) => 
+                a + (parseFloat(b.electricityPrice) * parseFloat(b.electricityDemand)), 0
+            );
+
+            let totalPreviousGasCosts: number = previousConsumptionsData.reduce( 
+                (a: number, b: { gasPrice: string; heatDemand: string; }) => 
+                a + (parseFloat(b.gasPrice) * parseFloat(b.heatDemand)), 0
+            );            
+
+            const totalCurrentCosts = totalCurrentElectricityCosts + totalCurrentGasCosts;
+            const totalPreviousCosts = totalPreviousElectricityCosts + totalPreviousGasCosts;
+
             // calculate percentage
             const electricityPercentage = Math.round(
                 (totalCurrentElectricityDemand - totalPreviousElectricityDemand) / totalPreviousElectricityDemand * 100
@@ -98,8 +121,11 @@ function Insights() {
             const gasPercentage = Math.round(
                 (totalCurrentGasDemand - totalPreviousGasDemand) / totalPreviousGasDemand * 100
             );
+            const costPercentage = Math.round(
+                (totalCurrentCosts - totalPreviousCosts) / totalPreviousCosts * 100
+            );
 
-            // add plus or minus symbol - this will also contain logic to change colour
+            // add plus or minus symbol and change colour
             if (electricityPercentage < 0) {
                 const stringElectricityPercentage = String(electricityPercentage);
                 finalConsumptions.push(stringElectricityPercentage);
@@ -120,13 +146,21 @@ function Insights() {
                 setIsGasPositive(true);
             };
 
+            if (costPercentage < 0) {
+                const stringCostPercentage = String(costPercentage);
+                finalConsumptions.push(stringCostPercentage);
+            }
+            else {
+                const stringCostPercentage = "+" + String(costPercentage);
+                finalConsumptions.push(stringCostPercentage);
+                setIsCostPositive(true);
+            };
+
             setConsumptionsList(finalConsumptions);
         }
 
         findAllConsumptionsBySiteAndTime();
     }, [])
-
-      let placeholderData: String[] = [" +8%", " -14.5%", " +13%"];
 
   return (
       <Container className="justify-content-end">
@@ -138,13 +172,12 @@ function Insights() {
                     {insightsList[0]} 
                     <b className="percentageNeutral" 
                     style={{
-                        backgroundColor: isCostPositive ? 'green' : 'darkred',
+                        backgroundColor: isCostPositive ? 'darkred' : 'green',
                     }}>
-                        {placeholderData[0]}
+                        {consumptionsList[2]}%
                     </b>
                     {insightsList[1]}
                 </Card.Body>
-
             </Card>
 
             <Card className="insightsCard flex-fill">
@@ -153,7 +186,7 @@ function Insights() {
                     {insightsList[2]} 
                     <b className="percentageNeutral" 
                     style={{
-                        backgroundColor: isElectricityPositive ? 'green' : 'darkred',
+                        backgroundColor: isElectricityPositive ? 'darkred' : 'green',
                     }}>
                         {consumptionsList[0]}%
                     </b>
@@ -167,14 +200,13 @@ function Insights() {
                     {insightsList[4]} 
                     <b className="percentageNeutral" 
                     style={{
-                        backgroundColor: isGasPositive ? 'green' : 'darkred',
+                        backgroundColor: isGasPositive ? 'darkred' : 'green',
                     }}>
                         {consumptionsList[1]}%
                     </b>
                     {insightsList[5]}
                 </Card.Body>
             </Card>
-
             </Col>
       </Container>
 
