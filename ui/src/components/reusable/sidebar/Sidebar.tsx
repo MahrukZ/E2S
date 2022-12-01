@@ -140,7 +140,6 @@ const Sidebar: React.FunctionComponent = () => {
                     )
                 })}
 
-
             </CollapsedSideBar>
 
             {/*The expanded sidebar which shows the icons, text and picture*/}
