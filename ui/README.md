@@ -39,6 +39,7 @@ npm i
 - `jest-environment-jsdom` package - **Learn more [here](https://www.npmjs.com/package/jest-environment-jsdom)**
 - `jsx-runtime` package - **Learn more [here](https://www.npmjs.com/package/jsx-runtime)**
 - `jest-canvas-mock` package - Mock canvas when run unit test cases with jest. **Learn more [here](https://jestjs.io/)**
+- `plotly` package - Plotly is a Javascript data visualization library. **Learn more [here](https://plotly.com/javascript/react/)**
 
 ## Available Scripts
 
