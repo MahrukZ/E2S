@@ -1,9 +1,9 @@
 import { Column, Model, Table, DataType } from "sequelize-typescript";
 
 export interface ISitesAndUser {
-    site_id?: number;
+    siteId?: number;
     name?: string;
-    user_id?: number;
+    userId?: number;
 }
 
 @Table({ tableName: 'sites_and_users' })
@@ -15,7 +15,7 @@ export class SitesAndUsers extends Model implements ISitesAndUser {
         autoIncrement: true,
         type: DataType.INTEGER 
     })
-    site_id?: number; 
+    siteId?: number; 
 
     @Column({ 
         type: DataType.STRING, 
@@ -25,5 +25,5 @@ export class SitesAndUsers extends Model implements ISitesAndUser {
     @Column({ 
         type: DataType.INTEGER
     })
-    user_id?: number;
+    userId?: number;
 }

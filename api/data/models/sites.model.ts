@@ -1,10 +1,10 @@
 import { Column, Model, Table, DataType } from "sequelize-typescript";
 
 export interface ISite {
-    site_id?: number;
+    siteId?: number;
     name?: string;
     location?: string;
-    org_id?: number;
+    orgId?: number;
 }
 
 @Table({ tableName: 'sites' })
@@ -16,7 +16,7 @@ export class Sites extends Model implements ISite {
         autoIncrement: true,
         type: DataType.INTEGER 
     })
-    site_id?: number; 
+    siteId?: number; 
 
     @Column({ 
         type: DataType.STRING, 
@@ -31,5 +31,5 @@ export class Sites extends Model implements ISite {
     @Column({ 
         type: DataType.INTEGER
     })
-    org_id?: number;
+    orgId?: number;
 }

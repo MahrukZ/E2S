@@ -27,12 +27,12 @@ export class UserManagementRepository {
         return data;
     }
 
-    async findUserManagementByUserId(user_id: number): Promise<IUserManagement[]> {
+    async findUserManagementByUserId(userId: number): Promise<IUserManagement[]> {
         let data = [];
         try {
             data = await this.userManagementRepository.findAll({
                 where: {
-                    user_id
+                    user_id: userId
                   }
               });
         } catch (err) {

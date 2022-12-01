@@ -1,7 +1,7 @@
 import { Column, Model, Table, DataType } from "sequelize-typescript";
 
 export interface IInsight {
-    insight_id?: number;
+    insightId?: number;
     description?: string;
 }
 
@@ -14,7 +14,7 @@ export class Insights extends Model implements IInsight {
         autoIncrement: true,
         type: DataType.INTEGER 
     })
-    insight_id?: number;
+    insightId?: number;
 
     @Column({ 
         type: DataType.STRING, 
