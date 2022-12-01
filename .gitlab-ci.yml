@@ -17,7 +17,6 @@ build:
     - cd api/ 
     - pwd
     - rm -rf node_modules
-    - npm cache clean
     - sudo apt-get install build-essential
     - npm i
   script:
