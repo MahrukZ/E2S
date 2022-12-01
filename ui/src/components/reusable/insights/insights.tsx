@@ -4,7 +4,7 @@ import { InsightsService } from "../../../services/insights.service";
 import { SitesService } from "../../../services/sites.service";
 import { ConsumptionsService } from "../../../services/consumptions.service";
 import { Container, Card, Col } from "react-bootstrap";
-import "./insights.css";
+import "./Insights.css";
 
 function Insights() {
   
@@ -62,7 +62,7 @@ function Insights() {
     }, []);
     
     useEffect(() => {
-        const findSumsOfGasElectricityCostsBySiteAndTime =async () => {
+        const findSumsOfGasElectricityCostsBySiteAndTime = async () => {
             let finalConsumptions: String[] = [];
             let consumptionsList: String[] = [];
 
@@ -72,7 +72,7 @@ function Insights() {
 
             const currentConsumptionsResponse = await consumptionsService.findSumsOfGasElectricityCostsBySiteAndTime(priorDate, now, currentSiteId);
             const previousConsumptionsResponse = await consumptionsService.findSumsOfGasElectricityCostsBySiteAndTime(priorPriorDate, priorDate, currentSiteId);
-            
+
             const currentConsumptionsData = currentConsumptionsResponse["data"];
             const previousConsumptionsData = previousConsumptionsResponse["data"];
 
@@ -130,7 +130,7 @@ function Insights() {
         }
 
         findSumsOfGasElectricityCostsBySiteAndTime();
-    }, [])
+    }, []);
 
   return (
       <Container className="justify-content-end">

@@ -1,11 +1,12 @@
 import React from 'react';
-import Insights from "./../reusable/insights/insights"
+import Insights from "../reusable/insights/Insights";
+import Graph from "../reusable/graphs/Graph";
 
 const Dashboard: React.FunctionComponent = () => {
     return (
         <div>
-        <h1 id='dashboard'>Dashboard</h1>
         <Insights></Insights>
+        <Graph></Graph>
         </div>
     );
 };
