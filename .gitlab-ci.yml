@@ -16,9 +16,8 @@ build:
     - apt-get update -qy
     - apt-get install --no-install-recommends -y npm
     - npm --version
-  script:
-    # - echo "//gitlab.example.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}">.npmrc
     - cd api/ 
     - pwd
+  script:
     - npm i
     - npm run build
