@@ -17,6 +17,8 @@ api build:
     - echo "Running build for api/"
     - npm run build
     - echo "API build was Successful!"
+  only:
+    - main
 
 ui build:
   stage: Builds
@@ -31,6 +33,8 @@ ui build:
     - echo "Running build for ui/"
     - npm run build
     - echo "UI build was Successful!"
+  only:
+    - main
 
 api unit tests:
   stage: Unit Tests
@@ -48,6 +52,8 @@ api unit tests:
     - echo $testFiles
     - npm test $testFiles
     - echo "All Tests Passed!"
+  only:
+    - main
 
 ui unit tests:
   stage: Unit Tests
@@ -62,3 +68,5 @@ ui unit tests:
     - echo "Running Unit Tests for ui/"
     - npm test
     - echo "All Tests Passed!"
+  only:
+    - main
