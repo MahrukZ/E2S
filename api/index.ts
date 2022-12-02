@@ -101,6 +101,11 @@ app.get("/api/users/:email/:password", async (req, res) => {
     userController.findUserByEmailAndPassword(req, res);
 });
 
+// sign in
+app.post("/sign-in",async (req, res) => {
+    userController.findUserByEmailAndPassword(req, res);
+})
+
 // port listen
 app.listen(port, () => {
     console.log(`Server is running on port: http://localhost:${port}`);

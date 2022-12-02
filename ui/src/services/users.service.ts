@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export class UserService {
+export class UsersService {
 
     public async findUserByEmailAndPassword(email: string, password: string): Promise<any> {
         const response = await axios.get(`/api/users/${email}/${password}`);
