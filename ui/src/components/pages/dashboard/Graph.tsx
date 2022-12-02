@@ -40,14 +40,14 @@ function Graph() {
           weekNumber: weekNumber,
           consumption: consumption
         }
-        const result = weekConsumptionArray.find((x: IWeekConsumption) => x.weekNumber == weekNumber);
+        const result = weekConsumptionArray.find((x: IWeekConsumption) => x.weekNumber === weekNumber);
         if (result) result.consumption += consumption;
         else weekConsumptionArray.push(obj);
       }
     });
 
     weekConsumptionArray.forEach((data: IWeekConsumption) => {
-      if (data.weekNumber == currentWeekNumber) {
+      if (data.weekNumber === currentWeekNumber) {
         weekNumber.push("Current Week");
       }
       else {
