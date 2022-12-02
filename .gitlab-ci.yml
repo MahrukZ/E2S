@@ -1,7 +1,36 @@
 image: node:latest
 
 stages:
+  - Builds
   - Unit Tests
+
+api build:
+  stage: Builds
+  before_script:
+    - echo "Changing directory to api/"
+    - cd api/ 
+    - pwd
+
+    - echo "Installing dependencies for api/"
+    - npm i
+  script:
+    - echo "Running build for api/"
+    - npm run build
+    - echo "API build was Successful!"
+
+ui build:
+  stage: Builds
+  before_script:
+    - echo "Changing directory to ui/"
+    - cd ui/ 
+    - pwd
+
+    - echo "Installing dependencies for ui/"
+    - npm i
+  script:
+    - echo "Running build for ui/"
+    - npm run build
+    - echo "UI build was Successful!"
 
 api unit tests:
   stage: Unit Tests
