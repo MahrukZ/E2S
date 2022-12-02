@@ -1,6 +1,6 @@
-import React from 'react'
-import * as FaIcons from 'react-icons/fa' 
+import * as FaIcons from 'react-icons/fa' ;
 
+// eslint-disable-next-line
 {/*Can add more links or change paths to the sidebar using this data file*/}
 export const SidebarData = [
     {
