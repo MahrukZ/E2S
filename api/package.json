@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc --watch --preserveWatchOutput",
+    "build": "npx tsc",
     "start": "nodemon dist/index.js",
     "test": "jest --coverage"
   },
