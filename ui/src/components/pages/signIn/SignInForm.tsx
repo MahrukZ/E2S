@@ -17,7 +17,7 @@ function SignInForm() {
     const usersService = new UsersService;
 
     const signIn = async () => {
-        const user = await usersService.findUserByEmailAndPassword(emailAddress, password);
+        const user = await usersService.signIn(emailAddress, password);
         console.log("user: ", user);
         if (user["data"].length == 0) {
             console.log("user not found");

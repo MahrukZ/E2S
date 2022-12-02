@@ -11,4 +11,12 @@ export class UsersService {
         const response = await axios.get("/api/users");
         return await response.data;
     }
+
+    public async signIn(email: string, password: string): Promise<any> {
+        const response = await axios.post(`/sign-in`, {
+            "email": email,
+            "password": password
+        });
+        return await response.data;
+    }
 }
