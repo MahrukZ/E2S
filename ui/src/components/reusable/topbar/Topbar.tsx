@@ -53,6 +53,7 @@ function Topbar() {
       setUser({userId:userJSON["data"][0]["user_id"], name: String(userJSON["data"][0]["firstName"]) + " " + String(userJSON["data"][0]["lastName"])});
     }
     getUser();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
