@@ -133,7 +133,7 @@ function Insights() {
     }, []);
 
   return (
-      <Container className="justify-content-end">
+      <Container fluid className="justify-content-center">
             <Col className="d-flex insightsCol">
 
             <Card className="insightsCard flex-fill">

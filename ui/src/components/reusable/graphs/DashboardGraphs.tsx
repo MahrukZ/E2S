@@ -1,0 +1,154 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useEffect, useState } from "react";
+import { Container, Card, Col } from "react-bootstrap";
+import { SitesService } from "../../../services/sites.service";
+import { ConsumptionsService } from "../../../services/consumptions.service";
+import "./Graph.css";
+import SingleGraph from "./SingleGraph";
+import DoubleGraph from "./DoubleGraph";
+
+export interface ISingleGraph {
+    xData: Date[],
+    yData: number[],
+    xName: string,
+    yName: string,
+    lineColour: string
+}
+
+export interface IDoubleGraph {
+    xData0: Date[],
+    yData0: number[],
+    yData1: number[],
+    xName: string,
+    yName: string,
+    lineColour0: string,
+    lineColour1: string,
+    name0: string,
+    name1: string
+}
+
+function DashboardGraphs() {
+
+    const currentSiteId = 1;
+
+    const [electricityGraph, setElectricityGraph] = useState<ISingleGraph>({
+        xData: [],
+        yData: [],
+        xName: "",
+        yName: "",
+        lineColour: ""
+    });
+
+    const [gasGraph, setGasGraph] = useState<ISingleGraph>({
+        xData: [],
+        yData: [],
+        xName: "",
+        yName: "",
+        lineColour: ""
+    });
+
+    const [costsGraph, setCostsGraph] = useState<IDoubleGraph>({
+        xData0: [],
+        yData0: [],
+        yData1: [],
+        xName: "",
+        yName: "",
+        lineColour0: "",
+        lineColour1: "",
+        name0: "",
+        name1: ""
+    });
+
+    const sitesService = new SitesService;
+    const consumptionsService = new ConsumptionsService;
+
+    useEffect(() => {
+        const findAllConsumptionsBySiteAndTime = async () => {
+            let electricityData = [];
+            let gasData = [];
+            let timeData = [];
+            let electricityCostData = [];
+            let gasCostData = [];
+
+            const now = new Date();
+            const priorDate = new Date(new Date().setDate(now.getDate() - 30));
+
+            const currentConsumptionsResponse = await consumptionsService.findAllConsumptionsBySiteAndTime(priorDate, now, currentSiteId);
+
+            const currentConsumptionsData = currentConsumptionsResponse["data"];
+
+            for (let i = 0; i < currentConsumptionsData.length; i++) {
+                const formattedElectricityDemand = parseFloat(currentConsumptionsData[i]["electricityDemand"]);
+
+                electricityData.push(formattedElectricityDemand);
+
+                const formattedGasDemand = parseFloat(currentConsumptionsData[i]["heatDemand"]);
+
+                gasData.push(formattedGasDemand);
+
+                const formattedDate = new Date(currentConsumptionsData[i]["timeInterval"]);
+
+                timeData.push(formattedDate);
+
+                const electricityCost = parseFloat(currentConsumptionsData[i]["electricityDemand"]) * parseFloat(currentConsumptionsData[i]["electricityPrice"]);
+
+                electricityCostData.push(electricityCost);
+
+                const gasCost = parseFloat(currentConsumptionsData[i]["heatDemand"]) * parseFloat(currentConsumptionsData[i]["gasPrice"]);
+
+                gasCostData.push(gasCost);
+            }
+
+            setElectricityGraph({
+                xData: timeData,
+                yData: electricityData,
+                xName: "date",
+                yName: "Electricity Consumption (kWh)",
+                lineColour: "#0d609d"
+            })
+
+            setGasGraph({
+                xData: timeData,
+                yData: gasData,
+                xName: "date",
+                yName: "Gas Consumption (kWh)",
+                lineColour: "#f15a2f"
+            })
+
+            setCostsGraph({
+                xData0: timeData,
+                yData0: electricityCostData,
+                yData1: gasCostData,
+                xName: "date",
+                yName: "Cost (£)",
+                lineColour0: "#0d609d",
+                lineColour1: "#f15a2f",
+                name0: "Electricity",
+                name1: "Gas"
+            })
+        }
+
+        findAllConsumptionsBySiteAndTime();
+    }, []);
+
+    return (
+        <Container fluid className="justify-content-center">
+            <Col className="d-flex graphContainer">
+
+                <SingleGraph graphData={electricityGraph} />
+
+                <SingleGraph graphData={gasGraph} />
+
+            </Col>
+
+            <Col className="d-flex graphContainer">
+
+                <DoubleGraph graphData={costsGraph} />
+
+            </Col>
+        </Container>
+
+    )
+}
+
+export default DashboardGraphs;
