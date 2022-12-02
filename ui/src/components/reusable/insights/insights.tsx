@@ -4,7 +4,7 @@ import { InsightsService } from "../../../services/insights.service";
 import { SitesService } from "../../../services/sites.service";
 import { ConsumptionsService } from "../../../services/consumptions.service";
 import { Container, Card, Col } from "react-bootstrap";
-import "./Insights.css";
+import "./insights.css";
 
 function Insights() {
   

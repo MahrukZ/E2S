@@ -13,8 +13,9 @@ function Graph() {
     const [electricityDemandList, setElectricityDemandList] = useState<number[]>([]);
     const [gasDemandList, setGasDemandList] = useState<number[]>([]);
     const [timeIntervalList, setTimeIntervalList] = useState<Date[]>([]);
+    const [electricityCostList, setElectricityCostList] = useState<number[]>([]);
+    const [gasCostList, setGasCostList] = useState<number[]>([]);
     
-
     const sitesService = new SitesService;
     const consumptionsService = new ConsumptionsService;
 
@@ -23,6 +24,8 @@ function Graph() {
             let electricityData = [];
             let gasData = [];
             let timeData = [];
+            let electricityCostData = [];
+            let gasCostData = [];
 
             const now = new Date();
             const priorDate = new Date(new Date().setDate(now.getDate() - 30));
@@ -43,11 +46,21 @@ function Graph() {
                 const formattedDate = new Date(currentConsumptionsData[i]["timeInterval"]);
 
                 timeData.push(formattedDate);
+
+                const electricityCost = parseFloat(currentConsumptionsData[i]["electricityDemand"]) * parseFloat(currentConsumptionsData[i]["electricityPrice"]);
+
+                electricityCostData.push(electricityCost);
+
+                const gasCost = parseFloat(currentConsumptionsData[i]["heatDemand"]) * parseFloat(currentConsumptionsData[i]["gasPrice"]);
+
+                gasCostData.push(gasCost);
             }
 
             setGasDemandList(gasData);
             setElectricityDemandList(electricityData);
             setTimeIntervalList(timeData);
+            setElectricityCostList(electricityCostData);
+            setGasCostList(gasCostData);
         }
 
         findAllConsumptionsBySiteAndTime();
@@ -173,6 +186,80 @@ function Graph() {
                         r: 0,
                         l: 70
                     }
+                    }
+                }
+            />
+        </div>
+        </Card>
+        </Col>
+
+        <Col className="d-flex graphContainer">
+        <Card className="largeGraphCard">
+        <div className="graph" data-testid="electricityGraph">
+            <Plot
+                data={[
+                    {
+                        x: timeIntervalList,
+                        y: electricityCostList,
+                        type: 'scatter',
+                        name: 'electricity',
+                        line: {
+                            color: ['#7F7F7F']
+                        }
+                    },
+                    {
+                        x: timeIntervalList,
+                        y: gasCostList,
+                        type: 'scatter',
+                        name: 'gas',
+                        line: {
+                            color: ['#FFFFFF']
+                        }
+                    }
+                ]}
+                layout={
+                    {
+                        width: 900,
+                        height: 450,
+                    xaxis: {
+                        autorange: true,
+                        range: ['2015-02-17', '2017-02-16'],
+                        rangeselector: {buttons: [
+                            {
+                              count: 1,
+                              label: 'Day',
+                              step: 'day',
+                              stepmode: 'backward'
+                            },
+                            {
+                              count: 6,
+                              label: 'Week',
+                              step: 'day',
+                              stepmode: 'backward'
+                            },
+                            {
+                                label: 'Month',
+                                step: 'all'
+                            }
+                          ]},
+                        rangeslider: {range: [timeIntervalList[0], timeIntervalList[-1]]},
+                        type: 'date'
+                      },
+                      yaxis: {
+                        title: 'Cost (£)',
+                                titlefont: {
+                                    size: 16
+                                },
+                        autorange: true,
+                        range: [86.8700008333, 138.870004167],
+                        type: 'linear'
+                      },
+                        margin: {
+                            b: 20,
+                            t: 50,
+                            r: 0,
+                            l: 70
+                        }
                     }
                 }
             />
