@@ -13,19 +13,19 @@ describe('SitesAndUsersRepository', () => {
             // Given
             const mockResponse: ISitesAndUser[] = [
                 {
-                    site_id: 1,
-                    name: 'Abacws',
-                    user_id: 1
+                    siteId: 1,
+                    name: "Abacws",
+                    userId: 1
                 },
                 {
-                    site_id: 1,
-                    name: 'Abacws',
-                    user_id: 3
+                    siteId: 1,
+                    name: "Abacws",
+                    userId: 3
                 },
                 {
-                    site_id: 2,
-                    name: 'National Software Academy',
-                    user_id: 1
+                    siteId: 2,
+                    name: "National Software Academy",
+                    userId: 1
                 }
             ];
             SitesAndUsers.findAll = jest.fn().mockResolvedValue(mockResponse);
@@ -58,19 +58,19 @@ describe('SitesAndUsersRepository', () => {
             const userId = 1;
             const mockResponse: ISitesAndUser[] = [
                 {
-                    site_id: 1,
-                    name: 'Abacws',
-                    user_id: 1
+                    siteId: 1,
+                    name: "Abacws",
+                    userId: 1
                 },
                 {
-                    site_id: 1,
-                    name: 'Abacws',
-                    user_id: 3
+                    siteId: 1,
+                    name: "Abacws",
+                    userId: 3
                 },
                 {
-                    site_id: 2,
-                    name: 'National Software Academy',
-                    user_id: 1
+                    siteId: 2,
+                    name: "National Software Academy",
+                    userId: 1
                 }
             ];
 

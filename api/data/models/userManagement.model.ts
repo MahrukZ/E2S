@@ -1,16 +1,16 @@
 import { Column, Model, Table, DataType } from "sequelize-typescript";
 
 export interface IUserManagement {
-    user_id?: number;
-    first_name?: string;
-    last_name?: string;
+    userId?: number;
+    firstName?: string;
+    lastName?: string;
     email?: string;
     organisation?: string;
-    no_sites_managed?: number;
+    noSitesManaged?: number;
     role?: string;
 }
 
-@Table({ tableName: 'user_management' })
+@Table({ tableName: 'user_management', underscored: true })
 export class UserManagement extends Model implements IUserManagement {
 
     @Column({
@@ -19,17 +19,17 @@ export class UserManagement extends Model implements IUserManagement {
         autoIncrement: true,
         type: DataType.INTEGER 
     })
-    user_id?: number;
+    userId?: number;
 
     @Column({ 
         type: DataType.STRING, 
     })
-    first_name?: string;
+    firstName?: string;
 
     @Column({ 
         type: DataType.STRING, 
     })
-    last_name?: string;
+    lastName?: string;
 
     @Column({ 
         type: DataType.STRING, 
@@ -44,7 +44,7 @@ export class UserManagement extends Model implements IUserManagement {
     @Column({ 
         type: DataType.INTEGER, 
     })
-    no_sites_managed?: number;
+    noSitesManaged?: number;
 
     @Column({ 
         type: DataType.STRING, 

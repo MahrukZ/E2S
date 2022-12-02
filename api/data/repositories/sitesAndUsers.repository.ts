@@ -27,12 +27,12 @@ export class SitesAndUsersRepository {
         return data;
     }
 
-    async findSitesAndUsersByUserId(user_id: number): Promise<ISitesAndUser[]> {
+    async findSitesAndUsersByUserId(userId: number): Promise<ISitesAndUser[]> {
         let data = [];
         try {
             data = await this.sitesAndUsersRepository.findAll({
                 where: {
-                    user_id
+                    user_id: userId
                   }
               });
         } catch (err) {

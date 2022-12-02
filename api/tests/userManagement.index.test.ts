@@ -35,29 +35,92 @@ describe('index', () => {
         jest.clearAllMocks();
     });
 
+    // Commented out since you can only mock one axios get request
+    // describe('GET /api/user-managements', () => {
+    //     const mUserManagements: IUserManagement[] = [
+    //         {
+    //             userId: 1,
+    //             firstName: "Rhys",
+    //             lastName: "Jones",
+    //             email: "rhys.jones@cardiff.ac.uk",
+    //             organisation: "Cardiff University",
+    //             noSitesManaged: 3,
+    //             role: "facility energy manager"
+    //         },
+    //         {
+    //             userId: 2,
+    //             firstName: "Johnny",
+    //             lastName: "Bravo",
+    //             email: "johnny.bravo@nhs.gov.uk",
+    //             organisation: "National Health Service",
+    //             noSitesManaged: 7,
+    //             role: "director of estates"
+    //         },
+    //         {
+    //             userId: 3,
+    //             firstName: "Cai",
+    //             lastName: "Robert",
+    //             email: "cairobert@e2s.co.uk",
+    //             organisation: "Empowering Energy Solutions",
+    //             noSitesManaged: 0,
+    //             role: "administrator"
+    //         }
+    //     ];
+    //     const mSuccessResponse: any = {
+    //         message: 'Success',
+    //         status: 200,
+    //         data: mUserManagements
+    //     };
+    //     const mFetchParams: number = 1;
+    //     mockedAxios.get.mockResolvedValue(mSuccessResponse);
+    //     const req = mRequest('', mFetchParams);
+    //     const res = mResponse();
+
+    //     it('should find user managements when request params are provided', async () => {
+    //         // Given
+    //         const mUrl = `/api/user-managements`;
+    //         const getSpy = jest
+    //             .spyOn(controller, 'getAllUserManagements')
+    //             .mockResolvedValue(mFetchParams);
+
+    //         // When
+    //         const result = await axios.get(mUrl);
+    //         await controller.getAllUserManagements(req, res);
+
+    //         // Then
+    //         expect(result).toEqual(mSuccessResponse);
+
+    //         expect(axios.get).toHaveBeenCalledTimes(1);
+    //         expect(axios.get).toHaveBeenCalledWith(mUrl);
+
+    //         expect(getSpy).toHaveBeenCalledTimes(1);
+    //         expect(getSpy).toHaveBeenCalledWith(req, res);
+    //     });
+    // });
+
     describe('GET /api/user-management/:id', () => {
-        const mUserManagement1: IUserManagement = {
-                user_id: 1,
-                first_name: 'Martin',
-                last_name: 'James',
-                email: 'martinjames@cardiff.ac.uk',
-                organisation: 'Cardiff University',
-                no_sites_managed: 3,
-                role: 'director of estates'
-            }
-        const mSuccessResponse1: any = {
+        const mUserManagement: IUserManagement = {
+            userId: 1,
+            firstName: "Rhys",
+            lastName: "Jones",
+            email: "rhys.jones@cardiff.ac.uk",
+            organisation: "Cardiff University",
+            noSitesManaged: 3,
+            role: "facility energy manager"
+        };
+        const mSuccessResponse: any = {
             message: 'Success',
             status: 200,
-            data: mUserManagement1
+            data: mUserManagement
         };
         const mFetchParams: number = 1;
-        mockedAxios.get.mockResolvedValue(mSuccessResponse1);
+        mockedAxios.get.mockResolvedValue(mSuccessResponse);
         const req = mRequest('', mFetchParams);
         const res = mResponse();
 
         it('should find user managements when request params are provided', async () => {
             // Given
-            const mUrl = `/api/user-managment/${mFetchParams}`;
+            const mUrl = `/api/user-management/${mFetchParams}`;
             const getSpy = jest
                 .spyOn(controller, 'findUserManagementByUserId')
                 .mockResolvedValue(mFetchParams);
@@ -67,7 +130,7 @@ describe('index', () => {
             await controller.findUserManagementByUserId(req, res);
 
             // Then
-            expect(result).toEqual(mSuccessResponse1);
+            expect(result).toEqual(mSuccessResponse);
 
             expect(axios.get).toHaveBeenCalledTimes(1);
             expect(axios.get).toHaveBeenCalledWith(mUrl);

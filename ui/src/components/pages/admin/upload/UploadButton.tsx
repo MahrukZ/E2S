@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { FaUpload } from "react-icons/fa";
-import { ConsumptionsService } from "../../../services/consumptions.service";
-import Message from "../../reusable/alerts/Message";
+import { ConsumptionsService } from "../../../../services/consumptions.service";
+import Message from "../../../reusable/alerts/Message";
 
 export interface IUploadData {
   consumptionId?: number,
@@ -22,6 +22,7 @@ interface UploadButtonProps {
 function UploadButton({ file }: UploadButtonProps) {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [isDisabled, setDisabled] = useState(false);
 
   const consumptionsService = new ConsumptionsService();
   const fileReader = new FileReader();
@@ -46,11 +47,19 @@ function UploadButton({ file }: UploadButtonProps) {
         }, {});
         return obj;
       });
-      
-      consumptionsService.bulkCreateConsumptions(array);
-      setSuccess("Successfully uploaded data!")
+
+      if (array[0].timeInterval && array[0].orgId && array[0].siteId) {
+        consumptionsService.bulkCreateConsumptions(array);
+        setError("");
+        setSuccess("Successfully uploaded data!");
+        setDisabled(true);
+      } else {
+        setSuccess("");
+        setError("The format of your CSV file is incorrect! Unable to upload data.");
+      }
     } catch (e) {
-      setError("Failed to upload data.")
+      setSuccess("");
+      setError("Failed to upload data.");
     }
   };
 
@@ -68,8 +77,8 @@ function UploadButton({ file }: UploadButtonProps) {
   // End of reference
 
   return (
-    <div className="container">
-      <Button data-testid="uploadBtn" variant="outline-primary" onClick={handleUpload}>
+    <>
+      <Button data-testid="uploadBtn" variant="outline-primary" disabled={isDisabled} onClick={handleUpload}>
         <FaUpload /> Upload Data
       </Button>
       {error.length > 0 && (
@@ -78,7 +87,7 @@ function UploadButton({ file }: UploadButtonProps) {
       {success.length > 0 && (
           <Message message={success} type='success'/>
       )}
-    </div>
+    </>
     );
 };
 

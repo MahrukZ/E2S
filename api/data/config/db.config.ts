@@ -20,7 +20,8 @@ export const connect = () => {
         dialect,
         repositoryMode: true,
         define: {
-            timestamps: false
+            timestamps: false,
+            underscored: true
         }
     });
 
