@@ -19,6 +19,7 @@ api build:
     - echo "API build was Successful!"
   only:
     - main
+    - merge_requests
 
 ui build:
   stage: Builds
@@ -35,6 +36,7 @@ ui build:
     - echo "UI build was Successful!"
   only:
     - main
+    - merge_requests
 
 api unit tests:
   stage: Unit Tests
@@ -54,6 +56,7 @@ api unit tests:
     - echo "All Tests Passed!"
   only:
     - main
+    - merge_requests
 
 ui unit tests:
   stage: Unit Tests
@@ -70,3 +73,4 @@ ui unit tests:
     - echo "All Tests Passed!"
   only:
     - main
+    - merge_requests
