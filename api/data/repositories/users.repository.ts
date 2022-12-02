@@ -28,6 +28,10 @@ export class UserRepository {
     }
 
     async findUserByEmailAndPassword(email: string, password: string): Promise<IUser> {
+        const bcrypt = require("bcrypt");
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        console.log("hashed pwd: ", hashedPassword);
         let data = [];
         try {
             data = await this.userRepository.findAll({

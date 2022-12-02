@@ -22,7 +22,7 @@ function SignInForm() {
         if (user["data"].length == 0) {
             console.log("user not found");
             setError("Wrong email/password combination");
-        }
+        }; 
     }
 
     return (
