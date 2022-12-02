@@ -78,7 +78,7 @@ function Graph() {
                         y: electricityDemandList,
                         type: 'scatter',
                         line: {
-                            color: ['#7F7F7F']
+                            color: '#0d609d'
                         }
                     },
                 ]}
@@ -111,7 +111,7 @@ function Graph() {
                         type: 'date'
                       },
                       yaxis: {
-                        title: 'Electricity Consumption (KWh)',
+                        title: 'Electricity Consumption (kWh)',
                                 titlefont: {
                                     size: 16
                                 },
@@ -139,7 +139,7 @@ function Graph() {
                         y: gasDemandList,
                         type: 'scatter',
                         line: {
-                            color: ['#7F7F7F']
+                            color: '#f15a2f'
                         }
                     },
                 ]}
@@ -172,7 +172,7 @@ function Graph() {
                         type: 'date'
                       },
                       yaxis: {
-                        title: 'Gas Consumption (KWh)',
+                        title: 'Gas Consumption (kWh)',
                                 titlefont: {
                                     size: 16
                                 },
@@ -204,7 +204,7 @@ function Graph() {
                         type: 'scatter',
                         name: 'electricity',
                         line: {
-                            color: ['#7F7F7F']
+                            color: '#0d609d'
                         }
                     },
                     {
@@ -213,7 +213,7 @@ function Graph() {
                         type: 'scatter',
                         name: 'gas',
                         line: {
-                            color: ['#FFFFFF']
+                            color: '#f15a2f'
                         }
                     }
                 ]}
