@@ -1,34 +1,76 @@
+image: node:latest
+
 stages:
-  - build
-  - test
+  - Builds
+  - Unit Tests
+
+api build:
+  stage: Builds
+  before_script:
+    - echo "Changing directory to api/"
+    - cd api/ 
+    - pwd
+
+    - echo "Installing dependencies for api/"
+    - npm i
+  script:
+    - echo "Running build for api/"
+    - npm run build
+    - echo "API build was Successful!"
+  only:
+    - main
+    - merge_requests
 
 ui build:
-  stage: build
-  # before_script:
-  #   - apt-get update -qy
-  #   - apt-get install --no-install-recommends -y npm
-  #   - npm --version
-  #   - cd ui/ 
-  #   - pwd
-  #   - npm i
-  script:
-    - cd ui/
-    - pwd
-    - npm install
-    - echo "This is a build job for ui"
-    # - npm run build
-
-ui unit test:
-  stage: test
-  # before_script:
-  #   - apt-get update -qy
-  #   - apt-get install --no-install-recommends -y npm
-  #   - npm --version
-  #   - cd ui/ 
-  #   - pwd
-  #   - npm i
-  script:
+  stage: Builds
+  before_script:
+    - echo "Changing directory to ui/"
     - cd ui/ 
     - pwd
-    - echo "This is a test job for ui"
-    # - npm test
+
+    - echo "Installing dependencies for ui/"
+    - npm i
+  script:
+    - echo "Running build for ui/"
+    - npm run build
+    - echo "UI build was Successful!"
+  only:
+    - main
+    - merge_requests
+
+api unit tests:
+  stage: Unit Tests
+  before_script:
+    - echo "Changing directory to api/"
+    - cd api/ 
+    - pwd
+
+    - echo "Installing dependencies for api/"
+    - npm i
+  script:
+    - echo "Running Unit Tests for api/"
+    # Create variable to find all test files exluding test files in data/
+    - testFiles=$(find tests/ -mindepth 1 ! -regex '^tests/data\(/.*\)?' -type f)
+    - echo $testFiles
+    - npm test $testFiles
+    - echo "All Tests Passed!"
+  only:
+    - main
+    - merge_requests
+
+ui unit tests:
+  stage: Unit Tests
+  before_script:
+    - echo "Changing directory to ui/"
+    - cd ui/
+    - pwd
+
+    - echo "Installing dependencies for ui/"
+    - npm i
+  script:
+    - echo "Running Unit Tests for ui/"
+    - npm test
+    - echo "All Tests Passed!"
+  only:
+    - main
+    - merge_requests
