@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { UsersService} from "../../../services/users.service";
 import Message from "../../reusable/alerts/Message";
 
@@ -13,17 +13,29 @@ function SignInForm() {
     const [password, setPassword] = useState("");
 
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+
+    const [signInStatus, setsignInStatus] = useState("");
 
     const usersService = new UsersService;
 
     const signIn = async () => {
         const user = await usersService.signIn(emailAddress, password);
-        console.log("user: ", user);
         if (user["data"].length == 0) {
-            console.log("user not found");
             setError("Wrong email/password combination");
-        }; 
+        } else {
+            setSuccess("signed in");
+        }
     }
+
+    useEffect(() => {
+        const getSignIn = async () => {
+          const signedIn = await usersService.checkSignIn();
+          setsignInStatus("signed in: " + String(signedIn["loggedIn"]));
+        }
+        getSignIn();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <Container>
@@ -56,9 +68,13 @@ function SignInForm() {
                             Sign In
                         </Button>
                     </Form>
+                    <h1>{signInStatus}</h1>
                     {error.length > 0 && (
                         <Message message={error} type='danger' />
-                    )}                   
+                    )}   
+                    {success.length > 0 && (
+                        <Message message={success} type='success' />
+                    )}                
                 </Col>
             </Row>
         </Container>

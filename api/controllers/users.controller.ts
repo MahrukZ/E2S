@@ -1,12 +1,6 @@
 import { Request, Response } from "express";
 import { UserService } from "../services/users.service";
 
-declare module 'express-session' {
-    export interface SessionData {
-      user: { [key: string]: any };
-    }
-  }
-
 export class UserController {
     private userService: UserService;
 
@@ -59,8 +53,7 @@ export class UserController {
                     status: 200,
                     data
                 });
-                req.session.user = data;
-                console.log("session: ", req.session.user);
+                return data;
         })
         .catch(err => {
             res.status(500).json({

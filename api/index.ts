@@ -27,14 +27,20 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(session({
-    // key: "userId",
     secret: "secret",
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: {
-        maxAge: 600,
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        secure: false,
     }
 }))
+
+declare module 'express-session' {
+    export interface SessionData {
+      user: { [key: string]: any };
+    }
+  }
 
 
 // controllers
@@ -117,14 +123,23 @@ app.get("/api/users", async (req, res) => {
     userController.getAllUsers(req, res);
 });
 
-// app.get("/api/users/:email/:password", async (req, res) => {
-//     userController.findUserByEmailAndPassword(req, res);
-// });
-
 // sign in
 app.post("/sign-in", async (req, res) => {
-    userController.signIn(req, res);
+    const signedIn: any = await userController.signIn(req, res);
+    if (signedIn.length != 0) {
+        req.session.user = signedIn[0]["dataValues"];
+        req.session.save();
+    }
 })
+
+// check sign in status
+app.get("/sign-in", async (req, res) => {
+    if (req.session.user) {
+        res.send({loggedIn: true, user: req.session.user});
+    } else {
+        res.send({loggedIn: false});
+    };
+});
 
 // port listen
 app.listen(port, () => {

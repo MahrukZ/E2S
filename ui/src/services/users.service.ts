@@ -19,4 +19,9 @@ export class UsersService {
         });
         return await response.data;
     }
+
+    public async checkSignIn(): Promise<any> {
+        const response = await axios.get("/sign-in");
+        return await response.data;
+    }
 }

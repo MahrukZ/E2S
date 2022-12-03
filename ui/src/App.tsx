@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Axios from "axios";
+import { UsersService } from "./services/users.service";
 
 import Sidebar from './components/reusable/sidebar/Sidebar';
 import Topbar from './components/reusable/topbar/Topbar';
@@ -15,6 +17,8 @@ import UploadPage from './components/pages/admin/upload/UploadPage';
 import UserManagementPage from './components/pages/admin/userManagement/UserManagementPage';
 
 const App: React.FunctionComponent = () => {
+
+  Axios.defaults.withCredentials = true;
   
   //Defines the paths of each page
   //This file should only have the topbar and sidebar

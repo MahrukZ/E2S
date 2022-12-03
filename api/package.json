@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
+    "buildwatch": "npx tsc --watch --preserveWatchOutput",
     "start": "nodemon dist/index.js",
     "test": "jest --coverage"
   },
