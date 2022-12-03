@@ -23,23 +23,6 @@ const consumptionController = new ConsumptionController();
 
 // routes
 
-//sites
-app.get("/api/sites", async (req, res) => {
-    siteController.getAllSites(req, res);
-});
-
-app.post("/api/site", async (req, res) => {
-    siteController.createSite(req, res);
-});
-
-app.put("/api/site", async (req, res) => {
-    siteController.updateSite(req, res);
-});
-
-app.delete("/api/site/:id", async (req, res) => {
-    siteController.deleteSite(req, res);
-});
-
 //sites_and_users
 app.get("/api/sites-and-users", async (req, res) => {
     sitesAndUsersController.getAllSitesAndUsers(req, res);
