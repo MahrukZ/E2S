@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { InsightController } from "./controllers/insights.controller";
 import { SiteController } from "./controllers/sites.controller";
 import { SitesAndUsersController } from "./controllers/sitesAndUsers.controller";
 import { UserManagementController } from "./controllers/userManagement.controller";
@@ -17,30 +16,12 @@ app.use(express.urlencoded({limit: '50mb'}));
 app.use(cors());
 
 // controllers
-const insightController = new InsightController();
 const siteController = new SiteController();
 const sitesAndUsersController = new SitesAndUsersController();
 const userManagementController = new UserManagementController();
 const consumptionController = new ConsumptionController();
 
 // routes
-
-//insights
-app.get("/api/insights", async (req, res) => {
-    insightController.getAllInsights(req, res);
-});
-
-app.post("/api/insight", async (req, res) => {
-    insightController.createInsight(req, res);
-});
-
-app.put("/api/insight", async (req, res) => {
-    insightController.updateInsight(req, res);
-});
-
-app.delete("/api/insight/:id", async (req, res) => {
-    insightController.deleteInsight(req, res);
-});
 
 //sites
 app.get("/api/sites", async (req, res) => {
