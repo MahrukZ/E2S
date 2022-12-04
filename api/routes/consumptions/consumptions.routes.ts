@@ -11,7 +11,7 @@ router.get("/api/consumptions", async (req, res) => {
     consumptionController.getAllConsumptions(req, res);
 });
 
-router.post("/api/consumptions", async (req, res) => {
+router.post("/api/consumption", async (req, res) => {
     consumptionController.createConsumption(req, res);
 });
 

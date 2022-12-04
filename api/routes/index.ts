@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import consumptions from "./consumptions/consumptions.routes";
-import sitesAndUsers from "./sitesAndUsers/sitesAndUsers.routes";
+import sitesAndUsers from "./sitesAndUsers/sitesAndusers.routes";
 import insights from "./insights/insights.routes";
 import users from "./users/users.routes";
 import sites from "./sites/sites.routes";
@@ -18,11 +18,13 @@ app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
 app.use(cors());
 
-routes.use('/', users);
-routes.use('/', consumptions);
-routes.use('/', insights);
-routes.use('/', sites);
-routes.use('/', sitesAndUsers);
+routes.use(users);
+routes.use(consumptions);
+routes.use(insights);
+routes.use(sites);
+routes.use(sitesAndUsers);
+
+app.use(routes);
 
 // port listen
 app.listen(port, () => {
