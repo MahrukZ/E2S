@@ -12,6 +12,7 @@ function Graph() {
 
     const [electricityDemandList, setElectricityDemandList] = useState<number[]>([]);
     const [gasDemandList, setGasDemandList] = useState<number[]>([]);
+    const [emissionsList, setEmissionsList] = useState<number[]>([]);
     const [timeIntervalList, setTimeIntervalList] = useState<Date[]>([]);
     const [electricityCostList, setElectricityCostList] = useState<number[]>([]);
     const [gasCostList, setGasCostList] = useState<number[]>([]);
@@ -23,6 +24,7 @@ function Graph() {
         const findAllConsumptionsBySiteAndTime = async () => {
             let electricityData = [];
             let gasData = [];
+            let emissionsData = []
             let timeData = [];
             let electricityCostData = [];
             let gasCostData = [];
@@ -43,6 +45,10 @@ function Graph() {
 
                 gasData.push(formattedGasDemand);
 
+                const formattedEmissions = parseFloat(currentConsumptionsData[i]["co2Emissions"]);
+
+                emissionsData.push(formattedEmissions);
+
                 const formattedDate = new Date(currentConsumptionsData[i]["timeInterval"]);
 
                 timeData.push(formattedDate);
@@ -58,6 +64,7 @@ function Graph() {
 
             setGasDemandList(gasData);
             setElectricityDemandList(electricityData);
+            setEmissionsList(emissionsData);
             setTimeIntervalList(timeData);
             setElectricityCostList(electricityCostData);
             setGasCostList(gasCostData);
@@ -191,6 +198,70 @@ function Graph() {
             />
         </div>
         </Card>
+        </Col>
+
+        <Col className="d-flex graphContainer">
+            <Card className="graphCard">
+                <div className="graph">
+                    <Plot
+                        data={[
+                            {
+                                x: timeIntervalList,
+                                y: emissionsList,
+                                type: 'scatter',
+                                line: {
+                                    color: '#488f31'
+                                }
+                            },
+                        ]}
+                        layout={
+                            {
+                                width: 400,
+                                height: 450,
+                                xaxis: {
+                                    autorange: true,
+                                    range: ['2015-02-17', '2017-02-16'],
+                                    rangeselector: {buttons: [
+                                        {
+                                            count: 1,
+                                            label: 'Day',
+                                            step: 'day',
+                                            stepmode: 'backward'
+                                        },
+                                        {
+                                            count: 6,
+                                            label: 'Week',
+                                            step: 'day',
+                                            stepmode: 'backward'
+                                        },
+                                        {
+                                            label: 'Month',
+                                            step: 'all'
+                                        }
+                                    ]},
+                                    rangeslider: {range: [timeIntervalList[0], timeIntervalList[-1]]},
+                                    type: 'date'
+                                },
+                                yaxis: {
+                                    title: 'Carbon Emissions (kt)',
+                                        titlefont: {
+                                            size: 16
+                                        },
+                                    autorange: true,
+                                    range: [86.8700008333, 138.870004167],
+                                    type: 'linear'
+                                },
+                                margin: {
+                                    b: 20,
+                                    t: 50,
+                                    r: 0,
+                                    l: 70
+                                }
+                            }
+                        }
+                    />
+                </div>
+            </Card>
         </Col>
 
         <Col className="d-flex graphContainer">
