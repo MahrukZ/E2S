@@ -75,7 +75,10 @@ export class ConsumptionRepository {
             (a: number, b: { electricityDemand: string; }) => a + parseFloat(b.electricityDemand), 0);
 
         let totalGasDemand: number = transitData.reduce( 
-        (a: number, b: { heatDemand: string; }) => a + parseFloat(b.heatDemand), 0);
+            (a: number, b: { heatDemand: string; }) => a + parseFloat(b.heatDemand), 0);
+        
+        let totalEmissions: number = transitData.reduce( 
+            (a: number, b: { co2Emissions: string; }) => a + parseFloat(b.co2Emissions), 0);
 
         let totalElectricityCosts: number = transitData.reduce( 
             (a: number, b: { electricityPrice: string; electricityDemand: string; }) => 
@@ -89,8 +92,8 @@ export class ConsumptionRepository {
         
         const totalCosts = totalElectricityCosts + totalGasCosts;
 
-        // Returns data as a list of 3 numbers with electricity first, gas second, costs third
-        finalData.push(totalElectricityDemand, totalGasDemand, totalCosts);
+        // Returns data as a list of 4 numbers with electricity first, gas second, emissions third, costs fourth
+        finalData.push(totalElectricityDemand, totalGasDemand, totalEmissions, totalCosts);
 
         data = finalData;
 
