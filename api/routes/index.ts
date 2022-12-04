@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import consumptions from "./consumptions/consumptions.routes";
-import sitesAndUsers from "./sitesAndUsers/sitesAndusers.routes";
+import sitesAndUsers from "./sitesAndUsers/sitesAndUsers.routes";
 import insights from "./insights/insights.routes";
 import users from "./users/users.routes";
 import sites from "./sites/sites.routes";
