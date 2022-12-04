@@ -5,6 +5,7 @@ export interface IConsumption {
     timeInterval?: Date;
     heatDemand?: number;
     electricityDemand?: number;
+    co2Emissions?: number;
     electricityPrice?: number;
     gasPrice?: number;
     siteId?: number;
@@ -29,22 +30,27 @@ export class Consumptions extends Model implements IConsumption {
     timeInterval?: Date;
 
     @Column({ 
-        type: DataType.INTEGER
+        type: DataType.FLOAT
     })
     heatDemand?: number;
 
     @Column({ 
-        type: DataType.INTEGER
+        type: DataType.FLOAT
     })
     electricityDemand?: number;
 
     @Column({ 
-        type: DataType.INTEGER
+        type: DataType.FLOAT
+    })
+    co2Emissions?: number;
+
+    @Column({ 
+        type: DataType.DECIMAL(19,2)
     })
     electricityPrice?: number;
 
     @Column({ 
-        type: DataType.INTEGER
+        type: DataType.DECIMAL(19,2)
     })
     gasPrice?: number;
 
