@@ -1,14 +1,14 @@
-import Graph from './Graph';
+import Graph from "../../reusable/graphs/Graph";
+import Insights from "../../reusable/insights/insights";
 
 function Dashboard() {
   return (
     <>
     <h1 id="dashboard" >Dashboard</h1>
-    <div className='dashboard'>
-        <div className='row'>
-          <div className='col-12'><Graph /></div>
-        </div>
-      </div>
+    <div className="fluid">
+      <Insights />
+      <Graph />
+    </div>
     </>
   );
 };
