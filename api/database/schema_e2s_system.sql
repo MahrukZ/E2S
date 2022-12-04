@@ -68,9 +68,9 @@ CREATE TABLE IF NOT EXISTS `insight_templates` (
 CREATE TABLE IF NOT EXISTS `consumptions` (
   `consumption_id` INT NOT NULL AUTO_INCREMENT,
   `time_interval` DATETIME NOT NULL,
-  `heat_demand` DECIMAL(19,6),
-  `electricity_demand` DECIMAL(19,6),
-  `co2_emissions` DECIMAL(19,6),
+  `heat_demand` FLOAT,
+  `electricity_demand` FLOAT,
+  `co2_emissions` FLOAT,
   `electricity_price` DECIMAL(19,2),
   `gas_price` DECIMAL(19,2),
   `site_id` INT NOT NULL,
@@ -167,6 +167,13 @@ CREATE TRIGGER calc_co2_emissions_before_insert
 BEFORE INSERT ON `consumptions`
 FOR EACH ROW
 BEGIN
-	SET NEW.co2_emissions = NEW.heat_demand + NEW.electricity_demand;
+	DECLARE sum FLOAT;
+    DECLARE multiplier FLOAT DEFAULT 0.19338;
+    DECLARE calc_emission FLOAT;
+    
+    SET sum = NEW.heat_demand + NEW.electricity_demand;
+    SET calc_emission = sum * multiplier;
+    
+	SET NEW.co2_emissions = calc_emission;
 END //
 DELIMITER ;
