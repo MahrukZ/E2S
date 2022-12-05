@@ -8,23 +8,24 @@ export class SiteService {
         this.siteRepository = new SiteRepository();
     }
 
-    async createSite(site: ISite) {
-        return await this.siteRepository.createSite(site);
-    }
+    // Unused methods
+    // async createSite(site: ISite) {
+    //     return await this.siteRepository.createSite(site);
+    // }
 
-    async deleteSite(siteId: number) {
-        return await this.siteRepository.deleteSite(siteId);
-    }
+    // async deleteSite(siteId: number) {
+    //     return await this.siteRepository.deleteSite(siteId);
+    // }
 
-    async getAllSites() {
-        return await this.siteRepository.getAllSites();
-    }
+    // async getAllSites() {
+    //     return await this.siteRepository.getAllSites();
+    // }
 
-    async updateSite(site: ISite) {
-        return await this.siteRepository.updateSite(site);
-    }
+    // async updateSite(site: ISite) {
+    //     return await this.siteRepository.updateSite(site);
+    // }
 
-    async findSiteBySiteId(userId: number) {
-        return await this.siteRepository.findSiteBySiteId(userId);
+    async findSiteById(siteId: number) {
+        return await this.siteRepository.findSiteById(siteId);
     }
 }

@@ -39,10 +39,10 @@ describe('SitesAndUsersRepository', () => {
             expect(SitesAndUsers.findAll).toHaveBeenCalledWith();
         });
 
-        it('should not fetch insights when there is no data in the database', async () => {
+        it('should not fetch sites and users when there is no data in the database', async () => {
             // Given 
             // When
-            const mErrorMessage = new Error("Failed to fetch all insights.");
+            const mErrorMessage = new Error("Failed to fetch all sites and users.");
             sitesAndUsersRepository.getAllSitesAndUsers = jest.fn().mockRejectedValue(mErrorMessage);
             
             // Then
@@ -92,7 +92,7 @@ describe('SitesAndUsersRepository', () => {
         it('should not fins sites and users when there is no Id provided', async () => {
             // Given 
             // When
-            const mErrorMessage = new Error("Failed to delete insights.");
+            const mErrorMessage = new Error("Failed to fetch sites and users.");
             sitesAndUsersRepository.findSitesAndUsersByUserId = jest.fn().mockRejectedValue(mErrorMessage);
             
             // Then

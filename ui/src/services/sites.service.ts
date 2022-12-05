@@ -7,8 +7,8 @@ export class SitesService {
         return await response.data;
     }
 
-    public async findSiteBySiteID(siteId: number): Promise<any> {
-        const response = await axios.get(`api/sites/${siteId}`);
+    public async findSiteById(siteId: number): Promise<any> {
+        const response = await axios.get(`api/site/${siteId}`);
         return await response.data;
     }
 

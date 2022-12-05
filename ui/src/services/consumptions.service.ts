@@ -15,13 +15,13 @@ export class ConsumptionsService{
         return await response.data;
     }
 
-    public async findAllConsumptionsBySiteAndTime(startTime: Date, endTime: Date, siteId: number): Promise<any> {
-        const response = await axios.get(`/api/consumption/findBySiteAndTime/${startTime}/${endTime}/${siteId}`);
+    public async findAllConsumptionsBySiteIdAndTime(startTime: Date, endTime: Date, siteId: number): Promise<any> {
+        const response = await axios.get(`/api/consumption/find/${startTime}/${endTime}/${siteId}`);
         return await response.data;
     }
 
-    public async findSumsOfGasElectricityCostsBySiteAndTime(startTime: Date, endTime: Date, siteId: number): Promise<any> {
-        const response = await axios.get(`/api/consumption/findSumsOfGasElectricityCostsBySiteAndTime/${startTime}/${endTime}/${siteId}`);
+    public async findSumOfConsumptionsBySiteIdAndTime(startTime: Date, endTime: Date, siteId: number): Promise<any> {
+        const response = await axios.get(`/api/consumption/find-sum/${startTime}/${endTime}/${siteId}`);
         return await response.data;
     }
 }

@@ -4,7 +4,7 @@ import { InsightsService } from "../../../services/insights.service";
 import { SitesService } from "../../../services/sites.service";
 import { ConsumptionsService } from "../../../services/consumptions.service";
 import { Container, Card, Col } from "react-bootstrap";
-import "./insights.css";
+import "./Insights.css";
 
 function Insights() {
   
@@ -20,9 +20,9 @@ function Insights() {
     const [isCostPositive, setIsCostPositive] = useState(false);
 
     // Initialize services
-    const insightsService = new InsightsService;
-    const sitesService = new SitesService;
-    const consumptionsService = new ConsumptionsService;
+    const insightsService = new InsightsService();
+    const sitesService = new SitesService();
+    const consumptionsService = new ConsumptionsService();
 
     useEffect(() => {
         // This will only work with 3 insight templates in the database
@@ -32,7 +32,7 @@ function Insights() {
 
             const insightsTemplates = await insightsService.getInsights();
             // Currently just has 1 as the siteId, this will need to be changed
-            const siteData = await sitesService.findSiteBySiteID(currentSiteId);
+            const siteData = await sitesService.findSiteById(currentSiteId);
 
             const currentSite = siteData["data"][0]["name"];
 
@@ -59,21 +59,20 @@ function Insights() {
 
         }
         getAllInsights();
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
     useEffect(() => {
-        const findSumsOfGasElectricityCostsBySiteAndTime = async () => {
+        const findSumOfConsumptionsBySiteIdAndTime = async () => {
             let finalConsumptions: String[] = [];
-            let consumptionsList: String[] = [];
 
             const now = new Date();
             const priorDate = new Date(new Date().setDate(now.getDate() - 7));
             const priorPriorDate = new Date(new Date().setDate(now.getDate() - 14));
 
-            const currentConsumptionsResponse = await consumptionsService.findSumsOfGasElectricityCostsBySiteAndTime(priorDate, now, currentSiteId);
-            const previousConsumptionsResponse = await consumptionsService.findSumsOfGasElectricityCostsBySiteAndTime(priorPriorDate, priorDate, currentSiteId);
-
+            const currentConsumptionsResponse = await consumptionsService.findSumOfConsumptionsBySiteIdAndTime(priorDate, now, currentSiteId);
+            const previousConsumptionsResponse = await consumptionsService.findSumOfConsumptionsBySiteIdAndTime(priorPriorDate, priorDate, currentSiteId);
+            
             const currentConsumptionsData = currentConsumptionsResponse["data"];
             const previousConsumptionsData = previousConsumptionsResponse["data"];
 
@@ -102,7 +101,7 @@ function Insights() {
             );
 
             // add plus or minus symbol and change colour
-            if (electricityPercentage < 0) {
+            if (electricityPercentage <= 0) {
                 const stringElectricityPercentage = String(electricityPercentage);
                 finalConsumptions.push(stringElectricityPercentage);
             }
@@ -112,7 +111,7 @@ function Insights() {
                 setIsElectricityPositive(true);
             };
 
-            if (gasPercentage < 0) {
+            if (gasPercentage <= 0) {
                 const stringGasPercentage = String(gasPercentage);
                 finalConsumptions.push(stringGasPercentage);
             }
@@ -122,7 +121,7 @@ function Insights() {
                 setIsGasPositive(true);
             };
 
-            if (emissionsPercentage < 0) {
+            if (emissionsPercentage <= 0) {
                 const stringEmissionsPercentage = String(emissionsPercentage);
                 finalConsumptions.push(stringEmissionsPercentage);
             }
@@ -132,7 +131,7 @@ function Insights() {
                 setIsEmissionsPositive(true);
             };
 
-            if (costPercentage < 0) {
+            if (costPercentage <= 0) {
                 const stringCostPercentage = String(costPercentage);
                 finalConsumptions.push(stringCostPercentage);
             }
@@ -144,15 +143,15 @@ function Insights() {
 
             setConsumptionsList(finalConsumptions);
         }
-
-        findSumsOfGasElectricityCostsBySiteAndTime();
+        findSumOfConsumptionsBySiteIdAndTime();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
   return (
       <Container className="justify-content-end">
             <Col className="d-flex insightsCol">
 
-            <Card className="insightsCard flex-fill">
+            <Card className="insightsCard flex-fill" data-testid="insightsCost">
                 <Card.Title>Total Costs</Card.Title>
                 <Card.Body>
                     {insightsList[0]} 

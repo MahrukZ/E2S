@@ -1,14 +1,16 @@
 import express from "express";
-import cors from "cors";
 import dotenv from "dotenv";
-import { InsightController } from "./controllers/insights.controller";
-import { SiteController } from "./controllers/sites.controller";
-import { SitesAndUsersController } from "./controllers/sitesAndUsers.controller";
-import { UserManagementController } from "./controllers/userManagement.controller";
-import { ConsumptionController } from "./controllers/consumptions.controller";
+import cors from "cors";
+import consumptions from "./routes/consumptions/consumptions.routes";
+import sitesAndUsers from "./routes/sitesAndUsers/sitesAndusers.routes";
+import insights from "./routes/insights/insights.routes";
+import users from "./routes/users/users.routes";
+import sites from "./routes/sites/sites.routes";
+import { Router } from 'express';
 
 // config
 dotenv.config();
+const routes = Router();
 const port = process.env.PORT || 8082;
 const app = express();
 
@@ -16,91 +18,13 @@ app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
 app.use(cors());
 
-// controllers
-const insightController = new InsightController();
-const siteController = new SiteController();
-const sitesAndUsersController = new SitesAndUsersController();
-const userManagementController = new UserManagementController();
-const consumptionController = new ConsumptionController();
+routes.use(users);
+routes.use(consumptions);
+routes.use(insights);
+routes.use(sites);
+routes.use(sitesAndUsers);
 
-// routes
-
-//insights
-app.get("/api/insights", async (req, res) => {
-    insightController.getAllInsights(req, res);
-});
-
-app.post("/api/insight", async (req, res) => {
-    insightController.createInsight(req, res);
-});
-
-app.put("/api/insight", async (req, res) => {
-    insightController.updateInsight(req, res);
-});
-
-app.delete("/api/insight/:id", async (req, res) => {
-    insightController.deleteInsight(req, res);
-});
-
-//sites
-app.get("/api/sites", async (req, res) => {
-    siteController.getAllSites(req, res);
-});
-
-app.post("/api/site", async (req, res) => {
-    siteController.createSite(req, res);
-});
-
-app.put("/api/site", async (req, res) => {
-    siteController.updateSite(req, res);
-});
-
-app.delete("/api/site/:id", async (req, res) => {
-    siteController.deleteSite(req, res);
-});
-
-app.get("/api/sites/:id", async (req, res) => {
-    siteController.findSiteBySiteId(req, res);
-});
-
-//sites_and_users
-app.get("/api/sites-and-users", async (req, res) => {
-    sitesAndUsersController.getAllSitesAndUsers(req, res);
-});
-
-app.get("/api/sites-and-users/:id", async (req, res) => {
-    sitesAndUsersController.findSitesAndUsersByUserId(req, res);
-});
-
-// user management
-app.get("/api/user-managements", async (req, res) => {
-    userManagementController.getAllUserManagements(req, res);
-});
-
-app.get("/api/user-management/:id", async (req, res) => {
-    userManagementController.findUserManagementByUserId(req, res);
-});
-
-// consumptions
-app.get("/api/consumptions", async (req, res) => {
-    consumptionController.getAllConsumptions(req, res);
-});
-
-app.post("/api/consumption", async (req, res) => {
-    consumptionController.createConsumption(req, res);
-});
-
-app.post("/api/consumption/bulk-create", async (req, res) => {
-    consumptionController.bulkCreateConsumptions(req, res);
-});
-
-app.get("/api/consumption/findBySiteAndTime/:start/:end/:id", async (req, res) => {
-    consumptionController.findAllConsumptionsBySiteAndTime(req, res);
-});
-
-app.get("/api/consumption/findSumsOfGasElectricityCostsBySiteAndTime/:start/:end/:id", async (req, res) => {
-    consumptionController.findSumsOfGasElectricityCostsBySiteAndTime(req, res);
-});
+app.use(routes);
 
 // port listen
 app.listen(port, () => {
