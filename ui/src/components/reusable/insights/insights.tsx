@@ -183,4 +183,4 @@ function Insights() {
   )
 }
 
-export default Insights
+export default Insights;
