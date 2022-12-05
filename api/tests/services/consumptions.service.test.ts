@@ -147,7 +147,6 @@ describe('ConsumptionService', () => {
 
     describe('ConsumptionService.findAllConsumptionsBySiteIdAndTime', () => {
         it('should return consumptions', async () => {
-
             // Given
             const mConsumption: IConsumption[] = [{
                 consumptionId: 1,
@@ -195,7 +194,6 @@ describe('ConsumptionService', () => {
 
     describe('ConsumptionService.findSumOfConsumptionsBySiteIdAndTime', () => {
         it('should return consumptions', async () => {
-
             // Given
             const getSpy = jest
                 .spyOn(repository, 'findSumOfConsumptionsBySiteIdAndTime')

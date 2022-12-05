@@ -32,7 +32,7 @@ describe("SiteController", () => {
         jest.clearAllMocks();
     });
 
-    describe("SitesAndUsersController.findSitesAndUsersByUserId", () => {
+    describe("SitesAndUsersController.findSiteById", () => {
         const mSite: ISite =
             {
                 siteId: 1,

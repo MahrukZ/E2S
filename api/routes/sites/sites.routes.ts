@@ -25,7 +25,7 @@ const siteController = new SiteController();
 //     siteController.deleteSite(req, res);
 // });
 
-router.get("/api/sites/:id", async (req, res) => {
+router.get("/api/site/:id", async (req, res) => {
     siteController.findSiteById(req, res);
 });
 

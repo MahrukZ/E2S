@@ -34,7 +34,7 @@ describe('index', () => {
         jest.clearAllMocks();
     });
 
-    describe('GET /api/sites/:id', () => {
+    describe('GET /api/site/:id', () => {
         const mSite: ISite = 
         {
             siteId: 1,
