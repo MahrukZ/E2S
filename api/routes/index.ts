@@ -6,7 +6,7 @@ import sitesAndUsers from "./sitesAndUsers/sitesAndusers.routes";
 import insights from "./insights/insights.routes";
 import users from "./users/users.routes";
 import sites from "./sites/sites.routes";
-import { Router } from 'express';
+import { Router } from "express";
 
 // config
 dotenv.config();
@@ -14,8 +14,8 @@ const routes = Router();
 const port = process.env.PORT || 8082;
 const app = express();
 
-app.use(express.json({limit: '50mb'}));
-app.use(express.urlencoded({limit: '50mb'}));
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb" }));
 app.use(cors());
 
 routes.use(users);
@@ -28,7 +28,7 @@ app.use(routes);
 
 // port listen
 app.listen(port, () => {
-    console.log(`Server is running on port: http://localhost:${port}`);
+  console.log(`Server is running on port: http://localhost:${port}`);
 });
 
 export default app;

@@ -4,14 +4,14 @@ import { IUserManagement } from "../../data/models/userManagement.model";
 
 jest.mock("axios");
 
-jest.mock('../../controllers/userManagement.controller', () => {
-    const mUserManagementController = { 
-        getAllUserManagements: jest.fn(),
-        findUserManagementByUserId: jest.fn()
-    };
-    return {
-        UserManagementController: jest.fn(() => mUserManagementController)
-    };
+jest.mock("../../controllers/userManagement.controller", () => {
+  const mUserManagementController = {
+    getAllUserManagements: jest.fn(),
+    findUserManagementByUserId: jest.fn(),
+  };
+  return {
+    UserManagementController: jest.fn(() => mUserManagementController),
+  };
 });
 
 describe("index", () => {
