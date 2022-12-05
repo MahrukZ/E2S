@@ -95,7 +95,7 @@ function Insights() {
             );
 
             // add plus or minus symbol and change colour
-            if (electricityPercentage < 0) {
+            if (electricityPercentage <= 0) {
                 const stringElectricityPercentage = String(electricityPercentage);
                 finalConsumptions.push(stringElectricityPercentage);
             }
@@ -105,7 +105,7 @@ function Insights() {
                 setIsElectricityPositive(true);
             };
 
-            if (gasPercentage < 0) {
+            if (gasPercentage <= 0) {
                 const stringGasPercentage = String(gasPercentage);
                 finalConsumptions.push(stringGasPercentage);
             }
@@ -115,7 +115,7 @@ function Insights() {
                 setIsGasPositive(true);
             };
 
-            if (costPercentage < 0) {
+            if (costPercentage <= 0) {
                 const stringCostPercentage = String(costPercentage);
                 finalConsumptions.push(stringCostPercentage);
             }
