@@ -1,13 +1,14 @@
-import Graph from '../reusable/graphs/Graph';
-import Insights from '../reusable/insights/Insights';
+import Insights from "../reusable/insights/Insights";
+import DashboardGraphs from "../reusable/graphs/DashboardGraphs";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Container } from "react-bootstrap";
 
 function Dashboard() {
     return (
-        <div>
-        <h1 id='dashboard'>Dashboard</h1>
-        <Insights />
-        <Graph />
-        </div>
+        <Container fluid className="d-flex flex-column">     
+            <Insights />
+            <DashboardGraphs />
+        </Container>
     );
 };
 
