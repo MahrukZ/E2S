@@ -2,11 +2,11 @@ import { Request, Response } from "express";
 import { ConsumptionService } from "../services/consumptions.service";
 
 export class ConsumptionController {
-  private consumptionService: ConsumptionService;
+    private consumptionService: ConsumptionService;
 
-  constructor() {
-    this.consumptionService = new ConsumptionService();
-  }
+    constructor() {
+        this.consumptionService = new ConsumptionService();
+    }
 
     async bulkCreateConsumptions(req: Request, res: Response): Promise<any> {
         return (this.consumptionService.bulkCreateConsumptions(req.body)
@@ -26,18 +26,18 @@ export class ConsumptionController {
         );
     };
 
-    async findAllConsumptionsBySiteIdAndTime(req: Request, res: Response): Promise<any> {
-        return (this.consumptionService.findAllConsumptionsBySiteIdAndTime(req.params.start, req.params.end, parseInt(req.params.id))
+    async createConsumption(req: Request, res: Response): Promise<any> {
+        return (this.consumptionService.createConsumption(req.body)
             .then(data => {
-                res.status(200).json({
-                    message: 'Success',
-                    status: 200,
+                res.status(201).json({
+                    message: 'Created',
+                    status: 201,
                     data
                 });
             })
-            .catch (err => {
+            .catch(err => {
                 res.status(500).json({
-                    message: err.message || "server error: failed to fetch consumptions.",
+                    message: err.message || "server error: failed to create a consumption.",
                     status: 500
                 });
             })
