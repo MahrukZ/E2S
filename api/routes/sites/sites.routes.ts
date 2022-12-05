@@ -23,4 +23,8 @@ router.delete("/api/site/:id", async (req, res) => {
     siteController.deleteSite(req, res);
 });
 
+router.get("/api/sites/:id", async (req, res) => {
+    siteController.getAllSites(req, res);
+});
+
 export default router;
