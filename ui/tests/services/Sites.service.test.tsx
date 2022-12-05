@@ -49,7 +49,7 @@ describe("sites.service", () => {
   // Can only mock one Axios.get
 //   it('should return correct sites when function is called', async () => {
 //     // Given
-//     const mSites = [
+//     const mSite = [
 //       {
 //         siteId: 1,
 //         name: "Abacws",
@@ -77,10 +77,10 @@ describe("sites.service", () => {
 //     const result = await mockService.findSiteById(1);
 
 //     // Then
-//     expect(result).toEqual(mSites);
+//     expect(result).toEqual(mSite);
 
 //     expect(axios.get).toHaveBeenCalledTimes(1);
-//     expect(axios.get).toHaveBeenCalledWith("/api/sites/1");
+//     expect(axios.get).toHaveBeenCalledWith("/api/site/1");
 //   });
 
 
