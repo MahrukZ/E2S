@@ -9,8 +9,8 @@ jest.mock('../../controllers/consumptions.controller', () => {
         bulkCreateConsumptions: jest.fn(),
         createConsumption: jest.fn(),
         getAllConsumptions: jest.fn(),
-        findAllConsumptionsBySiteAndTime: jest.fn(),
-        findSumsOfGasElectricityCostsBySiteAndTime: jest.fn()
+        findAllConsumptionsBySiteIdAndTime: jest.fn(),
+        findSumOfConsumptionsBySiteIdAndTime: jest.fn()
     };
     return {
         ConsumptionController: jest.fn(() => mConsumptionController)
@@ -100,7 +100,7 @@ describe('index', () => {
         });
     });
 
-    describe('GET /api/consumption/findBySiteAndTime/:start/:end/:id', () => {
+    describe('GET /api/consumption/find/:start/:end/:id', () => {
         const mConsumption: IConsumption[] = [{
             consumptionId: 1,
             timeInterval: mockDateObject,
@@ -142,13 +142,13 @@ describe('index', () => {
 
         it('should fetch all consumptions when there is data', async () => {
             // Given
-            const mUrl = "/api/consumption/findBySiteAndTime/:start/:end/:id";
+            const mUrl = "/api/consumption/find/:start/:end/:id";
             const getSpy = jest
-                .spyOn(controller, 'findAllConsumptionsBySiteAndTime');
+                .spyOn(controller, 'findAllConsumptionsBySiteIdAndTime');
 
             // When
             const result = await axios.get(mUrl);
-            await controller.findAllConsumptionsBySiteAndTime(req, res);
+            await controller.findAllConsumptionsBySiteIdAndTime(req, res);
 
             // Then
             expect(result).toEqual(mSuccessResponse);
@@ -161,7 +161,7 @@ describe('index', () => {
         });
     });
 
-    describe('GET /api/consumption/findSumOfConsumptionsBySiteIdAndTime/:start/:end/:id', () => {
+    describe('GET /api/consumption/find-sum/:start/:end/:id', () => {
         const mConsumption: IConsumption[] = [{
             consumptionId: 1,
             timeInterval: mockDateObject,
@@ -203,7 +203,7 @@ describe('index', () => {
 
         it('should fetch all consumptions when there is data', async () => {
             // Given
-            const mUrl = "/api/consumption/findSumOfConsumptionsBySiteIdAndTime/:start/:end/:id";
+            const mUrl = "/api/consumption/find-sum/:start/:end/:id";
             const getSpy = jest
                 .spyOn(controller, 'findSumOfConsumptionsBySiteIdAndTime');
 

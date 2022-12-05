@@ -7,8 +7,8 @@ jest.mock('../../services/consumptions.service', () => {
         bulkCreateConsumptions: jest.fn(),
         createConsumption: jest.fn(),
         getAllConsumptions: jest.fn(),
-        findAllConsumptionsBySiteAndTime: jest.fn(),
-        findSumsOfGasElectricityCostsBySiteAndTime: jest.fn()
+        findAllConsumptionsBySiteIdAndTime: jest.fn(),
+        findSumOfConsumptionsBySiteIdAndTime: jest.fn()
     };
     return {
         ConsumptionService: jest.fn(() => mConsumptionService)
@@ -254,7 +254,7 @@ describe("ConsumptionController", () => {
         });
     });
 
-    describe("ConsumptionController.findAllConsumptionsBySiteAndTime", () => {
+    describe("ConsumptionController.findAllConsumptionsBySiteIdAndTime", () => {
         const mConsumption: IConsumption[] = [{
             consumptionId: 1,
             timeInterval: mockDateObject,
@@ -300,11 +300,11 @@ describe("ConsumptionController", () => {
             const req = mRequest();
             const res = mResponse();
             const getSpy = jest
-                .spyOn(service, 'findAllConsumptionsBySiteAndTime')
+                .spyOn(service, 'findAllConsumptionsBySiteIdAndTime')
                 .mockResolvedValueOnce(mConsumption);
 
             // When
-            await controller.findAllConsumptionsBySiteAndTime(req, res);
+            await controller.findAllConsumptionsBySiteIdAndTime(req, res);
 
             // Then
             expect(res.status).toHaveBeenCalledWith(200);
@@ -318,11 +318,11 @@ describe("ConsumptionController", () => {
             const req = mRequest();
             const res = mResponse();
             const getSpy = jest
-                .spyOn(service, 'findAllConsumptionsBySiteAndTime')
+                .spyOn(service, 'findAllConsumptionsBySiteIdAndTime')
                 .mockRejectedValue({});
 
             // When
-            await controller.findAllConsumptionsBySiteAndTime(req, res);
+            await controller.findAllConsumptionsBySiteIdAndTime(req, res);
 
             // Then
             expect(res.status).toHaveBeenCalledWith(500);

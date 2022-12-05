@@ -62,8 +62,8 @@ export class ConsumptionController {
         );
     };
 
-    async findAllConsumptionsBySiteAndTime(req: Request, res: Response): Promise<any> {
-        return (this.consumptionService.findAllConsumptionsBySiteAndTime(req.params.start, req.params.end, parseInt(req.params.id))
+    async findAllConsumptionsBySiteIdAndTime(req: Request, res: Response): Promise<any> {
+        return (this.consumptionService.findAllConsumptionsBySiteIdAndTime(req.params.start, req.params.end, parseInt(req.params.id))
             .then(data => {
                 res.status(200).json({
                     message: 'Success',

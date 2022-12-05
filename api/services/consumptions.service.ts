@@ -24,7 +24,7 @@ export class ConsumptionService {
         return await this.consumptionRepository.findSumOfConsumptionsBySiteIdAndTime(startTime, endTime, siteId);
     }
 
-    async findAllConsumptionsBySiteAndTime(startTime: string, endTime: string, siteId: number) {
-        return await this.consumptionRepository.findAllConsumptionsBySiteAndTime(startTime, endTime, siteId);
+    async findAllConsumptionsBySiteIdAndTime(startTime: string, endTime: string, siteId: number) {
+        return await this.consumptionRepository.findAllConsumptionsBySiteIdAndTime(startTime, endTime, siteId);
     }
 }

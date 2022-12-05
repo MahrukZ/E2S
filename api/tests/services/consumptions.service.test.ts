@@ -7,8 +7,8 @@ jest.mock('../../data/repositories/consumptions.repository', () => {
         bulkCreateConsumptions: jest.fn(),
         createConsumption: jest.fn(),
         getAllConsumptions: jest.fn(),
-        findAllConsumptionsBySiteAndTime: jest.fn(),
-        findSumsOfGasElectricityCostsBySiteAndTime: jest.fn()
+        findAllConsumptionsBySiteIdAndTime: jest.fn(),
+        findSumOfConsumptionsBySiteIdAndTime: jest.fn()
     };
     return {
         ConsumptionRepository: jest.fn(() => mConsumptionRepo)
@@ -145,7 +145,7 @@ describe('ConsumptionService', () => {
         });
     });
 
-    describe('ConsumptionService.findAllConsumptionsBySiteAndTime', () => {
+    describe('ConsumptionService.findAllConsumptionsBySiteIdAndTime', () => {
         it('should return consumptions', async () => {
 
             // Given
@@ -180,11 +180,11 @@ describe('ConsumptionService', () => {
                 orgId: 3
             }];
             const getSpy = jest
-                .spyOn(repository, 'findAllConsumptionsBySiteAndTime')
+                .spyOn(repository, 'findAllConsumptionsBySiteIdAndTime')
                 .mockResolvedValue(mConsumption);
 
             // When
-            const result = await service.findAllConsumptionsBySiteAndTime("", "", 1);
+            const result = await service.findAllConsumptionsBySiteIdAndTime("", "", 1);
 
             // Then
             expect(result).toEqual(mConsumption);

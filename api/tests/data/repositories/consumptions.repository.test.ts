@@ -162,7 +162,7 @@ describe('ConsumptionRepository', () => {
         });
     });
 
-    describe('ConsumptionRepository.findAllConsumptionsBySiteAndTime', () => {
+    describe('ConsumptionRepository.findAllConsumptionsBySiteIdAndTime', () => {
         it('should fetch some consumptions when there is data in the database', async () => {
             // Given
             const mockResponse: IConsumption[] = [{
@@ -198,7 +198,7 @@ describe('ConsumptionRepository', () => {
             Consumptions.findAll = jest.fn().mockResolvedValue(mockResponse);
 
             // When
-            const result = await consumptionRepository.findAllConsumptionsBySiteAndTime("","",1);
+            const result = await consumptionRepository.findAllConsumptionsBySiteIdAndTime("","",1);
 
             // Then
             expect(result).toEqual(mockResponse);
@@ -209,12 +209,12 @@ describe('ConsumptionRepository', () => {
             // Given 
             // When
             const mErrorMessage = new Error("Failed to fetch all consumptions.");
-            consumptionRepository.findAllConsumptionsBySiteAndTime = jest.fn().mockRejectedValue(mErrorMessage);
+            consumptionRepository.findAllConsumptionsBySiteIdAndTime = jest.fn().mockRejectedValue(mErrorMessage);
             
             // Then
-            expect(consumptionRepository.findAllConsumptionsBySiteAndTime).rejects.toMatchObject(mErrorMessage);
-            expect(consumptionRepository.findAllConsumptionsBySiteAndTime).toHaveBeenCalledTimes(1);
-            expect(consumptionRepository.findAllConsumptionsBySiteAndTime).toHaveBeenCalledWith();
+            expect(consumptionRepository.findAllConsumptionsBySiteIdAndTime).rejects.toMatchObject(mErrorMessage);
+            expect(consumptionRepository.findAllConsumptionsBySiteIdAndTime).toHaveBeenCalledTimes(1);
+            expect(consumptionRepository.findAllConsumptionsBySiteIdAndTime).toHaveBeenCalledWith();
         });
     });
 
