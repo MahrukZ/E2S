@@ -31,7 +31,7 @@ function Insights() {
 
             const insightsTemplates = await insightsService.getInsights();
             // Currently just has 1 as the siteId, this will need to be changed
-            const siteData = await sitesService.findSiteByID(currentSiteId);
+            const siteData = await sitesService.findSiteById(currentSiteId);
 
             const currentSite = siteData["data"][0]["name"];
 

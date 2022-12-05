@@ -74,7 +74,7 @@ describe("sites.service", () => {
 //     });
 
 //     // When
-//     const result = await mockService.findSiteByID(1);
+//     const result = await mockService.findSiteById(1);
 
 //     // Then
 //     expect(result).toEqual(mSites);
