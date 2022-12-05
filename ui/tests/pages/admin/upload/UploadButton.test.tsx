@@ -1,16 +1,15 @@
 import React from "react";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import UploadButton from '../../../../src/components/pages/admin/upload/UploadButton';
+import UploadButton from "../../../../src/components/pages/admin/upload/UploadButton";
 
-test('should render upload button element', () => {
-    // Given
-    render(<UploadButton file=""/>);
+test("should render upload button element", () => {
+  // Given
+  render(<UploadButton file="" />);
 
-    // When
-    const buttonElement = screen.getByTestId("uploadBtn");
+  // When
+  const buttonElement = screen.getByTestId("uploadBtn");
 
-    // Then
-    expect(buttonElement).toBeInTheDocument();
+  // Then
+  expect(buttonElement).toBeInTheDocument();
 });
-

@@ -2,11 +2,11 @@ import { Request, Response } from "express";
 import { SiteService } from "../services/sites.service";
 
 export class SiteController {
-    private siteService: SiteService;
+  private siteService: SiteService;
 
-    constructor() {
-        this.siteService = new SiteService();
-    }
+  constructor() {
+    this.siteService = new SiteService();
+  }
 
 
     // Unused Methods

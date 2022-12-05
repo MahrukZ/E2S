@@ -43,7 +43,13 @@ git clone https://git.cardiff.ac.uk/c2061455/team_2_e2s.git
 **_If your machine is not yet configured:_**
 - Consult the Wiki for instructions on how to [set up your machine](https://git.cardiff.ac.uk/c2061455/team_2_e2s/-/wikis/Setting-Up-Your-Machine)
 
-## Documentation
+## VS Code Prettier Extention 
+- Install the Prettier extension from the extensions tabs in VS code
+- Go to File -> Preferences -> Settings -> Search for Formatter 
+- Select prettier in the setting (Default Formatter)
+- And select the boxes next to Format on paste and Format on save
+- Make sure javaScript format enable is selected as well
 
+## Documentation
 - Visit the GitLab [Wiki](https://git.cardiff.ac.uk/c2061455/team_2_e2s/-/wikis/home) produced by the contributors of this repository.
 - Here are some links to helpful documentation and resources [here](https://git.cardiff.ac.uk/c2061455/team_2_e2s/-/wikis/Learning-Resources).

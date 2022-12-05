@@ -1,156 +1,169 @@
 import { InsightRepository } from "../../../data/repositories/insights.repository";
 import { Insights, IInsight } from "../../../data/models/insights.model";
 
-describe('InsightRepository', () => {
-    const insightRepository = new InsightRepository();
+describe("InsightRepository", () => {
+  const insightRepository = new InsightRepository();
 
-    beforeEach(() => {
-        jest.resetAllMocks();
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
+  describe("InsightRepository.getAllInsights", () => {
+    it("should fetch all insights when there is data in the database", async () => {
+      // Given
+      const mockResponse: IInsight[] = [
+        {
+          insightId: 1,
+          description: "insight 1",
+        },
+        {
+          insightId: 2,
+          description: "insight 2",
+        },
+        {
+          insightId: 3,
+          description: "insight 3",
+        },
+      ];
+      Insights.findAll = jest.fn().mockResolvedValue(mockResponse);
+
+      // When
+      const result = await insightRepository.getAllInsights();
+
+      // Then
+      expect(result).toEqual(mockResponse);
+      expect(Insights.findAll).toHaveBeenCalledTimes(1);
+      expect(Insights.findAll).toHaveBeenCalledWith();
     });
 
-    describe('InsightRepository.getAllInsights', () => {
-        it('should fetch all insights when there is data in the database', async () => {
-            // Given
-            const mockResponse: IInsight[] = [
-                {
-                    insightId: 1,
-                    description: 'insight 1'
-                },
-                {
-                    insightId: 2,
-                    description: 'insight 2'
-                },
-                {
-                    insightId: 3,
-                    description: 'insight 3'
-                }
-            ];
-            Insights.findAll = jest.fn().mockResolvedValue(mockResponse);
+    it("should not fetch insights when there is no data in the database", async () => {
+      // Given
+      // When
+      const mErrorMessage = new Error("Failed to fetch all insights.");
+      insightRepository.getAllInsights = jest
+        .fn()
+        .mockRejectedValue(mErrorMessage);
 
-            // When
-            const result = await insightRepository.getAllInsights();
+      // Then
+      expect(insightRepository.getAllInsights).rejects.toMatchObject(
+        mErrorMessage
+      );
+      expect(insightRepository.getAllInsights).toHaveBeenCalledTimes(1);
+      expect(insightRepository.getAllInsights).toHaveBeenCalledWith();
+    });
+  });
 
-            // Then
-            expect(result).toEqual(mockResponse);
-            expect(Insights.findAll).toHaveBeenCalledTimes(1);
-            expect(Insights.findAll).toHaveBeenCalledWith();
-        });
+  describe("InsightRepository.deleteInsight", () => {
+    it("should delete an insight when Id is provided", async () => {
+      // Given
+      const insightId = 1;
+      const mockResponse = true;
 
-        it('should not fetch insights when there is no data in the database', async () => {
-            // Given 
-            // When
-            const mErrorMessage = new Error("Failed to fetch all insights.");
-            insightRepository.getAllInsights = jest.fn().mockRejectedValue(mErrorMessage);
-            
-            // Then
-            expect(insightRepository.getAllInsights).rejects.toMatchObject(mErrorMessage);
-            expect(insightRepository.getAllInsights).toHaveBeenCalledTimes(1);
-            expect(insightRepository.getAllInsights).toHaveBeenCalledWith();
-        });
+      Insights.destroy = jest.fn().mockResolvedValue(mockResponse);
+
+      // When
+      const result = await insightRepository.deleteInsight(insightId);
+
+      // Then
+      expect(result).toEqual(mockResponse);
+      expect(Insights.destroy).toHaveBeenCalledTimes(1);
+      expect(Insights.destroy).toBeCalledWith({
+        where: {
+          insight_id: insightId,
+        },
+      });
     });
 
-    describe('InsightRepository.deleteInsight', () => {
-        it('should delete an insight when Id is provided', async () => {
-            // Given
-            const insightId = 1;
-            const mockResponse = true;
+    it("should not delete an insight when there is no Id provided", async () => {
+      // Given
+      // When
+      const mErrorMessage = new Error("Failed to delete insights.");
+      insightRepository.deleteInsight = jest
+        .fn()
+        .mockRejectedValue(mErrorMessage);
 
-            Insights.destroy = jest.fn().mockResolvedValue(mockResponse);
+      // Then
+      expect(insightRepository.deleteInsight).rejects.toMatchObject(
+        mErrorMessage
+      );
+      expect(insightRepository.deleteInsight).toHaveBeenCalledTimes(1);
+      expect(insightRepository.deleteInsight).toHaveBeenCalledWith();
+    });
+  });
 
-            // When
-            const result = await insightRepository.deleteInsight(insightId);
+  describe("InsightRepository.createInsight", () => {
+    it("should create an insight when there is insight data being passed", async () => {
+      // Given
+      const mockCreateInsight: IInsight = {
+        insightId: 4,
+        description: "new insight",
+      };
 
-            // Then
-            expect(result).toEqual(mockResponse);
-            expect(Insights.destroy).toHaveBeenCalledTimes(1);
-            expect(Insights.destroy).toBeCalledWith({
-                where: {
-                    insight_id: insightId
-                }
-            });
-        });
+      Insights.create = jest.fn().mockResolvedValue(mockCreateInsight);
 
-        it('should not delete an insight when there is no Id provided', async () => {
-            // Given 
-            // When
-            const mErrorMessage = new Error("Failed to delete insights.");
-            insightRepository.deleteInsight = jest.fn().mockRejectedValue(mErrorMessage);
-            
-            // Then
-            expect(insightRepository.deleteInsight).rejects.toMatchObject(mErrorMessage);
-            expect(insightRepository.deleteInsight).toHaveBeenCalledTimes(1);
-            expect(insightRepository.deleteInsight).toHaveBeenCalledWith();
-        });
+      // When
+      const result = await insightRepository.createInsight(mockCreateInsight);
+
+      // Then
+      expect(result).toEqual(mockCreateInsight);
+      expect(Insights.create).toHaveBeenCalledTimes(1);
+      expect(Insights.create).toHaveBeenCalledWith(mockCreateInsight);
     });
 
-    describe('InsightRepository.createInsight', () => {
-        it('should create an insight when there is insight data being passed', async () => {
-            // Given
-            const mockCreateInsight: IInsight = {
-                insightId: 4,
-                description: 'new insight'
-            }
+    it("should not create an insight when there is no insight data being passed", async () => {
+      // Given
+      // When
+      const mErrorMessage = new Error("Failed to create insight.");
+      insightRepository.createInsight = jest
+        .fn()
+        .mockRejectedValue(mErrorMessage);
 
-            Insights.create = jest.fn().mockResolvedValue(mockCreateInsight);
+      // Then
+      expect(insightRepository.createInsight).rejects.toMatchObject(
+        mErrorMessage
+      );
+      expect(insightRepository.createInsight).toHaveBeenCalledTimes(1);
+      expect(insightRepository.createInsight).toHaveBeenCalledWith();
+    });
+  });
 
-            // When
-            const result = await insightRepository.createInsight(mockCreateInsight);
+  describe("InsightRepository.updateInsight", () => {
+    it("should update an insight when there is insight data being passed", async () => {
+      // Given
+      const mockUpdateInsight: IInsight = {
+        insightId: 2,
+        description: "updated insight",
+      };
 
-            // Then
-            expect(result).toEqual(mockCreateInsight);
-            expect(Insights.create).toHaveBeenCalledTimes(1);
-            expect(Insights.create).toHaveBeenCalledWith(mockCreateInsight);
-        });
+      Insights.update = jest.fn().mockResolvedValue(mockUpdateInsight);
 
-        it('should not create an insight when there is no insight data being passed', async () => {
-            // Given 
-            // When
-            const mErrorMessage = new Error("Failed to create insight.");
-            insightRepository.createInsight = jest.fn().mockRejectedValue(mErrorMessage);
-            
-            // Then
-            expect(insightRepository.createInsight).rejects.toMatchObject(mErrorMessage);
-            expect(insightRepository.createInsight).toHaveBeenCalledTimes(1);
-            expect(insightRepository.createInsight).toHaveBeenCalledWith();
-        });
+      // When
+      const result = await insightRepository.updateInsight(mockUpdateInsight);
+
+      // Then
+      expect(result).toEqual(mockUpdateInsight);
+      expect(Insights.update).toHaveBeenCalledTimes(1);
+      expect(Insights.update).toBeCalledWith(mockUpdateInsight, {
+        where: {
+          insight_id: mockUpdateInsight.insightId,
+        },
+      });
     });
 
-    describe('InsightRepository.updateInsight', () => {
-        it('should update an insight when there is insight data being passed', async () => {
-            // Given
-            const mockUpdateInsight: IInsight = {
-                insightId: 2,
-                description: 'updated insight'
-            }
+    it("should not update an insight when there is insight data being passed", async () => {
+      // Given
+      // When
+      const mErrorMessage = new Error("Failed to update insight.");
+      insightRepository.updateInsight = jest
+        .fn()
+        .mockRejectedValue(mErrorMessage);
 
-            Insights.update = jest.fn().mockResolvedValue(mockUpdateInsight);
-
-            // When
-            const result = await insightRepository.updateInsight(mockUpdateInsight);
-
-            // Then
-            expect(result).toEqual(mockUpdateInsight);
-            expect(Insights.update).toHaveBeenCalledTimes(1);
-            expect(Insights.update).toBeCalledWith(
-                mockUpdateInsight, {
-                    where: {
-                        insight_id: mockUpdateInsight.insightId
-                    }
-                }      
-            );
-        });
-
-        it('should not update an insight when there is insight data being passed', async () => {
-            // Given 
-            // When
-            const mErrorMessage = new Error("Failed to update insight.");
-            insightRepository.updateInsight = jest.fn().mockRejectedValue(mErrorMessage);
-            
-            // Then
-            expect(insightRepository.updateInsight).rejects.toMatchObject(mErrorMessage);
-            expect(insightRepository.updateInsight).toHaveBeenCalledTimes(1);
-            expect(insightRepository.updateInsight).toHaveBeenCalledWith();
-        });
+      // Then
+      expect(insightRepository.updateInsight).rejects.toMatchObject(
+        mErrorMessage
+      );
+      expect(insightRepository.updateInsight).toHaveBeenCalledTimes(1);
+      expect(insightRepository.updateInsight).toHaveBeenCalledWith();
     });
-    
+  });
 });
