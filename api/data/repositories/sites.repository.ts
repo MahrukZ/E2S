@@ -66,12 +66,12 @@ export class SiteRepository {
         return data;
     }
 
-    async findSiteBySiteId(site_id: number): Promise<ISite> {
+    async findSiteById(siteId: number): Promise<ISite> {
         let data = [];
         try {
             data = await this.siteRepository.findAll({
                 where: {
-                    site_id
+                    siteId
                   }
               });
         } catch (err) {

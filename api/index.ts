@@ -60,7 +60,7 @@ app.delete("/api/site/:id", async (req, res) => {
 });
 
 app.get("/api/sites/:id", async (req, res) => {
-    siteController.findSiteBySiteId(req, res);
+    siteController.findSiteById(req, res);
 });
 
 //sites_and_users
@@ -98,8 +98,8 @@ app.get("/api/consumption/findBySiteAndTime/:start/:end/:id", async (req, res) =
     consumptionController.findAllConsumptionsBySiteAndTime(req, res);
 });
 
-app.get("/api/consumption/findSumsOfGasElectricityCostsBySiteAndTime/:start/:end/:id", async (req, res) => {
-    consumptionController.findSumsOfGasElectricityCostsBySiteAndTime(req, res);
+app.get("/api/consumption/findSumOfConsumptionsBySiteIdAndTime/:start/:end/:id", async (req, res) => {
+    consumptionController.findSumOfConsumptionsBySiteIdAndTime(req, res);
 });
 
 // port listen

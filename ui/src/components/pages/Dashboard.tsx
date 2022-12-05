@@ -1,5 +1,5 @@
 import React from 'react';
-import Insights from "./../reusable/insights/insights"
+import Insights from "../reusable/insights/Insights"
 
 const Dashboard: React.FunctionComponent = () => {
     return (

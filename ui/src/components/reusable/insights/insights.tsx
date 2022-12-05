@@ -4,7 +4,7 @@ import { InsightsService } from "../../../services/insights.service";
 import { SitesService } from "../../../services/sites.service";
 import { ConsumptionsService } from "../../../services/consumptions.service";
 import { Container, Card, Col } from "react-bootstrap";
-import "./insights.css";
+import "./Insights.css";
 
 function Insights() {
   
@@ -31,7 +31,7 @@ function Insights() {
 
             const insightsTemplates = await insightsService.getInsights();
             // Currently just has 1 as the siteId, this will need to be changed
-            const siteData = await sitesService.findSiteBySiteID(currentSiteId);
+            const siteData = await sitesService.findSiteByID(currentSiteId);
 
             const currentSite = siteData["data"][0]["name"];
 
@@ -62,7 +62,7 @@ function Insights() {
     }, []);
     
     useEffect(() => {
-        const findSumsOfGasElectricityCostsBySiteAndTime =async () => {
+        const findSumOfConsumptionsBySiteIdAndTime =async () => {
             let finalConsumptions: String[] = [];
             let consumptionsList: String[] = [];
 
@@ -70,8 +70,8 @@ function Insights() {
             const priorDate = new Date(new Date().setDate(now.getDate() - 7));
             const priorPriorDate = new Date(new Date().setDate(now.getDate() - 14));
 
-            const currentConsumptionsResponse = await consumptionsService.findSumsOfGasElectricityCostsBySiteAndTime(priorDate, now, currentSiteId);
-            const previousConsumptionsResponse = await consumptionsService.findSumsOfGasElectricityCostsBySiteAndTime(priorPriorDate, priorDate, currentSiteId);
+            const currentConsumptionsResponse = await consumptionsService.findSumOfConsumptionsBySiteIdAndTime(priorDate, now, currentSiteId);
+            const previousConsumptionsResponse = await consumptionsService.findSumOfConsumptionsBySiteIdAndTime(priorPriorDate, priorDate, currentSiteId);
             
             const currentConsumptionsData = currentConsumptionsResponse["data"];
             const previousConsumptionsData = previousConsumptionsResponse["data"];
@@ -129,7 +129,7 @@ function Insights() {
             setConsumptionsList(finalConsumptions);
         }
 
-        findSumsOfGasElectricityCostsBySiteAndTime();
+        findSumOfConsumptionsBySiteIdAndTime();
     }, [])
 
   return (

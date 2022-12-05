@@ -24,7 +24,7 @@ export class SiteService {
         return await this.siteRepository.updateSite(site);
     }
 
-    async findSiteBySiteId(userId: number) {
-        return await this.siteRepository.findSiteBySiteId(userId);
+    async findSiteById(siteId: number) {
+        return await this.siteRepository.findSiteById(siteId);
     }
 }

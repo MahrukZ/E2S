@@ -78,8 +78,8 @@ export class SiteController {
         );
     };
 
-    async findSiteBySiteId(req: Request, res: Response): Promise<any> {
-        return (this.siteService.findSiteBySiteId(parseInt(req.params.id))
+    async findSiteById(req: Request, res: Response): Promise<any> {
+        return (this.siteService.findSiteById(parseInt(req.params.id))
             .then(data => {
                 res.status(200).json({
                     message: 'Success',
@@ -89,7 +89,7 @@ export class SiteController {
             })
             .catch(err => {
                 res.status(500).json({
-                    message: err.message || "server error: failed to fetch site by siteID.",
+                    message: err.message || "server error: failed to fetch site by Id.",
                     status: 500
                 });
             })

@@ -44,4 +44,44 @@ describe("sites.service", () => {
     expect(axios.get).toHaveBeenCalledTimes(1);
     expect(axios.get).toHaveBeenCalledWith("/api/sites");
   });
+
+
+  // Can only mock one Axios.get
+//   it('should return correct sites when function is called', async () => {
+//     // Given
+//     const mSites = [
+//       {
+//         siteId: 1,
+//         name: "Abacws",
+//         location: "Cathays",
+//         orgId: 1
+//       },
+//       {
+//         siteId: 2,
+//         name: "National Software Academy",
+//         location: "Newport",
+//         orgId: 1
+//       },
+//       {
+//         siteId: 3,
+//         name: "Queens Building",
+//         location: "Cardiff",
+//         orgId: 1
+//       }
+//     ];
+//     mockedAxios.get.mockResolvedValue({
+//       data: mSites
+//     });
+
+//     // When
+//     const result = await mockService.findSiteByID(1);
+
+//     // Then
+//     expect(result).toEqual(mSites);
+
+//     expect(axios.get).toHaveBeenCalledTimes(1);
+//     expect(axios.get).toHaveBeenCalledWith("/api/sites/1");
+//   });
+
+
 });
