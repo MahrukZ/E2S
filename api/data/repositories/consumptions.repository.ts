@@ -1,5 +1,6 @@
 import { connect } from "../config/db.config";
 import { Consumptions, IConsumption } from "../models/consumptions.model";
+import { Op } from "sequelize"; 
 
 export class ConsumptionRepository {
     private db: any = {};
@@ -44,6 +45,74 @@ export class ConsumptionRepository {
         } catch (err) {
             throw new Error("Failed to fetch all consumptions." || err);
         }
+        return data;
+    }
+
+    async findSumOfConsumptionsBySiteIdAndTime(startTime: string, endTime: string, siteId: number): Promise<number[]> {
+        let data = [];
+        let transitData = [];
+
+        // Convert start/end to Dates from String
+        const startTimeDate = new Date(startTime);
+        const endTimeDate = new Date(endTime);
+
+        try {
+            transitData = await this.consumptionRepository.findAll({
+                where: {
+                    siteId,
+                    timeInterval: {
+                        [Op.between]: [startTimeDate, endTimeDate]
+                    }
+                  }
+              });
+        } catch (err) {
+            throw new Error("Failed to fetch all consumptions." || err);
+        }
+
+        let totalElectricityDemand: number = transitData.reduce( 
+            (a: number, b: { electricityDemand: string; }) => a + parseFloat(b.electricityDemand), 0);
+
+        let totalGasDemand: number = transitData.reduce( 
+        (a: number, b: { heatDemand: string; }) => a + parseFloat(b.heatDemand), 0);
+
+        let totalElectricityCosts: number = transitData.reduce( 
+            (a: number, b: { electricityPrice: string; electricityDemand: string; }) => 
+            a + (parseFloat(b.electricityPrice) * parseFloat(b.electricityDemand)), 0
+        );
+
+        let totalGasCosts: number = transitData.reduce( 
+            (a: number, b: { gasPrice: string; heatDemand: string; }) => 
+            a + (parseFloat(b.gasPrice) * parseFloat(b.heatDemand)), 0
+        );
+        
+        const totalCosts = totalElectricityCosts + totalGasCosts;
+
+        // Returns data as a list of 3 numbers with electricity first, gas second, costs third
+        data.push(totalElectricityDemand, totalGasDemand, totalCosts);
+
+        return data;
+    }
+
+    async findAllConsumptionsBySiteIdAndTime(startTime: string, endTime: string, siteId: number): Promise<IConsumption[]> {
+        let data = [];
+
+        // Convert start/end to Dates from Strings
+        const startTimeDate = new Date(startTime);
+        const endTimeDate = new Date(endTime);
+
+        try {
+            data = await this.consumptionRepository.findAll({
+                where: {
+                    siteId,
+                    timeInterval: {
+                        [Op.between]: [startTimeDate, endTimeDate]
+                    }
+                  }
+              });
+        } catch (err) {
+            throw new Error("Failed to fetch all consumptions." || err);
+        }
+
         return data;
     }
 }

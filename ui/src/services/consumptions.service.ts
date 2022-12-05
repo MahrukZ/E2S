@@ -14,4 +14,14 @@ export class ConsumptionsService{
         const response = await axios.post(`/api/consumption/bulk-create`, consumptionsData);
         return await response.data;
     }
+
+    public async findAllConsumptionsBySiteIdAndTime(startTime: Date, endTime: Date, siteId: number): Promise<any> {
+        const response = await axios.get(`/api/consumption/find/${startTime}/${endTime}/${siteId}`);
+        return await response.data;
+    }
+
+    public async findSumOfConsumptionsBySiteIdAndTime(startTime: Date, endTime: Date, siteId: number): Promise<any> {
+        const response = await axios.get(`/api/consumption/find-sum/${startTime}/${endTime}/${siteId}`);
+        return await response.data;
+    }
 }

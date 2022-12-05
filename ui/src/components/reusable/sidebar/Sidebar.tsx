@@ -18,6 +18,7 @@ const CollapsedSideBar = styled.div`
     background-color: #417285;
     position: fixed;
     top: 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
 `
 
 const MenuIconOpen = styled(Link)`
@@ -30,6 +31,9 @@ const MenuIconOpen = styled(Link)`
     margin-top: 1.25rem;
     margin-bottom: 1rem;
     color: #ffffff;
+    &:hover {
+        color: #0F242C;
+    }
 
 `
 
@@ -37,17 +41,20 @@ const MenuIconClose = styled(Link)`
     font-size: 2.5rem;
     color: #ffffff;
     margin-left: 6.5rem;
+    &:hover {
+        color: #0F242C;
+    }
 `
 
 const TopSideBarClose = styled.div`
-display: flex;
-// justify-content: end;
-margin-left: 2rem;
-font-size: 2.5rem;
-margin-top: 0.75rem;
-margin-right: 1rem;
-margin-bottom: 1rem;
-color: #ffffff;
+    display: flex;
+    // justify-content: end;
+    margin-left: 2rem;
+    font-size: 2.5rem;
+    margin-top: 0.75rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
 `
 
 const SidebarMenu = styled.div<{close: boolean}>`
@@ -58,6 +65,7 @@ const SidebarMenu = styled.div<{close: boolean}>`
     top: 0;
     left: ${({ close}) => close ? '0' : '-100%'};
     transition: .3s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
 `
 
 const MenuItems = styled.li`
@@ -116,7 +124,7 @@ const Sidebar: React.FunctionComponent = () => {
         <>
 
             {/*The collapsed sidebar which only shows the icons*/}
-            <CollapsedSideBar data-testid="collapsedSideBar">
+            <CollapsedSideBar data-testid="collapsedSideBar" className='onTop'>
             
             <MenuIconOpen data-testid="menuIconOpen" to="#" onClick={showSidebar}>
                     <FaIcons.FaBars />
@@ -132,17 +140,16 @@ const Sidebar: React.FunctionComponent = () => {
                     )
                 })}
 
-
             </CollapsedSideBar>
 
             {/*The expanded sidebar which shows the icons, text and picture*/}
-            <SidebarMenu data-testid="sidebarMenu" close={close}>
+            <SidebarMenu data-testid="sidebarMenu" className='onTop' close={close}>
 
                 <TopSideBarClose>
                 
                 {/* Image placed inside ui/src so that it is accessible */}
                 <ImageLink to={'/'} >
-                <img width={50} height={50} src={logo} alt="logo" />
+                <img className="imageLogo" width={50} height={50} src={logo} alt="logo" />
                 </ImageLink>
 
                 <MenuIconClose data-testid="menuIconClose" to="#" onClick={showSidebar}>

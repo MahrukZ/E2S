@@ -24,7 +24,7 @@ describe('InsightService', () => {
     });
 
     describe('InsightService.createInsight', () => {
-        it('should create an insights', async () => {
+        it('should create an insight', async () => {
             // Given
             const mCreateInsight: IInsight = {
                 insightId: 4,
