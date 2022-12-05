@@ -1,7 +1,8 @@
 import { Navigate, Outlet } from "react-router-dom";
+import { ISignedIn } from "../App";
 
 interface ProtectedRoutesProps {
-  signedIn: boolean;
+  signedIn: ISignedIn;
 }
 
 function ProtectedRoutes({ signedIn }: ProtectedRoutesProps) {

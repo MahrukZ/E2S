@@ -19,12 +19,21 @@ import UserManagementPage from "./components/pages/admin/userManagement/UserMana
 
 import { UsersService } from "./services/users.service";
 
+export interface ISignedIn {
+  userId: number;
+  role: string;
+}
+
 const App: React.FunctionComponent = () => {
   Axios.defaults.withCredentials = true;
 
   const usersService = new UsersService();
 
-  const [signInStatus, setsignInStatus] = useState<boolean>(false);
+  const [signInStatus, setsignInStatus] = useState<ISignedIn>({
+    signedIn: false,
+    userId: 0,
+    role: "no role",
+  });
 
   useEffect(() => {
     const getSignIn = async () => {
