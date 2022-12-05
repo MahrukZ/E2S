@@ -58,14 +58,9 @@ describe("consumptions.service", () => {
         expect(axios.post).toHaveBeenCalledTimes(1);
         expect(axios.post).toHaveBeenCalledWith("/api/consumption/bulk-create", expectedData);
     });
-});
-
-describe("consumptions.service", () => {
 
     const mockService = new ConsumptionsService();
-    const mockedAxios = axios as jest.Mocked<typeof axios>;
     const mockDateObject = new Date("2021-02-26T20:42:16.652Z");
-    const mockDate: string = "2021-02-26T20:42:16.652Z";
 
 //  Commented out as can only mock one axios.get
 //   it('should return correct consumptions when function is called', async () => {
