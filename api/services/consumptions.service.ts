@@ -18,7 +18,15 @@ export class ConsumptionService {
     return await this.consumptionRepository.createConsumption(consumption);
   }
 
-  async getAllConsumptions() {
-    return await this.consumptionRepository.getAllConsumptions();
-  }
+    async getAllConsumptions() {
+        return await this.consumptionRepository.getAllConsumptions();
+    }
+
+    async findSumOfConsumptionsBySiteIdAndTime(startTime: string, endTime: string, siteId: number) {
+        return await this.consumptionRepository.findSumOfConsumptionsBySiteIdAndTime(startTime, endTime, siteId);
+    }
+
+    async findAllConsumptionsBySiteIdAndTime(startTime: string, endTime: string, siteId: number) {
+        return await this.consumptionRepository.findAllConsumptionsBySiteIdAndTime(startTime, endTime, siteId);
+    }
 }

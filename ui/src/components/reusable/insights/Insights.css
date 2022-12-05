@@ -1,0 +1,29 @@
+.insightsCard {
+    width: 40px;
+    margin: 15px;
+    padding: 10px;
+    align-items:center;
+    background-color: #73A6BA;
+    color: #FFFFFF;
+    /* modified from https://www.w3schools.com/css/css3_shadows_box.asp */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
+}
+
+.insightsCol {
+    margin-left: 100px;
+}
+
+.percentageNeutral {
+
+    color: white;
+    padding: 2px;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.percentageBad {
+    padding: 2px;
+    color: white;
+    border-radius: 4px;
+    font-size: 16px;
+}

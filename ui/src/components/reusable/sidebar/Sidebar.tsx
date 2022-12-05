@@ -13,12 +13,13 @@ import logo from "./../../../assets/images/Cardiff_University_logo.png";
 //css in this file due to custom headings with links
 
 const CollapsedSideBar = styled.div`
-  width: 100px;
-  height: 100vh;
-  background-color: #417285;
-  position: fixed;
-  top: 0;
-`;
+    width: 100px;
+    height: 100vh;
+    background-color: #417285;
+    position: fixed;
+    top: 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
+`
 
 const MenuIconOpen = styled(Link)`
     background-color: #203841:     
@@ -30,35 +31,42 @@ const MenuIconOpen = styled(Link)`
     margin-top: 1.25rem;
     margin-bottom: 1rem;
     color: #ffffff;
+    &:hover {
+        color: #0F242C;
+    }
 
 `;
 
 const MenuIconClose = styled(Link)`
-  font-size: 2.5rem;
-  color: #ffffff;
-  margin-left: 6.5rem;
-`;
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-left: 6.5rem;
+    &:hover {
+        color: #0F242C;
+    }
+`
 
 const TopSideBarClose = styled.div`
-  display: flex;
-  // justify-content: end;
-  margin-left: 2rem;
-  font-size: 2.5rem;
-  margin-top: 0.75rem;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
-  color: #ffffff;
-`;
+    display: flex;
+    // justify-content: end;
+    margin-left: 2rem;
+    font-size: 2.5rem;
+    margin-top: 0.75rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
+`
 
-const SidebarMenu = styled.div<{ close: boolean }>`
-  width: 250px;
-  height: 100vh;
-  background-color: #417285;
-  position: fixed;
-  top: 0;
-  left: ${({ close }) => (close ? "0" : "-100%")};
-  transition: 0.3s;
-`;
+const SidebarMenu = styled.div<{close: boolean}>`
+    width: 250px;
+    height: 100vh;
+    background-color: #417285;
+    position: fixed;
+    top: 0;
+    left: ${({ close}) => close ? '0' : '-100%'};
+    transition: .3s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
+`
 
 const MenuItems = styled.li`
   list-style: none;
@@ -109,34 +117,39 @@ const CollapsedMenuItemLinks = styled(Link)`
 const ImageLink = styled(Link)``;
 
 const Sidebar: React.FunctionComponent = () => {
-  const [close, setClose] = useState(false);
-  const showSidebar = () => setClose(!close);
-  return (
-    <>
-      {/*The collapsed sidebar which only shows the icons*/}
-      <CollapsedSideBar data-testid="collapsedSideBar">
-        <MenuIconOpen data-testid="menuIconOpen" to="#" onClick={showSidebar}>
-          <FaIcons.FaBars />
-        </MenuIconOpen>
+    const [close, setClose] = useState(false)
+    const showSidebar = () => setClose(!close)
+    return (
+        <>
 
-        {SidebarData.map((item, index) => {
-          return (
-            <MenuItems key={index}>
-              <CollapsedMenuItemLinks to={item.path}>
-                {item.icon}
-              </CollapsedMenuItemLinks>
-            </MenuItems>
-          );
-        })}
-      </CollapsedSideBar>
+            {/*The collapsed sidebar which only shows the icons*/}
+            <CollapsedSideBar data-testid="collapsedSideBar" className='onTop'>
+            
+            <MenuIconOpen data-testid="menuIconOpen" to="#" onClick={showSidebar}>
+                    <FaIcons.FaBars />
+                </MenuIconOpen>
+            
+                {SidebarData.map((item, index) => {
+                    return (
+                        <MenuItems key={index}>
+                            <CollapsedMenuItemLinks to={item.path}>
+                                {item.icon}
+                            </CollapsedMenuItemLinks>
+                        </MenuItems>
+                    )
+                })}
 
-      {/*The expanded sidebar which shows the icons, text and picture*/}
-      <SidebarMenu data-testid="sidebarMenu" close={close}>
-        <TopSideBarClose>
-          {/* Image placed inside ui/src so that it is accessible */}
-          <ImageLink to={"/"}>
-            <img width={50} height={50} src={logo} alt="logo" />
-          </ImageLink>
+            </CollapsedSideBar>
+
+            {/*The expanded sidebar which shows the icons, text and picture*/}
+            <SidebarMenu data-testid="sidebarMenu" className='onTop' close={close}>
+
+                <TopSideBarClose>
+                
+                {/* Image placed inside ui/src so that it is accessible */}
+                <ImageLink to={'/'} >
+                <img className="imageLogo" width={50} height={50} src={logo} alt="logo" />
+                </ImageLink>
 
           <MenuIconClose
             data-testid="menuIconClose"

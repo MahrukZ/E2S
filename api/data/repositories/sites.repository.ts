@@ -17,49 +17,66 @@ export class SiteRepository {
     this.siteRepository = this.db.Sequelize.getRepository(Sites);
   }
 
-  async createSite(site: ISite): Promise<ISite> {
-    let data = {};
-    try {
-      data = await this.siteRepository.create(site);
-    } catch (err) {
-      throw new Error("Failed to create site." || err);
-    }
-    return data;
-  }
+    //Unused Methods
+    // async createSite(site: ISite): Promise<ISite> {
+    //     let data = {};
+    //     try {
+    //         data = await this.siteRepository.create(site);
+    //     } catch(err) {
+    //         throw new Error("Failed to create site." || err);
+    //     }
+    //     return data;
+    // }
 
-  async deleteSite(siteId: number): Promise<ISite> {
-    let data = {};
-    try {
-      data = await this.siteRepository.destroy({
-        where: {
-          site_id: siteId,
-        },
-      });
-    } catch (err) {
-      throw new Error("Failed to delete site." || err);
-    }
-    return data;
-  }
+    // async deleteSite(siteId: number): Promise<ISite> {
+    //     let data = {};
+    //     try {
+    //         data = await this.siteRepository.destroy({
+    //             where: {
+    //                 site_id: siteId
+    //             }
+    //         });
+    //     } catch(err) {
+    //         throw new Error("Failed to delete site." || err);
+    //     }
+    //     return data;
+    // }
 
-  async getAllSites(): Promise<ISite> {
-    let data = {};
-    try {
-      data = await this.siteRepository.findAll();
-    } catch (err) {
-      throw new Error("Failed to get all sites." || err);
-    }
-    return data;
-  }
+    // async getAllSites(): Promise<ISite[]> {
+    //     let data = [];
+    //     try {
+    //         data = await this.siteRepository.findAll();
+    //     } catch (err) {
+    //         throw new Error("Failed to get all sites." || err);
+    //     }
+    //     return data;
+    // }
 
-  async updateSite(site: ISite): Promise<ISite> {
-    let data = {};
-    try {
-      data = await this.siteRepository.update(
-        { ...site },
-        {
-          where: {
-            site_id: site.siteId,
-          },
+    // async updateSite(site: ISite): Promise<ISite> {
+    //     let data = {};
+    //     try {
+    //         data = await this.siteRepository.update({...site}, {
+    //             where: {
+    //                 site_id: site.siteId
+    //             }
+    //         });
+    //     } catch(err) {
+    //         console.error(err);
+    //         throw (err);
+    //     }
+    //     return data;
+    // }
+
+    async findSiteById(siteId: number): Promise<ISite> {
+        let data = [];
+        try {
+            data = await this.siteRepository.findAll({
+                where: {
+                    siteId
+                  }
+              });
+        } catch (err) {
+            throw new Error("Failed to get sites and users." || err);
         }
       );
     } catch (err) {

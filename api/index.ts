@@ -1,12 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import consumptions from "./consumptions/consumptions.routes";
-import sitesAndUsers from "./sitesAndUsers/sitesAndusers.routes";
-import insights from "./insights/insights.routes";
-import users from "./users/users.routes";
-import sites from "./sites/sites.routes";
-import { Router } from "express";
+import consumptions from "./routes/consumptions/consumptions.routes";
+import sitesAndUsers from "./routes/sitesAndUsers/sitesAndusers.routes";
+import insights from "./routes/insights/insights.routes";
+import users from "./routes/users/users.routes";
+import sites from "./routes/sites/sites.routes";
+import { Router } from 'express';
 
 // config
 dotenv.config();
