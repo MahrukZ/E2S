@@ -10,8 +10,6 @@ describe("consumptions.service", () => {
     const service = new ConsumptionsService();
     const mockDate: string = "2021-02-26T20:42:16.652Z";
     const mockedAxios = axios as jest.Mocked<typeof axios>;
-    const mockService = new ConsumptionsService();
-    const mockDateObject = new Date("2021-02-26T20:42:16.652Z");
 
     it('should bulk create consumptions when function is called', async () => {
         // Given
