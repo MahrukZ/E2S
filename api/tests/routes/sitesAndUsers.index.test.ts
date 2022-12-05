@@ -1,17 +1,17 @@
-import axios from "axios";
-import { SitesAndUsersController } from "../controllers/sitesAndUsers.controller";
-import { ISitesAndUser } from "../data/models/sitesAndUsers.model";
+import axios from "axios"
+import { SitesAndUsersController } from "../../controllers/sitesAndUsers.controller";
+import { ISitesAndUser } from "../../data/models/sitesAndUsers.model";
 
 jest.mock("axios");
 
-jest.mock("../controllers/sitesAndUsers.controller", () => {
-  const mSitesAndUsersController = {
-    getAllSitesAndUsers: jest.fn(),
-    findSitesAndUsersByUserId: jest.fn(),
-  };
-  return {
-    SitesAndUsersController: jest.fn(() => mSitesAndUsersController),
-  };
+jest.mock('../../controllers/sitesAndUsers.controller', () => {
+    const mSitesAndUsersController = { 
+        getAllSitesAndUsers: jest.fn(),
+        findSitesAndUsersByUserId: jest.fn()
+    };
+    return {
+        SitesAndUsersController: jest.fn(() => mSitesAndUsersController)
+    };
 });
 
 describe("index", () => {

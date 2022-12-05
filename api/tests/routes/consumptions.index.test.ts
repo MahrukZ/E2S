@@ -1,18 +1,18 @@
 import axios from "axios";
-import { ConsumptionController } from "../controllers/consumptions.controller";
-import { IConsumption } from "../data/models/consumptions.model";
+import { ConsumptionController} from "../../controllers/consumptions.controller";
+import { IConsumption } from "../../data/models/consumptions.model";
 
 jest.mock("axios");
 
-jest.mock("../controllers/consumptions.controller", () => {
-  const mConsumptionController = {
-    bulkCreateConsumptions: jest.fn(),
-    createConsumption: jest.fn(),
-    getAllConsumptions: jest.fn(),
-  };
-  return {
-    ConsumptionController: jest.fn(() => mConsumptionController),
-  };
+jest.mock('../../controllers/consumptions.controller', () => {
+    const mConsumptionController = { 
+        bulkCreateConsumptions: jest.fn(),
+        createConsumption: jest.fn(),
+        getAllConsumptions: jest.fn()
+    };
+    return {
+        ConsumptionController: jest.fn(() => mConsumptionController)
+    };
 });
 
 describe("index", () => {
