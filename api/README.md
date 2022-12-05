@@ -33,6 +33,7 @@ npm i
 - `jest` package - Jest is a delightful JavaScript Testing Framework with a focus on simplicity. **Learn more [here](https://jestjs.io/)**
 - `ts-jest` package - A Jest transformer with source map support that lets you use Jest to test projects written in TypeScript. **Learn more [here](https://www.npmjs.com/package/ts-jest)**
 - `axios` package - Promise based HTTP client for the browser and Node.js. **Learn more [here](https://www.npmjs.com/package/axios)**
+- `prettier` package - Prettier is a code formatter and enforces a consistent style. **Learn more [here](https://prettier.io/)**
 
 ## Setting up Environment Variables
 
