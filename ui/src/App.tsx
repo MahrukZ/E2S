@@ -1,43 +1,45 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Sidebar from './components/reusable/sidebar/Sidebar';
-import Topbar from './components/reusable/topbar/Topbar';
+import Sidebar from "./components/reusable/sidebar/Sidebar";
+import Topbar from "./components/reusable/topbar/Topbar";
 
-import Dashboard from './components/pages/dashboard/Dashboard';
-import Reports from './components/pages/Reports';
-import BillValidation from './components/pages/BillValidation';
-import CostForecast from './components/pages/CostForecast';
+import Dashboard from "./components/pages/dashboard/Dashboard";
+import Reports from "./components/pages/Reports";
+import BillValidation from "./components/pages/BillValidation";
+import CostForecast from "./components/pages/CostForecast";
 
-import UploadPage from './components/pages/admin/upload/UploadPage';
-import UserManagementPage from './components/pages/admin/userManagement/UserManagementPage';
+import UploadPage from "./components/pages/admin/upload/UploadPage";
+import UserManagementPage from "./components/pages/admin/userManagement/UserManagementPage";
 
 const App: React.FunctionComponent = () => {
-  
   //Defines the paths of each page
   //This file should only have the topbar and sidebar
   return (
     <>
       <div className="App">
-         <Topbar />
+        <Topbar />
       </div>
 
       <Router>
         <Sidebar />
         <Routes>
-          <Route path='/' element={<Dashboard />} />
-          <Route path='/reports' element={<Reports />} />            
-          <Route path='/billvalidation' element={<BillValidation />} />    
-          <Route path='/costforecast' element={<CostForecast />} />
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/billvalidation" element={<BillValidation />} />
+          <Route path="/costforecast" element={<CostForecast />} />
 
           {/* admin routes */}
-          <Route path='/admin/upload' element={<UploadPage />} />
-          <Route path='/admin/user-management' element={<UserManagementPage />} />
+          <Route path="/admin/upload" element={<UploadPage />} />
+          <Route
+            path="/admin/user-management"
+            element={<UserManagementPage />}
+          />
         </Routes>
-      </Router> 
+      </Router>
     </>
   );
-}
+};
 
 export default App;

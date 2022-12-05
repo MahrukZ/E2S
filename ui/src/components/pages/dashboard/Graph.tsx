@@ -22,7 +22,10 @@ interface IWeekConsumption {
 const consumptionsService = new ConsumptionsService();
 
 function Graph() {
-  const [consumption, setConsumption] = useState({ weekNumber: [], electricityDemand: [] });
+  const [consumption, setConsumption] = useState({
+    weekNumber: [],
+    electricityDemand: [],
+  });
 
   const graphData = async () => {
     const consumptions = await consumptionsService.getAllConsumptions();
@@ -35,12 +38,17 @@ function Graph() {
     consumptions.data.forEach((element: IConsumption) => {
       const weekNumber = getWeekNumberByDate(element.timeInterval);
       const consumption = Number(element.electricityDemand);
-      if (weekNumber === currentWeekNumber || weekNumber === previousWeekNumber) {
+      if (
+        weekNumber === currentWeekNumber ||
+        weekNumber === previousWeekNumber
+      ) {
         const obj: any = {
           weekNumber: weekNumber,
-          consumption: consumption
-        }
-        const result = weekConsumptionArray.find((x: IWeekConsumption) => x.weekNumber === weekNumber);
+          consumption: consumption,
+        };
+        const result = weekConsumptionArray.find(
+          (x: IWeekConsumption) => x.weekNumber === weekNumber
+        );
         if (result) result.consumption += consumption;
         else weekConsumptionArray.push(obj);
       }
@@ -49,20 +57,22 @@ function Graph() {
     weekConsumptionArray.forEach((data: IWeekConsumption) => {
       if (data.weekNumber === currentWeekNumber) {
         weekNumber.push("Current Week");
-      }
-      else {
+      } else {
         weekNumber.push("Previous Week");
       }
       electricityDemand.push(data.consumption);
     });
-    setConsumption({ ...weekConsumptionArray, weekNumber: weekNumber, electricityDemand: electricityDemand });
+    setConsumption({
+      ...weekConsumptionArray,
+      weekNumber: weekNumber,
+      electricityDemand: electricityDemand,
+    });
     return weekConsumptionArray;
-  }
+  };
 
   useEffect(() => {
     graphData();
-  }
-    , [])
+  }, []);
   return (
     <div className="graph" data-testid="electricityGraph">
       <Plot
@@ -70,43 +80,43 @@ function Graph() {
           {
             x: consumption.weekNumber,
             y: consumption.electricityDemand,
-            type: 'bar',
+            type: "bar",
             marker: {
-              color: ['rgba(1, 93, 251, 0.8)', 'rgba(248, 119, 16, 0.8)']
-            }
+              color: ["rgba(1, 93, 251, 0.8)", "rgba(248, 119, 16, 0.8)"],
+            },
           },
         ]}
-        layout={
-          {
-            width: 450,
-            height: 450,
-            title: 'Electricity Usage',
-            xaxis: {
-              title: 'Week',
-              titlefont: {
-                family: 'Arial',
-                size: 13
-              }
+        layout={{
+          width: 450,
+          height: 450,
+          title: "Electricity Usage",
+          xaxis: {
+            title: "Week",
+            titlefont: {
+              family: "Arial",
+              size: 13,
             },
-            yaxis: {
-              title: 'Electricity Consumption (kW)',
-              titlefont: {
-                family: 'Arial',
-                size: 13
-              }
-            }
-          }
-        }
+          },
+          yaxis: {
+            title: "Electricity Consumption (kW)",
+            titlefont: {
+              family: "Arial",
+              size: 13,
+            },
+          },
+        }}
       />
     </div>
-  )
-};
+  );
+}
 
 function getWeekNumberByDate(date: any) {
   date = new Date(date).toLocaleDateString();
   date = new Date(date);
   const firstJanuary: any = new Date(date.getFullYear(), 0, 4);
-  const dayNumber: number = Math.ceil((date - firstJanuary) / (24 * 60 * 60 * 1000));
+  const dayNumber: number = Math.ceil(
+    (date - firstJanuary) / (24 * 60 * 60 * 1000)
+  );
   const weekNumber: number = Math.ceil((dayNumber + firstJanuary.getDay()) / 7);
   return weekNumber;
 }
