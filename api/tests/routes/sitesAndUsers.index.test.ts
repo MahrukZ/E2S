@@ -1,10 +1,10 @@
 import axios from "axios"
-import { SitesAndUsersController } from "../controllers/sitesAndUsers.controller";
-import { ISitesAndUser } from "../data/models/sitesAndUsers.model";
+import { SitesAndUsersController } from "../../controllers/sitesAndUsers.controller";
+import { ISitesAndUser } from "../../data/models/sitesAndUsers.model";
 
 jest.mock('axios');
 
-jest.mock('../controllers/sitesAndUsers.controller', () => {
+jest.mock('../../controllers/sitesAndUsers.controller', () => {
     const mSitesAndUsersController = { 
         getAllSitesAndUsers: jest.fn(),
         findSitesAndUsersByUserId: jest.fn()
