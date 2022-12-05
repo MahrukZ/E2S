@@ -49,28 +49,15 @@ describe("sites.service", () => {
   // Can only mock one Axios.get
 //   it('should return correct sites when function is called', async () => {
 //     // Given
-//     const mSite = [
-//       {
-//         siteId: 1,
-//         name: "Abacws",
-//         location: "Cathays",
-//         orgId: 1
-//       },
-//       {
-//         siteId: 2,
-//         name: "National Software Academy",
-//         location: "Newport",
-//         orgId: 1
-//       },
+//     const mSite = 
 //       {
 //         siteId: 3,
 //         name: "Queens Building",
 //         location: "Cardiff",
 //         orgId: 1
-//       }
-//     ];
+//       };
 //     mockedAxios.get.mockResolvedValue({
-//       data: mSites
+//       data: mSite
 //     });
 
 //     // When
