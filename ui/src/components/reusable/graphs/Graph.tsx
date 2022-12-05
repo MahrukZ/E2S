@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Container, Card, Col } from "react-bootstrap";
-import { SitesService } from "../../../services/sites.service";
 import { ConsumptionsService } from "../../../services/consumptions.service";
 import "./Graph.css";
 import Plot from 'react-plotly.js';
@@ -17,11 +16,10 @@ function Graph() {
     const [electricityCostList, setElectricityCostList] = useState<number[]>([]);
     const [gasCostList, setGasCostList] = useState<number[]>([]);
     
-    const sitesService = new SitesService;
-    const consumptionsService = new ConsumptionsService;
+    const consumptionsService = new ConsumptionsService();
 
     useEffect(() => {
-        const findAllConsumptionsBySiteAndTime = async () => {
+        const findAllConsumptionsBySiteIdAndTime = async () => {
             let electricityData = [];
             let gasData = [];
             let emissionsData = []
@@ -32,33 +30,27 @@ function Graph() {
             const now = new Date();
             const priorDate = new Date(new Date().setDate(now.getDate() - 30));
 
-            const currentConsumptionsResponse = await consumptionsService.findAllConsumptionsBySiteAndTime(priorDate, now, currentSiteId);
+            const currentConsumptionsResponse = await consumptionsService.findAllConsumptionsBySiteIdAndTime(priorDate, now, currentSiteId);
 
             const currentConsumptionsData = currentConsumptionsResponse["data"];
 
             for (let i = 0; i < currentConsumptionsData.length; i++) {
                 const formattedElectricityDemand = parseFloat(currentConsumptionsData[i]["electricityDemand"]);
-
                 electricityData.push(formattedElectricityDemand);
 
                 const formattedGasDemand = parseFloat(currentConsumptionsData[i]["heatDemand"]);
-
                 gasData.push(formattedGasDemand);
 
                 const formattedEmissions = parseFloat(currentConsumptionsData[i]["co2Emissions"]);
-
                 emissionsData.push(formattedEmissions);
 
                 const formattedDate = new Date(currentConsumptionsData[i]["timeInterval"]);
-
                 timeData.push(formattedDate);
 
                 const electricityCost = parseFloat(currentConsumptionsData[i]["electricityDemand"]) * parseFloat(currentConsumptionsData[i]["electricityPrice"]);
-
                 electricityCostData.push(electricityCost);
 
                 const gasCost = parseFloat(currentConsumptionsData[i]["heatDemand"]) * parseFloat(currentConsumptionsData[i]["gasPrice"]);
-
                 gasCostData.push(gasCost);
             }
 
@@ -70,7 +62,8 @@ function Graph() {
             setGasCostList(gasCostData);
         }
 
-        findAllConsumptionsBySiteAndTime();
+        findAllConsumptionsBySiteIdAndTime();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
