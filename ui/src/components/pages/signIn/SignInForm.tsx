@@ -17,6 +17,8 @@ function SignInForm() {
 
     const [signInStatus, setsignInStatus] = useState("");
 
+    const [authStatus, setAuthStatus] = useState("");
+
     const usersService = new UsersService;
 
     const signIn = async () => {
@@ -25,6 +27,17 @@ function SignInForm() {
             setError("Wrong email/password combination");
         } else {
             setSuccess("signed in");
+        }
+    }
+
+    const checkAuth = async () => {
+        const token: any = localStorage.getItem("token");
+        console.log("token from local storage on form: ", token);
+        if (token) {
+            const authStatus = await usersService.checkAuth(token);
+            if (authStatus) {
+                setAuthStatus(authStatus);
+            }
         }
     }
 
@@ -74,7 +87,13 @@ function SignInForm() {
                     )}   
                     {success.length > 0 && (
                         <Message message={success} type='success' />
-                    )}                
+                    )}    
+                    <h2>{authStatus}</h2>
+                    <Button variant="primary"
+                        onClick={checkAuth}
+                    >
+                        Check auth
+                    </Button>            
                 </Col>
             </Row>
         </Container>

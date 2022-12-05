@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { UserService } from "../services/users.service";
+import jwt from "jsonwebtoken";
 
 export class UserController {
     private userService: UserService;
@@ -48,11 +49,6 @@ export class UserController {
     async signIn(req: Request, res: Response): Promise<any> {
         return (this.userService.signIn(req.body.email, req.body.password)
             .then(data => {
-                res.status(200).json({
-                    message: 'Success',
-                    status: 200,
-                    data
-                });
                 return data;
         })
         .catch(err => {

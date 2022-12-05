@@ -10,11 +10,13 @@ import { UserController } from "./controllers/users.controller";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import session from "express-session";
+import jwt from "jsonwebtoken";
 
 // config
 dotenv.config();
 const port = process.env.PORT || 8082;
-const app = express();
+const app = express(); 
+const key: string = process.env.JWT_KEY || "key not found";
 
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
@@ -27,7 +29,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(session({
-    secret: "secret",
+    secret: key,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -40,7 +42,25 @@ declare module 'express-session' {
     export interface SessionData {
       user: { [key: string]: any };
     }
-  }
+};
+
+const verifyJWT = (req: any, res: any, next: any) => {
+    const token = req.headers["x-access-token"];
+    console.log("token on index: ", token);
+
+    if (!token) {
+        res.send("Please provide a token");
+    } else {
+        jwt.verify(token, key, (err: any, decoded: any) => {
+            if (err) {
+                res.json("You failed to authenticate");
+            } else {
+                req.userId = decoded.id;
+                next();
+            };
+        });
+    };
+};
 
 
 // controllers
@@ -127,7 +147,13 @@ app.get("/api/users", async (req, res) => {
 app.post("/sign-in", async (req, res) => {
     const signedIn: any = await userController.signIn(req, res);
     if (signedIn.length != 0) {
-        req.session.user = signedIn[0]["dataValues"];
+        const user = signedIn[0]["dataValues"];
+        const id = user.userId;
+        const token = jwt.sign({id}, key, {
+            expiresIn: "1hr",
+        });
+        res.json({auth: true, token: token, result: user});
+        req.session.user = user;
         req.session.save();
     }
 })
@@ -139,6 +165,11 @@ app.get("/sign-in", async (req, res) => {
     } else {
         res.send({loggedIn: false});
     };
+});
+
+// check token - can delete later
+app.get("/is-user-auth", verifyJWT, async (req, res) => {
+    res.send("You are authenticated");
 });
 
 // port listen
