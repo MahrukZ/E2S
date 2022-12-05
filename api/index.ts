@@ -62,7 +62,6 @@ const verifyJWT = (req: any, res: any, next: any) => {
     };
 };
 
-
 // controllers
 const insightController = new InsightController();
 const siteController = new SiteController();
@@ -155,6 +154,8 @@ app.post("/sign-in", async (req, res) => {
         res.json({auth: true, token: token, result: user});
         req.session.user = user;
         req.session.save();
+    } else {
+        res.json({auth: false});
     }
 })
 

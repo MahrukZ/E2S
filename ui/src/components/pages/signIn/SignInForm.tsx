@@ -22,11 +22,12 @@ function SignInForm() {
     const usersService = new UsersService;
 
     const signIn = async () => {
-        const user = await usersService.signIn(emailAddress, password);
-        if (user["data"].length == 0) {
+        const signInRes = await usersService.signIn(emailAddress, password);
+        console.log("sign in res: ", signInRes);
+        if (signInRes.auth == false) {
             setError("Wrong email/password combination");
         } else {
-            setSuccess("signed in");
+            setSuccess("Signed in");
         }
     }
 

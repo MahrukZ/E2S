@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Axios from "axios";
 import { UsersService } from "./services/users.service";
 
@@ -24,11 +24,8 @@ const App: React.FunctionComponent = () => {
   //This file should only have the topbar and sidebar
   return (
     <>
-      <div className="App">
-         <Topbar />
-      </div>
-
       <Router>
+        <Topbar />
         <Sidebar />
         <Routes>
           <Route path='/' element={<Dashboard />} />

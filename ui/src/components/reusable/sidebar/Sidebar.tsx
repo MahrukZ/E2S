@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { SidebarData } from './SidebarData'
 import "./Sidebar.css";
 import * as FaIcons from 'react-icons/fa' 
@@ -112,6 +112,13 @@ const ImageLink = styled(Link)``
 const Sidebar: React.FunctionComponent = () => {
     const [close, setClose] = useState(false)
     const showSidebar = () => setClose(!close)
+
+    const location = useLocation();
+    
+    if(["/sign-in"].includes(location.pathname)) {
+        return <></> 
+    };
+    
     return (
         <>
 

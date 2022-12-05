@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from "react";
 import { Container, Nav, Navbar, Row } from "react-bootstrap";
 import { SitesAndUsersService } from "../../../services/sitesAndUsers.service";
@@ -55,6 +56,12 @@ function Topbar() {
     getUser();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const location = useLocation();
+
+  if(["/sign-in"].includes(location.pathname)) {
+      return <></> 
+  };
 
   return (
     <Navbar data-testid="topbar" className="py-0" id="topbar">
