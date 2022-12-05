@@ -19,9 +19,9 @@ function Insights() {
     const [isCostPositive, setIsCostPositive] = useState(false);
 
     // Initialize services
-    const insightsService = new InsightsService;
-    const sitesService = new SitesService;
-    const consumptionsService = new ConsumptionsService;
+    const insightsService = new InsightsService();
+    const sitesService = new SitesService();
+    const consumptionsService = new ConsumptionsService();
 
     useEffect(() => {
         // This will only work with 3 insight templates in the database
@@ -58,13 +58,12 @@ function Insights() {
 
         }
         getAllInsights();
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
     useEffect(() => {
         const findSumOfConsumptionsBySiteIdAndTime =async () => {
             let finalConsumptions: String[] = [];
-            let consumptionsList: String[] = [];
 
             const now = new Date();
             const priorDate = new Date(new Date().setDate(now.getDate() - 7));
@@ -128,8 +127,8 @@ function Insights() {
 
             setConsumptionsList(finalConsumptions);
         }
-
         findSumOfConsumptionsBySiteIdAndTime();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
   return (
