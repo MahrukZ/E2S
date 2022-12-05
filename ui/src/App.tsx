@@ -1,25 +1,40 @@
 import Axios from "axios";
-import React from 'react';
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import ProtectedRoutes from "./ProtectedRoutes";
-import './App.css';
+import { useState, useEffect } from "react";
+import ProtectedRoutes from "../src/routes/ProtectedRoutes";
+import "./App.css";
 
-import Sidebar from './components/reusable/sidebar/Sidebar';
-import Topbar from './components/reusable/topbar/Topbar';
+import Sidebar from "./components/reusable/sidebar/Sidebar";
+import Topbar from "./components/reusable/topbar/Topbar";
 
-import BillValidation from './components/pages/BillValidation';
-import CostForecast from './components/pages/CostForecast';
-import Dashboard from './components/pages/dashboard/Dashboard';
-import Reports from './components/pages/Reports';
-import SignIn from './components/pages/signIn/SignIn';
+import BillValidation from "./components/pages/BillValidation";
+import CostForecast from "./components/pages/CostForecast";
+import Dashboard from "./components/pages/dashboard/Dashboard";
+import Reports from "./components/pages/Reports";
+import SignIn from "./components/pages/signIn/SignIn";
 
-import UploadPage from './components/pages/admin/upload/UploadPage';
-import UserManagementPage from './components/pages/admin/userManagement/UserManagementPage';
+import UploadPage from "./components/pages/admin/upload/UploadPage";
+import UserManagementPage from "./components/pages/admin/userManagement/UserManagementPage";
+
+import { UsersService } from "./services/users.service";
 
 const App: React.FunctionComponent = () => {
-
   Axios.defaults.withCredentials = true;
-  
+
+  const usersService = new UsersService();
+
+  const [signInStatus, setsignInStatus] = useState<boolean>(false);
+
+  useEffect(() => {
+    const getSignIn = async () => {
+      const signedIn = await usersService.checkSignIn();
+      setsignInStatus(signedIn["loggedIn"]);
+    };
+    getSignIn();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   //Defines the paths of each page
   //This file should only have the topbar and sidebar
   return (
@@ -28,22 +43,25 @@ const App: React.FunctionComponent = () => {
         <Topbar />
         <Sidebar />
         <Routes>
-          <Route element={<ProtectedRoutes />}>
-            
+          <Route element={<ProtectedRoutes signedIn={signInStatus} />}>
+            <Route path="/reports" element={<Reports />} />
+            <Route path="/billvalidation" element={<BillValidation />} />
+            <Route path="/costforecast" element={<CostForecast />} />
           </Route>
-          <Route path='/' element={<Dashboard />} />
-          <Route path='/reports' element={<Reports />} />            
-          <Route path='/billvalidation' element={<BillValidation />} />    
-          <Route path='/costforecast' element={<CostForecast />} />
-          <Route path='/sign-in' element={<SignIn />} />
+          <Route path="/" element={<Dashboard />} />
+
+          <Route path="/sign-in" element={<SignIn />} />
 
           {/* admin routes */}
-          <Route path='/admin/upload' element={<UploadPage />} />
-          <Route path='/admin/user-management' element={<UserManagementPage />} />
+          <Route path="/admin/upload" element={<UploadPage />} />
+          <Route
+            path="/admin/user-management"
+            element={<UserManagementPage />}
+          />
         </Routes>
-      </Router> 
+      </Router>
     </>
   );
-}
+};
 
 export default App;
