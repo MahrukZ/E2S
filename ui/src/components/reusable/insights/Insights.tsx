@@ -196,14 +196,14 @@ function Insights() {
             <Card className="insightsCard flex-fill">
             <Card.Title>CO2 Emissions Insight</Card.Title>
                 <Card.Body>
-                    {insightsList[4]} 
+                    {insightsList[6]} 
                     <b className="percentageNeutral" 
                     style={{
                         backgroundColor: isEmissionsPositive ? 'darkred' : 'green',
                     }}>
                         {consumptionsList[2]}%
                     </b>
-                    {insightsList[5]}
+                    {insightsList[7]}
                 </Card.Body>
             </Card>
             </Col>
