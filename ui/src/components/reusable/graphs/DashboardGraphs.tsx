@@ -47,6 +47,14 @@ function DashboardGraphs() {
         lineColour: ""
     });
 
+    const [emissionsGraph, setEmissionsGraph] = useState<ISingleGraph>({
+        xData: [],
+        yData: [],
+        xName: "",
+        yName: "",
+        lineColour: ""
+    });
+
     const [costsGraph, setCostsGraph] = useState<IDoubleGraph>({
         xData0: [],
         yData0: [],
@@ -69,6 +77,7 @@ function DashboardGraphs() {
             let timeData = [];
             let electricityCostData = [];
             let gasCostData = [];
+            let emissionsData = [];
 
             const now = new Date();
             const priorDate = new Date(new Date().setDate(now.getDate() - 30));
@@ -97,6 +106,10 @@ function DashboardGraphs() {
                 const gasCost = parseFloat(currentConsumptionsData[i]["heatDemand"]) * parseFloat(currentConsumptionsData[i]["gasPrice"]);
 
                 gasCostData.push(gasCost);
+
+                // const formattedEmissions = parseFloat(currentConsumptionsData[i]["co2Emissions"]);
+
+                // emissionsData.push(formattedEmissions);
             }
 
             setElectricityGraph({
@@ -114,6 +127,14 @@ function DashboardGraphs() {
                 yName: "Gas Consumption (kWh)",
                 lineColour: "#f15a2f"
             })
+
+            // setEmissionsGraph({
+            //     xData: timeData,
+            //     yData: emissionsData,
+            //     xName: "date",
+            //     yName: "CO2 Emissions (INSERT UNIT HERE)",
+            //     lineColour: "#a4ba71"
+            // })
 
             setCostsGraph({
                 xData0: timeData,
@@ -138,6 +159,8 @@ function DashboardGraphs() {
                 <SingleGraph graphData={electricityGraph} />
 
                 <SingleGraph graphData={gasGraph} />
+
+                {/* <SingleGraph graphData={emissionsGraph} /> */}
 
             </Col>
 
