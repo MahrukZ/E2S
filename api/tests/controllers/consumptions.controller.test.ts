@@ -332,7 +332,7 @@ describe("ConsumptionController", () => {
         });
     });
 
-    describe("ConsumptionController.findAllConsumptionsBySiteAndTime", () => {
+    describe("ConsumptionController.findSumOfConsumptionsBySiteIdAndTime", () => {
         const mConsumption: number[] = [1, 2, 3];
         const mSuccessResponse: any = {
             message: 'Success',
@@ -349,11 +349,11 @@ describe("ConsumptionController", () => {
             const req = mRequest();
             const res = mResponse();
             const getSpy = jest
-                .spyOn(service, 'findSumsOfGasElectricityCostsBySiteAndTime')
+                .spyOn(service, 'findSumOfConsumptionsBySiteIdAndTime')
                 .mockResolvedValueOnce(mConsumption);
 
             // When
-            await controller.findSumsOfGasElectricityCostsBySiteAndTime(req, res);
+            await controller.findSumOfConsumptionsBySiteIdAndTime(req, res);
 
             // Then
             expect(res.status).toHaveBeenCalledWith(200);
@@ -367,11 +367,11 @@ describe("ConsumptionController", () => {
             const req = mRequest();
             const res = mResponse();
             const getSpy = jest
-                .spyOn(service, 'findSumsOfGasElectricityCostsBySiteAndTime')
+                .spyOn(service, 'findSumOfConsumptionsBySiteIdAndTime')
                 .mockRejectedValue({});
 
             // When
-            await controller.findSumsOfGasElectricityCostsBySiteAndTime(req, res);
+            await controller.findSumOfConsumptionsBySiteIdAndTime(req, res);
 
             // Then
             expect(res.status).toHaveBeenCalledWith(500);

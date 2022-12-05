@@ -193,16 +193,16 @@ describe('ConsumptionService', () => {
         });
     });
 
-    describe('ConsumptionService.findSumsOfGasElectricityCostsBySiteAndTime', () => {
+    describe('ConsumptionService.findSumOfConsumptionsBySiteIdAndTime', () => {
         it('should return consumptions', async () => {
 
             // Given
             const getSpy = jest
-                .spyOn(repository, 'findSumsOfGasElectricityCostsBySiteAndTime')
+                .spyOn(repository, 'findSumOfConsumptionsBySiteIdAndTime')
                 .mockResolvedValue([1, 2, 3]);
 
             // When
-            const result = await service.findSumsOfGasElectricityCostsBySiteAndTime("", "", 1);
+            const result = await service.findSumOfConsumptionsBySiteIdAndTime("", "", 1);
 
             // Then
             expect(result).toEqual([1, 2, 3]);

@@ -218,14 +218,14 @@ describe('ConsumptionRepository', () => {
         });
     });
 
-    describe('ConsumptionRepository.findSumsOfGasElectricityCostsBySiteAndTimes', () => {
+    describe('ConsumptionRepository.findSumOfConsumptionsBySiteIdAndTime', () => {
         it('should fetch some numbers when there is data in the database', async () => {
             // Given
             const mockResponse: number[] = [1, 2, 3];
             Consumptions.findAll = jest.fn().mockResolvedValue(mockResponse);
 
             // When
-            const result = await consumptionRepository.findSumsOfGasElectricityCostsBySiteAndTime("2022-11-30 15:30:00","2022-12-01 2015:30:00",1);
+            const result = await consumptionRepository.findSumOfConsumptionsBySiteIdAndTime("2022-11-30 15:30:00","2022-12-01 2015:30:00",1);
 
             // Then
             expect(Consumptions.findAll).toHaveBeenCalledTimes(1);
@@ -235,12 +235,12 @@ describe('ConsumptionRepository', () => {
             // Given 
             // When
             const mErrorMessage = new Error("Failed to fetch all consumptions.");
-            consumptionRepository.findSumsOfGasElectricityCostsBySiteAndTime = jest.fn().mockRejectedValue(mErrorMessage);
+            consumptionRepository.findSumOfConsumptionsBySiteIdAndTime = jest.fn().mockRejectedValue(mErrorMessage);
             
             // Then
-            expect(consumptionRepository.findSumsOfGasElectricityCostsBySiteAndTime).rejects.toMatchObject(mErrorMessage);
-            expect(consumptionRepository.findSumsOfGasElectricityCostsBySiteAndTime).toHaveBeenCalledTimes(1);
-            expect(consumptionRepository.findSumsOfGasElectricityCostsBySiteAndTime).toHaveBeenCalledWith();
+            expect(consumptionRepository.findSumOfConsumptionsBySiteIdAndTime).rejects.toMatchObject(mErrorMessage);
+            expect(consumptionRepository.findSumOfConsumptionsBySiteIdAndTime).toHaveBeenCalledTimes(1);
+            expect(consumptionRepository.findSumOfConsumptionsBySiteIdAndTime).toHaveBeenCalledWith();
         });
     });
     

@@ -161,7 +161,7 @@ describe('index', () => {
         });
     });
 
-    describe('GET /api/consumption/findSumsOfGasElectricityCostsBySiteAndTime/:start/:end/:id', () => {
+    describe('GET /api/consumption/findSumOfConsumptionsBySiteIdAndTime/:start/:end/:id', () => {
         const mConsumption: IConsumption[] = [{
             consumptionId: 1,
             timeInterval: mockDateObject,
@@ -203,13 +203,13 @@ describe('index', () => {
 
         it('should fetch all consumptions when there is data', async () => {
             // Given
-            const mUrl = "/api/consumption/findSumsOfGasElectricityCostsBySiteAndTime/:start/:end/:id";
+            const mUrl = "/api/consumption/findSumOfConsumptionsBySiteIdAndTime/:start/:end/:id";
             const getSpy = jest
-                .spyOn(controller, 'findSumsOfGasElectricityCostsBySiteAndTime');
+                .spyOn(controller, 'findSumOfConsumptionsBySiteIdAndTime');
 
             // When
             const result = await axios.get(mUrl);
-            await controller.findSumsOfGasElectricityCostsBySiteAndTime(req, res);
+            await controller.findSumOfConsumptionsBySiteIdAndTime(req, res);
 
             // Then
             expect(result).toEqual(mSuccessResponse);
