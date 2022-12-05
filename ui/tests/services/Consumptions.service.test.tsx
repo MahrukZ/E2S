@@ -149,7 +149,7 @@ describe("consumptions.service", () => {
         const fakeDate1 = new Date();
 
         // When
-        const result = await mockService.findAllConsumptionsBySiteIdAndTime(fakeDate0, fakeDate1, 1);
+        const result = await service.findAllConsumptionsBySiteIdAndTime(fakeDate0, fakeDate1, 1);
 
         // Then
         expect(result).toEqual(mBody);
