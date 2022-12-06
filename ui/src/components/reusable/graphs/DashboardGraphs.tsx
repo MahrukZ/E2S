@@ -65,9 +65,9 @@ function DashboardGraphs() {
     name1: "",
   });
 
-  const consumptionsService = new ConsumptionsService();
-
   useEffect(() => {
+    const consumptionsService = new ConsumptionsService();
+
     const findAllConsumptionsBySiteIdAndTime = async () => {
       let electricityData = [];
       let gasData = [];
