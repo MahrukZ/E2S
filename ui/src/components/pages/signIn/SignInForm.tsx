@@ -20,7 +20,25 @@ function SignInForm() {
   const [authStatus, setAuthStatus] = useState("");
 
   const usersService = new UsersService();
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const redirect = async () => {
+      const signInRes = await usersService.checkSignIn();
+      console.log(signInRes);
+      if (signInRes["loggedIn"] == true) {
+        setSuccess("Signed in");
+        if (signInRes["user"].role != "administrator") {
+          navigate("/");
+        } else if (signInRes["user"].role == "administrator") {
+          navigate("/admin/upload");
+        }
+      }
+    };
+    redirect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const signIn = async () => {
     const signInRes = await usersService.signIn(emailAddress, password);
@@ -28,12 +46,7 @@ function SignInForm() {
       setError("Wrong email/password combination");
     } else {
       setSuccess("Signed in");
-      if (signInRes["result"].role != "administrator") {
-        navigate("/");
-      } else if (signInRes["result"].role == "administrator") {
-        navigate("/admin/upload");
-      }
-      console.log(signInRes["result"].role);
+      window.location.reload();
     }
   };
 
