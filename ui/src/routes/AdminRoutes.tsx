@@ -3,27 +3,32 @@ import { UsersService } from "../services/users.service";
 import { BrowserRouter as Redirect, Route, Routes } from "react-router-dom";
 import { Navigate, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { render } from "react-dom";
 
-const ProtectedRoutes = () => {
+const AdminRoutes = () => {
   const usersService = new UsersService();
 
-  const [signInStatus, setSignInStatus] = useState();
+  const [adminStatus, setAdminStatus] = useState<boolean>();
   useEffect(() => {
     const getSignIn = async () => {
       const signedIn = await usersService.checkSignIn();
-      setSignInStatus(signedIn["loggedIn"]);
+      if (signedIn["loggedIn"] === true) {
+        if (signedIn["user"].role == "administrator") {
+          setAdminStatus(true);
+        } else {
+          setAdminStatus(false);
+        }
+      }
     };
     getSignIn();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  if (signInStatus === false) {
+  if (adminStatus === false) {
     return <Navigate to="/sign-in" />;
   }
-  if (signInStatus === true) {
+  if (adminStatus === true) {
     return <Outlet />;
   }
   return <>Still loading...</>;
 };
 
-export default ProtectedRoutes;
+export default AdminRoutes;

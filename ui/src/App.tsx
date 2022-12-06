@@ -1,8 +1,6 @@
 import Axios from "axios";
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { useState, useEffect } from "react";
-import ProtectedRoutes from "../src/routes/ProtectedRoutes";
 import "./App.css";
 
 import Sidebar from "./components/reusable/sidebar/Sidebar";
@@ -14,10 +12,10 @@ import Dashboard from "./components/pages/dashboard/Dashboard";
 import Reports from "./components/pages/Reports";
 import SignIn from "./components/pages/signIn/SignIn";
 
+import AdminRoutes from "../src/routes/AdminRoutes";
+import ProtectedRoutes from "../src/routes/ProtectedRoutes";
 import UploadPage from "./components/pages/admin/upload/UploadPage";
 import UserManagementPage from "./components/pages/admin/userManagement/UserManagementPage";
-
-import { UsersService } from "./services/users.service";
 
 const App: React.FunctionComponent = () => {
   Axios.defaults.withCredentials = true;
@@ -34,17 +32,17 @@ const App: React.FunctionComponent = () => {
             <Route path="/reports" element={<Reports />} />
             <Route path="/billvalidation" element={<BillValidation />} />
             <Route path="/costforecast" element={<CostForecast />} />
+            <Route path="/" element={<Dashboard />} />
           </Route>
-          <Route path="/" element={<Dashboard />} />
-
-          <Route path="/sign-in" element={<SignIn />} />
-
           {/* admin routes */}
-          <Route path="/admin/upload" element={<UploadPage />} />
-          <Route
-            path="/admin/user-management"
-            element={<UserManagementPage />}
-          />
+          <Route element={<AdminRoutes />}>
+            <Route path="/admin/upload" element={<UploadPage />} />
+            <Route
+              path="/admin/user-management"
+              element={<UserManagementPage />}
+            />
+          </Route>
+          <Route path="/sign-in" element={<SignIn />} />
         </Routes>
       </Router>
     </>
