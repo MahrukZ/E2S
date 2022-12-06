@@ -12,7 +12,7 @@ function DoubleGraph({ graphData }: DoubleGraphProps) {
 
     return (
         <Card className="largeGraphCard  flex-fill">
-        <div className="graph">
+        <div className="graph" data-testid="graphElement">
             <Plot
                 data={[
                     {

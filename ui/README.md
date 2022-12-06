@@ -40,6 +40,7 @@ npm i
 - `jest-environment-jsdom` package - **Learn more [here](https://www.npmjs.com/package/jest-environment-jsdom)**
 - `jsx-runtime` package - **Learn more [here](https://www.npmjs.com/package/jsx-runtime)**
 - `jest-canvas-mock` package - Mock canvas when run unit test cases with jest. **Learn more [here](https://www.npmjs.com/package/jest-canvas-mock)**
+- `prettier` package - Prettier is a code formatter and enforces a consistent style. **Learn more [here](https://prettier.io/)**
 
 ## Available Scripts
 

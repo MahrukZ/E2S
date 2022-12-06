@@ -1,15 +1,15 @@
 import React from "react";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import UploadPage from '../../../../src/components/pages/admin/upload/UploadPage';
+import UploadPage from "../../../../src/components/pages/admin/upload/UploadPage";
 
-test('should render upload page title element', () => {
-    // Given
-    render(<UploadPage />);
+test("should render upload page title element", () => {
+  // Given
+  render(<UploadPage />);
 
-    // When
-    const uploadPageElement = screen.getByText("Upload Page")
+  // When
+  const uploadPageElement = screen.getByText("Upload Page");
 
-    // Then
-    expect(uploadPageElement).toBeInTheDocument();
+  // Then
+  expect(uploadPageElement).toBeInTheDocument();
 });

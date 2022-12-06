@@ -2,11 +2,11 @@ import { ISite } from "../data/models/sites.model";
 import { SiteRepository } from "../data/repositories/sites.repository";
 
 export class SiteService {
-    private siteRepository: SiteRepository;
+  private siteRepository: SiteRepository;
 
-    constructor() {
-        this.siteRepository = new SiteRepository();
-    }
+  constructor() {
+    this.siteRepository = new SiteRepository();
+  }
 
     // Unused methods
     // async createSite(site: ISite) {

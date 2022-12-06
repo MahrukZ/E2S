@@ -12,22 +12,21 @@ export interface IConsumption {
     orgId?: number;
 }
 
-@Table({ tableName: 'consumptions', underscored: true })
+@Table({ tableName: "consumptions", underscored: true })
 export class Consumptions extends Model implements IConsumption {
+  @Column({
+    primaryKey: true,
+    allowNull: false,
+    autoIncrement: true,
+    type: DataType.INTEGER,
+  })
+  consumptionId?: number;
 
-    @Column({
-        primaryKey: true,
-        allowNull: false,
-        autoIncrement: true,
-        type: DataType.INTEGER 
-    })
-    consumptionId?: number; 
-
-    @Column({ 
-        type: DataType.DATE,
-        defaultValue: DataType.NOW
-    })
-    timeInterval?: Date;
+  @Column({
+    type: DataType.DATE,
+    defaultValue: DataType.NOW,
+  })
+  timeInterval?: Date;
 
     @Column({ 
         type: DataType.FLOAT
@@ -54,13 +53,13 @@ export class Consumptions extends Model implements IConsumption {
     })
     gasPrice?: number;
 
-    @Column({ 
-        type: DataType.INTEGER
-    })
-    siteId?: number;
+  @Column({
+    type: DataType.INTEGER,
+  })
+  siteId?: number;
 
-    @Column({ 
-        type: DataType.INTEGER
-    })
-    orgId?: number;
+  @Column({
+    type: DataType.INTEGER,
+  })
+  orgId?: number;
 }

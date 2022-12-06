@@ -1,16 +1,15 @@
-import axios from 'axios';
-import '@testing-library/jest-dom';
-import { UserManagementService } from '../../src/services/userManagement.service';
-import { IUserManagement } from '../../src/components/pages/admin/userManagement/UserTable';
+import axios from "axios";
+import "@testing-library/jest-dom";
+import { UserManagementService } from "../../src/services/userManagement.service";
+import { IUserManagement } from "../../src/components/pages/admin/userManagement/UserTable";
 
-jest.mock('axios');
+jest.mock("axios");
 
 describe("UserManagementService", () => {
-
   const mockService = new UserManagementService();
   const mockedAxios = axios as jest.Mocked<typeof axios>;
 
-  describe('UserManagementService.findUserManagementByUserId', () => {
+  describe("UserManagementService.findUserManagementByUserId", () => {
     // Given
     const mUser: IUserManagement = {
       userId: 1,
@@ -19,13 +18,13 @@ describe("UserManagementService", () => {
       email: "rhys.jones@cardiff.ac.uk",
       organisation: "Cardiff University",
       noSitesManaged: 3,
-      role: "facility energy manager"
+      role: "facility energy manager",
     };
     mockedAxios.get.mockResolvedValue({
-      data: mUser
+      data: mUser,
     });
 
-    it('should return correct user when function is called', async () => {
+    it("should return correct user when function is called", async () => {
       // When
       const result = await mockService.findUserManagementByUserId(1);
 

@@ -1,14 +1,19 @@
-import Form from 'react-bootstrap/Form';
-import { ISiteAndUser } from './Topbar';
+import Form from "react-bootstrap/Form";
+import { ISiteAndUser } from "./Topbar";
 
 interface SiteDropownProps {
-    sites: ISiteAndUser[];
+  sites: ISiteAndUser[];
 }
 
 function SiteDropdown({ sites }: SiteDropownProps) {
   return (
     <div>
-      <Form.Select data-testid="siteDropdown" id="siteDropdown" size="sm" className="mt-1 mb-1">
+      <Form.Select
+        data-testid="siteDropdown"
+        id="siteDropdown"
+        size="sm"
+        className="mt-1 mb-1"
+      >
         {sites.map((site, index) => (
           <option data-testid={index} key={index} value={site.siteId}>
             {site.siteName}
@@ -16,7 +21,7 @@ function SiteDropdown({ sites }: SiteDropownProps) {
         ))}
       </Form.Select>
     </div>
-  )
+  );
 }
 
-export default SiteDropdown
+export default SiteDropdown;

@@ -5,7 +5,7 @@ import { Container } from "react-bootstrap";
 
 function Dashboard() {
     return (
-        <Container fluid className="d-flex flex-column">     
+        <Container fluid className="d-flex flex-column" data-testid="dashboardContainer">     
             <Insights />
             <DashboardGraphs />
         </Container>

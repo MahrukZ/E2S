@@ -12,7 +12,7 @@ function SingleGraph({ graphData }: SingleGraphProps) {
 
     return (
         <Card className="graphCard flex-fill">
-        <div className="graph">
+        <div className="graph" data-testid="graphElement">
             <Plot
                 data={[
                     {
