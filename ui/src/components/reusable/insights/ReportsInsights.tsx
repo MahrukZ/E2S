@@ -7,7 +7,7 @@ import { Container, Col } from "react-bootstrap";
 import "./Insights.css";
 import Insight, { IInsightData } from "./Insight";
 
-function DashboardInsights() {
+function ReportsInsights() {
   
     const currentSiteId = 1;
 
@@ -59,7 +59,7 @@ function DashboardInsights() {
             const currentSite = siteData["data"][0]["name"];
 
             // Replace [site] in the template with site name
-            for (let i = 0; i < 3; i++ ) {
+            for (let i = 3; i < 6; i++ ) {
                 const currentInsight0: string = String(insightsTemplates["data"][i]["description"]);
 
                 const insightToAdd0 = currentInsight0.replace("[site]", currentSite)
@@ -85,7 +85,7 @@ function DashboardInsights() {
         const findSumOfConsumptionsBySiteIdAndTime = async () => {
             let costPct: String = "";
             let electricityPct: String = "";
-            let gasPct: String = "";
+            let gasPct: String = "";            
 
             const now = new Date();
             const priorDate = new Date(new Date().setDate(now.getDate() - 7));
@@ -120,7 +120,8 @@ function DashboardInsights() {
             if (electricityPercentage <= 0) {
                 const stringElectricityPercentage = String(electricityPercentage);
                 electricityPct = stringElectricityPercentage;
-            } else {
+            }
+            else {
                 const stringElectricityPercentage = "+" + String(electricityPercentage);
                 electricityPct = stringElectricityPercentage;
                 setIsElectricityPositive(true);
@@ -129,7 +130,8 @@ function DashboardInsights() {
             if (gasPercentage <= 0) {
                 const stringGasPercentage = String(gasPercentage);
                 gasPct = stringGasPercentage;
-            } else {
+            }
+            else {
                 const stringGasPercentage = "+" + String(gasPercentage);
                 gasPct = stringGasPercentage;
                 setIsGasPositive(true);
@@ -138,14 +140,15 @@ function DashboardInsights() {
             if (costPercentage <= 0) {
                 const stringCostPercentage = String(costPercentage);
                 costPct = stringCostPercentage;
-            } else {
+            }
+            else {
                 const stringCostPercentage = "+" + String(costPercentage);
                 costPct = stringCostPercentage;
                 setIsCostPositive(true);
             };
 
             setCostsInsight({
-                title: "Total Costs",
+                title: "Total Costs Insight",
                 insightList: costsInsightsList,
                 percentage: costPct,
                 isPositive: isCostPositive
@@ -185,4 +188,4 @@ function DashboardInsights() {
     );
 };
 
-export default DashboardInsights;
+export default ReportsInsights;
