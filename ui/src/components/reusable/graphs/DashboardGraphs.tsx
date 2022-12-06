@@ -71,7 +71,7 @@ function DashboardGraphs() {
     const consumptionsService = new ConsumptionsService;
 
     useEffect(() => {
-        const findAllConsumptionsBySiteAndTime = async () => {
+        const findAllConsumptionsBySiteIdAndTime = async () => {
             let electricityData = [];
             let gasData = [];
             let timeData = [];
@@ -82,7 +82,7 @@ function DashboardGraphs() {
             const now = new Date();
             const priorDate = new Date(new Date().setDate(now.getDate() - 30));
 
-            const currentConsumptionsResponse = await consumptionsService.findAllConsumptionsBySiteAndTime(priorDate, now, currentSiteId);
+            const currentConsumptionsResponse = await consumptionsService.findAllConsumptionsBySiteIdAndTime(priorDate, now, currentSiteId);
 
             const currentConsumptionsData = currentConsumptionsResponse["data"];
 
@@ -149,11 +149,11 @@ function DashboardGraphs() {
             })
         }
 
-        findAllConsumptionsBySiteAndTime();
+        findAllConsumptionsBySiteIdAndTime();
     }, []);
 
     return (
-        <Container fluid className="justify-content-center">
+        <Container fluid className="justify-content-center" data-testid="graphContainer">
             <Col className="d-flex graphContainer">
 
                 <SingleGraph graphData={electricityGraph} />

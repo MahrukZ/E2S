@@ -6,7 +6,7 @@ import Insights from '../reusable/insights/Insights';
 
 function Dashboard() {
     return (
-        <Container fluid className="d-flex flex-column">     
+        <Container fluid className="d-flex flex-column" data-testid="dashboardContainer">     
         <Insights></Insights>
         <DashboardGraphs></DashboardGraphs>
         </Container>
