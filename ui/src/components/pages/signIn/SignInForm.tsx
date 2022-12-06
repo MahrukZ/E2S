@@ -7,6 +7,7 @@ import Row from "react-bootstrap/Row";
 import { useNavigate } from "react-router-dom";
 import { UsersService } from "../../../services/users.service";
 import Message from "../../reusable/alerts/Message";
+import "./SignInForm.css";
 
 function SignInForm() {
   const [emailAddress, setEmailAddress] = useState("");
@@ -70,12 +71,13 @@ function SignInForm() {
   }, []);
 
   return (
-    <Container>
+    <Container className="signInContainer mt-5">
       <Row>
         <Col>
+          <h1 className="signInTitle">Sign In to E2S Dashboard</h1>
           <Form>
             <Form.Group className="mb-3" controlId="emailAddress">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label className="signInFormLabel">Email address</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="Enter email"
@@ -85,26 +87,31 @@ function SignInForm() {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="password">
-              <Form.Label>Password</Form.Label>
+              <Form.Label className="signInFormLabel">Password</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Password"
+                placeholder="Enter Password"
                 onChange={(e: any) => {
                   setPassword(e.target.value);
                 }}
               />
             </Form.Group>
-            <Button variant="primary" onClick={signIn}>
-              Sign In
-            </Button>
+            <div className="btnContainer">
+              <Button
+                variant="primary"
+                onClick={signIn}
+                className="mb-3 signInBtn"
+              >
+                Sign In
+              </Button>
+            </div>
           </Form>
-          <h1>{signInStatus}</h1>
+          {/* <h1>{signInStatus}</h1> */}
           {error.length > 0 && <Message message={error} type="danger" />}
-          {success.length > 0 && <Message message={success} type="success" />}
-          <h2>{authStatus}</h2>
+          {/* <h2>{authStatus}</h2>
           <Button variant="primary" onClick={checkAuth}>
             Check auth
-          </Button>
+          </Button> */}
         </Col>
       </Row>
     </Container>

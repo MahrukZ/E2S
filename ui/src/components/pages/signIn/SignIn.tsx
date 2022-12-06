@@ -5,10 +5,9 @@ import "./SignIn.css";
 function SignIn() {
   return (
     <div>
-        <h1 id="signInTitle">Sign In</h1>
-        <SignInForm />
+      <SignInForm />
     </div>
   );
-};
+}
 
 export default SignIn;
