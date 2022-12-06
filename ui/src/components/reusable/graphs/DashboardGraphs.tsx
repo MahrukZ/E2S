@@ -124,7 +124,7 @@ function DashboardGraphs() {
                 xData: timeData,
                 yData: emissionsData,
                 xName: "date",
-                yName: "CO2 Emissions (kt)",
+                yName: "CO2 Emissions (kgCO2e)",
                 lineColour: "#a4ba71"
             });
 
