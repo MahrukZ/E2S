@@ -19,30 +19,8 @@ import UserManagementPage from "./components/pages/admin/userManagement/UserMana
 
 import { UsersService } from "./services/users.service";
 
-export interface ISignedIn {
-  userId: number;
-  role: string;
-}
-
 const App: React.FunctionComponent = () => {
   Axios.defaults.withCredentials = true;
-
-  const usersService = new UsersService();
-
-  const [signInStatus, setsignInStatus] = useState<ISignedIn>({
-    signedIn: false,
-    userId: 0,
-    role: "no role",
-  });
-
-  useEffect(() => {
-    const getSignIn = async () => {
-      const signedIn = await usersService.checkSignIn();
-      setsignInStatus(signedIn["loggedIn"]);
-    };
-    getSignIn();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   //Defines the paths of each page
   //This file should only have the topbar and sidebar
@@ -52,7 +30,7 @@ const App: React.FunctionComponent = () => {
         <Topbar />
         <Sidebar />
         <Routes>
-          <Route element={<ProtectedRoutes signedIn={signInStatus} />}>
+          <Route element={<ProtectedRoutes />}>
             <Route path="/reports" element={<Reports />} />
             <Route path="/billvalidation" element={<BillValidation />} />
             <Route path="/costforecast" element={<CostForecast />} />
