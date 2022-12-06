@@ -1,15 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card } from "react-bootstrap";
+import { IDashboardInsights } from "./DashboardInsights";
 import "./Insights.css";
 
 interface InsightProps {
-    title: string,
-    insightList: String[],
-    percentage: String,
-    isPositive: Boolean
+    insightData: IDashboardInsights
 }
 
-function Insight(insightData: InsightProps) {
+function Insight({ insightData }: InsightProps) {
     console.log(insightData);
   
     return (

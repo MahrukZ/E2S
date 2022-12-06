@@ -1,10 +1,10 @@
-import Insights from '../reusable/insights/Insights';
+import DashboardInsights from '../reusable/insights/DashboardInsights';
 
 function Dashboard() {
     return (
         <div>
-        <h1 id='dashboard'>Dashboard</h1>
-        <Insights></Insights>
+            <h1 id='dashboard'>Dashboard</h1>
+            <DashboardInsights />
         </div>
     );
 };
