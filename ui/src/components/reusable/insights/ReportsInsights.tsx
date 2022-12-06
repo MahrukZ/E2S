@@ -88,6 +88,13 @@ function ReportsInsights() {
             let gasPct: String = "";            
 
             const now = new Date();
+            const firstDayOfTheWeek = (now.getDate() - now.getDay()) + 1;
+            const lastDayOfTheWeek = firstDayOfTheWeek + 6;
+            const firstDayOfLastWeek = new Date(now.setDate(firstDayOfTheWeek - 7));
+            const lastDayOfLastWeek = new Date(now.setDate(lastDayOfTheWeek - 7));
+            console.log(firstDayOfLastWeek);
+            console.log(lastDayOfLastWeek);
+
             const priorDate = new Date(new Date().setDate(now.getDate() - 7));
             const priorPriorDate = new Date(new Date().setDate(now.getDate() - 14));
 
