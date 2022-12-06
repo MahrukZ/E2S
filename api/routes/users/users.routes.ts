@@ -8,11 +8,11 @@ const userManagementController = new UserManagementController();
 
 // routes
 router.get("/api/user-managements", async (req, res) => {
-    userManagementController.getAllUserManagements(req, res);
+  userManagementController.getAllUserManagements(req, res);
 });
 
 router.get("/api/user-management/:id", async (req, res) => {
-    userManagementController.findUserManagementByUserId(req, res);
+  userManagementController.findUserManagementByUserId(req, res);
 });
 
 export default router;

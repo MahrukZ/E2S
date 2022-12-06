@@ -1,6 +1,4 @@
-import React from 'react';
-
-const CostForecast: React.FunctionComponent = () => {
+function CostForecast() {
     return (
         <h1 id="costForecast">CostForecast</h1>
     );

@@ -1,12 +1,11 @@
 import axios from "axios";
 import { IUploadData } from "../components/pages/admin/upload/UploadButton";
 
-export class ConsumptionsService{
-
-    public async getAllConsumptions():Promise<any> {
-        const response = await axios.get('/api/consumptions');
-        return response.data;
-    }
+export class ConsumptionsService {
+  public async getAllConsumptions(): Promise<any> {
+    const response = await axios.get("/api/consumptions");
+    return response.data;
+  }
 
     public async bulkCreateConsumptions(consumptions: IUploadData[]): Promise<any> {
         // Last record comes back as undefined. This line gets all data without last record.
@@ -15,13 +14,13 @@ export class ConsumptionsService{
         return await response.data;
     }
 
-    public async findAllConsumptionsBySiteAndTime(startTime: Date, endTime: Date, siteId: number): Promise<any> {
-        const response = await axios.get(`/api/consumption/findBySiteAndTime/${startTime}/${endTime}/${siteId}`);
+    public async findAllConsumptionsBySiteIdAndTime(startTime: Date, endTime: Date, siteId: number): Promise<any> {
+        const response = await axios.get(`/api/consumption/find/${startTime}/${endTime}/${siteId}`);
         return await response.data;
     }
 
-    public async findSumsOfGasElectricityCostsBySiteAndTime(startTime: Date, endTime: Date, siteId: number): Promise<any> {
-        const response = await axios.get(`/api/consumption/findSumsOfGasElectricityCostsBySiteAndTime/${startTime}/${endTime}/${siteId}`);
+    public async findSumOfConsumptionsBySiteIdAndTime(startTime: Date, endTime: Date, siteId: number): Promise<any> {
+        const response = await axios.get(`/api/consumption/find-sum/${startTime}/${endTime}/${siteId}`);
         return await response.data;
     }
 }

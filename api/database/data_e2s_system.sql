@@ -147,10 +147,10 @@ INSERT INTO `reports`
 VALUES(null, './assets/reports/report.pdf', 8, '2022-03-25');
 
 INSERT INTO `insight_templates`
-VALUES(null, 'Considering your energy prices forecasts, your CHP units should be ran into thermal led mode. This could help you save £... on your energy bills and ... tCO2e');
+VALUES(null, 'In the last 7 days, the total costs of [site] has changed by [data] compared to the previous 7 days.');
 INSERT INTO `insight_templates`
-VALUES(null, 'Last ..., your electricity consumption increased by ...% compared to your baseline');
+VALUES(null, 'In the last 7 days, the electricity consumption of [site] has changed by [data] compared to the previous 7 days.');
 INSERT INTO `insight_templates`
-VALUES(null, 'Your forecast energy costs for the next ... is £... This is an increase/decrease of ...% compared to last ... at the same period');
+VALUES(null, 'In the last 7 days, the gas consumption of [site] has changed by [data] compared to the previous 7 days.');
 
 SET foreign_key_checks = 1;

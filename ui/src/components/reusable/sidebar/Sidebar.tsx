@@ -1,14 +1,14 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { SidebarData } from './SidebarData'
+import React from "react";
+import { Link } from "react-router-dom";
+import { SidebarData } from "./SidebarData";
 import "./Sidebar.css";
-import * as FaIcons from 'react-icons/fa' 
+import * as FaIcons from "react-icons/fa";
 
-import { useState } from 'react'
+import { useState } from "react";
 
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import logo from './../../../assets/images/Cardiff_University_logo.png'
+import logo from "./../../../assets/images/Cardiff_University_logo.png";
 
 //css in this file due to custom headings with links
 
@@ -35,7 +35,7 @@ const MenuIconOpen = styled(Link)`
         color: #0F242C;
     }
 
-`
+`;
 
 const MenuIconClose = styled(Link)`
     font-size: 2.5rem;
@@ -69,53 +69,52 @@ const SidebarMenu = styled.div<{close: boolean}>`
 `
 
 const MenuItems = styled.li`
-    list-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    width: 100%;
-    height: 90px;
-    padding: 1rem 0 1.25rem;
-`
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  height: 90px;
+  padding: 1rem 0 1.25rem;
+`;
 
 const MenuItemLinks = styled(Link)`
-    display: flex;
-    align-items: center;
-    padding: 0 2rem;
-    font-size: 11px;
-    text-decoration: none;
-    color: #ffffff;
-    margin: 0 1rem;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  font-size: 11px;
+  text-decoration: none;
+  color: #ffffff;
+  margin: 0 1rem;
 
-    &:hover {
-        background-color: #ffffff;
-        color: #0F242C;
-        width: 100%;
-        height: 100%;
-        border-radius: 5px;
-        margin: 0 1rem;
-    }
-`
+  &:hover {
+    background-color: #ffffff;
+    color: #0f242c;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    margin: 0 1rem;
+  }
+`;
 
 const CollapsedMenuItemLinks = styled(Link)`
-    display: flex;
-    align-items: center;
-    padding: 0 2rem;
-    font-size: 11px;
-    text-decoration: none;
-    color: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  font-size: 11px;
+  text-decoration: none;
+  color: #ffffff;
 
-    &:hover {
-        background-color: #ffffff;
-        color: #0F242C;
-        width: 100%;
-        height: 100%;
-        border-radius: 3px;
-        
-    }
-`
+  &:hover {
+    background-color: #ffffff;
+    color: #0f242c;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+  }
+`;
 
-const ImageLink = styled(Link)``
+const ImageLink = styled(Link)``;
 
 const Sidebar: React.FunctionComponent = () => {
     const [close, setClose] = useState(false)
@@ -152,25 +151,28 @@ const Sidebar: React.FunctionComponent = () => {
                 <img className="imageLogo" width={50} height={50} src={logo} alt="logo" />
                 </ImageLink>
 
-                <MenuIconClose data-testid="menuIconClose" to="#" onClick={showSidebar}>
-                    <FaIcons.FaTimes />
-                </MenuIconClose>
+          <MenuIconClose
+            data-testid="menuIconClose"
+            to="#"
+            onClick={showSidebar}
+          >
+            <FaIcons.FaTimes />
+          </MenuIconClose>
+        </TopSideBarClose>
 
-                </TopSideBarClose>
+        {SidebarData.map((item, index) => {
+          return (
+            <MenuItems key={index}>
+              <MenuItemLinks to={item.path}>
+                {item.icon}
+                <h1 id="sidebarHeadings">{item.title}</h1>
+              </MenuItemLinks>
+            </MenuItems>
+          );
+        })}
+      </SidebarMenu>
+    </>
+  );
+};
 
-                {SidebarData.map((item, index) => {
-                    return (
-                        <MenuItems key={index}>
-                            <MenuItemLinks to={item.path}>
-                                {item.icon}
-                                <h1 id="sidebarHeadings" >{item.title}</h1>
-                            </MenuItemLinks>
-                        </MenuItems>
-                    )
-                })}
-            </SidebarMenu>
-        </>
-    )
-}
-
-export default Sidebar
+export default Sidebar;

@@ -1,0 +1,23 @@
+# See https://prettier.io/docs/en/ignore.html for more about ignoring files.
+
+# Ignore artifacts:
+build
+coverage
+package-lock.json
+package.json
+jest.config.js
+tsconfig.json
+*.md
+
+# dependencies
+dist/
+client
+node_modules/
+coverage/
+database/
+
+# misc
+.DS_Store
+.env
+.gitignore
+.gitlab-ci.yml
