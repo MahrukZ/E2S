@@ -36,19 +36,19 @@ describe("SitesAndUsersController", () => {
     describe("SitesAndUsersController.getAllSitesAndUsers", () => {
         const mSitesAndUsers: ISitesAndUser[] = [
             {
-                site_id: 1,
+                siteId: 1,
                 name: "Abacws",
-                user_id: 1
+                userId: 1
             },
             {
-                site_id: 1,
+                siteId: 1,
                 name: "Abacws",
-                user_id: 3
+                userId: 3
             },
             {
-                site_id: 2,
+                siteId: 2,
                 name: "National Software Academy",
-                user_id: 1
+                userId: 1
             }
         ];
         const mSuccessResponse: any = {
@@ -102,19 +102,19 @@ describe("SitesAndUsersController", () => {
     describe("SitesAndUsersController.findSitesAndUsersByUserId", () => {
         const mSitesAndUsers: ISitesAndUser[] = [
             {
-                site_id: 1,
+                siteId: 1,
                 name: "Abacws",
-                user_id: 1
+                userId: 1
             },
             {
-                site_id: 1,
+                siteId: 1,
                 name: "Abacws",
-                user_id: 3
+                userId: 3
             },
             {
-                site_id: 2,
+                siteId: 2,
                 name: "National Software Academy",
-                user_id: 1
+                userId: 1
             }
         ];
         const mSuccessResponse: any = {

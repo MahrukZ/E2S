@@ -12,7 +12,8 @@
     background-color:#417285;
     border-color: #417285;
     border-radius: 10px;
-    min-width: 9em;
+    min-width: 12em;
+    max-width: 100%;
 }
 
 .dropdown-menu[aria-labelledby = dropdown-basic-button] {
@@ -22,7 +23,7 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     margin: auto;
-    min-width:auto;
+    width: 100%;
     padding-top: 0;
     padding-bottom: 0;
 }
@@ -32,6 +33,7 @@
     width: 100%;
     margin: auto;
     border-radius: 0;
+    text-align: center;
 }
 
 #settingsDropdown:hover {
@@ -46,6 +48,7 @@
     border-top-right-radius: 0;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    text-align: center;
 }
 
 #signOutDropdown:hover {
@@ -74,11 +77,4 @@
 #siteDropdown {
     position: relative;
     top:2px;
-}
-
-#hoverContainer {
-    border: solid;
-    border-color: #73A6BA;
-    height: 50%;
-    width: fit-content;
 }

@@ -56,7 +56,7 @@ export class InsightRepository {
         try {
             data = await this.insightRepository.update({...insight}, {
                 where: {
-                    insight_id: insight.insight_id
+                    insight_id: insight.insightId
                 }
             });
         } catch(err) {

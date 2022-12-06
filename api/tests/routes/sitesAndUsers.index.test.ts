@@ -1,10 +1,10 @@
 import axios from "axios"
-import { SitesAndUsersController } from "../controllers/sitesAndUsers.controller";
-import { ISitesAndUser } from "../data/models/sitesAndUsers.model";
+import { SitesAndUsersController } from "../../controllers/sitesAndUsers.controller";
+import { ISitesAndUser } from "../../data/models/sitesAndUsers.model";
 
 jest.mock('axios');
 
-jest.mock('../controllers/sitesAndUsers.controller', () => {
+jest.mock('../../controllers/sitesAndUsers.controller', () => {
     const mSitesAndUsersController = { 
         getAllSitesAndUsers: jest.fn(),
         findSitesAndUsersByUserId: jest.fn()
@@ -38,19 +38,19 @@ describe('index', () => {
     describe('GET /api/sites_and_users', () => {
         const mSitesAndUser: ISitesAndUser[] = [
             {
-                site_id: 1,
-                name: 'Abacws',
-                user_id: 1
+                siteId: 1,
+                name: "Abacws",
+                userId: 1
             },
             {
-                site_id: 1,
-                name: 'Abacws',
-                user_id: 3
+                siteId: 1,
+                name: "Abacws",
+                userId: 3
             },
             {
-                site_id: 2,
-                name: 'National Software Academy',
-                user_id: 1
+                siteId: 2,
+                name: "National Software Academy",
+                userId: 1
             }
         ];
         const mSuccessResponse: any = {
@@ -86,19 +86,19 @@ describe('index', () => {
     describe('GET /api/sites_and_users/:id', () => {
         const mSitesAndUser: ISitesAndUser[] = [
             {
-                site_id: 1,
-                name: 'Abacws',
-                user_id: 1
+                siteId: 1,
+                name: "Abacws",
+                userId: 1
             },
             {
-                site_id: 1,
-                name: 'Abacws',
-                user_id: 3
+                siteId: 1,
+                name: "Abacws",
+                userId: 3
             },
             {
-                site_id: 2,
-                name: 'National Software Academy',
-                user_id: 1
+                siteId: 2,
+                name: "National Software Academy",
+                userId: 1
             }
         ];
         const mSuccessResponse1: any = {

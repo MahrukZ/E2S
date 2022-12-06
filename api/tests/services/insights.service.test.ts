@@ -27,7 +27,7 @@ describe('InsightService', () => {
         it('should create an insights', async () => {
             // Given
             const mCreateInsight: IInsight = {
-                insight_id: 4,
+                insightId: 4,
                 description: 'new insight'
             };
             const createSpy = jest
@@ -68,15 +68,15 @@ describe('InsightService', () => {
             // Given
             const mInsight: IInsight[] = [
                 {
-                    insight_id: 1,
+                    insightId: 1,
                     description: 'insight 1'
                 },
                 {
-                    insight_id: 2,
+                    insightId: 2,
                     description: 'insight 2'
                 },
                 {
-                    insight_id: 3,
+                    insightId: 3,
                     description: 'insight 3'
                 }
             ];
@@ -98,7 +98,7 @@ describe('InsightService', () => {
         it('should update an insights', async () => {
             // Given
             const mUpdateInsight: IInsight = {
-                insight_id: 1,
+                insightId: 1,
                 description: 'updated insight'
             };
             const updateSpy = jest
