@@ -161,10 +161,26 @@ app.post("/sign-in", async (req, res) => {
   }
 });
 
+app.post("/sign-out", async (req, res) => {
+  req.session.user = { loggedIn: false };
+  req.session.save();
+  console.log("signed out. Session: ", req.session);
+  res.status(200).json({
+    message: "Signed Out",
+    status: 201,
+  });
+});
+
 // check sign in status
 app.get("/sign-in", async (req, res) => {
+  console.log("checking sign in: ", req.session);
+
   if (req.session.user) {
-    res.send({ loggedIn: true, user: req.session.user });
+    if (req.session.user["loggedIn"] == false) {
+      res.send({ loggedIn: false });
+    } else {
+      res.send({ loggedIn: true, user: req.session.user });
+    }
   } else {
     res.send({ loggedIn: false });
   }

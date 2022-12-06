@@ -25,6 +25,11 @@ export class UsersService {
     return await response.data;
   }
 
+  public async signOut(): Promise<any> {
+    const response = await axios.post(`/sign-out`);
+    return await response.data;
+  }
+
   public async checkSignIn(): Promise<any> {
     const response = await axios.get("/sign-in");
     return await response.data;
