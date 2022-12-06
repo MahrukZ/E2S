@@ -1,7 +1,6 @@
-import React from 'react';
 import DashboardGraphs from "../reusable/graphs/DashboardGraphs";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Card, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Insights from '../reusable/insights/Insights';
 
 function Dashboard() {

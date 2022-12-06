@@ -1,8 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect, useState } from "react";
-import { Container, Card, Col } from "react-bootstrap";
-import { SitesService } from "../../../services/sites.service";
-import { ConsumptionsService } from "../../../services/consumptions.service";
+import { Card } from "react-bootstrap";
 import "./Graph.css";
 import Plot from 'react-plotly.js';
 import { IDoubleGraph } from "./DashboardGraphs";
