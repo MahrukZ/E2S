@@ -1,9 +1,10 @@
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { useState, useEffect } from "react";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import { useNavigate } from "react-router-dom";
 import { UsersService } from "../../../services/users.service";
 import Message from "../../reusable/alerts/Message";
 
@@ -19,6 +20,7 @@ function SignInForm() {
   const [authStatus, setAuthStatus] = useState("");
 
   const usersService = new UsersService();
+  const navigate = useNavigate();
 
   const signIn = async () => {
     const signInRes = await usersService.signIn(emailAddress, password);
@@ -26,6 +28,12 @@ function SignInForm() {
       setError("Wrong email/password combination");
     } else {
       setSuccess("Signed in");
+      if (signInRes["result"].role != "administrator") {
+        navigate("/");
+      } else if (signInRes["result"].role == "administrator") {
+        navigate("/admin/upload");
+      }
+      console.log(signInRes["result"].role);
     }
   };
 
