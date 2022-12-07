@@ -27,7 +27,6 @@ function SignInForm() {
   useEffect(() => {
     const redirect = async () => {
       const signInRes = await usersService.checkSignIn();
-      console.log(signInRes);
       if (signInRes["loggedIn"] == true) {
         setSuccess("Signed in");
         if (signInRes["user"].role != "administrator") {

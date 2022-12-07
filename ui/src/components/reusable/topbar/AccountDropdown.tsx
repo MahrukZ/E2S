@@ -42,8 +42,7 @@ function AccountDropdown({ user }: AccountDropdownProps) {
 
   async function signOut() {
     const signedOut = await usersService.signOut();
-    console.log("sign out resp: ", signedOut);
-    navigate("/");
+    window.location.reload();
   }
 
   return (

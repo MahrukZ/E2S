@@ -32,7 +32,6 @@ function Topbar() {
 
   const getCurrentUserId = async (): Promise<number> => {
     const checkSignIn = await usersService.checkSignIn();
-    console.log(checkSignIn);
     if (checkSignIn["loggedIn"] == true) {
       return checkSignIn.user.userId;
     } else {
@@ -45,8 +44,6 @@ function Topbar() {
       const userId: any = await getCurrentUserId();
       if (userId) {
         let sitesList: ISiteAndUser[] = [];
-        console.log("current user id: ", userId);
-
         const sites = await sitesAndUsersService.findSitesAndUsersByUserId(
           userId
         );
