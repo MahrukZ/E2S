@@ -67,13 +67,7 @@ function ReportsGraphs() {
 
   useEffect(() => {
     const consumptionsService = new ConsumptionsService();
-
-    const now = new Date();
-    const firstDayOfTheWeek = now.getDate() - now.getDay() + 1;
-    const lastDayOfTheWeek = firstDayOfTheWeek + 6;
-    const firstDayOfLastWeek = new Date(now.setDate(firstDayOfTheWeek - 7));
-    const lastDayOfLastWeek = new Date(now.setDate(lastDayOfTheWeek - 7));
-
+    
     const findAllConsumptionsBySiteIdAndTime = async () => {
       let electricityData = [];
       let gasData = [];
