@@ -55,7 +55,7 @@ const verifyJWT = (req: any, res: any, next: any) => {
   } else {
     jwt.verify(token, key, (err: any, decoded: any) => {
       if (err) {
-        res.json("You failed to authenticate");
+        res.send("You failed to authenticate");
       } else {
         req.userId = decoded.id;
         next();
@@ -153,11 +153,11 @@ app.post("/sign-in", async (req, res) => {
     const token = jwt.sign({ id }, key, {
       expiresIn: "1hr",
     });
-    res.json({ auth: true, token: token, result: user });
+    res.status(200).json({ auth: true, token: token, result: user });
     req.session.user = user;
     req.session.save();
   } else {
-    res.json({ auth: false });
+    res.status(400).json({ auth: false });
   }
 });
 
@@ -174,12 +174,12 @@ app.post("/sign-out", async (req, res) => {
 app.get("/sign-in", async (req, res) => {
   if (req.session.user) {
     if (req.session.user["loggedIn"] == false) {
-      res.send({ loggedIn: false });
+      res.status(500).json({ loggedIn: false });
     } else {
-      res.send({ loggedIn: true, user: req.session.user });
+      res.status(200).json({ loggedIn: true, user: req.session.user });
     }
   } else {
-    res.send({ loggedIn: false });
+    res.status(500).json({ loggedIn: false });
   }
 });
 
