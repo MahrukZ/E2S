@@ -8,191 +8,154 @@ import "./Insights.css";
 import Insight, { IInsightData } from "./Insight";
 
 function ReportsInsights() {
-  
-    const currentSiteId = 1;
+  const currentSiteId = 1;
 
-    const [costsInsight, setCostsInsight] = useState<IInsightData>({
-        title: "",
-        insightList: [],
-        percentage: "",
-        isPositive: false
-    });
+  const [costsInsight, setCostsInsight] = useState<IInsightData>({
+    title: "",
+    insightList: [],
+    data: "",
+  });
 
-    const [electricityInsight, setElectricityInsight] = useState<IInsightData>({
-        title: "",
-        insightList: [],
-        percentage: "",
-        isPositive: false
-    });
+  const [electricityInsight, setElectricityInsight] = useState<IInsightData>({
+    title: "",
+    insightList: [],
+    data: "",
+  });
 
-    const [gasInsight, setGasInsight] = useState<IInsightData>({
-        title: "",
-        insightList: [],
-        percentage: "",
-        isPositive: false
-    });
-    
-    // Sets the colour based on whether the change or positive or negative
-    const [isElectricityPositive, setIsElectricityPositive] = useState(false);
-    const [isGasPositive, setIsGasPositive] = useState(false);
-    const [isCostPositive, setIsCostPositive] = useState(false);
+  const [gasInsight, setGasInsight] = useState<IInsightData>({
+    title: "",
+    insightList: [],
+    data: "",
+  });
 
-    // Initialize services
-    const insightsService = new InsightsService();
-    const sitesService = new SitesService();
-    const consumptionsService = new ConsumptionsService();
+  const [emissionsInsight, setEmissionsInsight] = useState<IInsightData>({
+    title: "",
+    insightList: [],
+    data: "",
+  });
 
-    useEffect(() => {
-        let costsInsightsList: String[] = [];
-        let electricityInsightsList: String[] = [];
-        let gasInsightsList: String[] = [];
+  // Initialize services
+  const insightsService = new InsightsService();
+  const sitesService = new SitesService();
+  const consumptionsService = new ConsumptionsService();
 
-        // This will only work with 3 insight templates in the database
-        const getAllInsights = async () => {
-            let finalInsights: String[] = [];
-            let insightsList: String[] = [];
+  useEffect(() => {
+    let costsInsightsList: String[] = [];
+    let electricityInsightsList: String[] = [];
+    let gasInsightsList: String[] = [];
+    let emissionsInsightsList: String[] = [];
 
-            const insightsTemplates = await insightsService.getInsights();
-            // Currently just has 1 as the siteId, this will need to be changed
-            const siteData = await sitesService.findSiteById(currentSiteId);
+    const now = new Date();
+    const firstDayOfTheWeek = now.getDate() - now.getDay() + 1;
+    const lastDayOfTheWeek = firstDayOfTheWeek + 6;
+    const firstDayOfLastWeek = new Date(now.setDate(firstDayOfTheWeek - 7));
+    const lastDayOfLastWeek = new Date(now.setDate(lastDayOfTheWeek - 7));
 
-            const currentSite = siteData["data"][0]["name"];
+    // This will only work with 3 insight templates in the database
+    const getAllInsights = async () => {
+      let finalInsights: String[] = [];
+      let insightsList: String[] = [];
 
-            // Replace [site] in the template with site name
-            for (let i = 3; i < 6; i++ ) {
-                const currentInsight0: string = String(insightsTemplates["data"][i]["description"]);
+      const insightsTemplates = await insightsService.getInsights();
+      // Currently just has 1 as the siteId, this will need to be changed
+      const siteData = await sitesService.findSiteById(currentSiteId);
 
-                const insightToAdd0 = currentInsight0.replace("[site]", currentSite)
+      const currentSite = siteData["data"][0]["name"];
 
-                insightsList.push(insightToAdd0);
-            }
+      // Replace [site] in the template with site name
+      for (let i = 4; i < 8; i++) {
+        let currentInsight0: string = String(
+          insightsTemplates["data"][i]["description"]
+        );
 
-            // Split the insight template in half so the data can go into the middle
-            for (let i = 0; i < insightsList.length; i++ ) {
-                const currentInsight1: string = String(insightsList[i]);
+        currentInsight0 = currentInsight0.replace("[site]", currentSite);
+        currentInsight0 = currentInsight0.replace(
+          "[dateFrom]",
+          String(firstDayOfLastWeek.toLocaleDateString("en-GB"))
+        );
+        currentInsight0 = currentInsight0.replace(
+          "[dateTo]",
+          String(lastDayOfLastWeek.toLocaleDateString("en-GB"))
+        );
 
-                const splitted = currentInsight1.split("[data]");
+        insightsList.push(currentInsight0);
+      }
 
-                finalInsights.push(splitted[0]);
-                finalInsights.push(splitted[1]);
-            }
-            costsInsightsList = [finalInsights[0], finalInsights[1]];
-            electricityInsightsList = [finalInsights[2], finalInsights[3]];
-            gasInsightsList = [finalInsights[4], finalInsights[5]];
-        }
-        getAllInsights();
+      // Split the insight template in half so the data can go into the middle
+      for (let i = 0; i < insightsList.length; i++) {
+        const currentInsight1: string = String(insightsList[i]);
 
-        const findSumOfConsumptionsBySiteIdAndTime = async () => {
-            let costPct: String = "";
-            let electricityPct: String = "";
-            let gasPct: String = "";            
+        const splitted = currentInsight1.split("[data]");
 
-            const now = new Date();
-            const firstDayOfTheWeek = (now.getDate() - now.getDay()) + 1;
-            const lastDayOfTheWeek = firstDayOfTheWeek + 6;
-            const firstDayOfLastWeek = new Date(now.setDate(firstDayOfTheWeek - 7));
-            const lastDayOfLastWeek = new Date(now.setDate(lastDayOfTheWeek - 7));
-            console.log(firstDayOfLastWeek);
-            console.log(lastDayOfLastWeek);
+        finalInsights.push(splitted[0]);
+        finalInsights.push(splitted[1]);
+      }
+      costsInsightsList = [finalInsights[0], finalInsights[1]];
+      electricityInsightsList = [finalInsights[2], finalInsights[3]];
+      gasInsightsList = [finalInsights[4], finalInsights[5]];
+      emissionsInsightsList = [finalInsights[6], finalInsights[7]];
+    };
+    getAllInsights();
 
-            const priorDate = new Date(new Date().setDate(now.getDate() - 7));
-            const priorPriorDate = new Date(new Date().setDate(now.getDate() - 14));
+    const findSumOfConsumptionsBySiteIdAndTime = async () => {
+      const lastWeekConsumptionsResponse =
+        await consumptionsService.findSumOfConsumptionsBySiteIdAndTime(
+          lastDayOfLastWeek,
+          firstDayOfLastWeek,
+          currentSiteId
+        );
 
-            const currentConsumptionsResponse = await consumptionsService.findSumOfConsumptionsBySiteIdAndTime(priorDate, now, currentSiteId);
-            const previousConsumptionsResponse = await consumptionsService.findSumOfConsumptionsBySiteIdAndTime(priorPriorDate, priorDate, currentSiteId);
-            
-            const currentConsumptionsData = currentConsumptionsResponse["data"];
-            const previousConsumptionsData = previousConsumptionsResponse["data"];
+      const lastWeekConsumptionsData = lastWeekConsumptionsResponse["data"];
 
-            const totalCurrentElectricityDemand = currentConsumptionsData[0];
-            const totalCurrentGasDemand = currentConsumptionsData[1];
-            const totalCurrentCosts = currentConsumptionsData[2];
+      const totalElectricityDemand =
+        Math.round(lastWeekConsumptionsData[0]).toLocaleString() + " kWh";
+      const totalGasDemand = Math.round(lastWeekConsumptionsData[1]).toLocaleString() + " kWh";
+      const totalEmissions =
+        Math.round(lastWeekConsumptionsData[2]).toLocaleString() + " kgCO2e";
+      const totalCosts =
+        "£" + Math.round(lastWeekConsumptionsData[3]).toLocaleString();
 
-            const totalPreviousElectricityDemand = previousConsumptionsData[0];
-            const totalPreviousGasDemand = previousConsumptionsData[1];
-            const totalPreviousCosts = previousConsumptionsData[2];
+      setCostsInsight({
+        title: "Total Costs",
+        insightList: costsInsightsList,
+        data: totalCosts,
+      });
 
-            // calculate percentage
-            const electricityPercentage = Math.round(
-                (totalCurrentElectricityDemand - totalPreviousElectricityDemand) / totalPreviousElectricityDemand * 100
-            );
-            const gasPercentage = Math.round(
-                (totalCurrentGasDemand - totalPreviousGasDemand) / totalPreviousGasDemand * 100
-            );
-            const costPercentage = Math.round(
-                (totalCurrentCosts - totalPreviousCosts) / totalPreviousCosts * 100
-            );
+      setElectricityInsight({
+        title: "Electricity Insight",
+        insightList: electricityInsightsList,
+        data: totalElectricityDemand,
+      });
 
-            // add plus or minus symbol and change colour
-            if (electricityPercentage <= 0) {
-                const stringElectricityPercentage = String(electricityPercentage);
-                electricityPct = stringElectricityPercentage;
-            }
-            else {
-                const stringElectricityPercentage = "+" + String(electricityPercentage);
-                electricityPct = stringElectricityPercentage;
-                setIsElectricityPositive(true);
-            };
+      setGasInsight({
+        title: "Gas Insight",
+        insightList: gasInsightsList,
+        data: totalGasDemand,
+      });
 
-            if (gasPercentage <= 0) {
-                const stringGasPercentage = String(gasPercentage);
-                gasPct = stringGasPercentage;
-            }
-            else {
-                const stringGasPercentage = "+" + String(gasPercentage);
-                gasPct = stringGasPercentage;
-                setIsGasPositive(true);
-            };
-
-            if (costPercentage <= 0) {
-                const stringCostPercentage = String(costPercentage);
-                costPct = stringCostPercentage;
-            }
-            else {
-                const stringCostPercentage = "+" + String(costPercentage);
-                costPct = stringCostPercentage;
-                setIsCostPositive(true);
-            };
-
-            setCostsInsight({
-                title: "Total Costs Insight",
-                insightList: costsInsightsList,
-                percentage: costPct,
-                isPositive: isCostPositive
-            });
-
-            setElectricityInsight({
-                title: "Electricity Insight",
-                insightList: electricityInsightsList,
-                percentage: electricityPct,
-                isPositive: isElectricityPositive
-            });
-
-            setGasInsight({
-                title: "Gas Insight",
-                insightList: gasInsightsList,
-                percentage: gasPct,
-                isPositive: isGasPositive
-            });
-        }
-        findSumOfConsumptionsBySiteIdAndTime();
-
+      setEmissionsInsight({
+        title: "CO2 Emissions Insight",
+        insightList: emissionsInsightsList,
+        data: totalEmissions,
+      });
+    };
+    findSumOfConsumptionsBySiteIdAndTime();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-    
-    return (
-        <Container className="justify-content-end">
-            <Col className="d-flex insightsCol">
+  }, []);
 
-                <Insight insightData={costsInsight} />
+  return (
+    <Container fluid className="justify-content-center">
+      <Col className="d-flex insightsCol">
+        <Insight insightData={costsInsight} />
 
-                <Insight insightData={electricityInsight} />
+        <Insight insightData={electricityInsight} />
 
-                <Insight insightData={gasInsight} />
+        <Insight insightData={gasInsight} />
 
-            </Col>
-        </Container>
-    );
-};
+        <Insight insightData={emissionsInsight} />
+      </Col>
+    </Container>
+  );
+}
 
 export default ReportsInsights;
