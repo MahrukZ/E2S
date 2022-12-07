@@ -24,6 +24,10 @@ const App: React.FunctionComponent = () => {
   //This file should only have the topbar and sidebar
   return (
     <>
+      {/* <div className="App">
+        <Topbar />
+      </div> */}
+
       <Router>
         <Topbar />
         <Sidebar />
