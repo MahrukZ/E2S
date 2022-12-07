@@ -45,13 +45,13 @@ function DashboardGraphs() {
     lineColour: "",
   });
 
-  // const [emissionsGraph, setEmissionsGraph] = useState<ISingleGraph>({
-  //     xData: [],
-  //     yData: [],
-  //     xName: "",
-  //     yName: "",
-  //     lineColour: ""
-  // });
+  const [emissionsGraph, setEmissionsGraph] = useState<ISingleGraph>({
+      xData: [],
+      yData: [],
+      xName: "",
+      yName: "",
+      lineColour: ""
+  });
 
   const [costsGraph, setCostsGraph] = useState<IDoubleGraph>({
     xData0: [],
@@ -65,16 +65,16 @@ function DashboardGraphs() {
     name1: "",
   });
 
-  useEffect(() => {
-    const consumptionsService = new ConsumptionsService();
+    useEffect(() => {
+        const consumptionsService = new ConsumptionsService();
 
-    const findAllConsumptionsBySiteIdAndTime = async () => {
-      let electricityData = [];
-      let gasData = [];
-      let timeData = [];
-      let electricityCostData = [];
-      let gasCostData = [];
-      // let emissionsData = [];
+        const findAllConsumptionsBySiteIdAndTime = async () => {
+            let electricityData = [];
+            let gasData = [];
+            let emissionsData = [];
+            let timeData = [];
+            let electricityCostData = [];
+            let gasCostData = [];
 
       const now = new Date();
       const priorDate = new Date(new Date().setDate(now.getDate() - 30));
@@ -92,36 +92,32 @@ function DashboardGraphs() {
         const formattedElectricityDemand = parseFloat(
           currentConsumptionsData[i]["electricityDemand"]
         );
-
         electricityData.push(formattedElectricityDemand);
 
         const formattedGasDemand = parseFloat(
           currentConsumptionsData[i]["heatDemand"]
         );
-
         gasData.push(formattedGasDemand);
+
+        const formattedEmissions = parseFloat(
+          currentConsumptionsData[i]["co2Emissions"]
+        );
+        emissionsData.push(formattedEmissions);
 
         const formattedDate = new Date(
           currentConsumptionsData[i]["timeInterval"]
         );
-
         timeData.push(formattedDate);
 
         const electricityCost =
           parseFloat(currentConsumptionsData[i]["electricityDemand"]) *
           parseFloat(currentConsumptionsData[i]["electricityPrice"]);
-
         electricityCostData.push(electricityCost);
 
         const gasCost =
           parseFloat(currentConsumptionsData[i]["heatDemand"]) *
           parseFloat(currentConsumptionsData[i]["gasPrice"]);
-
         gasCostData.push(gasCost);
-
-        // const formattedEmissions = parseFloat(currentConsumptionsData[i]["co2Emissions"]);
-
-        // emissionsData.push(formattedEmissions);
       }
 
       setElectricityGraph({
@@ -140,13 +136,13 @@ function DashboardGraphs() {
         lineColour: "#f15a2f",
       });
 
-      // setEmissionsGraph({
-      //     xData: timeData,
-      //     yData: emissionsData,
-      //     xName: "date",
-      //     yName: "CO2 Emissions (INSERT UNIT HERE)",
-      //     lineColour: "#a4ba71"
-      // })
+      setEmissionsGraph({
+          xData: timeData,
+          yData: emissionsData,
+          xName: "date",
+          yName: "CO2 Emissions (kgCO2e)",
+          lineColour: "#a4ba71"
+      });
 
       setCostsGraph({
         xData0: timeData,
@@ -161,8 +157,9 @@ function DashboardGraphs() {
       });
     };
 
-    findAllConsumptionsBySiteIdAndTime();
-  }, []);
+        findAllConsumptionsBySiteIdAndTime();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
   return (
     <Container
@@ -175,14 +172,18 @@ function DashboardGraphs() {
 
         <SingleGraph graphData={gasGraph} />
 
-        {/* <SingleGraph graphData={emissionsGraph} /> */}
-      </Col>
+                <SingleGraph graphData={emissionsGraph} />
 
-      <Col className="d-flex graphContainer">
-        <DoubleGraph graphData={costsGraph} />
-      </Col>
-    </Container>
-  );
-}
+            </Col>
+
+            <Col className="d-flex graphContainer">
+
+                <DoubleGraph graphData={costsGraph} />
+
+            </Col>
+        </Container>
+
+    );
+};
 
 export default DashboardGraphs;

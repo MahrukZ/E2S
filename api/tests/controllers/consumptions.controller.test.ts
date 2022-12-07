@@ -43,6 +43,7 @@ describe("ConsumptionController", () => {
             timeInterval: mockDateObject,
             heatDemand: 1897,
             electricityDemand: 1699,
+            co2Emissions: 695.39,
             electricityPrice: 18,
             gasPrice: 15,
             siteId: 1,
@@ -53,6 +54,7 @@ describe("ConsumptionController", () => {
             timeInterval: mockDateObject,
             heatDemand: 2897,
             electricityDemand: 2699,
+            co2Emissions: 1082.15,
             electricityPrice: 28,
             gasPrice: 25,
             siteId: 2,
@@ -63,6 +65,7 @@ describe("ConsumptionController", () => {
             timeInterval: mockDateObject,
             heatDemand: 3897,
             electricityDemand: 3699,
+            co2Emissions: 1468.91,
             electricityPrice: 38,
             gasPrice: 35,
             siteId: 3,
@@ -122,6 +125,7 @@ describe("ConsumptionController", () => {
             timeInterval: mockDateObject,
             heatDemand: 1897,
             electricityDemand: 1699,
+            co2Emissions: 695.39,
             electricityPrice: 18,
             gasPrice: 15,
             siteId: 1,
@@ -176,11 +180,12 @@ describe("ConsumptionController", () => {
     });
 
     describe("ConsumptionController.getAllConsumptions", () => {
-        const mConsumption: IConsumption[] = [{
+        const mConsumptions: IConsumption[] = [{
             consumptionId: 1,
             timeInterval: mockDateObject,
             heatDemand: 1897,
             electricityDemand: 1699,
+            co2Emissions: 695.39,
             electricityPrice: 18,
             gasPrice: 15,
             siteId: 1,
@@ -191,6 +196,7 @@ describe("ConsumptionController", () => {
             timeInterval: mockDateObject,
             heatDemand: 2897,
             electricityDemand: 2699,
+            co2Emissions: 1082.15,
             electricityPrice: 28,
             gasPrice: 25,
             siteId: 2,
@@ -201,6 +207,7 @@ describe("ConsumptionController", () => {
             timeInterval: mockDateObject,
             heatDemand: 3897,
             electricityDemand: 3699,
+            co2Emissions: 1468.91,
             electricityPrice: 38,
             gasPrice: 35,
             siteId: 3,
@@ -209,7 +216,7 @@ describe("ConsumptionController", () => {
         const mSuccessResponse: any = {
             message: 'Success',
             status: 200,
-            data: mConsumption
+            data: mConsumptions
         };
         const mFailResponse: any = {
             message: "server error: failed to fetch consumptions.",
@@ -222,7 +229,7 @@ describe("ConsumptionController", () => {
             const res = mResponse();
             const getSpy = jest
                 .spyOn(service, 'getAllConsumptions')
-                .mockResolvedValueOnce(mConsumption);
+                .mockResolvedValueOnce(mConsumptions);
 
             // When
             await controller.getAllConsumptions(req, res);
