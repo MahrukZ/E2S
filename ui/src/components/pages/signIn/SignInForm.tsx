@@ -50,6 +50,7 @@ function SignInForm() {
     }
     if (valid) {
       const signInRes = await usersService.signIn(emailAddress, password);
+      console.log(signInRes);
       if (signInRes.auth == false) {
         setError("Wrong email/password combination");
       } else {
