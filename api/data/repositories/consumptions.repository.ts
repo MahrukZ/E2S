@@ -92,8 +92,12 @@ export class ConsumptionRepository {
         
         const totalCosts = (totalElectricityCosts + totalGasCosts) / 100;
 
-        // Returns data as a list of 4 numbers with electricity first, gas second, emissions third, costs fourth
-        data.push(totalElectricityDemand, totalGasDemand, totalEmissions, totalCosts);
+        const finalElectricityCosts = totalElectricityCosts / 100;
+        const finalGasCosts = totalGasCosts / 100;
+
+        // Returns data as a list of 6 numbers with electricity first, gas second, emissions third, costs fourth
+        // electricity costs fifth, gas costs sixth
+        data.push(totalElectricityDemand, totalGasDemand, totalEmissions, totalCosts, finalElectricityCosts, finalGasCosts);
 
         return data;
     }
