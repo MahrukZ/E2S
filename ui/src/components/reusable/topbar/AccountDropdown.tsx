@@ -38,7 +38,7 @@ function AccountDropdown({ user }: AccountDropdownProps) {
   const usersService = new UsersService();
 
   async function signOut() {
-    const signedOut = await usersService.signOut();
+    await usersService.signOut();
     window.location.reload();
   }
 

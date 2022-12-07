@@ -23,7 +23,7 @@ function SignInForm() {
   useEffect(() => {
     const redirect = async () => {
       const signInRes = await usersService.checkSignIn();
-      if (signInRes["loggedIn"] == true) {
+      if (signInRes["loggedIn"] === true) {
         if (signInRes["user"].role !== "administrator") {
           navigate("/");
         } else if (signInRes["user"].role === "administrator") {
@@ -55,14 +55,6 @@ function SignInForm() {
       }
     }
   };
-
-  useEffect(() => {
-    const getSignIn = async () => {
-      const signedIn = await usersService.checkSignIn();
-    };
-    getSignIn();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <>
