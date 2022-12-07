@@ -75,6 +75,8 @@ DB_PASSWORD='YOUR PASSWORD'
 DB_PORT=3306
 DB_DATABASE='YOUR DATABASE'
 DB_DIALECT='mysql'
+
+JWT_KEY='secret'
 ```
 
 ## Available Scripts
