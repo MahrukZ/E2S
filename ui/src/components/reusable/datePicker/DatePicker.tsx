@@ -37,10 +37,12 @@ function DatePicker() {
 
     return (
         <Col className="d-flex calendarContainer justify-content-center">
-            <Card className="flex-fill datePickerCard">
+            <Card
+                className="flex-fill datePickerCard"
+                data-testid="datePickerElement"
+            >
                 <Card.Title>
-                    Select a date range to view data in order to check
-                    your bill
+                    Select a date range to view data in order to check your bill
                 </Card.Title>
                 <DateRangePicker
                     onChange={(item) => {

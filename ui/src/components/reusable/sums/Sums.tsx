@@ -24,13 +24,8 @@ function Sums({ betweenDates }: ISumsProps) {
         const findSumOfConsumptionsBySiteIdAndTime = async () => {
             let finalConsumptions: String[] = [];
 
-            // let now = new Date();
-            // let priorDate = new Date(new Date().setDate(now.getDate() - 7));
-
-            // if (betweenDates) {
             let now: Date = betweenDates.dateRange[0]["endDate"]!;
             let priorDate: Date = betweenDates.dateRange[0]["startDate"]!;
-            // }
 
             const siteData = await sitesService.findSiteById(currentSiteId);
 
@@ -94,7 +89,7 @@ function Sums({ betweenDates }: ISumsProps) {
     }, [betweenDates]);
 
     return (
-        <Card className="flex-shrink-1 sumsCard">
+        <Card className="flex-shrink-1 sumsCard" data-testid="sumsElement">
             <Card.Title>
                 Between {dateRange[0]} and {dateRange[1]} {siteName} had:
             </Card.Title>
