@@ -16,6 +16,7 @@ function Insights() {
     // Sets the colour based on whether the change or positive or negative
     const [isElectricityPositive, setIsElectricityPositive] = useState(false);
     const [isGasPositive, setIsGasPositive] = useState(false);
+    const [isEmissionsPositive, setIsEmissionsPositive] = useState(false);
     const [isCostPositive, setIsCostPositive] = useState(false);
 
     // Initialize services
@@ -62,7 +63,7 @@ function Insights() {
     }, []);
     
     useEffect(() => {
-        const findSumOfConsumptionsBySiteIdAndTime =async () => {
+        const findSumOfConsumptionsBySiteIdAndTime = async () => {
             let finalConsumptions: String[] = [];
 
             const now = new Date();
@@ -77,11 +78,13 @@ function Insights() {
 
             const totalCurrentElectricityDemand = currentConsumptionsData[0];
             const totalCurrentGasDemand = currentConsumptionsData[1];
-            const totalCurrentCosts = currentConsumptionsData[2];
+            const totalCurrentEmissions = currentConsumptionsData[2];
+            const totalCurrentCosts = currentConsumptionsData[3];
 
             const totalPreviousElectricityDemand = previousConsumptionsData[0];
             const totalPreviousGasDemand = previousConsumptionsData[1];
-            const totalPreviousCosts = previousConsumptionsData[2];
+            const totalPreviousEmissions = previousConsumptionsData[2];
+            const totalPreviousCosts = previousConsumptionsData[3];
 
             // calculate percentage
             const electricityPercentage = Math.round(
@@ -89,6 +92,9 @@ function Insights() {
             );
             const gasPercentage = Math.round(
                 (totalCurrentGasDemand - totalPreviousGasDemand) / totalPreviousGasDemand * 100
+            );
+            const emissionsPercentage = Math.round(
+                (totalCurrentEmissions - totalPreviousEmissions) / totalPreviousEmissions * 100
             );
             const costPercentage = Math.round(
                 (totalCurrentCosts - totalPreviousCosts) / totalPreviousCosts * 100
@@ -115,6 +121,16 @@ function Insights() {
                 setIsGasPositive(true);
             };
 
+            if (emissionsPercentage <= 0) {
+                const stringEmissionsPercentage = String(emissionsPercentage);
+                finalConsumptions.push(stringEmissionsPercentage);
+            }
+            else {
+                const stringEmissionsPercentage = "+" + String(emissionsPercentage);
+                finalConsumptions.push(stringEmissionsPercentage);
+                setIsEmissionsPositive(true);
+            };
+
             if (costPercentage <= 0) {
                 const stringCostPercentage = String(costPercentage);
                 finalConsumptions.push(stringCostPercentage);
@@ -129,10 +145,10 @@ function Insights() {
         }
         findSumOfConsumptionsBySiteIdAndTime();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, []);
 
   return (
-      <Container className="justify-content-end">
+      <Container fluid className="justify-content-center">
             <Col className="d-flex insightsCol">
 
             <Card className="insightsCard flex-fill" data-testid="insightsCost">
@@ -143,7 +159,7 @@ function Insights() {
                     style={{
                         backgroundColor: isCostPositive ? 'darkred' : 'green',
                     }}>
-                        {consumptionsList[2]}%
+                        {consumptionsList[3]}%
                     </b>
                     {insightsList[1]}
                 </Card.Body>
@@ -176,10 +192,24 @@ function Insights() {
                     {insightsList[5]}
                 </Card.Body>
             </Card>
+
+            <Card className="insightsCard flex-fill">
+            <Card.Title>CO2 Emissions Insight</Card.Title>
+                <Card.Body>
+                    {insightsList[6]} 
+                    <b className="percentageNeutral" 
+                    style={{
+                        backgroundColor: isEmissionsPositive ? 'darkred' : 'green',
+                    }}>
+                        {consumptionsList[2]}%
+                    </b>
+                    {insightsList[7]}
+                </Card.Body>
+            </Card>
             </Col>
       </Container>
 
-  )
-}
+  );
+};
 
 export default Insights;

@@ -32,6 +32,7 @@ describe('ConsumptionService', () => {
                 timeInterval: mockDateObject,
                 heatDemand: 1897,
                 electricityDemand: 1699,
+                co2Emissions: 695.39,
                 electricityPrice: 18,
                 gasPrice: 15,
                 siteId: 1,
@@ -42,6 +43,7 @@ describe('ConsumptionService', () => {
                 timeInterval: mockDateObject,
                 heatDemand: 2897,
                 electricityDemand: 2699,
+                co2Emissions: 1082.15,
                 electricityPrice: 28,
                 gasPrice: 25,
                 siteId: 2,
@@ -52,6 +54,7 @@ describe('ConsumptionService', () => {
                 timeInterval: mockDateObject,
                 heatDemand: 3897,
                 electricityDemand: 3699,
+                co2Emissions: 1468.91,
                 electricityPrice: 38,
                 gasPrice: 35,
                 siteId: 3,
@@ -79,6 +82,7 @@ describe('ConsumptionService', () => {
                 timeInterval: mockDateObject,
                 heatDemand: 1897,
                 electricityDemand: 1699,
+                co2Emissions: 695.39,
                 electricityPrice: 18,
                 gasPrice: 15,
                 siteId: 1,
@@ -101,11 +105,12 @@ describe('ConsumptionService', () => {
     describe('ConsumptionService.getAllConsumptions', () => {
         it('should return all consumptions', async () => {
             // Given
-            const mConsumption: IConsumption[] = [{
+            const mConsumptions: IConsumption[] = [{
                 consumptionId: 1,
                 timeInterval: mockDateObject,
                 heatDemand: 1897,
                 electricityDemand: 1699,
+                co2Emissions: 695.39,
                 electricityPrice: 18,
                 gasPrice: 15,
                 siteId: 1,
@@ -116,6 +121,7 @@ describe('ConsumptionService', () => {
                 timeInterval: mockDateObject,
                 heatDemand: 2897,
                 electricityDemand: 2699,
+                co2Emissions: 1082.15,
                 electricityPrice: 28,
                 gasPrice: 25,
                 siteId: 2,
@@ -126,6 +132,7 @@ describe('ConsumptionService', () => {
                 timeInterval: mockDateObject,
                 heatDemand: 3897,
                 electricityDemand: 3699,
+                co2Emissions: 1468.91,
                 electricityPrice: 38,
                 gasPrice: 35,
                 siteId: 3,
@@ -133,13 +140,13 @@ describe('ConsumptionService', () => {
             }];
             const getSpy = jest
                 .spyOn(repository, 'getAllConsumptions')
-                .mockResolvedValue(mConsumption);
+                .mockResolvedValue(mConsumptions);
 
             // When
             const result = await service.getAllConsumptions();
 
             // Then
-            expect(result).toEqual(mConsumption);
+            expect(result).toEqual(mConsumptions);
             expect(getSpy).toHaveBeenCalledTimes(1);
             expect(getSpy).toHaveBeenCalledWith();
         });
