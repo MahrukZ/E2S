@@ -1,13 +1,13 @@
+import { Container } from "react-bootstrap";
 import ReportsGraphs from "../reusable/graphs/ReportsGraphs";
 import ReportsInsights from "../reusable/insights/ReportsInsights";
 
 function Reports() {
     return (
-        <>
-            <h1 id="reports">Reports</h1>
+        <Container fluid className="d-flex flex-column" data-testid="reportsContainer">   
             <ReportsInsights />
             <ReportsGraphs />
-        </>
+        </Container>
     );
 };
 
