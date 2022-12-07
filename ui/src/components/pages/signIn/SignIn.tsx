@@ -4,7 +4,7 @@ import "./SignIn.css";
 
 function SignIn() {
   return (
-    <div>
+    <div data-testid="signInForm">
       <SignInForm />
     </div>
   );

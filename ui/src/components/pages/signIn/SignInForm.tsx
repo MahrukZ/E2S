@@ -78,7 +78,10 @@ function SignInForm() {
         alt="e2s logo"
         className="e2sLogo mt-4"
       />
-      <Container className="signInContainer mt-5">
+      <Container
+        className="signInContainer mt-5"
+        data-testid="signInFormElement"
+      >
         <Row>
           <Col>
             <h1 className="signInTitle">
