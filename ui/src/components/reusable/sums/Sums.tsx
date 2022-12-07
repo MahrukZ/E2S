@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Card } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { ISums } from "./../datePicker/DatePicker";
-import "../datePicker/DatePicker.css";
+import "./Sums.css";
 import { ConsumptionsService } from "../../../services/consumptions.service";
 import { SitesService } from "../../../services/sites.service";
 
@@ -19,8 +19,6 @@ function Sums({ betweenDates }: ISumsProps) {
 
     const consumptionsService = new ConsumptionsService();
     const sitesService = new SitesService();
-
-    console.log(betweenDates.dateRange[0]["startDate"]);
 
     useEffect(() => {
         const findSumOfConsumptionsBySiteIdAndTime = async () => {
@@ -93,20 +91,33 @@ function Sums({ betweenDates }: ISumsProps) {
         };
         findSumOfConsumptionsBySiteIdAndTime();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [betweenDates]);
 
     return (
-        <Card className="flex-fill datePickerCard">
+        <Card className="flex-shrink-1 sumsCard">
             <Card.Title>
-                {siteName} between {dateRange[0]} and {dateRange[1]}
+                Between {dateRange[0]} and {dateRange[1]} {siteName} had:
             </Card.Title>
             <Card.Body>
-                <li>Electricity Demand: {consumptionsList[0]} kWh</li>
-                <li>Gas Demand: {consumptionsList[1]} kWh</li>
-                <li>Carbon Emissions: {consumptionsList[2]} UNIT</li>
-                <li>Electricity Costs: £ {consumptionsList[4]}</li>
-                <li>Gas Costs: £ {consumptionsList[5]}</li>
-                <li>Total Costs: £ {consumptionsList[3]}</li>
+                <p></p>
+                <p>
+                    <b>Electricity Demand: {consumptionsList[0]} kWh</b>
+                </p>
+                <p>
+                    <b>Gas Demand: {consumptionsList[1]} kWh</b>
+                </p>
+                <p>
+                    <b>Carbon Emissions: {consumptionsList[2]} kt</b>
+                </p>
+                <p>
+                    <b>Electricity Costs: £ {consumptionsList[4]}</b>
+                </p>
+                <p>
+                    <b>Gas Costs: £ {consumptionsList[5]}</b>
+                </p>
+                <p>
+                    <b>Total Costs: £ {consumptionsList[3]}</b>
+                </p>
             </Card.Body>
         </Card>
     );

@@ -38,18 +38,24 @@ function DatePicker() {
     return (
         <Col className="d-flex calendarContainer justify-content-center">
             <Card className="flex-fill datePickerCard">
+                <Card.Title>
+                    Select a date range to view data in order to check
+                    your bill
+                </Card.Title>
                 <DateRangePicker
                     onChange={(item) => {
                         setState([item.selection]);
                         setDateRange({ dateRange: [item.selection] });
                     }}
                     moveRangeOnFirstSelection={false}
-                    months={1}
+                    months={2}
                     ranges={state}
                     direction="horizontal"
                     preventSnapRefocus={true}
                     calendarFocus="backwards"
                     maxDate={today}
+                    staticRanges={[]}
+                    inputRanges={[]}
                 />
             </Card>
             <Sums betweenDates={dateRange} />

@@ -1,15 +1,7 @@
-.calendarContainer {
-    margin-left: 100px;
-}
-
-.rdrDefinedRangesWrapper {
-    display: none;
-}
-
-.datePickerCard {
+.sumsCard {
     margin: 15px;
     padding: 10px;
-    align-items: center;
+    width: 350px;
     background-color: #73a6ba;
     color: #ffffff;
     /* modified from https://www.w3schools.com/css/css3_shadows_box.asp */
