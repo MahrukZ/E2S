@@ -183,11 +183,6 @@ app.get("/sign-in", async (req, res) => {
   }
 });
 
-// check token - can delete later
-app.get("/is-user-auth", verifyJWT, async (req, res) => {
-  res.send("You are authenticated");
-});
-
 // port listen
 app.listen(port, () => {
   console.log(`Server is running on port: http://localhost:${port}`);

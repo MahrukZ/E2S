@@ -11,7 +11,6 @@ const AdminRoutes = () => {
   useEffect(() => {
     const getSignIn = async () => {
       const signedIn = await usersService.checkSignIn();
-      console.log("checking sign in admin routes");
       if (signedIn["loggedIn"] === true) {
         if (signedIn["user"].role == "administrator") {
           setAdminStatus(true);

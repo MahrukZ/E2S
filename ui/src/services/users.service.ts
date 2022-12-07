@@ -34,13 +34,4 @@ export class UsersService {
     const response = await axios.get("/sign-in");
     return await response.data;
   }
-
-  public async checkAuth(token?: string): Promise<any> {
-    const response = await axios.get("/is-user-auth", {
-      headers: {
-        "x-access-token": localStorage.getItem("token"),
-      },
-    });
-    return await response.data;
-  }
 }

@@ -14,7 +14,6 @@ function SignInForm() {
   const [password, setPassword] = useState("");
 
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   const [signInStatus, setsignInStatus] = useState("");
 
@@ -28,7 +27,6 @@ function SignInForm() {
     const redirect = async () => {
       const signInRes = await usersService.checkSignIn();
       if (signInRes["loggedIn"] == true) {
-        setSuccess("Signed in");
         if (signInRes["user"].role != "administrator") {
           navigate("/");
         } else if (signInRes["user"].role == "administrator") {
@@ -41,21 +39,21 @@ function SignInForm() {
   }, []);
 
   const signIn = async () => {
-    const signInRes = await usersService.signIn(emailAddress, password);
-    if (signInRes.auth == false) {
-      setError("Wrong email/password combination");
-    } else {
-      setSuccess("Signed in");
-      window.location.reload();
+    let valid: boolean = true;
+    if (emailAddress.length > 44) {
+      setError("Email address is too long");
+      valid = false;
     }
-  };
-
-  const checkAuth = async () => {
-    const token: any = localStorage.getItem("token");
-    if (token) {
-      const authStatus = await usersService.checkAuth(token);
-      if (authStatus) {
-        setAuthStatus(authStatus);
+    if (password.length > 25) {
+      setError("Password is too long");
+      valid = false;
+    }
+    if (valid) {
+      const signInRes = await usersService.signIn(emailAddress, password);
+      if (signInRes.auth == false) {
+        setError("Wrong email/password combination");
+      } else {
+        window.location.reload();
       }
     }
   };
@@ -89,6 +87,7 @@ function SignInForm() {
               <Form.Label className="signInFormLabel">Password</Form.Label>
               <Form.Control
                 type="password"
+                required
                 placeholder="Enter Password"
                 onChange={(e: any) => {
                   setPassword(e.target.value);
@@ -105,12 +104,7 @@ function SignInForm() {
               </Button>
             </div>
           </Form>
-          {/* <h1>{signInStatus}</h1> */}
           {error.length > 0 && <Message message={error} type="danger" />}
-          {/* <h2>{authStatus}</h2>
-          <Button variant="primary" onClick={checkAuth}>
-            Check auth
-          </Button> */}
         </Col>
       </Row>
     </Container>
