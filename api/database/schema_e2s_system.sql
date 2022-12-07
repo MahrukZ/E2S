@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_name` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `role` ENUM('facility energy manager', 'administrator', 'director of estates') NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(150) NOT NULL,
   `org_id` INT NOT NULL,
   PRIMARY KEY (`user_id`)
 );

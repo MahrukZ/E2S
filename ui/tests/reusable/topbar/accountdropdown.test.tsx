@@ -3,6 +3,7 @@ import { cleanup, render, screen } from "@testing-library/react";
 import React from "react";
 import AccountDropdown from "../../../src/components/reusable/topbar/AccountDropdown";
 import { IUser } from "../../../src/components/reusable/topbar/Topbar";
+import { BrowserRouter as Router } from "react-router-dom";
 
 test("should render account dropdown element with user props", () => {
   // Given
@@ -10,7 +11,11 @@ test("should render account dropdown element with user props", () => {
     userId: 1,
     name: "Test Name",
   };
-  render(<AccountDropdown user={testUser} />);
+  render(
+    <Router>
+      <AccountDropdown user={testUser} />
+    </Router>
+  );
 
   // When
   const dropDownElement = screen.getByTestId("dropdownButton");

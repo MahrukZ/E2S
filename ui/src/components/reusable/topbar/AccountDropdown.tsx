@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { Container, Dropdown, DropdownButton } from "react-bootstrap";
 import { FaCog, FaSignOutAlt, FaUserAlt } from "react-icons/fa";
+import { UsersService } from "../../../services/users.service";
 import "./AccountDropdown.css";
 import { IUser } from "./Topbar";
 
@@ -33,6 +34,13 @@ function AccountDropdown({ user }: AccountDropdownProps) {
     }
   };
   // End of reference
+
+  const usersService = new UsersService();
+
+  async function signOut() {
+    await usersService.signOut();
+    window.location.reload();
+  }
 
   return (
     <Container
@@ -67,6 +75,7 @@ function AccountDropdown({ user }: AccountDropdownProps) {
           SETTINGS
         </Dropdown.Item>
         <Dropdown.Item
+          onClick={signOut}
           data-testid="signOutDropdown"
           id="signOutDropdown"
           href="#"

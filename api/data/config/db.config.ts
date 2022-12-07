@@ -5,6 +5,8 @@ import { Sites } from "../models/sites.model";
 import { SitesAndUsers } from "../models/sitesAndUsers.model";
 import { UserManagement } from "../models/userManagement.model";
 import { Consumptions } from "../models/consumptions.model";
+import { Users } from "../models/users.model";
+
 
 dotenv.config();
 
@@ -30,6 +32,7 @@ export const connect = () => {
   sequelize.addModels([SitesAndUsers]);
   sequelize.addModels([UserManagement]);
   sequelize.addModels([Consumptions]);
+  sequelize.addModels([Users]);
 
   const db: any = {};
   db.Sequelize = Sequelize;
