@@ -16,10 +16,6 @@ function SignInForm() {
 
   const [error, setError] = useState("");
 
-  const [signInStatus, setsignInStatus] = useState("");
-
-  const [authStatus, setAuthStatus] = useState("");
-
   const usersService = new UsersService();
 
   const navigate = useNavigate();
@@ -28,9 +24,9 @@ function SignInForm() {
     const redirect = async () => {
       const signInRes = await usersService.checkSignIn();
       if (signInRes["loggedIn"] == true) {
-        if (signInRes["user"].role != "administrator") {
+        if (signInRes["user"].role !== "administrator") {
           navigate("/");
-        } else if (signInRes["user"].role == "administrator") {
+        } else if (signInRes["user"].role === "administrator") {
           navigate("/admin/upload");
         }
       }
@@ -52,7 +48,7 @@ function SignInForm() {
     if (valid) {
       const signInRes = await usersService.signIn(emailAddress, password);
       console.log(signInRes);
-      if (signInRes.auth == false) {
+      if (signInRes.auth === false) {
         setError("Wrong email/password combination");
       } else {
         window.location.reload();
@@ -63,7 +59,6 @@ function SignInForm() {
   useEffect(() => {
     const getSignIn = async () => {
       const signedIn = await usersService.checkSignIn();
-      setsignInStatus("signed in: " + String(signedIn["loggedIn"]));
     };
     getSignIn();
     // eslint-disable-next-line react-hooks/exhaustive-deps

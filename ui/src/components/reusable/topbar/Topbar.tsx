@@ -32,7 +32,7 @@ function Topbar() {
 
   const getCurrentUserId = async (): Promise<number> => {
     const checkSignIn = await usersService.checkSignIn();
-    if (checkSignIn["loggedIn"] == true) {
+    if (checkSignIn["loggedIn"] === true) {
       return checkSignIn.user.userId;
     } else {
       return 0;

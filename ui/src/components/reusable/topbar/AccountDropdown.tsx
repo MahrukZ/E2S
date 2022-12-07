@@ -5,7 +5,6 @@ import { FaCog, FaSignOutAlt, FaUserAlt } from "react-icons/fa";
 import { UsersService } from "../../../services/users.service";
 import "./AccountDropdown.css";
 import { IUser } from "./Topbar";
-import { useNavigate } from "react-router-dom";
 
 interface AccountDropdownProps {
   user: IUser;
@@ -37,8 +36,6 @@ function AccountDropdown({ user }: AccountDropdownProps) {
   // End of reference
 
   const usersService = new UsersService();
-
-  const navigate = useNavigate();
 
   async function signOut() {
     const signedOut = await usersService.signOut();

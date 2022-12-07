@@ -1,9 +1,6 @@
-import React from "react";
-import { UsersService } from "../services/users.service";
-import { BrowserRouter as Redirect, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { render } from "react-dom";
+import { UsersService } from "../services/users.service";
 
 const ProtectedRoutes = () => {
   const usersService = new UsersService();

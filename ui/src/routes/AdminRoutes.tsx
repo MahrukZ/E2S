@@ -1,8 +1,6 @@
-import React from "react";
-import { UsersService } from "../services/users.service";
-import { BrowserRouter as Redirect, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { UsersService } from "../services/users.service";
 
 const AdminRoutes = () => {
   const usersService = new UsersService();
@@ -12,7 +10,7 @@ const AdminRoutes = () => {
     const getSignIn = async () => {
       const signedIn = await usersService.checkSignIn();
       if (signedIn["loggedIn"] === true) {
-        if (signedIn["user"].role == "administrator") {
+        if (signedIn["user"].role === "administrator") {
           setAdminStatus(true);
         } else {
           setAdminStatus(false);
