@@ -160,5 +160,7 @@ INSERT INTO `insight_templates`
 VALUES(null, 'Between [dateFrom] and [dateTo], the gas consumption of [site] has changed by [data].');
 INSERT INTO `insight_templates`
 VALUES(null, 'Between [dateFrom] and [dateTo], the electricity consumption of [site] has changed by [data].');
+INSERT INTO `insight_templates`
+VALUES(null, 'Between [dateFrom] and [dateTo], the carbon emissions of [site] has changed by [data].');
 
 SET foreign_key_checks = 1;

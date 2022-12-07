@@ -222,7 +222,7 @@ function DashboardInsights() {
     }, []);
     
     return (
-      <Container className="justify-content-end">
+      <Container fluid className="justify-content-center">
         <Col className="d-flex insightsCol">
           <Insight insightData={costsInsight} />
 
