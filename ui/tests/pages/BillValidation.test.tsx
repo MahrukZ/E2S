@@ -8,7 +8,7 @@ test("should render billvalidation title element", () => {
   render(<BillValidation />);
 
   // When
-  const billValidationElement = screen.getByText("BillValidation");
+  const billValidationElement = screen.getByTestId("BillValidation");
 
   // Then
   expect(billValidationElement).toBeInTheDocument();

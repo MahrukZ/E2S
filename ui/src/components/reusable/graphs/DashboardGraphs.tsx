@@ -110,13 +110,13 @@ function DashboardGraphs() {
         timeData.push(formattedDate);
 
         const electricityCost =
-          parseFloat(currentConsumptionsData[i]["electricityDemand"]) *
-          parseFloat(currentConsumptionsData[i]["electricityPrice"]);
+          (parseFloat(currentConsumptionsData[i]["electricityDemand"]) *
+          parseFloat(currentConsumptionsData[i]["electricityPrice"])) / 100;
         electricityCostData.push(electricityCost);
 
         const gasCost =
-          parseFloat(currentConsumptionsData[i]["heatDemand"]) *
-          parseFloat(currentConsumptionsData[i]["gasPrice"]);
+          (parseFloat(currentConsumptionsData[i]["heatDemand"]) *
+          parseFloat(currentConsumptionsData[i]["gasPrice"])) / 100;
         gasCostData.push(gasCost);
       }
 
