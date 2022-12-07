@@ -9,25 +9,27 @@ import "./DatePicker.css";
 import Sums from "../sums/Sums";
 
 export interface ISums {
-    betweenDates: Range[];
+    dateRange: Range[];
 }
 
 function DatePicker() {
     const [state, setState] = useState<Range[]>([
         {
-            startDate: new Date(),
-            endDate: addDays(new Date(), 7),
+            startDate: addDays(new Date(), -7),
+            endDate: new Date(),
             key: "selection",
         },
     ]);
 
-    const [betweenDates, setBetweenDates] = useState<ISums>({
-        betweenDates: state,
+    const [dateRange, setDateRange] = useState<ISums>({
+        dateRange: state,
     });
+
+    const today = new Date();
 
     useEffect(() => {
         const setTheBetweenDates = async () => {
-            setBetweenDates({ betweenDates: state });
+            setDateRange({ dateRange: state });
         };
         setTheBetweenDates();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,7 +41,7 @@ function DatePicker() {
                 <DateRangePicker
                     onChange={(item) => {
                         setState([item.selection]);
-                        setBetweenDates({ betweenDates: [item.selection] });
+                        setDateRange({ dateRange: [item.selection] });
                     }}
                     moveRangeOnFirstSelection={false}
                     months={1}
@@ -47,9 +49,10 @@ function DatePicker() {
                     direction="horizontal"
                     preventSnapRefocus={true}
                     calendarFocus="backwards"
+                    maxDate={today}
                 />
             </Card>
-            <Sums betweenDates={betweenDates} />
+            <Sums betweenDates={dateRange} />
         </Col>
     );
 }

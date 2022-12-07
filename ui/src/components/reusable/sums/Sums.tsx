@@ -20,14 +20,19 @@ function Sums({ betweenDates }: ISumsProps) {
     const consumptionsService = new ConsumptionsService();
     const sitesService = new SitesService();
 
-    console.log(betweenDates);
+    console.log(betweenDates.dateRange[0]["startDate"]);
 
     useEffect(() => {
         const findSumOfConsumptionsBySiteIdAndTime = async () => {
             let finalConsumptions: String[] = [];
 
-            const now = new Date();
-            const priorDate = new Date(new Date().setDate(now.getDate() - 7));
+            // let now = new Date();
+            // let priorDate = new Date(new Date().setDate(now.getDate() - 7));
+
+            // if (betweenDates) {
+            let now: Date = betweenDates.dateRange[0]["endDate"]!;
+            let priorDate: Date = betweenDates.dateRange[0]["startDate"]!;
+            // }
 
             const siteData = await sitesService.findSiteById(currentSiteId);
 
@@ -90,7 +95,6 @@ function Sums({ betweenDates }: ISumsProps) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log(betweenDates);
     return (
         <Card className="flex-fill datePickerCard">
             <Card.Title>
