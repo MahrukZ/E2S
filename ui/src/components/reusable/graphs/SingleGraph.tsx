@@ -2,7 +2,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Card } from "react-bootstrap";
 import "./Graph.css";
 import Plot from 'react-plotly.js';
-import { ISingleGraph } from "./DashboardGraphs";
+
+export interface ISingleGraph {
+  xData: Date[];
+  yData: number[];
+  xName: string;
+  yName: string;
+  lineColour: string;
+}
 
 interface SingleGraphProps {
     graphData: ISingleGraph

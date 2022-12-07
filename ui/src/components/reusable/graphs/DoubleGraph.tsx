@@ -2,7 +2,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Card } from "react-bootstrap";
 import "./Graph.css";
 import Plot from 'react-plotly.js';
-import { IDoubleGraph } from "./DashboardGraphs";
+
+export interface IDoubleGraph {
+  xData0: Date[];
+  yData0: number[];
+  yData1: number[];
+  xName: string;
+  yName: string;
+  lineColour0: string;
+  lineColour1: string;
+  name0: string;
+  name1: string;
+}
 
 interface DoubleGraphProps {
     graphData: IDoubleGraph

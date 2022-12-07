@@ -3,28 +3,8 @@ import { useEffect, useState } from "react";
 import { Container, Col } from "react-bootstrap";
 import { ConsumptionsService } from "../../../services/consumptions.service";
 import "./Graph.css";
-import SingleGraph from "./SingleGraph";
-import DoubleGraph from "./DoubleGraph";
-
-export interface ISingleGraph {
-  xData: Date[];
-  yData: number[];
-  xName: string;
-  yName: string;
-  lineColour: string;
-}
-
-export interface IDoubleGraph {
-  xData0: Date[];
-  yData0: number[];
-  yData1: number[];
-  xName: string;
-  yName: string;
-  lineColour0: string;
-  lineColour1: string;
-  name0: string;
-  name1: string;
-}
+import SingleGraph, { ISingleGraph } from "./SingleGraph";
+import DoubleGraph, { IDoubleGraph } from "./DoubleGraph";
 
 function ReportsGraphs() {
   const currentSiteId = 1;
@@ -67,7 +47,7 @@ function ReportsGraphs() {
 
   useEffect(() => {
     const consumptionsService = new ConsumptionsService();
-    
+
     const findAllConsumptionsBySiteIdAndTime = async () => {
       let electricityData = [];
       let gasData = [];
