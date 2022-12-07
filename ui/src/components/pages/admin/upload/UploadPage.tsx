@@ -1,4 +1,4 @@
-import Upload from './Upload';
+import Upload from "./Upload";
 
 function UploadPage() {
   return (
@@ -7,6 +7,6 @@ function UploadPage() {
       <Upload />
     </div>
   );
-};
+}
 
 export default UploadPage;

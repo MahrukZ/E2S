@@ -1,80 +1,80 @@
 #hoverContainer {
-    border: solid;
-    border-color: #73A6BA;
-    height: 50%;
-    width: fit-content;
-    margin-bottom: 0;
-    position: relative;
-    bottom: 1px;
-}
-  
-#dropdown-basic-button {
-    background-color:#417285;
-    border-color: #417285;
-    border-radius: 10px;
-    min-width: 12em;
-    max-width: 100%;
+  border: solid;
+  border-color: #73a6ba;
+  height: 50%;
+  width: fit-content;
+  margin-bottom: 0;
+  position: relative;
+  bottom: 1px;
 }
 
-.dropdown-menu[aria-labelledby = dropdown-basic-button] {
-    background-color: #73A6BA;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    margin: auto;
-    width: 100%;
-    padding-top: 0;
-    padding-bottom: 0;
+#dropdown-basic-button {
+  background-color: #417285;
+  border-color: #417285;
+  border-radius: 10px;
+  min-width: 12em;
+  max-width: 100%;
+}
+
+.dropdown-menu[aria-labelledby="dropdown-basic-button"] {
+  background-color: #73a6ba;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  margin: auto;
+  width: 100%;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 #settingsDropdown {
-    color: white;
-    width: 100%;
-    margin: auto;
-    border-radius: 0;
-    text-align: center;
+  color: white;
+  width: 100%;
+  margin: auto;
+  border-radius: 0;
+  text-align: center;
 }
 
 #settingsDropdown:hover {
-    background-color: #0084CF;
+  background-color: #0084cf;
 }
 
 #signOutDropdown {
-    color: white;
-    width: 100%;
-    margin: auto;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    text-align: center;
+  color: white;
+  width: 100%;
+  margin: auto;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  text-align: center;
 }
 
 #signOutDropdown:hover {
-    background-color: #EC808D;
+  background-color: #ec808d;
 }
 
-#dropdown-basic-button::after{
-    display: none; 
+#dropdown-basic-button::after {
+  display: none;
 }
 
 #userIcon {
-    position: relative;
-    bottom: 1px;
+  position: relative;
+  bottom: 1px;
 }
 
 #settingsIcon {
-    position: relative;
-    bottom: 1px;
+  position: relative;
+  bottom: 1px;
 }
 
 #signOutIcon {
-    position: relative;
-    bottom: 1px;
+  position: relative;
+  bottom: 1px;
 }
 
 #siteDropdown {
-    position: relative;
-    top:2px;
+  position: relative;
+  top: 2px;
 }

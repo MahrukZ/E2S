@@ -1,17 +1,15 @@
-import React from 'react'
-import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
-import BillValidation from '../../src/components/pages/BillValidation'
+import React from "react";
+import "@testing-library/jest-dom";
+import { render, screen } from "@testing-library/react";
+import BillValidation from "../../src/components/pages/BillValidation";
 
+test("should render billvalidation title element", () => {
+  // Given
+  render(<BillValidation />);
 
-test('should render billvalidation title element', () => {
-    // Given
-    render(<BillValidation />);
+  // When
+  const billValidationElement = screen.getByTestId("BillValidation");
 
-    // When
-    const billValidationElement = screen.getByText("BillValidation")
-
-    // Then
-    expect(billValidationElement).toBeInTheDocument();
+  // Then
+  expect(billValidationElement).toBeInTheDocument();
 });
-

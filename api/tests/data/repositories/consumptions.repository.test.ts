@@ -17,6 +17,7 @@ describe('ConsumptionRepository', () => {
                 timeInterval: mockDateObject,
                 heatDemand: 1897,
                 electricityDemand: 1699,
+                co2Emissions: 695.39,
                 electricityPrice: 18,
                 gasPrice: 15,
                 siteId: 1,
@@ -27,6 +28,7 @@ describe('ConsumptionRepository', () => {
                 timeInterval: mockDateObject,
                 heatDemand: 2897,
                 electricityDemand: 2699,
+                co2Emissions: 1082.15,
                 electricityPrice: 28,
                 gasPrice: 25,
                 siteId: 2,
@@ -37,6 +39,7 @@ describe('ConsumptionRepository', () => {
                 timeInterval: mockDateObject,
                 heatDemand: 3897,
                 electricityDemand: 3699,
+                co2Emissions: 1468.91,
                 electricityPrice: 38,
                 gasPrice: 35,
                 siteId: 3,
@@ -75,6 +78,7 @@ describe('ConsumptionRepository', () => {
                 timeInterval: mockDateObject,
                 heatDemand: 1897,
                 electricityDemand: 1699,
+                co2Emissions: 695.39,
                 electricityPrice: 18,
                 gasPrice: 15,
                 siteId: 1,
@@ -113,6 +117,7 @@ describe('ConsumptionRepository', () => {
                 timeInterval: mockDateObject,
                 heatDemand: 1897,
                 electricityDemand: 1699,
+                co2Emissions: 695.39,
                 electricityPrice: 18,
                 gasPrice: 15,
                 siteId: 1,
@@ -123,6 +128,7 @@ describe('ConsumptionRepository', () => {
                 timeInterval: mockDateObject,
                 heatDemand: 2897,
                 electricityDemand: 2699,
+                co2Emissions: 1082.15,
                 electricityPrice: 28,
                 gasPrice: 25,
                 siteId: 2,
@@ -133,6 +139,7 @@ describe('ConsumptionRepository', () => {
                 timeInterval: mockDateObject,
                 heatDemand: 3897,
                 electricityDemand: 3699,
+                co2Emissions: 1468.91,
                 electricityPrice: 38,
                 gasPrice: 35,
                 siteId: 3,
@@ -161,4 +168,87 @@ describe('ConsumptionRepository', () => {
             expect(consumptionRepository.getAllConsumptions).toHaveBeenCalledWith();
         });
     });
+
+    describe('ConsumptionRepository.findAllConsumptionsBySiteIdAndTime', () => {
+        it('should fetch some consumptions when there is data in the database', async () => {
+            // Given
+            const mockResponse: IConsumption[] = [{
+                consumptionId: 1,
+                timeInterval: mockDateObject,
+                heatDemand: 1897,
+                electricityDemand: 1699,
+                electricityPrice: 18,
+                gasPrice: 15,
+                siteId: 1,
+                orgId: 1
+            },
+            {
+                consumptionId: 2,
+                timeInterval: mockDateObject,
+                heatDemand: 2897,
+                electricityDemand: 2699,
+                electricityPrice: 28,
+                gasPrice: 25,
+                siteId: 2,
+                orgId: 2
+            },
+            {
+                consumptionId: 3,
+                timeInterval: mockDateObject,
+                heatDemand: 3897,
+                electricityDemand: 3699,
+                electricityPrice: 38,
+                gasPrice: 35,
+                siteId: 3,
+                orgId: 3
+            }];
+            Consumptions.findAll = jest.fn().mockResolvedValue(mockResponse);
+
+            // When
+            const result = await consumptionRepository.findAllConsumptionsBySiteIdAndTime("","",1);
+
+            // Then
+            expect(result).toEqual(mockResponse);
+            expect(Consumptions.findAll).toHaveBeenCalledTimes(1);
+        });
+
+        it('should not fetch consumptions when there is no data in the database', async () => {
+            // Given 
+            // When
+            const mErrorMessage = new Error("Failed to fetch all consumptions.");
+            consumptionRepository.findAllConsumptionsBySiteIdAndTime = jest.fn().mockRejectedValue(mErrorMessage);
+            
+            // Then
+            expect(consumptionRepository.findAllConsumptionsBySiteIdAndTime).rejects.toMatchObject(mErrorMessage);
+            expect(consumptionRepository.findAllConsumptionsBySiteIdAndTime).toHaveBeenCalledTimes(1);
+            expect(consumptionRepository.findAllConsumptionsBySiteIdAndTime).toHaveBeenCalledWith();
+        });
+    });
+
+    describe('ConsumptionRepository.findSumOfConsumptionsBySiteIdAndTime', () => {
+        it('should fetch some numbers when there is data in the database', async () => {
+            // Given
+            const mockResponse: number[] = [1, 2, 3];
+            Consumptions.findAll = jest.fn().mockResolvedValue(mockResponse);
+
+            // When
+            const result = await consumptionRepository.findSumOfConsumptionsBySiteIdAndTime("2022-11-30 15:30:00","2022-12-01 2015:30:00",1);
+
+            // Then
+            expect(Consumptions.findAll).toHaveBeenCalledTimes(1);
+        });
+
+        it('should not fetch consumptions when there is no data in the database', async () => {
+            // Given 
+            // When
+            const mErrorMessage = new Error("Failed to fetch all consumptions.");
+            consumptionRepository.findSumOfConsumptionsBySiteIdAndTime = jest.fn().mockRejectedValue(mErrorMessage);
+            
+            // Then
+            expect(consumptionRepository.findSumOfConsumptionsBySiteIdAndTime).rejects.toMatchObject(mErrorMessage);
+            expect(consumptionRepository.findSumOfConsumptionsBySiteIdAndTime).toHaveBeenCalledTimes(1);
+            expect(consumptionRepository.findSumOfConsumptionsBySiteIdAndTime).toHaveBeenCalledWith();
+        });
+    });
+    
 });

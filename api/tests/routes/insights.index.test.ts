@@ -1,10 +1,10 @@
 import axios from "axios";
-import { InsightController } from "../controllers/insights.controller";
-import { IInsight } from "../data/models/insights.model";
+import { InsightController } from "../../controllers/insights.controller";
+import { IInsight } from "../../data/models/insights.model";
 
 jest.mock('axios');
 
-jest.mock('../controllers/insights.controller', () => {
+jest.mock('../../controllers/insights.controller', () => {
     const mInsightController = { 
         createInsight: jest.fn(),
         deleteInsight: jest.fn(),

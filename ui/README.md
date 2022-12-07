@@ -32,6 +32,8 @@ npm i
 - `react-router-dom` package - The react-router-dom package contains bindings for using React Router in web applications. **Learn more [here](https://www.npmjs.com/package/react-router-dom)**
 - `styled-components` package - Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress. **Learn more [here](https://www.npmjs.com/package/styled-components)**
 - `plotly` package - Plotly is a Javascript data visualization library. **Learn more [here](https://plotly.com/javascript/react/)**
+- `react-date-range` package - Contains date range picker **Learn more [here](https://www.npmjs.com/package/react-date-range)**
+- `date-fns` package - Toolset for manipulating JavaScript dates in a browser & Node.js **Learn more [here](https://www.npmjs.com/package/date-fns)**
 
 
 ###### _devDependencies:_
@@ -40,6 +42,7 @@ npm i
 - `jest-environment-jsdom` package - **Learn more [here](https://www.npmjs.com/package/jest-environment-jsdom)**
 - `jsx-runtime` package - **Learn more [here](https://www.npmjs.com/package/jsx-runtime)**
 - `jest-canvas-mock` package - Mock canvas when run unit test cases with jest. **Learn more [here](https://www.npmjs.com/package/jest-canvas-mock)**
+- `prettier` package - Prettier is a code formatter and enforces a consistent style. **Learn more [here](https://prettier.io/)**
 
 ## Available Scripts
 

@@ -1,16 +1,15 @@
 import React from "react";
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
-import Upload from '../../../../src/components/pages/admin/upload/Upload';
+import Upload from "../../../../src/components/pages/admin/upload/Upload";
 
-test('should render form element', () => {
-    // Given
-    render(<Upload />);
+test("should render form element", () => {
+  // Given
+  render(<Upload />);
 
-    // When
-    const formElement = document.getElementById("formFile");
+  // When
+  const formElement = document.getElementById("formFile");
 
-    // Then
-    expect(formElement).toBeInTheDocument();
+  // Then
+  expect(formElement).toBeInTheDocument();
 });
-

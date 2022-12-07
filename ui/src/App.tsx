@@ -8,26 +8,24 @@ import Topbar from "./components/reusable/topbar/Topbar";
 
 import BillValidation from "./components/pages/BillValidation";
 import CostForecast from "./components/pages/CostForecast";
-import Dashboard from "./components/pages/dashboard/Dashboard";
+// import Dashboard from "./components/pages/dashboard/Dashboard";
 import Reports from "./components/pages/Reports";
 import SignIn from "./components/pages/signIn/SignIn";
 
 import AdminRoutes from "../src/routes/AdminRoutes";
 import ProtectedRoutes from "../src/routes/ProtectedRoutes";
+import Dashboard from "./components/pages/Dashboard";
+
+
 import UploadPage from "./components/pages/admin/upload/UploadPage";
 import UserManagementPage from "./components/pages/admin/userManagement/UserManagementPage";
 
 const App: React.FunctionComponent = () => {
   Axios.defaults.withCredentials = true;
-
   //Defines the paths of each page
   //This file should only have the topbar and sidebar
   return (
     <>
-      {/* <div className="App">
-        <Topbar />
-      </div> */}
-
       <Router>
         <Topbar />
         <Sidebar />

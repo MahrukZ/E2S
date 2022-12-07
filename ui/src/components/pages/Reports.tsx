@@ -1,6 +1,4 @@
-import React from 'react';
-
-const Reports: React.FunctionComponent = () => {
+function Reports() {
     return (
         <h1 id="reports">Reports</h1>
     );

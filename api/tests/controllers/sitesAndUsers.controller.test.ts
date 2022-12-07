@@ -2,166 +2,166 @@ import { SitesAndUsersController } from "../../controllers/sitesAndUsers.control
 import { ISitesAndUser } from "../../data/models/sitesAndUsers.model";
 import { SitesAndUsersService } from "../../services/sitesAndUsers.service";
 
-jest.mock('../../services/sitesAndUsers.service', () => {
-    const mSitesAndUsersService = { 
-        getAllSitesAndUsers: jest.fn(),
-        findSitesAndUsersByUserId: jest.fn(),
-    };
-    return {
-        SitesAndUsersService: jest.fn(() => mSitesAndUsersService)
-    };
+jest.mock("../../services/sitesAndUsers.service", () => {
+  const mSitesAndUsersService = {
+    getAllSitesAndUsers: jest.fn(),
+    findSitesAndUsersByUserId: jest.fn(),
+  };
+  return {
+    SitesAndUsersService: jest.fn(() => mSitesAndUsersService),
+  };
 });
 
-describe("SitesAndUsersController", () => {    
-    const service = new SitesAndUsersService();
-    const controller = new SitesAndUsersController();
+describe("SitesAndUsersController", () => {
+  const service = new SitesAndUsersService();
+  const controller = new SitesAndUsersController();
 
-    const mRequest = (body?: any, params?: any) => {
-        const req: any = {};
-        req.body = jest.fn().mockReturnValue(body || req);
-        req.params = jest.fn().mockReturnValue(params || req);
-        return req;
+  const mRequest = (body?: any, params?: any) => {
+    const req: any = {};
+    req.body = jest.fn().mockReturnValue(body || req);
+    req.params = jest.fn().mockReturnValue(params || req);
+    return req;
+  };
+  const mResponse = () => {
+    const res: any = {};
+    res.status = jest.fn().mockReturnValue(res);
+    res.json = jest.fn().mockReturnValue(res);
+    return res;
+  };
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  describe("SitesAndUsersController.getAllSitesAndUsers", () => {
+    const mSitesAndUsers: ISitesAndUser[] = [
+      {
+        siteId: 1,
+        name: "Abacws",
+        userId: 1,
+      },
+      {
+        siteId: 1,
+        name: "Abacws",
+        userId: 3,
+      },
+      {
+        siteId: 2,
+        name: "National Software Academy",
+        userId: 1,
+      },
+    ];
+    const mSuccessResponse: any = {
+      message: "Success",
+      status: 200,
+      data: mSitesAndUsers,
     };
-    const mResponse = () => {
-        const res: any = {};
-        res.status = jest.fn().mockReturnValue(res);
-        res.json = jest.fn().mockReturnValue(res);
-        return res;
+    const mFailResponse: any = {
+      message: "server error: failed to fetch sites and users.",
+      status: 500,
     };
 
-    beforeEach(() => {
-        jest.clearAllMocks();
+    it("should fetch all sites and users when there is data in the database", async () => {
+      // Given
+      const req = mRequest();
+      const res = mResponse();
+      const getSpy = jest
+        .spyOn(service, "getAllSitesAndUsers")
+        .mockResolvedValueOnce(mSitesAndUsers);
+
+      // When
+      await controller.getAllSitesAndUsers(req, res);
+
+      // Then
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith(mSuccessResponse);
+
+      expect(getSpy).toHaveBeenCalledTimes(1);
+      expect(getSpy).toHaveBeenCalledWith();
     });
 
-    describe("SitesAndUsersController.getAllSitesAndUsers", () => {
-        const mSitesAndUsers: ISitesAndUser[] = [
-            {
-                siteId: 1,
-                name: "Abacws",
-                userId: 1
-            },
-            {
-                siteId: 1,
-                name: "Abacws",
-                userId: 3
-            },
-            {
-                siteId: 2,
-                name: "National Software Academy",
-                userId: 1
-            }
-        ];
-        const mSuccessResponse: any = {
-            message: 'Success',
-            status: 200,
-            data: mSitesAndUsers
-        };
-        const mFailResponse: any = {
-            message: "server error: failed to fetch sites and users.",
-            status: 500
-        };
+    it("should not fetch sites and users when there is no data in the database", async () => {
+      // Given
+      const req = mRequest();
+      const res = mResponse();
+      const getSpy = jest
+        .spyOn(service, "getAllSitesAndUsers")
+        .mockRejectedValue({});
 
-        it('should fetch all sites and users when there is data in the database', async () => {
-            // Given
-            const req = mRequest();
-            const res = mResponse();
-            const getSpy = jest
-                .spyOn(service, 'getAllSitesAndUsers')
-                .mockResolvedValueOnce(mSitesAndUsers);
+      // When
+      await controller.getAllSitesAndUsers(req, res);
 
-            // When
-            await controller.getAllSitesAndUsers(req, res);
+      // Then
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith(mFailResponse);
 
-            // Then
-            expect(res.status).toHaveBeenCalledWith(200);
-            expect(res.json).toHaveBeenCalledWith(mSuccessResponse);
+      expect(getSpy).toHaveBeenCalledTimes(1);
+    });
+  });
 
-            expect(getSpy).toHaveBeenCalledTimes(1);
-            expect(getSpy).toHaveBeenCalledWith();
-        });
+  describe("SitesAndUsersController.findSitesAndUsersByUserId", () => {
+    const mSitesAndUsers: ISitesAndUser[] = [
+      {
+        siteId: 1,
+        name: "Abacws",
+        userId: 1,
+      },
+      {
+        siteId: 1,
+        name: "Abacws",
+        userId: 3,
+      },
+      {
+        siteId: 2,
+        name: "National Software Academy",
+        userId: 1,
+      },
+    ];
+    const mSuccessResponse: any = {
+      message: "Success",
+      status: 200,
+      data: mSitesAndUsers,
+    };
+    const mFailResponse: any = {
+      message: "server error: failed to fetch sites and users.",
+      status: 500,
+    };
+    const mParameter: number = 1;
 
-        it('should not fetch sites and users when there is no data in the database', async () => {
-            // Given
-            const req = mRequest();
-            const res = mResponse();
-            const getSpy = jest
-                .spyOn(service, 'getAllSitesAndUsers')
-                .mockRejectedValue({});
+    it("should fetch when parameter is provided", async () => {
+      // Given
+      const req = mRequest("", mParameter);
+      const res = mResponse();
+      const fetchSpy = jest
+        .spyOn(service, "findSitesAndUsersByUserId")
+        .mockResolvedValue(mSitesAndUsers);
 
-            // When
-            await controller.getAllSitesAndUsers(req, res);
+      // When
+      await controller.findSitesAndUsersByUserId(req, res);
 
-            // Then
-            expect(res.status).toHaveBeenCalledWith(500);
-            expect(res.json).toHaveBeenCalledWith(mFailResponse);
+      // Then
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith(mSuccessResponse);
 
-            expect(getSpy).toHaveBeenCalledTimes(1);
-        });
+      expect(fetchSpy).toHaveBeenCalledTimes(1);
     });
 
-    describe("SitesAndUsersController.findSitesAndUsersByUserId", () => {
-        const mSitesAndUsers: ISitesAndUser[] = [
-            {
-                siteId: 1,
-                name: "Abacws",
-                userId: 1
-            },
-            {
-                siteId: 1,
-                name: "Abacws",
-                userId: 3
-            },
-            {
-                siteId: 2,
-                name: "National Software Academy",
-                userId: 1
-            }
-        ];
-        const mSuccessResponse: any = {
-            message: 'Success',
-            status: 200,
-            data: mSitesAndUsers
-        };
-        const mFailResponse: any = {
-            message: "server error: failed to fetch sites and users.",
-            status: 500
-        };
-        const mParameter : number = 1;
+    it("should not fetch when parameter is not provided", async () => {
+      // Given
+      const req = mRequest();
+      const res = mResponse();
+      const fetchSpy = jest
+        .spyOn(service, "findSitesAndUsersByUserId")
+        .mockRejectedValue({});
 
-        it('should fetch when parameter is provided', async () => {
-            // Given
-            const req = mRequest("", mParameter);
-            const res = mResponse();
-            const fetchSpy = jest
-            .spyOn(service, 'findSitesAndUsersByUserId')
-            .mockResolvedValue(mSitesAndUsers);
+      // When
+      await controller.findSitesAndUsersByUserId(req, res);
 
-            // When
-            await controller.findSitesAndUsersByUserId(req, res);
+      // Then
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith(mFailResponse);
 
-            // Then
-            expect(res.status).toHaveBeenCalledWith(200);
-            expect(res.json).toHaveBeenCalledWith(mSuccessResponse);
-
-            expect(fetchSpy).toHaveBeenCalledTimes(1);
-        });
-
-        it('should not fetch when parameter is not provided', async () => {
-           // Given
-           const req = mRequest();
-           const res = mResponse();
-           const fetchSpy = jest
-           .spyOn(service, 'findSitesAndUsersByUserId')
-           .mockRejectedValue({});
-
-           // When
-           await controller.findSitesAndUsersByUserId(req, res);
-
-           // Then
-           expect(res.status).toHaveBeenCalledWith(500);
-           expect(res.json).toHaveBeenCalledWith(mFailResponse);
-
-           expect(fetchSpy).toHaveBeenCalledTimes(1);
-        });
+      expect(fetchSpy).toHaveBeenCalledTimes(1);
     });
+  });
 });

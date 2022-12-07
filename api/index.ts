@@ -1,19 +1,26 @@
 import express from "express";
-import cors from "cors";
 import dotenv from "dotenv";
-import { InsightController } from "./controllers/insights.controller";
-import { SiteController } from "./controllers/sites.controller";
-import { SitesAndUsersController } from "./controllers/sitesAndUsers.controller";
-import { UserManagementController } from "./controllers/userManagement.controller";
-import { ConsumptionController } from "./controllers/consumptions.controller";
+// import { InsightController } from "./controllers/insights.controller";
+// import { SiteController } from "./controllers/sites.controller";
+// import { SitesAndUsersController } from "./controllers/sitesAndUsers.controller";
+// import { UserManagementController } from "./controllers/userManagement.controller";
+// import { ConsumptionController } from "./controllers/consumptions.controller";
 import { UserController } from "./controllers/users.controller";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import session from "express-session";
 import jwt from "jsonwebtoken";
+import cors from "cors";
+import consumptions from "./routes/consumptions/consumptions.routes";
+import sitesAndUsers from "./routes/sitesAndUsers/sitesAndusers.routes";
+import insights from "./routes/insights/insights.routes";
+import users from "./routes/users/users.routes";
+import sites from "./routes/sites/sites.routes";
+import { Router } from 'express';
 
 // config
 dotenv.config();
+const routes = Router();
 const port = process.env.PORT || 8082;
 const app = express();
 const key: string = process.env.JWT_KEY || "key not found";
@@ -65,84 +72,84 @@ const verifyJWT = (req: any, res: any, next: any) => {
 };
 
 // controllers
-const insightController = new InsightController();
-const siteController = new SiteController();
-const sitesAndUsersController = new SitesAndUsersController();
-const userManagementController = new UserManagementController();
-const consumptionController = new ConsumptionController();
+// const insightController = new InsightController();
+// const siteController = new SiteController();
+// const sitesAndUsersController = new SitesAndUsersController();
+// const userManagementController = new UserManagementController();
+// const consumptionController = new ConsumptionController();
 const userController = new UserController();
 
 // routes
 
 //insights
-app.get("/api/insights", async (req, res) => {
-  insightController.getAllInsights(req, res);
-});
+// app.get("/api/insights", async (req, res) => {
+//   insightController.getAllInsights(req, res);
+// });
 
-app.post("/api/insight", async (req, res) => {
-  insightController.createInsight(req, res);
-});
+// app.post("/api/insight", async (req, res) => {
+//   insightController.createInsight(req, res);
+// });
 
-app.put("/api/insight", async (req, res) => {
-  insightController.updateInsight(req, res);
-});
+// app.put("/api/insight", async (req, res) => {
+//   insightController.updateInsight(req, res);
+// });
 
-app.delete("/api/insight/:id", async (req, res) => {
-  insightController.deleteInsight(req, res);
-});
+// app.delete("/api/insight/:id", async (req, res) => {
+//   insightController.deleteInsight(req, res);
+// });
 
-//sites
-app.get("/api/sites", async (req, res) => {
-  siteController.getAllSites(req, res);
-});
+// //sites
+// app.get("/api/sites", async (req, res) => {
+//   siteController.getAllSites(req, res);
+// });
 
-app.post("/api/site", async (req, res) => {
-  siteController.createSite(req, res);
-});
+// app.post("/api/site", async (req, res) => {
+//   siteController.createSite(req, res);
+// });
 
-app.put("/api/site", async (req, res) => {
-  siteController.updateSite(req, res);
-});
+// app.put("/api/site", async (req, res) => {
+//   siteController.updateSite(req, res);
+// });
 
-app.delete("/api/site/:id", async (req, res) => {
-  siteController.deleteSite(req, res);
-});
+// app.delete("/api/site/:id", async (req, res) => {
+//   siteController.deleteSite(req, res);
+// });
 
-//sites_and_users
-app.get("/api/sites-and-users", async (req, res) => {
-  sitesAndUsersController.getAllSitesAndUsers(req, res);
-});
+// //sites_and_users
+// app.get("/api/sites-and-users", async (req, res) => {
+//   sitesAndUsersController.getAllSitesAndUsers(req, res);
+// });
 
-app.get("/api/sites-and-users/:id", async (req, res) => {
-  sitesAndUsersController.findSitesAndUsersByUserId(req, res);
-});
+// app.get("/api/sites-and-users/:id", async (req, res) => {
+//   sitesAndUsersController.findSitesAndUsersByUserId(req, res);
+// });
 
-// user management
-app.get("/api/user-managements", async (req, res) => {
-  userManagementController.getAllUserManagements(req, res);
-});
+// // user management
+// app.get("/api/user-managements", async (req, res) => {
+//   userManagementController.getAllUserManagements(req, res);
+// });
 
-app.get("/api/user-management/:id", async (req, res) => {
-  userManagementController.findUserManagementByUserId(req, res);
-});
+// app.get("/api/user-management/:id", async (req, res) => {
+//   userManagementController.findUserManagementByUserId(req, res);
+// });
 
-// consumptions
-app.get("/api/consumptions", async (req, res) => {
-  consumptionController.getAllConsumptions(req, res);
-});
+// // consumptions
+// app.get("/api/consumptions", async (req, res) => {
+//   consumptionController.getAllConsumptions(req, res);
+// });
 
-app.post("/api/consumption", async (req, res) => {
-  consumptionController.createConsumption(req, res);
-});
+// app.post("/api/consumption", async (req, res) => {
+//   consumptionController.createConsumption(req, res);
+// });
 
-app.post("/api/consumption/bulk-create", async (req, res) => {
-  consumptionController.bulkCreateConsumptions(req, res);
-});
+// app.post("/api/consumption/bulk-create", async (req, res) => {
+//   consumptionController.bulkCreateConsumptions(req, res);
+// });
 
-// users
-app.get("/api/users", async (req, res) => {
-  userController.getAllUsers(req, res);
-});
+// // users
+// app.get("/api/users", async (req, res) => {
+//   userController.getAllUsers(req, res);
+// });
 
 // sign in
 app.post("/sign-in", async (req, res) => {
@@ -196,6 +203,15 @@ app.get("/sign-in", async (req, res) => {
     });
   }
 });
+app.use(cors());
+
+routes.use(users);
+routes.use(consumptions);
+routes.use(insights);
+routes.use(sites);
+routes.use(sitesAndUsers);
+
+app.use(routes);
 
 // port listen
 app.listen(port, () => {

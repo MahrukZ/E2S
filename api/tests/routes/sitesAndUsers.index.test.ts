@@ -1,10 +1,10 @@
 import axios from "axios"
-import { UserManagementController } from "../controllers/userManagement.controller";
-import { IUserManagement } from "../data/models/userManagement.model";
+import { UserManagementController } from "../../controllers/userManagement.controller";
+import { IUserManagement } from "../../data/models/userManagement.model";
 
 jest.mock('axios');
 
-jest.mock('../controllers/userManagement.controller', () => {
+jest.mock('../../controllers/userManagement.controller', () => {
     const mUserManagementController = { 
         getAllUserManagements: jest.fn(),
         findUserManagementByUserId: jest.fn()

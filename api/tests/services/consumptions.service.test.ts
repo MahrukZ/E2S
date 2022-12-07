@@ -6,7 +6,9 @@ jest.mock('../../data/repositories/consumptions.repository', () => {
     const mConsumptionRepo = { 
         bulkCreateConsumptions: jest.fn(),
         createConsumption: jest.fn(),
-        getAllConsumptions: jest.fn()
+        getAllConsumptions: jest.fn(),
+        findAllConsumptionsBySiteIdAndTime: jest.fn(),
+        findSumOfConsumptionsBySiteIdAndTime: jest.fn()
     };
     return {
         ConsumptionRepository: jest.fn(() => mConsumptionRepo)
@@ -30,6 +32,7 @@ describe('ConsumptionService', () => {
                 timeInterval: mockDateObject,
                 heatDemand: 1897,
                 electricityDemand: 1699,
+                co2Emissions: 695.39,
                 electricityPrice: 18,
                 gasPrice: 15,
                 siteId: 1,
@@ -40,6 +43,7 @@ describe('ConsumptionService', () => {
                 timeInterval: mockDateObject,
                 heatDemand: 2897,
                 electricityDemand: 2699,
+                co2Emissions: 1082.15,
                 electricityPrice: 28,
                 gasPrice: 25,
                 siteId: 2,
@@ -50,6 +54,7 @@ describe('ConsumptionService', () => {
                 timeInterval: mockDateObject,
                 heatDemand: 3897,
                 electricityDemand: 3699,
+                co2Emissions: 1468.91,
                 electricityPrice: 38,
                 gasPrice: 35,
                 siteId: 3,
@@ -77,6 +82,7 @@ describe('ConsumptionService', () => {
                 timeInterval: mockDateObject,
                 heatDemand: 1897,
                 electricityDemand: 1699,
+                co2Emissions: 695.39,
                 electricityPrice: 18,
                 gasPrice: 15,
                 siteId: 1,
@@ -98,6 +104,56 @@ describe('ConsumptionService', () => {
 
     describe('ConsumptionService.getAllConsumptions', () => {
         it('should return all consumptions', async () => {
+            // Given
+            const mConsumptions: IConsumption[] = [{
+                consumptionId: 1,
+                timeInterval: mockDateObject,
+                heatDemand: 1897,
+                electricityDemand: 1699,
+                co2Emissions: 695.39,
+                electricityPrice: 18,
+                gasPrice: 15,
+                siteId: 1,
+                orgId: 1
+            },
+            {
+                consumptionId: 2,
+                timeInterval: mockDateObject,
+                heatDemand: 2897,
+                electricityDemand: 2699,
+                co2Emissions: 1082.15,
+                electricityPrice: 28,
+                gasPrice: 25,
+                siteId: 2,
+                orgId: 2
+            },
+            {
+                consumptionId: 3,
+                timeInterval: mockDateObject,
+                heatDemand: 3897,
+                electricityDemand: 3699,
+                co2Emissions: 1468.91,
+                electricityPrice: 38,
+                gasPrice: 35,
+                siteId: 3,
+                orgId: 3
+            }];
+            const getSpy = jest
+                .spyOn(repository, 'getAllConsumptions')
+                .mockResolvedValue(mConsumptions);
+
+            // When
+            const result = await service.getAllConsumptions();
+
+            // Then
+            expect(result).toEqual(mConsumptions);
+            expect(getSpy).toHaveBeenCalledTimes(1);
+            expect(getSpy).toHaveBeenCalledWith();
+        });
+    });
+
+    describe('ConsumptionService.findAllConsumptionsBySiteIdAndTime', () => {
+        it('should return consumptions', async () => {
             // Given
             const mConsumption: IConsumption[] = [{
                 consumptionId: 1,
@@ -130,16 +186,33 @@ describe('ConsumptionService', () => {
                 orgId: 3
             }];
             const getSpy = jest
-                .spyOn(repository, 'getAllConsumptions')
+                .spyOn(repository, 'findAllConsumptionsBySiteIdAndTime')
                 .mockResolvedValue(mConsumption);
 
             // When
-            const result = await service.getAllConsumptions();
+            const result = await service.findAllConsumptionsBySiteIdAndTime("", "", 1);
 
             // Then
             expect(result).toEqual(mConsumption);
             expect(getSpy).toHaveBeenCalledTimes(1);
-            expect(getSpy).toHaveBeenCalledWith();
+            expect(getSpy).toHaveBeenCalledWith("", "", 1);
+        });
+    });
+
+    describe('ConsumptionService.findSumOfConsumptionsBySiteIdAndTime', () => {
+        it('should return consumptions', async () => {
+            // Given
+            const getSpy = jest
+                .spyOn(repository, 'findSumOfConsumptionsBySiteIdAndTime')
+                .mockResolvedValue([1, 2, 3]);
+
+            // When
+            const result = await service.findSumOfConsumptionsBySiteIdAndTime("", "", 1);
+
+            // Then
+            expect(result).toEqual([1, 2, 3]);
+            expect(getSpy).toHaveBeenCalledTimes(1);
+            expect(getSpy).toHaveBeenCalledWith("", "", 1);
         });
     });
 });
