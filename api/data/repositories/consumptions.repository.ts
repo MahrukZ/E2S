@@ -90,7 +90,7 @@ export class ConsumptionRepository {
             a + (parseFloat(b.gasPrice) * parseFloat(b.heatDemand)), 0
         );
         
-        const totalCosts = totalElectricityCosts + totalGasCosts;
+        const totalCosts = (totalElectricityCosts + totalGasCosts) / 100;
 
         // Returns data as a list of 4 numbers with electricity first, gas second, emissions third, costs fourth
         data.push(totalElectricityDemand, totalGasDemand, totalEmissions, totalCosts);
