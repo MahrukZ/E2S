@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { UsersService } from "../../../services/users.service";
 import Message from "../../reusable/alerts/Message";
 import "./SignInForm.css";
+import logo from "./../../../assets/images/E2S_logo.png";
 
 function SignInForm() {
   const [emailAddress, setEmailAddress] = useState("");
@@ -69,46 +70,59 @@ function SignInForm() {
   }, []);
 
   return (
-    <Container className="signInContainer mt-5">
-      <Row>
-        <Col>
-          <h1 className="signInTitle">Sign In to E2S Dashboard</h1>
-          <Form>
-            <Form.Group className="mb-3" controlId="emailAddress">
-              <Form.Label className="signInFormLabel">Email address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter email"
-                onChange={(e: any) => {
-                  setEmailAddress(e.target.value);
-                }}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="password">
-              <Form.Label className="signInFormLabel">Password</Form.Label>
-              <Form.Control
-                type="password"
-                required
-                placeholder="Enter Password"
-                onChange={(e: any) => {
-                  setPassword(e.target.value);
-                }}
-              />
-            </Form.Group>
-            <div className="btnContainer">
-              <Button
-                variant="primary"
-                onClick={signIn}
-                className="mb-3 signInBtn"
-              >
-                Sign In
-              </Button>
-            </div>
-          </Form>
-          {error.length > 0 && <Message message={error} type="danger" />}
-        </Col>
-      </Row>
-    </Container>
+    <>
+      <img
+        width={150}
+        height={150}
+        src={logo}
+        alt="e2s logo"
+        className="e2sLogo mt-4"
+      />
+      <Container className="signInContainer mt-5">
+        <Row>
+          <Col>
+            <h1 className="signInTitle">
+              Sign In to E<sup>2</sup>S Dashboard
+            </h1>
+            <Form>
+              <Form.Group className="mb-3" controlId="emailAddress">
+                <Form.Label className="signInFormLabel">
+                  Email address
+                </Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Enter email"
+                  onChange={(e: any) => {
+                    setEmailAddress(e.target.value);
+                  }}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="password">
+                <Form.Label className="signInFormLabel">Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  required
+                  placeholder="Enter Password"
+                  onChange={(e: any) => {
+                    setPassword(e.target.value);
+                  }}
+                />
+              </Form.Group>
+              <div className="btnContainer">
+                <Button
+                  variant="primary"
+                  onClick={signIn}
+                  className="mb-3 signInBtn"
+                >
+                  Sign In
+                </Button>
+              </div>
+            </Form>
+            {error.length > 0 && <Message message={error} type="danger" />}
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 }
 
