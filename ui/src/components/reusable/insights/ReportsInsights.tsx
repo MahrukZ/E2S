@@ -49,7 +49,7 @@ function ReportsInsights() {
     const firstDayOfTheWeek = now.getDate() - now.getDay() + 1;
     const lastDayOfTheWeek = firstDayOfTheWeek + 6;
     const firstDayOfLastWeek = new Date(now.setDate(firstDayOfTheWeek - 7));
-    const lastDayOfLastWeek = new Date(now.setDate(lastDayOfTheWeek - 7));
+    const lastDayOfLastWeek = new Date(new Date().setDate(lastDayOfTheWeek - 7));
 
     // This will only work with 3 insight templates in the database
     const getAllInsights = async () => {
@@ -100,8 +100,8 @@ function ReportsInsights() {
     const findSumOfConsumptionsBySiteIdAndTime = async () => {
       const lastWeekConsumptionsResponse =
         await consumptionsService.findSumOfConsumptionsBySiteIdAndTime(
-          lastDayOfLastWeek,
           firstDayOfLastWeek,
+          lastDayOfLastWeek,
           currentSiteId
         );
 

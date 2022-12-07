@@ -60,12 +60,12 @@ function ReportsGraphs() {
       const firstDayOfTheWeek = now.getDate() - now.getDay() + 1;
       const lastDayOfTheWeek = firstDayOfTheWeek + 6;
       const firstDayOfLastWeek = new Date(now.setDate(firstDayOfTheWeek - 7));
-      const lastDayOfLastWeek = new Date(now.setDate(lastDayOfTheWeek - 7));
+      const lastDayOfLastWeek = new Date(new Date().setDate(lastDayOfTheWeek - 7));
 
       const currentConsumptionsResponse =
         await consumptionsService.findAllConsumptionsBySiteIdAndTime(
-          lastDayOfLastWeek,
           firstDayOfLastWeek,
+          lastDayOfLastWeek,
           currentSiteId
         );
 
