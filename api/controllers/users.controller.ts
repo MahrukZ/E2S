@@ -35,7 +35,7 @@ export class UserController {
       })
       .catch((err) => {
         res.status(500).json({
-          message: err.message || "server error: failed to fetch user.",
+          message: err.message || "server error: failed to fetch user data.",
           status: 500,
         });
       });

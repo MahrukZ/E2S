@@ -82,7 +82,9 @@ function SignInForm() {
         <Row>
           <Col>
             <h1 className="signInTitle">
-              Sign In to E<sup>2</sup>S Dashboard
+              <span>
+                Sign In to E<sup>2</sup>S Dashboard
+              </span>
             </h1>
             <Form>
               <Form.Group className="mb-3" controlId="emailAddress">
