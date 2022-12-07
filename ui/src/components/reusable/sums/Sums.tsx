@@ -89,7 +89,10 @@ function Sums({ betweenDates }: ISumsProps) {
     }, [betweenDates]);
 
     return (
-        <Card className="flex-shrink-1 sumsCard" data-testid="sumsElement">
+        <Card
+            className="flex-shrink-1 sumsCard"
+            data-testid="sumsElement"
+        >
             <Card.Title>
                 Between {dateRange[0]} and {dateRange[1]} {siteName} had:
             </Card.Title>
@@ -102,7 +105,7 @@ function Sums({ betweenDates }: ISumsProps) {
                     <b>Gas Demand: {consumptionsList[1]} kWh</b>
                 </p>
                 <p>
-                    <b>Carbon Emissions: {consumptionsList[2]} kt</b>
+                    <b>Carbon Emissions: {consumptionsList[2]} kgCO2e</b>
                 </p>
                 <p>
                     <b>Electricity Costs: £ {consumptionsList[4]}</b>
