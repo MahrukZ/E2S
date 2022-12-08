@@ -3,12 +3,12 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import CostForecast from "../../src/components/pages/CostForecast";
 
-test("should render costforecast title element", () => {
+test("should render costforecast container", () => {
   // Given
   render(<CostForecast />);
 
   // When
-  const costForecastElement = screen.getByText("CostForecast");
+  const costForecastElement = screen.getByTestId("costForecastContainer");
 
   // Then
   expect(costForecastElement).toBeInTheDocument();
