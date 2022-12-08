@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
-import { Container, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { ConsumptionsService } from "../../../services/consumptions.service";
 import "./Graph.css";
 import SingleGraph, { ISingleGraph } from "./SingleGraph";
