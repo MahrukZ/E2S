@@ -5,6 +5,7 @@ import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { Card, Col, Container } from "react-bootstrap";
 import "./DatePicker.css";
+import "./ReportsDatePicker.css";
 import ReportsInsights from "../insights/ReportsInsights";
 import ReportsGraphs from "../graphs/ReportsGraphs";
 
@@ -46,7 +47,7 @@ function ReportsDatePicker() {
     return (
         <>
             <Col className="d-flex calendarContainer justify-content-center">
-                <Container className="flex-fill">
+                <Container className="flex-fill reportsData">
                     <ReportsInsights betweenDates={dateRange} />
                     <ReportsGraphs betweenDates={dateRange} />
                 </Container>
