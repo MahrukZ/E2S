@@ -185,7 +185,11 @@ function ReportsInsights({ betweenDates }: IReportsInsightsProp) {
     ]);
 
     return (
-        <Container fluid className="justify-content-center d-flex">
+        <Container
+            fluid
+            className="justify-content-center d-flex"
+            data-testid="reportsInsights"
+        >
             <Insight insightData={costsInsight} />
 
             <Insight insightData={electricityInsight} />
