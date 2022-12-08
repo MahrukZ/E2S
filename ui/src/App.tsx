@@ -1,5 +1,6 @@
 import Axios from "axios";
 import React from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 
@@ -8,7 +9,7 @@ import Topbar from "./components/reusable/topbar/Topbar";
 
 import BillValidation from "./components/pages/BillValidation";
 import CostForecast from "./components/pages/CostForecast";
-// import Dashboard from "./components/pages/dashboard/Dashboard";
+import { UsersService } from "./services/users.service";
 import Reports from "./components/pages/Reports";
 import SignIn from "./components/pages/signIn/SignIn";
 
@@ -21,12 +22,32 @@ import UserManagementPage from "./components/pages/admin/userManagement/UserMana
 
 const App: React.FunctionComponent = () => {
     Axios.defaults.withCredentials = true;
+
+    const [currentSite, setCurrentSite] = useState<number>(0);
+
+    const usersService = new UsersService();
+
+    // useEffect(() => {
+    //     const redirect = async () => {
+    //         const signInRes = await usersService.checkSignIn();
+    //         if (signInRes["loggedIn"] === true) {
+    //             console.log("logged in app.tsx");
+    //             // if (signInRes["user"].role !== "administrator") {
+    //             console.log(signInRes["user"].userId);
+    //         } else {
+    //             console.log("not logged in app.tsx");
+    //         }
+    //     };
+    //     redirect();
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, []);
+
     //Defines the paths of each page
     //This file should only have the topbar and sidebar
     return (
         <>
             <Router>
-                <Topbar />
+                <Topbar setCurrentSite={setCurrentSite} />
                 <Sidebar />
                 <Routes>
                     <Route element={<ProtectedRoutes />}>
@@ -39,7 +60,10 @@ const App: React.FunctionComponent = () => {
                             path="/costforecast"
                             element={<CostForecast />}
                         />
-                        <Route path="/" element={<Dashboard />} />
+                        <Route
+                            path="/"
+                            element={<Dashboard currentSite={currentSite} />}
+                        />
                     </Route>
                     {/* admin routes */}
                     <Route element={<AdminRoutes />}>

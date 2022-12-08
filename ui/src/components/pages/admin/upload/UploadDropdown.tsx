@@ -1,8 +1,6 @@
-import React from "react";
-import { ChangeEvent } from "react";
-import { SitesService } from "../../../../services/sites.service";
-import { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
+import { SitesService } from "../../../../services/sites.service";
 
 export interface ISite {
     siteId: number;

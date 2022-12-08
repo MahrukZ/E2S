@@ -8,7 +8,6 @@ const siteController = new SiteController();
 
 // routes
 
-// Unused Routes
 router.get("/api/sites", async (req, res) => {
     siteController.getAllSites(req, res);
 });
