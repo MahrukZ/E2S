@@ -160,17 +160,13 @@ function ReportsGraphs({ betweenDates }: IReportsGraphsProp) {
             className="justify-content-center"
             data-testid="graphContainer"
         >
-            <Col className="d-flex graphContainer">
-                <SingleGraph graphData={electricityGraph} />
+            <SingleGraph graphData={electricityGraph} />
 
-                <SingleGraph graphData={gasGraph} />
+            <SingleGraph graphData={gasGraph} />
 
-                <SingleGraph graphData={emissionsGraph} />
-            </Col>
+            <SingleGraph graphData={emissionsGraph} />
 
-            <Col className="d-flex graphContainer">
-                <DoubleGraph graphData={costsGraph} />
-            </Col>
+            <DoubleGraph graphData={costsGraph} />
         </Container>
     );
 }

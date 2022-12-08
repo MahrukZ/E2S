@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import { InsightsService } from "../../../services/insights.service";
 import { SitesService } from "../../../services/sites.service";
 import { ConsumptionsService } from "../../../services/consumptions.service";
-import { Container, Col } from "react-bootstrap";
-import "./Insights.css";
+import { Container } from "react-bootstrap";
 import Insight, { IInsightData } from "./Insight";
 import { IReportsDateRange } from "../datePicker/ReportsDatePicker";
 
@@ -52,7 +51,8 @@ function ReportsInsights({ betweenDates }: IReportsInsightsProp) {
         const insightsService = new InsightsService();
         const sitesService = new SitesService();
 
-        const firstDayOfLastWeek: Date = betweenDates.dateRange[0]["startDate"]!;
+        const firstDayOfLastWeek: Date =
+            betweenDates.dateRange[0]["startDate"]!;
         const lastDayOfLastWeek: Date = betweenDates.dateRange[0]["endDate"]!;
 
         const getAllInsights = async () => {
@@ -110,7 +110,8 @@ function ReportsInsights({ betweenDates }: IReportsInsightsProp) {
     useEffect(() => {
         const consumptionsService = new ConsumptionsService();
 
-        const firstDayOfLastWeek: Date = betweenDates.dateRange[0]["startDate"]!;
+        const firstDayOfLastWeek: Date =
+            betweenDates.dateRange[0]["startDate"]!;
         const lastDayOfLastWeek: Date = betweenDates.dateRange[0]["endDate"]!;
 
         const findSumOfConsumptionsBySiteIdAndTime = async () => {
@@ -170,16 +171,14 @@ function ReportsInsights({ betweenDates }: IReportsInsightsProp) {
     ]);
 
     return (
-        <Container fluid className="justify-content-center">
-            <Col className="d-flex insightsCol">
-                <Insight insightData={costsInsight} />
+        <Container fluid className="justify-content-center d-flex">
+            <Insight insightData={costsInsight} />
 
-                <Insight insightData={electricityInsight} />
+            <Insight insightData={electricityInsight} />
 
-                <Insight insightData={gasInsight} />
+            <Insight insightData={gasInsight} />
 
-                <Insight insightData={emissionsInsight} />
-            </Col>
+            <Insight insightData={emissionsInsight} />
         </Container>
     );
 }

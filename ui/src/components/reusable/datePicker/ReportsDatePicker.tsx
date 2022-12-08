@@ -44,14 +44,14 @@ function ReportsDatePicker() {
     }, []);
 
     return (
-        <Container
-            fluid
-            className="d-flex flex-column"
-            data-testid="reportsContainer"
-        >
+        <>
             <Col className="d-flex calendarContainer justify-content-center">
+                <Container className="flex-fill">
+                    <ReportsInsights betweenDates={dateRange} />
+                    <ReportsGraphs betweenDates={dateRange} />
+                </Container>
                 <Card
-                    className="flex-fill datePickerCard"
+                    className="flex-shrink-1 datePickerCard"
                     data-testid="datePickerElement"
                 >
                     <Card.Title>
@@ -74,9 +74,7 @@ function ReportsDatePicker() {
                     />
                 </Card>
             </Col>
-            <ReportsInsights betweenDates={dateRange} />
-            <ReportsGraphs betweenDates={dateRange} />
-        </Container>
+        </>
     );
 }
 
