@@ -1,16 +1,31 @@
 import React from "react";
+import { ChangeEvent } from "react";
 import { SitesService } from "../../../../services/sites.service";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import Form from "react-bootstrap/Form";
 
 export interface ISite {
     siteId: number;
     siteName: string;
+    siteOrgId: number;
 }
 
-function UploadDropdown() {
+interface UploadDropDownProps {
+    setSelectedId: any;
+}
+
+function UploadDropdown({ setSelectedId }: UploadDropDownProps) {
     const siteService = new SitesService();
 
     const [allSites, setAllSites] = useState<ISite[]>([]);
+    const [selectedOption, setSelectedOption] = useState<number>();
+
+    const selectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        e.preventDefault();
+        const value = parseInt(e.target.value);
+        setSelectedId(value);
+        setSelectedOption(value);
+    };
 
     useEffect(() => {
         const redirect = async () => {
@@ -22,9 +37,11 @@ function UploadDropdown() {
                 for (let index = 0; index < len; index++) {
                     const currentSiteId = siteRes.data[index].siteId;
                     const currentSiteName = siteRes.data[index].name;
+                    const currentSiteOrgId: number = siteRes.data[index].orgId;
                     const siteToAdd: ISite = {
                         siteId: currentSiteId,
                         siteName: currentSiteName,
+                        siteOrgId: currentSiteOrgId,
                     };
                     sitesList.push(siteToAdd);
                 }
@@ -35,9 +52,24 @@ function UploadDropdown() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log("allSites: ", allSites);
-
-    return <div>UploadDropdown</div>;
+    return (
+        <div>
+            <Form.Select
+                onChange={selectChange}
+                data-testid="siteDropdown"
+                id="siteDropdown"
+                size="sm"
+                className="mt-1 mb-1"
+            >
+                {allSites.map((site, index) => (
+                    <option data-testid={index} key={index} value={site.siteId}>
+                        {site.siteName}
+                    </option>
+                ))}
+            </Form.Select>
+            {selectedOption && <h2>{selectedOption}</h2>}
+        </div>
+    );
 }
 
 export default UploadDropdown;

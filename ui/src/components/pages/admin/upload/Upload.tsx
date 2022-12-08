@@ -9,6 +9,8 @@ function Upload() {
     const [fileExt, setFileExt] = useState("");
     const [error, setError] = useState("");
 
+    const [selectedId, setSelectedId] = useState<number>(0);
+
     const allowedExtensions = ["csv"];
 
     // Adapted from https://www.geeksforgeeks.org/how-to-read-csv-files-in-react-js/
@@ -42,9 +44,9 @@ function Upload() {
                 />
             </Form.Group>
             {allowedExtensions.includes(fileExt) && (
-                <UploadButton file={csvFile} />
+                <UploadButton file={csvFile} selectedId={selectedId} />
             )}
-            <UploadDropdown />
+            <UploadDropdown setSelectedId={setSelectedId} />
             {error.length > 0 && <Message message={error} type="danger" />}
         </div>
     );
