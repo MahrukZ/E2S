@@ -47,9 +47,6 @@ function Sums({ betweenDates }: ISumsProps) {
             const stringGasDemand = Math.round(
                 consumptionsData[1]
             ).toLocaleString();
-            const stringEmissions = Math.round(
-                consumptionsData[2]
-            ).toLocaleString();
             const stringTotalCosts = Math.round(
                 consumptionsData[3]
             ).toLocaleString();
@@ -60,21 +57,12 @@ function Sums({ betweenDates }: ISumsProps) {
                 consumptionsData[5]
             ).toLocaleString();
 
-            const priorMonth = priorDate.getMonth() + 1;
-            const nowMonth = now.getMonth() + 1;
-
-            const from =
-                priorDate.getDate() +
-                "-" +
-                priorMonth +
-                "-" +
-                priorDate.getFullYear();
-            const to = now.getDate() + "-" + nowMonth + "-" + now.getFullYear();
+            const from = priorDate.toLocaleDateString("en-GB");
+            const to = now.toLocaleDateString("en-GB");
 
             finalConsumptions.push(
                 stringElectricityDemand,
                 stringGasDemand,
-                stringEmissions,
                 stringTotalCosts,
                 stringElectricityCosts,
                 stringGasCosts
@@ -105,16 +93,13 @@ function Sums({ betweenDates }: ISumsProps) {
                     <b>Gas Demand: {consumptionsList[1]} kWh</b>
                 </p>
                 <p>
-                    <b>Carbon Emissions: {consumptionsList[2]} kgCO2e</b>
+                    <b>Electricity Costs: £ {consumptionsList[3]}</b>
                 </p>
                 <p>
-                    <b>Electricity Costs: £ {consumptionsList[4]}</b>
+                    <b>Gas Costs: £ {consumptionsList[4]}</b>
                 </p>
                 <p>
-                    <b>Gas Costs: £ {consumptionsList[5]}</b>
-                </p>
-                <p>
-                    <b>Total Costs: £ {consumptionsList[3]}</b>
+                    <b>Total Costs: £ {consumptionsList[2]}</b>
                 </p>
             </Card.Body>
         </Card>
