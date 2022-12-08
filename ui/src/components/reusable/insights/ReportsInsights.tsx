@@ -51,9 +51,8 @@ function ReportsInsights({ betweenDates }: IReportsInsightsProp) {
         const insightsService = new InsightsService();
         const sitesService = new SitesService();
 
-        const firstDayOfLastWeek: Date =
-            betweenDates.dateRange[0]["startDate"]!;
-        const lastDayOfLastWeek: Date = betweenDates.dateRange[0]["endDate"]!;
+        const from: Date = betweenDates.dateRange[0]["startDate"]!;
+        const to: Date = betweenDates.dateRange[0]["endDate"]!;
 
         const getAllInsights = async () => {
             let finalInsights: String[] = [];
@@ -66,8 +65,8 @@ function ReportsInsights({ betweenDates }: IReportsInsightsProp) {
             const currentSite = siteData["data"][0]["name"];
 
             // Replace [site] in the template with site name
-            // Replace [dateFrom] in the template with firstDayOfLastWeek
-            // Replace [dateTo] in the template with lastDayOfLastWeek
+            // Replace [dateFrom] in the template with from
+            // Replace [dateTo] in the template with to
             for (let i = 4; i < 8; i++) {
                 let currentInsight0: string = String(
                     insightsTemplates["data"][i]["description"]
@@ -79,11 +78,11 @@ function ReportsInsights({ betweenDates }: IReportsInsightsProp) {
                 );
                 currentInsight0 = currentInsight0.replace(
                     "[dateFrom]",
-                    String(firstDayOfLastWeek.toLocaleDateString("en-GB"))
+                    String(from.toLocaleDateString("en-GB"))
                 );
                 currentInsight0 = currentInsight0.replace(
                     "[dateTo]",
-                    String(lastDayOfLastWeek.toLocaleDateString("en-GB"))
+                    String(to.toLocaleDateString("en-GB"))
                 );
 
                 insightsList.push(currentInsight0);
@@ -110,32 +109,47 @@ function ReportsInsights({ betweenDates }: IReportsInsightsProp) {
     useEffect(() => {
         const consumptionsService = new ConsumptionsService();
 
-        const firstDayOfLastWeek: Date =
-            betweenDates.dateRange[0]["startDate"]!;
-        const lastDayOfLastWeek: Date = betweenDates.dateRange[0]["endDate"]!;
+        const from: Date = betweenDates.dateRange[0]["startDate"]!;
+        const to: Date = betweenDates.dateRange[0]["endDate"]!;
+
+        let totalElectricityDemand: string;
+        let totalGasDemand: string;
+        let totalEmissions: string;
+        let totalCosts: string;
 
         const findSumOfConsumptionsBySiteIdAndTime = async () => {
             const lastWeekConsumptionsResponse =
                 await consumptionsService.findSumOfConsumptionsBySiteIdAndTime(
-                    firstDayOfLastWeek,
-                    lastDayOfLastWeek,
+                    from,
+                    to,
                     currentSiteId
                 );
 
             const lastWeekConsumptionsData =
                 lastWeekConsumptionsResponse["data"];
 
-            const totalElectricityDemand =
-                Math.round(lastWeekConsumptionsData[0]).toLocaleString() +
-                " kWh";
-            const totalGasDemand =
-                Math.round(lastWeekConsumptionsData[1]).toLocaleString() +
-                " kWh";
-            const totalEmissions =
-                Math.round(lastWeekConsumptionsData[2]).toLocaleString() +
-                " kgCO2e";
-            const totalCosts =
-                "£" + Math.round(lastWeekConsumptionsData[3]).toLocaleString();
+            if (
+                from.toLocaleDateString("en-GB") !==
+                to.toLocaleDateString("en-GB")
+            ) {
+                totalElectricityDemand =
+                    Math.round(lastWeekConsumptionsData[0]).toLocaleString() +
+                    " kWh";
+                totalGasDemand =
+                    Math.round(lastWeekConsumptionsData[1]).toLocaleString() +
+                    " kWh";
+                totalEmissions =
+                    Math.round(lastWeekConsumptionsData[2]).toLocaleString() +
+                    " kgCO2e";
+                totalCosts =
+                    "£" +
+                    Math.round(lastWeekConsumptionsData[3]).toLocaleString();
+            } else {
+                totalElectricityDemand = (0).toLocaleString() + " kWh";
+                totalGasDemand = (0).toLocaleString() + " kWh";
+                totalEmissions = (0).toLocaleString() + " kgCO2e";
+                totalCosts = "£" + (0).toLocaleString();
+            }
 
             setCostsInsight({
                 title: "Total Costs",
