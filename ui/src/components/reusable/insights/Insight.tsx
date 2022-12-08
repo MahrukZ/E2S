@@ -16,7 +16,7 @@ interface InsightProps {
 
 function Insight({ insightData }: InsightProps) {
     return (
-        <Card className="insightsCard flex-fill" data-testid="insightsCost">
+        <Card className="insightsCard flex-fill" data-testid="insight">
             <Card.Title>{insightData.title}</Card.Title>
             <Card.Body>
                 {insightData.insightList[0]}
