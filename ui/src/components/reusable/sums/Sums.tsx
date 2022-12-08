@@ -24,6 +24,12 @@ function Sums({ betweenDates }: ISumsProps) {
         const findSumOfConsumptionsBySiteIdAndTime = async () => {
             let finalConsumptions: String[] = [];
 
+            let stringElectricityDemand: String;
+            let stringGasDemand: String;
+            let stringTotalCosts: String;
+            let stringElectricityCosts: String;
+            let stringGasCosts: String;
+
             let now: Date = betweenDates.dateRange[0]["endDate"]!;
             let priorDate: Date = betweenDates.dateRange[0]["startDate"]!;
 
@@ -40,25 +46,32 @@ function Sums({ betweenDates }: ISumsProps) {
 
             const consumptionsData = consumptionsResponse["data"];
 
-            const stringElectricityDemand = Math.round(
-                consumptionsData[0]
-            ).toLocaleString();
-
-            const stringGasDemand = Math.round(
-                consumptionsData[1]
-            ).toLocaleString();
-            const stringTotalCosts = Math.round(
-                consumptionsData[3]
-            ).toLocaleString();
-            const stringElectricityCosts = Math.round(
-                consumptionsData[4]
-            ).toLocaleString();
-            const stringGasCosts = Math.round(
-                consumptionsData[5]
-            ).toLocaleString();
-
             const from = priorDate.toLocaleDateString("en-GB");
             const to = now.toLocaleDateString("en-GB");
+
+            if (from !== to) {
+                stringElectricityDemand = Math.round(
+                    consumptionsData[0]
+                ).toLocaleString();
+                stringGasDemand = Math.round(
+                    consumptionsData[1]
+                ).toLocaleString();
+                stringTotalCosts = Math.round(
+                    consumptionsData[3]
+                ).toLocaleString();
+                stringElectricityCosts = Math.round(
+                    consumptionsData[4]
+                ).toLocaleString();
+                stringGasCosts = Math.round(
+                    consumptionsData[5]
+                ).toLocaleString();
+            } else {
+                stringElectricityDemand = (0).toLocaleString();
+                stringGasDemand = (0).toLocaleString();
+                stringTotalCosts = (0).toLocaleString();
+                stringElectricityCosts = (0).toLocaleString();
+                stringGasCosts = (0).toLocaleString();
+            }
 
             finalConsumptions.push(
                 stringElectricityDemand,
@@ -77,10 +90,7 @@ function Sums({ betweenDates }: ISumsProps) {
     }, [betweenDates]);
 
     return (
-        <Card
-            className="flex-shrink-1 sumsCard"
-            data-testid="sumsElement"
-        >
+        <Card className="flex-shrink-1 sumsCard" data-testid="sumsElement">
             <Card.Title>
                 Between {dateRange[0]} and {dateRange[1]} {siteName} had:
             </Card.Title>
