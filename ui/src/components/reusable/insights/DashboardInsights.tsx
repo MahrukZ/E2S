@@ -231,7 +231,11 @@ function DashboardInsights() {
     }, []);
 
     return (
-        <Container fluid className="justify-content-center">
+        <Container
+            fluid
+            className="justify-content-center"
+            data-testid="dashboardInsights"
+        >
             <Col className="d-flex insightsCol">
                 <Insight insightData={costsInsight} />
 
