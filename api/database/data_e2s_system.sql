@@ -32,27 +32,27 @@ INSERT INTO `organisations`
 VALUES(null, 'Empowering Energy Solutions', 4);
 
 INSERT INTO `users`
-VALUES(null, 'Martin', 'James', 'martinjames@cardiff.ac.uk', 'director of estates', 'martin12345', 1);
+VALUES(null, 'Martin', 'James', 'martinjames@cardiff.ac.uk', 'director of estates', '$2a$10$JubOeS1ni5ZurQZ9Y3S/f.yLlhLdnSOcDWqYJbkWGYzXzzlat6aum', 1);
 INSERT INTO `users`
-VALUES(null, 'Rhy', 'Jones', 'rhyjones@cardiff.ac.uk', 'facility energy manager', 'rhy12345', 1);
+VALUES(null, 'Rhy', 'Jones', 'rhyjones@cardiff.ac.uk', 'facility energy manager', '$2a$10$OI1b4b4kzeU6qI8Dns3YGeKVvG.BBTGflE0tfzVd2WO4sQ/OC.sU.', 1);
 INSERT INTO `users`
-VALUES(null, 'James', 'Ohay', 'jamesohay@cardiff.ac.uk', 'facility energy manager', 'james12345', 1);
+VALUES(null, 'James', 'Ohay', 'jamesohay@cardiff.ac.uk', 'facility energy manager', '$2a$10$ZBYZscFZAnKVrUnWyUdr.OGr2p/ZjY4FkJ3T7abNKzqTYkvq6bz9S', 1);
 INSERT INTO `users`
-VALUES(null, 'Helen', 'Wilkins', 'helenwilkins@nhs.co.uk', 'director of estates', 'helen12345', 2);
+VALUES(null, 'Helen', 'Wilkins', 'helenwilkins@nhs.co.uk', 'director of estates', '$2a$10$QWu3qFeprrA9whrfxu0nmu7RDMWnTTKURoKWMcH/45h.fGVGrWGSO', 2);
 INSERT INTO `users`
-VALUES(null, 'Max', 'Norris', 'maxnorris@nhs.co.uk', 'facility energy manager', 'max12345', 2);
+VALUES(null, 'Max', 'Norris', 'maxnorris@nhs.co.uk', 'facility energy manager', '$2a$10$SPlcCORRWTpWpsGv3nFx/.PtA/BzajdhbLCnxIUO5eBqshR.Yon1m', 2);
 INSERT INTO `users`
-VALUES(null, 'Johnny', 'Bravo', 'johnnybravo@nhs.co.uk', 'facility energy manager', 'johnny12345', 2);
+VALUES(null, 'Johnny', 'Bravo', 'johnnybravo@nhs.co.uk', 'facility energy manager', '$2a$10$55ys62Kjw3seJaL6DjPlRu12JR/1vjge9Ttf.2FO4XEhVnVrMH7Pu', 2);
 INSERT INTO `users`
-VALUES(null, 'Jade', 'Pierce', 'jadepierce@ons.gov.uk', 'director of estates', 'jade12345', 3);
+VALUES(null, 'Jade', 'Pierce', 'jadepierce@ons.gov.uk', 'director of estates', '$2a$10$A/L8rmJ50zK8ooq9E.L7SObwDydyO4UMRH5AHwgQZ1NAchlqfK5RO', 3);
 INSERT INTO `users`
-VALUES(null, 'Martina', 'Schmitt', 'martinaschmitt@ons.gov.uk', 'facility energy manager', 'martina12345', 3);
+VALUES(null, 'Martina', 'Schmitt', 'martinaschmitt@ons.gov.uk', 'facility energy manager', '$2a$10$LlTv6dx11zSvhrF404.TKeFKqOwsaIAlxFdIf1U5KbyiAB9Tzvw8W', 3);
 INSERT INTO `users`
-VALUES(null, 'Antonio', 'White', 'antoniowhite@ons.gov.uk', 'facility energy manager', 'antonio12345', 3);
+VALUES(null, 'Antonio', 'White', 'antoniowhite@ons.gov.uk', 'facility energy manager', '$2a$10$bjMzX7I3ayPYPn4BSSpqEOeGT4qt6tlIBZEhmcQfxjsz36nH63PwK', 3);
 INSERT INTO `users`
-VALUES(null, 'Cai', 'Robert', 'cairobert@e2s.co.uk', 'administrator', 'cai12345', 4);
+VALUES(null, 'Cai', 'Robert', 'cairobert@e2s.co.uk', 'administrator', '$2a$10$xNRnHsQEf2vn/rTbmTWcmOJ1t2Mm7q20anm64pLMAyYJdNqWZEDYS', 4);
 INSERT INTO `users`
-VALUES(null, 'Admin', 'User', 'adminuser@e2s.co.uk', 'administrator', 'adminpass', 4);
+VALUES(null, 'Admin', 'User', 'adminuser@e2s.co.uk', 'administrator', '$2a$10$ZWFMVtxOab0qGSM61eKEFOwUK3VdIaE2621mRzTWnDk3Gw9TIPOv6', 4);
 
 INSERT INTO `sites`
 VALUES(null, 'Abacws', 'Cathays', 1);
