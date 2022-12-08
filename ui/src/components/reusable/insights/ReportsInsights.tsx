@@ -6,8 +6,13 @@ import { ConsumptionsService } from "../../../services/consumptions.service";
 import { Container, Col } from "react-bootstrap";
 import "./Insights.css";
 import Insight, { IInsightData } from "./Insight";
+import { IReportsDateRange } from "../datePicker/ReportsDatePicker";
 
-function ReportsInsights() {
+interface IReportsInsightsProp {
+    betweenDates: IReportsDateRange;
+}
+
+function ReportsInsights({ betweenDates }: IReportsInsightsProp) {
     const currentSiteId = 1;
 
     const [costsInsight, setCostsInsight] = useState<IInsightData>({
@@ -35,21 +40,20 @@ function ReportsInsights() {
     });
 
     const [costsInsightsList, setCostsInsightsList] = useState<String[]>([]);
-    const [electricityInsightsList, setElectricityInsightsList] = useState<String[]>([]);
+    const [electricityInsightsList, setElectricityInsightsList] = useState<
+        String[]
+    >([]);
     const [gasInsightsList, setGasInsightsList] = useState<String[]>([]);
-    const [emissionsInsightsList, setEmissionsInsightsList] = useState<String[]>([]);
+    const [emissionsInsightsList, setEmissionsInsightsList] = useState<
+        String[]
+    >([]);
 
     useEffect(() => {
         const insightsService = new InsightsService();
         const sitesService = new SitesService();
 
-        const now = new Date();
-        const firstDayOfTheWeek = now.getDate() - now.getDay() + 1;
-        const lastDayOfTheWeek = firstDayOfTheWeek + 6;
-        const firstDayOfLastWeek = new Date(now.setDate(firstDayOfTheWeek - 7));
-        const lastDayOfLastWeek = new Date(
-            new Date().setDate(lastDayOfTheWeek - 7)
-        );
+        const firstDayOfLastWeek: Date = betweenDates.dateRange[0]["startDate"]!;
+        const lastDayOfLastWeek: Date = betweenDates.dateRange[0]["endDate"]!;
 
         const getAllInsights = async () => {
             let finalInsights: String[] = [];
@@ -101,18 +105,13 @@ function ReportsInsights() {
         };
         getAllInsights();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [betweenDates]);
 
     useEffect(() => {
         const consumptionsService = new ConsumptionsService();
 
-        const now = new Date();
-        const firstDayOfTheWeek = now.getDate() - now.getDay() + 1;
-        const lastDayOfTheWeek = firstDayOfTheWeek + 6;
-        const firstDayOfLastWeek = new Date(now.setDate(firstDayOfTheWeek - 7));
-        const lastDayOfLastWeek = new Date(
-            new Date().setDate(lastDayOfTheWeek - 7)
-        );
+        const firstDayOfLastWeek: Date = betweenDates.dateRange[0]["startDate"]!;
+        const lastDayOfLastWeek: Date = betweenDates.dateRange[0]["endDate"]!;
 
         const findSumOfConsumptionsBySiteIdAndTime = async () => {
             const lastWeekConsumptionsResponse =
@@ -167,6 +166,7 @@ function ReportsInsights() {
         gasInsightsList,
         emissionsInsightsList,
         costsInsightsList,
+        betweenDates,
     ]);
 
     return (
