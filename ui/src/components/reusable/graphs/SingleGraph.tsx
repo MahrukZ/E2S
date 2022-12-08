@@ -9,6 +9,7 @@ export interface ISingleGraph {
   xName: string;
   yName: string;
   lineColour: string;
+  width?: string;
 }
 
 interface SingleGraphProps {
@@ -18,7 +19,7 @@ interface SingleGraphProps {
 function SingleGraph({ graphData }: SingleGraphProps) {
 
     return (
-        <Card className="graphCard flex-fill">
+        <Card className="graphCard flex-fill" style={{width: graphData.width}}>
         <div className="graph" data-testid="graphElement">
             <Plot
                 data={[
