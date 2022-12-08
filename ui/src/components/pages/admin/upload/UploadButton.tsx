@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { FaUpload } from "react-icons/fa";
 import { ConsumptionsService } from "../../../../services/consumptions.service";
+import { SitesService } from "../../../../services/sites.service";
 import Message from "../../../reusable/alerts/Message";
 
 export interface IUploadData {
@@ -25,16 +26,19 @@ function UploadButton({ file, selectedId }: UploadButtonProps) {
     const [success, setSuccess] = useState("");
     const [isDisabled, setDisabled] = useState(false);
 
+    const sitesService = new SitesService();
     const consumptionsService = new ConsumptionsService();
     const fileReader = new FileReader();
 
     // Adapted from https://dev.to/refine/how-to-import-csv-file-with-react-4pj2
-    const csvFileToArray = (str: string) => {
+    const csvFileToArray = async (str: string) => {
         const csvHeader = str.slice(0, str.indexOf("\n")).split(",");
         const csvRows = str.slice(str.indexOf("\n") + 1).split("\n");
 
         try {
-            console.log("selected id: ", selectedId, typeof selectedId);
+            // get org id
+            const currentSite = await sitesService.findSiteById(selectedId);
+            const orgId = currentSite.data[0].orgId;
             const array: IUploadData[] = csvRows.map((i) => {
                 const values = i.split(",");
                 const obj = csvHeader.reduce(
@@ -50,7 +54,7 @@ function UploadButton({ file, selectedId }: UploadButtonProps) {
                             object[header] = parseFloat(values[index]);
                         }
                         object["siteId"] = selectedId;
-                        object["orgId"] = 1;
+                        object["orgId"] = orgId;
                         return object;
                     },
                     {}

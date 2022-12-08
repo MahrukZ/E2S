@@ -9,7 +9,7 @@ function Upload() {
     const [fileExt, setFileExt] = useState("");
     const [error, setError] = useState("");
 
-    const [selectedId, setSelectedId] = useState<number>(0);
+    const [selectedId, setSelectedId] = useState<number>(1);
 
     const allowedExtensions = ["csv"];
 
