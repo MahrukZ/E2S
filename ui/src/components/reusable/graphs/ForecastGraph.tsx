@@ -3,20 +3,8 @@ import { useEffect, useState } from "react";
 import { Container, Col, Card } from "react-bootstrap";
 import { ConsumptionsService } from "../../../services/consumptions.service";
 import "./Graph.css";
-import DoubleGraph from "./DoubleGraph";
+import DoubleGraph, { IDoubleGraph } from "./DoubleGraph";
 import { addDays } from "date-fns";
-
-export interface IDoubleGraph {
-    xData0: Date[];
-    yData0: number[];
-    yData1: number[];
-    xName: string;
-    yName: string;
-    lineColour0: string;
-    lineColour1: string;
-    name0: string;
-    name1: string;
-}
 
 function ForecastGraph() {
     const currentSiteId = 1;
