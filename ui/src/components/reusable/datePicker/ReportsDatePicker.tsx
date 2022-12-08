@@ -46,15 +46,15 @@ function ReportsDatePicker() {
 
     return (
         <>
-            <Col className="d-flex calendarContainer justify-content-center">
+            <Col
+                className="d-flex calendarContainer justify-content-center"
+                data-testid="reportsDatePickerElement"
+            >
                 <Container className="flex-fill reportsData">
                     <ReportsInsights betweenDates={dateRange} />
                     <ReportsGraphs betweenDates={dateRange} />
                 </Container>
-                <Card
-                    className="flex-shrink-1 datePickerCard"
-                    data-testid="datePickerElement"
-                >
+                <Card className="flex-shrink-1 datePickerCard">
                     <Card.Title>
                         Select a date range to view your report.
                     </Card.Title>
