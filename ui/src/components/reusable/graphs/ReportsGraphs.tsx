@@ -5,8 +5,13 @@ import { ConsumptionsService } from "../../../services/consumptions.service";
 import "./Graph.css";
 import SingleGraph, { ISingleGraph } from "./SingleGraph";
 import DoubleGraph, { IDoubleGraph } from "./DoubleGraph";
+import { IReportsDateRange } from "../datePicker/ReportsDatePicker";
 
-function ReportsGraphs() {
+interface IReportsGraphsProp {
+    betweenDates: IReportsDateRange;
+}
+
+function ReportsGraphs({ betweenDates }: IReportsGraphsProp) {
     const currentSiteId = 1;
 
     const [electricityGraph, setElectricityGraph] = useState<ISingleGraph>({
@@ -56,15 +61,10 @@ function ReportsGraphs() {
             let electricityCostData = [];
             let gasCostData = [];
 
-            const now = new Date();
-            const firstDayOfTheWeek = now.getDate() - now.getDay() + 1;
-            const lastDayOfTheWeek = firstDayOfTheWeek + 6;
-            const firstDayOfLastWeek = new Date(
-                now.setDate(firstDayOfTheWeek - 7)
-            );
-            const lastDayOfLastWeek = new Date(
-                new Date().setDate(lastDayOfTheWeek - 7)
-            );
+            const firstDayOfLastWeek: Date =
+                betweenDates.dateRange[0]["startDate"]!;
+            const lastDayOfLastWeek: Date =
+                betweenDates.dateRange[0]["endDate"]!;
 
             const currentConsumptionsResponse =
                 await consumptionsService.findAllConsumptionsBySiteIdAndTime(
@@ -152,7 +152,7 @@ function ReportsGraphs() {
 
         findAllConsumptionsBySiteIdAndTime();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [betweenDates]);
 
     return (
         <Container

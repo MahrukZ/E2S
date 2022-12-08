@@ -75,7 +75,7 @@ function ReportsDatePicker() {
                 </Card>
             </Col>
             <ReportsInsights betweenDates={dateRange} />
-            <ReportsGraphs />
+            <ReportsGraphs betweenDates={dateRange} />
         </Container>
     );
 }
