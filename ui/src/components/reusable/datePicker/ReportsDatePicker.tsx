@@ -8,6 +8,7 @@ import "./DatePicker.css";
 import "./ReportsDatePicker.css";
 import ReportsInsights from "../insights/ReportsInsights";
 import ReportsGraphs from "../graphs/ReportsGraphs";
+import PdfDownloadBtn from "../buttons/PdfDownloadBtn";
 
 export interface IReportsDateRange {
     dateRange: Range[];
@@ -50,11 +51,15 @@ function ReportsDatePicker() {
                 className="d-flex calendarContainer justify-content-center"
                 data-testid="reportsDatePickerElement"
             >
-                <Container className="flex-fill reportsData">
+                <Container id="reportData" className="flex-fill reportsData">
                     <ReportsInsights betweenDates={dateRange} />
                     <ReportsGraphs betweenDates={dateRange} />
                 </Container>
                 <Card className="flex-shrink-1 datePickerCard">
+                    <PdfDownloadBtn
+                        downloadFileName="YourReport"
+                        rootElementId="reportData"
+                    />
                     <Card.Title>
                         Select a date range to view your report.
                     </Card.Title>
