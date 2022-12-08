@@ -2,7 +2,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Card } from "react-bootstrap";
 import "./Graph.css";
 import Plot from 'react-plotly.js';
-import { ISingleGraph } from "./DashboardGraphs";
+
+export interface ISingleGraph {
+  xData: Date[];
+  yData: number[];
+  xName: string;
+  yName: string;
+  lineColour: string;
+  width?: string;
+}
 
 interface SingleGraphProps {
     graphData: ISingleGraph
@@ -11,7 +19,7 @@ interface SingleGraphProps {
 function SingleGraph({ graphData }: SingleGraphProps) {
 
     return (
-        <Card className="graphCard flex-fill">
+        <Card className="graphCard flex-fill" style={{width: graphData.width}}>
         <div className="graph" data-testid="graphElement">
             <Plot
                 data={[

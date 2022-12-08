@@ -3,28 +3,8 @@ import { useEffect, useState } from "react";
 import { Container, Col } from "react-bootstrap";
 import { ConsumptionsService } from "../../../services/consumptions.service";
 import "./Graph.css";
-import SingleGraph from "./SingleGraph";
-import DoubleGraph from "./DoubleGraph";
-
-export interface ISingleGraph {
-  xData: Date[];
-  yData: number[];
-  xName: string;
-  yName: string;
-  lineColour: string;
-}
-
-export interface IDoubleGraph {
-  xData0: Date[];
-  yData0: number[];
-  yData1: number[];
-  xName: string;
-  yName: string;
-  lineColour0: string;
-  lineColour1: string;
-  name0: string;
-  name1: string;
-}
+import SingleGraph, { ISingleGraph } from "./SingleGraph";
+import DoubleGraph, { IDoubleGraph } from "./DoubleGraph";
 
 function DashboardGraphs() {
   const currentSiteId = 1;
@@ -35,14 +15,16 @@ function DashboardGraphs() {
     xName: "",
     yName: "",
     lineColour: "",
+    width: "0px",
   });
 
   const [gasGraph, setGasGraph] = useState<ISingleGraph>({
-    xData: [],
-    yData: [],
-    xName: "",
-    yName: "",
-    lineColour: "",
+      xData: [],
+      yData: [],
+      xName: "",
+      yName: "",
+      lineColour: "",
+      width: "0px",
   });
 
   const [emissionsGraph, setEmissionsGraph] = useState<ISingleGraph>({
@@ -50,7 +32,8 @@ function DashboardGraphs() {
       yData: [],
       xName: "",
       yName: "",
-      lineColour: ""
+      lineColour: "",
+      width: "0px",
   });
 
   const [costsGraph, setCostsGraph] = useState<IDoubleGraph>({
@@ -121,19 +104,21 @@ function DashboardGraphs() {
       }
 
       setElectricityGraph({
-        xData: timeData,
-        yData: electricityData,
-        xName: "date",
-        yName: "Electricity Consumption (kWh)",
-        lineColour: "#0d609d",
+          xData: timeData,
+          yData: electricityData,
+          xName: "date",
+          yName: "Electricity Consumption (kWh)",
+          lineColour: "#0d609d",
+          width: "600px",
       });
 
       setGasGraph({
-        xData: timeData,
-        yData: gasData,
-        xName: "date",
-        yName: "Gas Consumption (kWh)",
-        lineColour: "#f15a2f",
+          xData: timeData,
+          yData: gasData,
+          xName: "date",
+          yName: "Gas Consumption (kWh)",
+          lineColour: "#f15a2f",
+          width: "600px",
       });
 
       setEmissionsGraph({
@@ -141,7 +126,8 @@ function DashboardGraphs() {
           yData: emissionsData,
           xName: "date",
           yName: "CO2 Emissions (kgCO2e)",
-          lineColour: "#a4ba71"
+          lineColour: "#a4ba71",
+          width: "600px",
       });
 
       setCostsGraph({

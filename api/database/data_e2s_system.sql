@@ -154,5 +154,13 @@ INSERT INTO `insight_templates`
 VALUES(null, 'In the last 7 days, the gas consumption of [site] has changed by [data] compared to the previous 7 days.');
 INSERT INTO `insight_templates`
 VALUES(null, 'In the last 7 days, the carbon emissions of [site] has changed by [data] compared to the previous 7 days.');
+INSERT INTO `insight_templates`
+VALUES(null, 'Between [dateFrom] and [dateTo], the total costs of [site] was [data].');
+INSERT INTO `insight_templates`
+VALUES(null, 'Between [dateFrom] and [dateTo], the gas consumption of [site] was [data].');
+INSERT INTO `insight_templates`
+VALUES(null, 'Between [dateFrom] and [dateTo], the electricity consumption of [site] was [data].');
+INSERT INTO `insight_templates`
+VALUES(null, 'Between [dateFrom] and [dateTo], the carbon emissions of [site] was [data].');
 
 SET foreign_key_checks = 1;

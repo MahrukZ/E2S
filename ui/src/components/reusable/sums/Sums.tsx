@@ -24,6 +24,12 @@ function Sums({ betweenDates }: ISumsProps) {
         const findSumOfConsumptionsBySiteIdAndTime = async () => {
             let finalConsumptions: String[] = [];
 
+            let stringElectricityDemand: String;
+            let stringGasDemand: String;
+            let stringTotalCosts: String;
+            let stringElectricityCosts: String;
+            let stringGasCosts: String;
+
             let now: Date = betweenDates.dateRange[0]["endDate"]!;
             let priorDate: Date = betweenDates.dateRange[0]["startDate"]!;
 
@@ -40,41 +46,36 @@ function Sums({ betweenDates }: ISumsProps) {
 
             const consumptionsData = consumptionsResponse["data"];
 
-            const stringElectricityDemand = Math.round(
-                consumptionsData[0]
-            ).toLocaleString();
+            const from = priorDate.toLocaleDateString("en-GB");
+            const to = now.toLocaleDateString("en-GB");
 
-            const stringGasDemand = Math.round(
-                consumptionsData[1]
-            ).toLocaleString();
-            const stringEmissions = Math.round(
-                consumptionsData[2]
-            ).toLocaleString();
-            const stringTotalCosts = Math.round(
-                consumptionsData[3]
-            ).toLocaleString();
-            const stringElectricityCosts = Math.round(
-                consumptionsData[4]
-            ).toLocaleString();
-            const stringGasCosts = Math.round(
-                consumptionsData[5]
-            ).toLocaleString();
-
-            const priorMonth = priorDate.getMonth() + 1;
-            const nowMonth = now.getMonth() + 1;
-
-            const from =
-                priorDate.getDate() +
-                "-" +
-                priorMonth +
-                "-" +
-                priorDate.getFullYear();
-            const to = now.getDate() + "-" + nowMonth + "-" + now.getFullYear();
+            if (from !== to) {
+                stringElectricityDemand = Math.round(
+                    consumptionsData[0]
+                ).toLocaleString();
+                stringGasDemand = Math.round(
+                    consumptionsData[1]
+                ).toLocaleString();
+                stringTotalCosts = Math.round(
+                    consumptionsData[3]
+                ).toLocaleString();
+                stringElectricityCosts = Math.round(
+                    consumptionsData[4]
+                ).toLocaleString();
+                stringGasCosts = Math.round(
+                    consumptionsData[5]
+                ).toLocaleString();
+            } else {
+                stringElectricityDemand = (0).toLocaleString();
+                stringGasDemand = (0).toLocaleString();
+                stringTotalCosts = (0).toLocaleString();
+                stringElectricityCosts = (0).toLocaleString();
+                stringGasCosts = (0).toLocaleString();
+            }
 
             finalConsumptions.push(
                 stringElectricityDemand,
                 stringGasDemand,
-                stringEmissions,
                 stringTotalCosts,
                 stringElectricityCosts,
                 stringGasCosts
@@ -89,10 +90,7 @@ function Sums({ betweenDates }: ISumsProps) {
     }, [betweenDates]);
 
     return (
-        <Card
-            className="flex-shrink-1 sumsCard"
-            data-testid="sumsElement"
-        >
+        <Card className="flex-shrink-1 sumsCard" data-testid="sumsElement">
             <Card.Title>
                 Between {dateRange[0]} and {dateRange[1]} {siteName} had:
             </Card.Title>
@@ -105,16 +103,13 @@ function Sums({ betweenDates }: ISumsProps) {
                     <b>Gas Demand: {consumptionsList[1]} kWh</b>
                 </p>
                 <p>
-                    <b>Carbon Emissions: {consumptionsList[2]} kgCO2e</b>
+                    <b>Electricity Costs: £ {consumptionsList[3]}</b>
                 </p>
                 <p>
-                    <b>Electricity Costs: £ {consumptionsList[4]}</b>
+                    <b>Gas Costs: £ {consumptionsList[4]}</b>
                 </p>
                 <p>
-                    <b>Gas Costs: £ {consumptionsList[5]}</b>
-                </p>
-                <p>
-                    <b>Total Costs: £ {consumptionsList[3]}</b>
+                    <b>Total Costs: £ {consumptionsList[2]}</b>
                 </p>
             </Card.Body>
         </Card>
