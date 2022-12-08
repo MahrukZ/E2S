@@ -23,7 +23,6 @@ const App: React.FunctionComponent = () => {
     Axios.defaults.withCredentials = true;
     //Defines the paths of each page
     //This file should only have the topbar and sidebar
-    //   test
     return (
         <>
             <Router>
