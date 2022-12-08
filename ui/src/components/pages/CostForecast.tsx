@@ -1,7 +1,11 @@
+import ForecastGraph from "../reusable/graphs/ForecastGraph";
+
 function CostForecast() {
     return (
-        <h1 id="costForecast">CostForecast</h1>
+        <div data-testid="costForecastContainer">
+            <ForecastGraph></ForecastGraph>
+        </div>
     );
-};
+}
 
 export default CostForecast;
