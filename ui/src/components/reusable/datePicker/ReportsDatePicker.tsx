@@ -56,13 +56,15 @@ function ReportsDatePicker() {
                     <ReportsGraphs betweenDates={dateRange} />
                 </Container>
                 <Card className="flex-shrink-1 datePickerCard">
-                    <PdfDownloadBtn
-                        downloadFileName="YourReport"
-                        rootElementId="reportData"
-                    />
-                    <Card.Title>
-                        Select a date range to view your report.
-                    </Card.Title>
+                    <Container className="justify-content-center d-flex mb-4">
+                        <PdfDownloadBtn
+                            downloadFileName="YourReport"
+                            rootElementId="reportData"
+                        />
+                    </Container>
+                    <Card.Header>
+                        Select a date range to view your report
+                    </Card.Header>
                     <DateRangePicker
                         onChange={(item) => {
                             setState([item.selection]);
@@ -78,6 +80,12 @@ function ReportsDatePicker() {
                         staticRanges={[]}
                         inputRanges={[]}
                     />
+                    <Container className="justify-content-center d-flex position-absolute bottom-0 mb-4">
+                        <PdfDownloadBtn
+                            downloadFileName="YourReport"
+                            rootElementId="reportData"
+                        />
+                    </Container>
                 </Card>
             </Col>
         </>

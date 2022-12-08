@@ -20,7 +20,7 @@ function PdfDownloadBtn({ rootElementId, downloadFileName }: IPdfDownloadProp) {
     };
 
     return (
-        <Button variant="primary" onClick={downloadPdfDocument}>
+        <Button variant="light" onClick={downloadPdfDocument}>
             Download <FaDownload />
         </Button>
     );
