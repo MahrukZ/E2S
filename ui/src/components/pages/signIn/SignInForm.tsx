@@ -32,6 +32,19 @@ function SignInForm() {
             }
         };
         redirect();
+        // reference. sign in on enter
+        // taken from https://bobbyhadz.com/blog/react-detect-enter-key-press
+        const keyDownHandler = (event: any) => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                signIn();
+            }
+        };
+        document.addEventListener("keydown", keyDownHandler);
+        return () => {
+            document.removeEventListener("keydown", keyDownHandler);
+        };
+        // end of reference
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
