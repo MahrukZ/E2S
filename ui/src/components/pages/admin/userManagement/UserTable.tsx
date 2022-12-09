@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { UserManagementService } from "../../../../services/userManagement.service";
+import DeleteBtn from "./DeleteBtn";
 
 export interface IUserManagement {
   userId: number;
@@ -36,7 +37,7 @@ function UserTable() {
         <td>{data.noSitesManaged}</td>
         <td>{data.role}</td>
         <td>EDIT</td>
-        <td>DELETE</td>
+        <td>{DeleteBtn(data.userId)}</td>
       </tr>
     );
   });
