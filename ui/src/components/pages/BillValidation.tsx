@@ -10,6 +10,7 @@ interface BillValidationProps {
 function BillValidation({ currentSite, setTopbarTitle }: BillValidationProps) {
     useEffect(() => {
         setTopbarTitle("Bill Validation");
+        document.title = "Bill Validation";
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (

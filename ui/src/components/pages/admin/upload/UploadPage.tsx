@@ -8,6 +8,7 @@ interface UploadPageProps {
 function UploadPage({ setTopbarTitle }: UploadPageProps) {
     useEffect(() => {
         setTopbarTitle("Upload");
+        document.title = "Admin/Site Management";
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (

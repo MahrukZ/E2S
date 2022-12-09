@@ -23,7 +23,7 @@ const App: React.FunctionComponent = () => {
 
     const [currentSite, setCurrentSite] = useState<number>(1);
     const [value, setValue] = useState(currentSite);
-    const [topbarTitle, setTopbarTitle] = useState("Title");
+    const [topbarTitle, setTopbarTitle] = useState("");
     const [topbarValue, setTopbarValue] = useState(topbarTitle);
     useEffect(() => {
         setValue(currentSite);

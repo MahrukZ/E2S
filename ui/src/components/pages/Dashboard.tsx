@@ -12,6 +12,7 @@ interface DashboardProps {
 function Dashboard({ currentSite, setTopbarTitle }: DashboardProps) {
     useEffect(() => {
         setTopbarTitle("Dashboard");
+        document.title = "Dashboard";
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (

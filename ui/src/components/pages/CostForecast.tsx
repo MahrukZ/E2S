@@ -9,6 +9,7 @@ interface CostForecastProps {
 function CostForecast({ currentSite, setTopbarTitle }: CostForecastProps) {
     useEffect(() => {
         setTopbarTitle("Cost Forecast");
+        document.title = "Cost Forecast";
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (

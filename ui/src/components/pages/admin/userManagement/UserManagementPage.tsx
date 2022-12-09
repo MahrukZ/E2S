@@ -8,6 +8,7 @@ interface UserManagementPageProps {
 function UserManagementPage({ setTopbarTitle }: UserManagementPageProps) {
     useEffect(() => {
         setTopbarTitle("User Management");
+        document.title = "Admin/User Management";
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (

@@ -10,6 +10,7 @@ interface ReportsProps {
 function Reports({ currentSite, setTopbarTitle }: ReportsProps) {
     useEffect(() => {
         setTopbarTitle("Reports");
+        document.title = "Reports";
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
