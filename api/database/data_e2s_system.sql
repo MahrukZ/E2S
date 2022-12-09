@@ -78,15 +78,13 @@ VALUES(1, 1);
 INSERT INTO `sites_has_users`
 VALUES(2, 1);
 INSERT INTO `sites_has_users`
-VALUES(3, 1);
-INSERT INTO `sites_has_users`
-VALUES(2, 2);
-INSERT INTO `sites_has_users`
 VALUES(1, 3);
 INSERT INTO `sites_has_users`
 VALUES(2, 3);
 INSERT INTO `sites_has_users`
-VALUES(3, 3);
+VALUES(3, 1);
+INSERT INTO `sites_has_users`
+VALUES(2, 2);
 INSERT INTO `sites_has_users`
 VALUES(4, 4);
 INSERT INTO `sites_has_users`
