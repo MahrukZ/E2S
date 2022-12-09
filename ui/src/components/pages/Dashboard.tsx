@@ -1,4 +1,5 @@
 import Insights from "../reusable/insights/Insights";
+import { useState, useEffect } from "react";
 import DashboardGraphs from "../reusable/graphs/DashboardGraphs";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
@@ -8,6 +9,12 @@ interface DashboardProps {
 }
 
 function Dashboard({ currentSite }: DashboardProps) {
+    const [value, setValue] = useState(currentSite);
+    useEffect(() => {
+        setValue(currentSite);
+    }, [currentSite]);
+
+    console.log("rendering dashboard");
     return (
         <Container
             fluid
@@ -15,7 +22,7 @@ function Dashboard({ currentSite }: DashboardProps) {
             data-testid="dashboardContainer"
         >
             <Insights />
-            <DashboardGraphs currentSite={currentSite} />
+            <DashboardGraphs currentSite={currentSite} key={currentSite} />
         </Container>
     );
 }

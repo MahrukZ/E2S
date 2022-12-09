@@ -21,9 +21,10 @@ export interface ISiteAndUser {
 
 interface TopbarProps {
     setCurrentSite: any;
+    currentSite: any;
 }
 
-function Topbar({ setCurrentSite }: TopbarProps) {
+function Topbar({ setCurrentSite, currentSite }: TopbarProps) {
     const [siteList, setSiteList] = useState<ISiteAndUser[]>([]);
     const [user, setUser] = useState<IUser>({
         userId: 0,
@@ -103,6 +104,7 @@ function Topbar({ setCurrentSite }: TopbarProps) {
                         <Nav className="me-auto">
                             <SiteDropdown
                                 sites={siteList}
+                                currentSite={currentSite}
                                 setCurrentSite={setCurrentSite}
                             />
                             <AccountDropdown user={user} />

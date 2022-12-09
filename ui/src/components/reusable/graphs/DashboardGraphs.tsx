@@ -71,6 +71,7 @@ function DashboardGraphs({ currentSite }: DashboardGraphsProps) {
     });
 
     useEffect(() => {
+        console.log("rendering dashboard graphs");
         const consumptionsService = new ConsumptionsService();
 
         const findAllConsumptionsBySiteIdAndTime = async () => {
@@ -88,7 +89,7 @@ function DashboardGraphs({ currentSite }: DashboardGraphsProps) {
                 await consumptionsService.findAllConsumptionsBySiteIdAndTime(
                     priorDate,
                     now,
-                    currentSiteId
+                    currentSite
                 );
 
             const currentConsumptionsData = currentConsumptionsResponse["data"];

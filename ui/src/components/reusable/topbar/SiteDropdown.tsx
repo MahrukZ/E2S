@@ -1,17 +1,40 @@
+import { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import { ISiteAndUser } from "./Topbar";
 
 interface SiteDropownProps {
     sites: ISiteAndUser[];
     setCurrentSite: any;
+    currentSite: any;
 }
 
-function SiteDropdown({ sites, setCurrentSite }: SiteDropownProps) {
+function SiteDropdown({
+    sites,
+    setCurrentSite,
+    currentSite,
+}: SiteDropownProps) {
     const selectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         e.preventDefault();
         const value = parseInt(e.target.value);
         setCurrentSite(value);
     };
+    console.log("sites: ", sites);
+
+    useEffect(() => {
+        const setSite = async () => {
+            console.log("setting site");
+            let firstSite = 1;
+
+            if (sites.length > 0) {
+                if (currentSite === 0) {
+                    firstSite = sites[0]["siteId"];
+                    setCurrentSite(firstSite);
+                }
+            }
+        };
+        setSite();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div>

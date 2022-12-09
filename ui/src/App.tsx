@@ -23,31 +23,19 @@ import UserManagementPage from "./components/pages/admin/userManagement/UserMana
 const App: React.FunctionComponent = () => {
     Axios.defaults.withCredentials = true;
 
-    const [currentSite, setCurrentSite] = useState<number>(0);
+    const [currentSite, setCurrentSite] = useState<number>(1);
 
     const usersService = new UsersService();
-
-    // useEffect(() => {
-    //     const redirect = async () => {
-    //         const signInRes = await usersService.checkSignIn();
-    //         if (signInRes["loggedIn"] === true) {
-    //             console.log("logged in app.tsx");
-    //             // if (signInRes["user"].role !== "administrator") {
-    //             console.log(signInRes["user"].userId);
-    //         } else {
-    //             console.log("not logged in app.tsx");
-    //         }
-    //     };
-    //     redirect();
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, []);
 
     //Defines the paths of each page
     //This file should only have the topbar and sidebar
     return (
         <>
             <Router>
-                <Topbar setCurrentSite={setCurrentSite} />
+                <Topbar
+                    setCurrentSite={setCurrentSite}
+                    currentSite={currentSite}
+                />
                 <Sidebar />
                 <Routes>
                     <Route element={<ProtectedRoutes />}>
