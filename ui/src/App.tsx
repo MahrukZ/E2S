@@ -88,7 +88,7 @@ const App: React.FunctionComponent = () => {
                     {/* admin routes */}
                     <Route element={<AdminRoutes />}>
                         <Route
-                            path="/admin/upload"
+                            path="/admin/site-management"
                             element={
                                 <UploadPage setTopbarTitle={setTopbarTitle} />
                             }

@@ -27,7 +27,7 @@ function SignInForm() {
                 if (signInRes["user"].role !== "administrator") {
                     navigate("/");
                 } else if (signInRes["user"].role === "administrator") {
-                    navigate("/admin/upload");
+                    navigate("/admin/user-management");
                 }
             }
         };
