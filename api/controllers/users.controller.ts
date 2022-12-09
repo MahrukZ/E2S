@@ -44,6 +44,25 @@ export class UserController {
             });
     }
 
+    async createUser(req: Request, res: Response): Promise<any> {
+        return this.userService
+            .createUser(req.body)
+            .then((data) => {
+                res.status(201).json({
+                    message: "Created",
+                    status: 201,
+                    data,
+                });
+            })
+            .catch((err) => {
+                res.status(500).json({
+                    message:
+                        err.message || "server error: failed to create user.",
+                    status: 500,
+                });
+            });
+    }
+
     async deleteUser(req: Request, res: Response): Promise<any> {
         return this.userService
             .deleteUser(parseInt(req.params.id))
@@ -57,6 +76,25 @@ export class UserController {
                 res.status(500).json({
                     message:
                         err.message || "server error: failed to delete user.",
+                    status: 500,
+                });
+            });
+    }
+
+    async updateUser(req: Request, res: Response): Promise<any> {
+        return this.userService
+            .updateUser(req.body)
+            .then((data) => {
+                res.status(200).json({
+                    message: `Successfully updated 1 record.`,
+                    status: 200,
+                });
+            })
+            .catch((err) => {
+                res.status(500).json({
+                    message:
+                        err.message ||
+                        "server error: failed to update user.",
                     status: 500,
                 });
             });

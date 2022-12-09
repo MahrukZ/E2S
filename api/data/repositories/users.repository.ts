@@ -64,6 +64,16 @@ export class UserRepository {
         return data;
     }
 
+    async createUser(user: IUser): Promise<IUser> {
+        let data = {};
+        try {
+            data = await this.userRepository.create(user);
+        } catch (err) {
+            throw new Error("Failed to create user." || err);
+        }
+        return data;
+    }
+
     async deleteUser(userId: number): Promise<IUser> {
         let data = {};
         try {
@@ -74,6 +84,23 @@ export class UserRepository {
             });
         } catch (err) {
             throw new Error("Failed to delete user." || err);
+        }
+        return data;
+    }
+
+    async updateUser(user: IUser): Promise<IUser> {
+        let data = {};
+        try {
+            data = await this.userRepository.update(
+                { ...user },
+                {
+                    where: {
+                        user_id: user.userId,
+                    },
+                }
+            );
+        } catch (err) {
+            throw new Error("Failed to update user." || err);
         }
         return data;
     }
