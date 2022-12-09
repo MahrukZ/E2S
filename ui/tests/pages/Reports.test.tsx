@@ -8,7 +8,7 @@ test("should render reports title element", () => {
   render(<Reports />);
 
   // When
-  const reportsElement = screen.getByText("Reports");
+  const reportsElement = screen.getByTestId("reportsContainer");
 
   // Then
   expect(reportsElement).toBeInTheDocument();

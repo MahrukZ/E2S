@@ -6,7 +6,6 @@
     border-width: 5px;
     border-color: #73a6ba;
     margin: 15px;
-    width: 600px;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25),
         0 6px 20px 0 rgba(0, 0, 0, 0.25);
 }

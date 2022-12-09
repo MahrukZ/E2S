@@ -1,5 +1,6 @@
 import Insights from "../reusable/insights/Insights";
 import { useState, useEffect } from "react";
+import DashboardInsights from "../reusable/insights/DashboardInsights";
 import DashboardGraphs from "../reusable/graphs/DashboardGraphs";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";

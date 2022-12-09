@@ -1,25 +1,25 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
-import { Container, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { ConsumptionsService } from "../../../services/consumptions.service";
 import "./Graph.css";
 import SingleGraph, { ISingleGraph } from "./SingleGraph";
 import DoubleGraph, { IDoubleGraph } from "./DoubleGraph";
+import { IReportsDateRange } from "../datePicker/ReportsDatePicker";
 
-interface DashboardGraphsProps {
-    currentSite: any;
+interface IReportsGraphsProp {
+    betweenDates: IReportsDateRange;
 }
 
-function DashboardGraphs({ currentSite }: DashboardGraphsProps) {
-    console.log("current site dshboard graph: ", currentSite);
+function ReportsGraphs({ betweenDates }: IReportsGraphsProp) {
     const currentSiteId = 1;
+
     const [electricityGraph, setElectricityGraph] = useState<ISingleGraph>({
         xData: [],
         yData: [],
         xName: "",
         yName: "",
         lineColour: "",
-        width: "0px",
     });
 
     const [gasGraph, setGasGraph] = useState<ISingleGraph>({
@@ -28,7 +28,6 @@ function DashboardGraphs({ currentSite }: DashboardGraphsProps) {
         xName: "",
         yName: "",
         lineColour: "",
-        width: "0px",
     });
 
     const [emissionsGraph, setEmissionsGraph] = useState<ISingleGraph>({
@@ -37,7 +36,6 @@ function DashboardGraphs({ currentSite }: DashboardGraphsProps) {
         xName: "",
         yName: "",
         lineColour: "",
-        width: "0px",
     });
 
     const [costsGraph, setCostsGraph] = useState<IDoubleGraph>({
@@ -53,7 +51,6 @@ function DashboardGraphs({ currentSite }: DashboardGraphsProps) {
     });
 
     useEffect(() => {
-        console.log("rendering dashboard graphs");
         const consumptionsService = new ConsumptionsService();
 
         const findAllConsumptionsBySiteIdAndTime = async () => {
@@ -64,14 +61,16 @@ function DashboardGraphs({ currentSite }: DashboardGraphsProps) {
             let electricityCostData = [];
             let gasCostData = [];
 
-            const now = new Date();
-            const priorDate = new Date(new Date().setDate(now.getDate() - 30));
+            const firstDayOfLastWeek: Date =
+                betweenDates.dateRange[0]["startDate"]!;
+            const lastDayOfLastWeek: Date =
+                betweenDates.dateRange[0]["endDate"]!;
 
             const currentConsumptionsResponse =
                 await consumptionsService.findAllConsumptionsBySiteIdAndTime(
-                    priorDate,
-                    now,
-                    currentSite
+                    firstDayOfLastWeek,
+                    lastDayOfLastWeek,
+                    currentSiteId
                 );
 
             const currentConsumptionsData = currentConsumptionsResponse["data"];
@@ -120,7 +119,6 @@ function DashboardGraphs({ currentSite }: DashboardGraphsProps) {
                 xName: "date",
                 yName: "Electricity Consumption (kWh)",
                 lineColour: "#0d609d",
-                width: "600px",
             });
 
             setGasGraph({
@@ -129,7 +127,6 @@ function DashboardGraphs({ currentSite }: DashboardGraphsProps) {
                 xName: "date",
                 yName: "Gas Consumption (kWh)",
                 lineColour: "#f15a2f",
-                width: "600px",
             });
 
             setEmissionsGraph({
@@ -138,7 +135,6 @@ function DashboardGraphs({ currentSite }: DashboardGraphsProps) {
                 xName: "date",
                 yName: "CO2 Emissions (kgCO2e)",
                 lineColour: "#a4ba71",
-                width: "600px",
             });
 
             setCostsGraph({
@@ -156,7 +152,7 @@ function DashboardGraphs({ currentSite }: DashboardGraphsProps) {
 
         findAllConsumptionsBySiteIdAndTime();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [betweenDates]);
 
     return (
         <Container
@@ -164,19 +160,15 @@ function DashboardGraphs({ currentSite }: DashboardGraphsProps) {
             className="justify-content-center"
             data-testid="graphContainer"
         >
-            <Col className="d-flex graphContainer">
-                <SingleGraph graphData={electricityGraph} />
+            <SingleGraph graphData={electricityGraph} />
 
-                <SingleGraph graphData={gasGraph} />
+            <SingleGraph graphData={gasGraph} />
 
-                <SingleGraph graphData={emissionsGraph} />
-            </Col>
+            <SingleGraph graphData={emissionsGraph} />
 
-            <Col className="d-flex graphContainer">
-                <DoubleGraph graphData={costsGraph} />
-            </Col>
+            <DoubleGraph graphData={costsGraph} />
         </Container>
     );
 }
 
-export default DashboardGraphs;
+export default ReportsGraphs;
