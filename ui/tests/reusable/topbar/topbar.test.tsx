@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import Topbar from "../../../src/components/reusable/topbar/Topbar";
 
 afterEach(() => {
@@ -9,7 +10,11 @@ afterEach(() => {
 
 test("should render Nav element", () => {
   // Given
-  render(<Topbar />);
+  render(
+    <Router>
+      <Topbar />
+    </Router>
+  );
   // When
   const navElement = screen.getByTestId("topbar");
   // Then
@@ -18,7 +23,11 @@ test("should render Nav element", () => {
 
 test("dropdown elements should not be visible initially", () => {
   // Given
-  render(<Topbar />);
+  render(
+    <Router>
+      <Topbar />
+    </Router>
+  );
   // When
   const settingsElement = screen.queryByTestId("settingsDropdown");
   const signOutElement = screen.queryByTestId("signOutDropdown");
@@ -29,7 +38,11 @@ test("dropdown elements should not be visible initially", () => {
 
 test("dropdown elements should be visible after mouse enter", () => {
   // Given
-  render(<Topbar />);
+  render(
+    <Router>
+      <Topbar />
+    </Router>
+  );
   // When
   const dropdownContainer = screen.getByTestId("dropdownButton");
   fireEvent.mouseEnter(dropdownContainer);

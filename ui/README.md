@@ -32,6 +32,8 @@ npm i
 - `react-router-dom` package - The react-router-dom package contains bindings for using React Router in web applications. **Learn more [here](https://www.npmjs.com/package/react-router-dom)**
 - `styled-components` package - Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress. **Learn more [here](https://www.npmjs.com/package/styled-components)**
 - `plotly` package - Plotly is a Javascript data visualization library. **Learn more [here](https://plotly.com/javascript/react/)**
+- `react-date-range` package - Contains date range picker **Learn more [here](https://www.npmjs.com/package/react-date-range)**
+- `date-fns` package - Toolset for manipulating JavaScript dates in a browser & Node.js **Learn more [here](https://www.npmjs.com/package/date-fns)**
 
 
 ###### _devDependencies:_

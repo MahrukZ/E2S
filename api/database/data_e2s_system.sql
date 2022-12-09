@@ -32,27 +32,27 @@ INSERT INTO `organisations`
 VALUES(null, 'Empowering Energy Solutions', 4);
 
 INSERT INTO `users`
-VALUES(null, 'Martin', 'James', 'martinjames@cardiff.ac.uk', 'director of estates', 'martin12345', 1);
+VALUES(null, 'Martin', 'James', 'martinjames@cardiff.ac.uk', 'director of estates', '$2a$10$JubOeS1ni5ZurQZ9Y3S/f.yLlhLdnSOcDWqYJbkWGYzXzzlat6aum', 1);
 INSERT INTO `users`
-VALUES(null, 'Rhy', 'Jones', 'rhyjones@cardiff.ac.uk', 'facility energy manager', 'rhy12345', 1);
+VALUES(null, 'Rhy', 'Jones', 'rhyjones@cardiff.ac.uk', 'facility energy manager', '$2a$10$OI1b4b4kzeU6qI8Dns3YGeKVvG.BBTGflE0tfzVd2WO4sQ/OC.sU.', 1);
 INSERT INTO `users`
-VALUES(null, 'James', 'Ohay', 'jamesohay@cardiff.ac.uk', 'facility energy manager', 'james12345', 1);
+VALUES(null, 'James', 'Ohay', 'jamesohay@cardiff.ac.uk', 'facility energy manager', '$2a$10$ZBYZscFZAnKVrUnWyUdr.OGr2p/ZjY4FkJ3T7abNKzqTYkvq6bz9S', 1);
 INSERT INTO `users`
-VALUES(null, 'Helen', 'Wilkins', 'helenwilkins@nhs.co.uk', 'director of estates', 'helen12345', 2);
+VALUES(null, 'Helen', 'Wilkins', 'helenwilkins@nhs.co.uk', 'director of estates', '$2a$10$QWu3qFeprrA9whrfxu0nmu7RDMWnTTKURoKWMcH/45h.fGVGrWGSO', 2);
 INSERT INTO `users`
-VALUES(null, 'Max', 'Norris', 'maxnorris@nhs.co.uk', 'facility energy manager', 'max12345', 2);
+VALUES(null, 'Max', 'Norris', 'maxnorris@nhs.co.uk', 'facility energy manager', '$2a$10$SPlcCORRWTpWpsGv3nFx/.PtA/BzajdhbLCnxIUO5eBqshR.Yon1m', 2);
 INSERT INTO `users`
-VALUES(null, 'Johnny', 'Bravo', 'johnnybravo@nhs.co.uk', 'facility energy manager', 'johnny12345', 2);
+VALUES(null, 'Johnny', 'Bravo', 'johnnybravo@nhs.co.uk', 'facility energy manager', '$2a$10$55ys62Kjw3seJaL6DjPlRu12JR/1vjge9Ttf.2FO4XEhVnVrMH7Pu', 2);
 INSERT INTO `users`
-VALUES(null, 'Jade', 'Pierce', 'jadepierce@ons.gov.uk', 'director of estates', 'jade12345', 3);
+VALUES(null, 'Jade', 'Pierce', 'jadepierce@ons.gov.uk', 'director of estates', '$2a$10$A/L8rmJ50zK8ooq9E.L7SObwDydyO4UMRH5AHwgQZ1NAchlqfK5RO', 3);
 INSERT INTO `users`
-VALUES(null, 'Martina', 'Schmitt', 'martinaschmitt@ons.gov.uk', 'facility energy manager', 'martina12345', 3);
+VALUES(null, 'Martina', 'Schmitt', 'martinaschmitt@ons.gov.uk', 'facility energy manager', '$2a$10$LlTv6dx11zSvhrF404.TKeFKqOwsaIAlxFdIf1U5KbyiAB9Tzvw8W', 3);
 INSERT INTO `users`
-VALUES(null, 'Antonio', 'White', 'antoniowhite@ons.gov.uk', 'facility energy manager', 'antonio12345', 3);
+VALUES(null, 'Antonio', 'White', 'antoniowhite@ons.gov.uk', 'facility energy manager', '$2a$10$bjMzX7I3ayPYPn4BSSpqEOeGT4qt6tlIBZEhmcQfxjsz36nH63PwK', 3);
 INSERT INTO `users`
-VALUES(null, 'Cai', 'Robert', 'cairobert@e2s.co.uk', 'administrator', 'cai12345', 4);
+VALUES(null, 'Cai', 'Robert', 'cairobert@e2s.co.uk', 'administrator', '$2a$10$xNRnHsQEf2vn/rTbmTWcmOJ1t2Mm7q20anm64pLMAyYJdNqWZEDYS', 4);
 INSERT INTO `users`
-VALUES(null, 'Admin', 'User', 'adminuser@e2s.co.uk', 'administrator', 'adminpass', 4);
+VALUES(null, 'Admin', 'User', 'adminuser@e2s.co.uk', 'administrator', '$2a$10$ZWFMVtxOab0qGSM61eKEFOwUK3VdIaE2621mRzTWnDk3Gw9TIPOv6', 4);
 
 INSERT INTO `sites`
 VALUES(null, 'Abacws', 'Cathays', 1);
@@ -133,11 +133,11 @@ INSERT INTO `bills`
 VALUES(null, './assets/bills/eon_bill.pdf', 'combined', 'valid', '2022-06-14', 7, 2);
 
 INSERT INTO `consumptions`
-VALUES(null, '2020/01/01 12:00', '2576.3', '2359.0', '43.45', '50.45', 1, 1);
+VALUES(null, '2020/01/01 12:00', 2576.3, 2359.0, NULL, 43.45, 50.45, 1, 1);
 INSERT INTO `consumptions`
-VALUES(null, '2020/01/02 15:00', '2529.7', '2351.1', '35.55', '32.55', 5, 5);
+VALUES(null, '2020/01/02 15:00', 2529.7, 2351.1, NULL, 35.55, 32.55, 5, 5);
 INSERT INTO `consumptions`
-VALUES(null, '2020/01/03 20:00', '2878.7', '2699.1', '78.55', '56.55', 8, 8);
+VALUES(null, '2020/01/03 20:00', 2878.7, 2699.1, NULL, 78.55, 56.55, 8, 8);
 
 INSERT INTO `reports`
 VALUES(null, './assets/reports/report.pdf', 1, '2022-02-20');
@@ -152,5 +152,15 @@ INSERT INTO `insight_templates`
 VALUES(null, 'In the last 7 days, the electricity consumption of [site] has changed by [data] compared to the previous 7 days.');
 INSERT INTO `insight_templates`
 VALUES(null, 'In the last 7 days, the gas consumption of [site] has changed by [data] compared to the previous 7 days.');
+INSERT INTO `insight_templates`
+VALUES(null, 'In the last 7 days, the carbon emissions of [site] has changed by [data] compared to the previous 7 days.');
+INSERT INTO `insight_templates`
+VALUES(null, 'Between [dateFrom] and [dateTo], the total costs of [site] was [data].');
+INSERT INTO `insight_templates`
+VALUES(null, 'Between [dateFrom] and [dateTo], the gas consumption of [site] was [data].');
+INSERT INTO `insight_templates`
+VALUES(null, 'Between [dateFrom] and [dateTo], the electricity consumption of [site] was [data].');
+INSERT INTO `insight_templates`
+VALUES(null, 'Between [dateFrom] and [dateTo], the carbon emissions of [site] was [data].');
 
 SET foreign_key_checks = 1;

@@ -1,6 +1,15 @@
+import { Container } from "react-bootstrap";
+import ReportsDatePicker from "../reusable/datePicker/ReportsDatePicker";
+
 function Reports() {
     return (
-        <h1 id="reports">Reports</h1>
+        <Container
+            fluid
+            className="d-flex flex-column"
+            data-testid="reportsContainer"
+        >
+            <ReportsDatePicker />
+        </Container>
     );
 };
 
