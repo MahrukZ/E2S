@@ -8,6 +8,7 @@ import "./DatePicker.css";
 import "./ReportsDatePicker.css";
 import ReportsInsights from "../insights/ReportsInsights";
 import ReportsGraphs from "../graphs/ReportsGraphs";
+import PdfDownloadBtn from "../buttons/PdfDownloadBtn";
 
 export interface IReportsDateRange {
     dateRange: Range[];
@@ -50,14 +51,20 @@ function ReportsDatePicker() {
                 className="d-flex calendarContainer justify-content-center"
                 data-testid="reportsDatePickerElement"
             >
-                <Container className="flex-fill reportsData">
+                <Container id="reportData" className="flex-fill reportsData">
                     <ReportsInsights betweenDates={dateRange} />
                     <ReportsGraphs betweenDates={dateRange} />
                 </Container>
                 <Card className="flex-shrink-1 datePickerCard">
-                    <Card.Title>
-                        Select a date range to view your report.
-                    </Card.Title>
+                    <Container className="justify-content-center d-flex mb-4">
+                        <PdfDownloadBtn
+                            downloadFileName="YourReport"
+                            rootElementId="reportData"
+                        />
+                    </Container>
+                    <Card.Header>
+                        Select a date range to view your report
+                    </Card.Header>
                     <DateRangePicker
                         onChange={(item) => {
                             setState([item.selection]);
@@ -73,6 +80,12 @@ function ReportsDatePicker() {
                         staticRanges={[]}
                         inputRanges={[]}
                     />
+                    <Container className="justify-content-center d-flex position-absolute bottom-0 mb-4">
+                        <PdfDownloadBtn
+                            downloadFileName="YourReport"
+                            rootElementId="reportData"
+                        />
+                    </Container>
                 </Card>
             </Col>
         </>
