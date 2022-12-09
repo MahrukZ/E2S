@@ -43,6 +43,8 @@ npm i
 - `jsx-runtime` package - **Learn more [here](https://www.npmjs.com/package/jsx-runtime)**
 - `jest-canvas-mock` package - Mock canvas when run unit test cases with jest. **Learn more [here](https://www.npmjs.com/package/jest-canvas-mock)**
 - `prettier` package - Prettier is a code formatter and enforces a consistent style. **Learn more [here](https://prettier.io/)**
+- `jsPDF` package - A library to generate PDFs in JavaScript. **Learn more [here](https://www.npmjs.com/package/jspdf)**
+- `html2canvas` package - The script renders the current page as a canvas image, by reading the DOM and the different styles applied to the elements. **Learn more [here](https://www.npmjs.com/package/html2canvas)**
 
 ## Available Scripts
 
