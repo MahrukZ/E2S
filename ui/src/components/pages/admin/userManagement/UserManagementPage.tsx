@@ -12,7 +12,7 @@ function UserManagementPage({ setTopbarTitle }: UserManagementPageProps) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
-        <div className="text-center">
+        <div data-testid="userManagement" className="text-center">
             <UserTable />
         </div>
     );

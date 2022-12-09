@@ -7,7 +7,7 @@ import "jest-canvas-mock";
 
 test("should render date picker element", () => {
     // Given
-    render(<DatePicker />);
+    render(<DatePicker currentSite={1} />);
 
     // When
     const datePickerElement = screen.getByTestId("datePickerElement");

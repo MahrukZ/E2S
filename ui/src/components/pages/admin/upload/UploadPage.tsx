@@ -12,7 +12,7 @@ function UploadPage({ setTopbarTitle }: UploadPageProps) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
-        <div className="container">
+        <div data-testid="uploadElement" className="container">
             <Upload />
         </div>
     );

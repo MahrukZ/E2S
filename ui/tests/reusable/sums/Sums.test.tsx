@@ -7,16 +7,18 @@ import "jest-canvas-mock";
 import { addDays } from "date-fns";
 
 const mockData = {
-    dateRange: [        {
+    dateRange: [
+        {
             startDate: addDays(new Date(), -7),
             endDate: new Date(),
             key: "selection",
-        }],
+        },
+    ],
 };
 
 test("should render sums element", () => {
     // Given
-    render(<Sums betweenDates={mockData} />);
+    render(<Sums currentSite={1} betweenDates={mockData} />);
 
     // When
     const sumsElement = screen.getByTestId("sumsElement");
