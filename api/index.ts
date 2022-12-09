@@ -6,7 +6,10 @@ import sitesAndUsers from "./routes/sitesAndUsers/sitesAndusers.routes";
 import insights from "./routes/insights/insights.routes";
 import users from "./routes/users/users.routes";
 import sites from "./routes/sites/sites.routes";
-import { Router } from 'express';
+import { Router } from "express";
+import { EmailCronJob } from "./emailConfig/emailScheduler";
+import cron from "node-cron";
+import { sendEmail } from "./emailConfig/sendEmail";
 
 // config
 dotenv.config();
@@ -25,6 +28,8 @@ routes.use(sites);
 routes.use(sitesAndUsers);
 
 app.use(routes);
+
+EmailCronJob();
 
 // port listen
 app.listen(port, () => {
