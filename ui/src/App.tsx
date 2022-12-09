@@ -1,6 +1,5 @@
 import Axios from "axios";
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 
@@ -9,7 +8,6 @@ import Topbar from "./components/reusable/topbar/Topbar";
 
 import BillValidation from "./components/pages/BillValidation";
 import CostForecast from "./components/pages/CostForecast";
-import { UsersService } from "./services/users.service";
 import Reports from "./components/pages/Reports";
 import SignIn from "./components/pages/signIn/SignIn";
 
@@ -24,11 +22,12 @@ const App: React.FunctionComponent = () => {
     Axios.defaults.withCredentials = true;
 
     const [currentSite, setCurrentSite] = useState<number>(1);
-
-    const usersService = new UsersService();
     const [value, setValue] = useState(currentSite);
+    const [topbarTitle, setTopbarTitle] = useState("Title");
+    const [topbarValue, setTopbarValue] = useState(topbarTitle);
     useEffect(() => {
         setValue(currentSite);
+        setTopbarValue(topbarTitle);
     }, [currentSite]);
 
     //Defines the paths of each page
@@ -39,6 +38,8 @@ const App: React.FunctionComponent = () => {
                 <Topbar
                     setCurrentSite={setCurrentSite}
                     currentSite={currentSite}
+                    topbarTitle={topbarTitle}
+                    key={topbarTitle}
                 />
                 <Sidebar />
                 <Routes>
@@ -47,6 +48,7 @@ const App: React.FunctionComponent = () => {
                             path="/reports"
                             element={
                                 <Reports
+                                    setTopbarTitle={setTopbarTitle}
                                     currentSite={currentSite}
                                     key={currentSite}
                                 />
@@ -56,6 +58,7 @@ const App: React.FunctionComponent = () => {
                             path="/billvalidation"
                             element={
                                 <BillValidation
+                                    setTopbarTitle={setTopbarTitle}
                                     currentSite={currentSite}
                                     key={currentSite}
                                 />
@@ -65,6 +68,7 @@ const App: React.FunctionComponent = () => {
                             path="/costforecast"
                             element={
                                 <CostForecast
+                                    setTopbarTitle={setTopbarTitle}
                                     currentSite={currentSite}
                                     key={currentSite}
                                 />
@@ -74,6 +78,7 @@ const App: React.FunctionComponent = () => {
                             path="/"
                             element={
                                 <Dashboard
+                                    setTopbarTitle={setTopbarTitle}
                                     currentSite={currentSite}
                                     key={currentSite}
                                 />
@@ -82,10 +87,19 @@ const App: React.FunctionComponent = () => {
                     </Route>
                     {/* admin routes */}
                     <Route element={<AdminRoutes />}>
-                        <Route path="/admin/upload" element={<UploadPage />} />
+                        <Route
+                            path="/admin/upload"
+                            element={
+                                <UploadPage setTopbarTitle={setTopbarTitle} />
+                            }
+                        />
                         <Route
                             path="/admin/user-management"
-                            element={<UserManagementPage />}
+                            element={
+                                <UserManagementPage
+                                    setTopbarTitle={setTopbarTitle}
+                                />
+                            }
                         />
                     </Route>
                     <Route path="/sign-in" element={<SignIn />} />

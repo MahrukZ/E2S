@@ -18,11 +18,9 @@ function SiteDropdown({
         const value = parseInt(e.target.value);
         setCurrentSite(value);
     };
-    console.log("sites: ", sites);
 
     useEffect(() => {
         const setSite = async () => {
-            console.log("setting site");
             let firstSite = 1;
 
             if (sites.length > 0) {

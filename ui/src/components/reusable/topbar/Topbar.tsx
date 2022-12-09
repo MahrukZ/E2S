@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
-import { Container, Nav, Navbar, Row } from "react-bootstrap";
+import { Container, Nav, Navbar, Row, Col } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { SitesAndUsersService } from "../../../services/sitesAndUsers.service";
 import { UserManagementService } from "../../../services/userManagement.service";
@@ -22,14 +22,17 @@ export interface ISiteAndUser {
 interface TopbarProps {
     setCurrentSite: any;
     currentSite: any;
+    topbarTitle: any;
 }
 
-function Topbar({ setCurrentSite, currentSite }: TopbarProps) {
+function Topbar({ setCurrentSite, currentSite, topbarTitle }: TopbarProps) {
     const [siteList, setSiteList] = useState<ISiteAndUser[]>([]);
     const [user, setUser] = useState<IUser>({
         userId: 0,
         name: "",
     });
+
+    const location = useLocation();
 
     const usersService = new UsersService();
     const sitesAndUsersService = new SitesAndUsersService();
@@ -90,29 +93,36 @@ function Topbar({ setCurrentSite, currentSite }: TopbarProps) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const location = useLocation();
+    console.log("location: ", location.pathname);
 
     if (["/sign-in"].includes(location.pathname)) {
         return <></>;
     }
     return (
-        <Navbar data-testid="topbar" className="py-0" id="topbar">
-            <Container className="justify-content-end">
-                <Row>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
+        <>
+            <Navbar data-testid="topbar" className="py-0" id="topbar">
+                <Container>
+                    <Nav id="titleNav">
+                        <h2 className="me-5" id="pageTitle">
+                            {topbarTitle}
+                        </h2>
+                    </Nav>
+                    <Navbar.Toggle />
+                    <Navbar.Collapse className="justify-content-end">
+                        <Nav id="siteDropdownNav">
                             <SiteDropdown
                                 sites={siteList}
                                 currentSite={currentSite}
                                 setCurrentSite={setCurrentSite}
                             />
+                        </Nav>
+                        <Nav id="accountDropdownNav">
                             <AccountDropdown user={user} />
                         </Nav>
                     </Navbar.Collapse>
-                </Row>
-            </Container>
-        </Navbar>
+                </Container>
+            </Navbar>
+        </>
     );
 }
 

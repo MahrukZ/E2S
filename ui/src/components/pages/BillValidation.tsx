@@ -1,11 +1,17 @@
 import DatePicker from "../reusable/datePicker/DatePicker";
+import { useEffect } from "react";
 import { Container } from "react-bootstrap";
 
 interface BillValidationProps {
     currentSite: any;
+    setTopbarTitle: any;
 }
 
-function BillValidation({ currentSite }: BillValidationProps) {
+function BillValidation({ currentSite, setTopbarTitle }: BillValidationProps) {
+    useEffect(() => {
+        setTopbarTitle("Bill Validation");
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     return (
         <Container
             fluid

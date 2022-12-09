@@ -11,8 +11,6 @@ interface DashboardGraphsProps {
 }
 
 function DashboardGraphs({ currentSite }: DashboardGraphsProps) {
-    console.log("current site dshboard graph: ", currentSite);
-    const currentSiteId = 1;
     const [electricityGraph, setElectricityGraph] = useState<ISingleGraph>({
         xData: [],
         yData: [],
@@ -53,7 +51,6 @@ function DashboardGraphs({ currentSite }: DashboardGraphsProps) {
     });
 
     useEffect(() => {
-        console.log("rendering dashboard graphs");
         const consumptionsService = new ConsumptionsService();
 
         const findAllConsumptionsBySiteIdAndTime = async () => {
