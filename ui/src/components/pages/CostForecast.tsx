@@ -1,9 +1,13 @@
 import ForecastGraph from "../reusable/graphs/ForecastGraph";
 
-function CostForecast() {
+interface CostForecastProps {
+    currentSite: any;
+}
+
+function CostForecast({ currentSite }: CostForecastProps) {
     return (
         <div data-testid="costForecastContainer">
-            <ForecastGraph></ForecastGraph>
+            <ForecastGraph currentSite={currentSite}></ForecastGraph>
         </div>
     );
 }

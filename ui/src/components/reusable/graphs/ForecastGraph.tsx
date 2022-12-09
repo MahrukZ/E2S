@@ -18,8 +18,12 @@ export interface IDoubleGraph {
     name1: string;
 }
 
-function ForecastGraph() {
-    const currentSiteId = 1;
+interface ForecastGraphProps {
+    currentSite: any;
+}
+
+function ForecastGraph({ currentSite }: ForecastGraphProps) {
+    const currentSiteId = currentSite;
 
     const [costsGraph, setCostsGraph] = useState<IDoubleGraph>({
         xData0: [],

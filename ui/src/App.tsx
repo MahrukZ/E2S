@@ -55,7 +55,12 @@ const App: React.FunctionComponent = () => {
                         />
                         <Route
                             path="/costforecast"
-                            element={<CostForecast />}
+                            element={
+                                <CostForecast
+                                    currentSite={currentSite}
+                                    key={currentSite}
+                                />
+                            }
                         />
                         <Route
                             path="/"
