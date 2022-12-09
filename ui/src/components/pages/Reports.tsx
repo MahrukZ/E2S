@@ -1,16 +1,20 @@
 import { Container } from "react-bootstrap";
 import ReportsDatePicker from "../reusable/datePicker/ReportsDatePicker";
 
-function Reports() {
+interface ReportsProps {
+    currentSite: any;
+}
+
+function Reports({ currentSite }: ReportsProps) {
     return (
         <Container
             fluid
             className="d-flex flex-column"
             data-testid="reportsContainer"
         >
-            <ReportsDatePicker />
+            <ReportsDatePicker currentSite={currentSite} />
         </Container>
     );
-};
+}
 
 export default Reports;

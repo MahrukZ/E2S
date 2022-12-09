@@ -9,10 +9,11 @@ import { IReportsDateRange } from "../datePicker/ReportsDatePicker";
 
 interface IReportsInsightsProp {
     betweenDates: IReportsDateRange;
+    currentSite: any;
 }
 
-function ReportsInsights({ betweenDates }: IReportsInsightsProp) {
-    const currentSiteId = 1;
+function ReportsInsights({ betweenDates, currentSite }: IReportsInsightsProp) {
+    const currentSiteId = currentSite;
 
     const [costsInsight, setCostsInsight] = useState<IInsightData>({
         title: "",

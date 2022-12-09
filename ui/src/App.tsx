@@ -43,7 +43,15 @@ const App: React.FunctionComponent = () => {
                 <Sidebar />
                 <Routes>
                     <Route element={<ProtectedRoutes />}>
-                        <Route path="/reports" element={<Reports />} />
+                        <Route
+                            path="/reports"
+                            element={
+                                <Reports
+                                    currentSite={currentSite}
+                                    key={currentSite}
+                                />
+                            }
+                        />
                         <Route
                             path="/billvalidation"
                             element={

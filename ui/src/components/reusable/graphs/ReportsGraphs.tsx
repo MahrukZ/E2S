@@ -9,10 +9,11 @@ import { IReportsDateRange } from "../datePicker/ReportsDatePicker";
 
 interface IReportsGraphsProp {
     betweenDates: IReportsDateRange;
+    currentSite: any;
 }
 
-function ReportsGraphs({ betweenDates }: IReportsGraphsProp) {
-    const currentSiteId = 1;
+function ReportsGraphs({ betweenDates, currentSite }: IReportsGraphsProp) {
+    const currentSiteId = currentSite;
 
     const [electricityGraph, setElectricityGraph] = useState<ISingleGraph>({
         xData: [],
