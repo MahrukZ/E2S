@@ -46,7 +46,12 @@ const App: React.FunctionComponent = () => {
                         <Route path="/reports" element={<Reports />} />
                         <Route
                             path="/billvalidation"
-                            element={<BillValidation />}
+                            element={
+                                <BillValidation
+                                    currentSite={currentSite}
+                                    key={currentSite}
+                                />
+                            }
                         />
                         <Route
                             path="/costforecast"

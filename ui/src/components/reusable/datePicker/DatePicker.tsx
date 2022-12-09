@@ -11,8 +11,10 @@ import Sums from "../sums/Sums";
 export interface ISums {
     dateRange: Range[];
 }
-
-function DatePicker() {
+interface DatePickerProps {
+    currentSite: any;
+}
+function DatePicker({ currentSite }: DatePickerProps) {
     const [state, setState] = useState<Range[]>([
         {
             startDate: addDays(new Date(), -7),
@@ -60,7 +62,7 @@ function DatePicker() {
                     inputRanges={[]}
                 />
             </Card>
-            <Sums betweenDates={dateRange} />
+            <Sums betweenDates={dateRange} currentSite={currentSite} />
         </Col>
     );
 }

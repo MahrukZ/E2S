@@ -65,7 +65,6 @@ function UploadDropdown({ setSelectedId }: UploadDropDownProps) {
                     </option>
                 ))}
             </Form.Select>
-            {selectedOption && <h2>{selectedOption}</h2>}
         </div>
     );
 }
