@@ -1,4 +1,5 @@
 import axios from "axios";
+import { IUser } from "../components/pages/admin/userManagement/UserTable";
 axios.defaults.withCredentials = true;
 
 export class UsersService {
@@ -35,8 +36,18 @@ export class UsersService {
         return await response.data;
     }
 
+    public async createUser(user: IUser): Promise<any> {
+        const response = await axios.post(`/api/user`, user);
+        return await response.data;
+    }
+
     public async deleteUser(userId: number): Promise<any> {
         const response = await axios.delete(`/api/user/${userId}`);
+        return await response.data;
+    }
+
+    public async updateUser(user: IUser): Promise<any> {
+        const response = await axios.put(`/api/user`, user);
         return await response.data;
     }
 }

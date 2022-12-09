@@ -17,8 +17,16 @@ router.get("/api/user-management/:id", async (req, res) => {
     userManagementController.findUserManagementByUserId(req, res);
 });
 
+router.post("/api/user", async (req, res) => {
+    userController.createUser(req, res);
+});
+
 router.delete("/api/user/:id", async (req, res) => {
     userController.deleteUser(req, res);
+});
+
+router.put("/api/user", async (req, res) => {
+    userController.updateUser(req, res);
 });
 
 export default router;
