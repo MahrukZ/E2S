@@ -34,6 +34,8 @@ npm i
 - `plotly` package - Plotly is a Javascript data visualization library. **Learn more [here](https://plotly.com/javascript/react/)**
 - `react-date-range` package - Contains date range picker **Learn more [here](https://www.npmjs.com/package/react-date-range)**
 - `date-fns` package - Toolset for manipulating JavaScript dates in a browser & Node.js **Learn more [here](https://www.npmjs.com/package/date-fns)**
+- `jsPDF` package - A library to generate PDFs in JavaScript. **Learn more [here](https://www.npmjs.com/package/jspdf)**
+- `html2canvas` package - The script renders the current page as a canvas image, by reading the DOM and the different styles applied to the elements. **Learn more [here](https://www.npmjs.com/package/html2canvas)**
 
 
 ###### _devDependencies:_
