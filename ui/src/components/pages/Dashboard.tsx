@@ -9,20 +9,14 @@ interface DashboardProps {
 }
 
 function Dashboard({ currentSite }: DashboardProps) {
-    const [value, setValue] = useState(currentSite);
-    useEffect(() => {
-        setValue(currentSite);
-    }, [currentSite]);
-
-    console.log("rendering dashboard");
     return (
         <Container
             fluid
             className="d-flex flex-column"
             data-testid="dashboardContainer"
         >
-            <Insights />
-            <DashboardGraphs currentSite={currentSite} key={currentSite} />
+            <Insights currentSite={currentSite} />
+            <DashboardGraphs currentSite={currentSite} />
         </Container>
     );
 }

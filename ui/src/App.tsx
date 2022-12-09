@@ -26,6 +26,10 @@ const App: React.FunctionComponent = () => {
     const [currentSite, setCurrentSite] = useState<number>(1);
 
     const usersService = new UsersService();
+    const [value, setValue] = useState(currentSite);
+    useEffect(() => {
+        setValue(currentSite);
+    }, [currentSite]);
 
     //Defines the paths of each page
     //This file should only have the topbar and sidebar
@@ -50,7 +54,12 @@ const App: React.FunctionComponent = () => {
                         />
                         <Route
                             path="/"
-                            element={<Dashboard currentSite={currentSite} />}
+                            element={
+                                <Dashboard
+                                    currentSite={currentSite}
+                                    key={currentSite}
+                                />
+                            }
                         />
                     </Route>
                     {/* admin routes */}

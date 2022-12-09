@@ -6,10 +6,11 @@ import { ConsumptionsService } from "../../../services/consumptions.service";
 import { Container, Card, Col } from "react-bootstrap";
 import "./Insights.css";
 
-function Insights() {
-  
-    const currentSiteId = 1;
+interface InsightsProps {
+    currentSite: any;
+}
 
+function Insights({ currentSite }: InsightsProps) {
     const [insightsList, setInsightsList] = useState<String[]>([]);
     const [consumptionsList, setConsumptionsList] = useState<String[]>([]);
 
@@ -26,27 +27,31 @@ function Insights() {
 
     useEffect(() => {
         // This will only work with 3 insight templates in the database
-        const getAllInsights =async () => {
+        const getAllInsights = async () => {
             let finalInsights: String[] = [];
             let insightsList: String[] = [];
 
             const insightsTemplates = await insightsService.getInsights();
-            // Currently just has 1 as the siteId, this will need to be changed
-            const siteData = await sitesService.findSiteById(currentSiteId);
+            const siteData = await sitesService.findSiteById(currentSite);
 
-            const currentSite = siteData["data"][0]["name"];
+            const currentSiteData = siteData["data"][0]["name"];
 
             // Replace [site] in the template with site name
-            for (let i = 0; i < insightsTemplates["data"].length; i++ ) {
-                const currentInsight0: string = String(insightsTemplates["data"][i]["description"]);
+            for (let i = 0; i < insightsTemplates["data"].length; i++) {
+                const currentInsight0: string = String(
+                    insightsTemplates["data"][i]["description"]
+                );
 
-                const insightToAdd0 = currentInsight0.replace("[site]", currentSite)
+                const insightToAdd0 = currentInsight0.replace(
+                    "[site]",
+                    currentSiteData
+                );
 
                 insightsList.push(insightToAdd0);
             }
 
             // Split the insight template in half so the data can go into the middle
-            for (let i = 0; i < insightsList.length; i++ ) {
+            for (let i = 0; i < insightsList.length; i++) {
                 const currentInsight1: string = String(insightsList[i]);
 
                 const splitted = currentInsight1.split("[data]");
@@ -54,27 +59,39 @@ function Insights() {
                 finalInsights.push(splitted[0]);
                 finalInsights.push(splitted[1]);
             }
-            
-            setInsightsList(finalInsights);
 
-        }
+            setInsightsList(finalInsights);
+        };
         getAllInsights();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    
+
     useEffect(() => {
         const findSumOfConsumptionsBySiteIdAndTime = async () => {
             let finalConsumptions: String[] = [];
 
             const now = new Date();
             const priorDate = new Date(new Date().setDate(now.getDate() - 7));
-            const priorPriorDate = new Date(new Date().setDate(now.getDate() - 14));
+            const priorPriorDate = new Date(
+                new Date().setDate(now.getDate() - 14)
+            );
 
-            const currentConsumptionsResponse = await consumptionsService.findSumOfConsumptionsBySiteIdAndTime(priorDate, now, currentSiteId);
-            const previousConsumptionsResponse = await consumptionsService.findSumOfConsumptionsBySiteIdAndTime(priorPriorDate, priorDate, currentSiteId);
-            
+            const currentConsumptionsResponse =
+                await consumptionsService.findSumOfConsumptionsBySiteIdAndTime(
+                    priorDate,
+                    now,
+                    currentSite
+                );
+            const previousConsumptionsResponse =
+                await consumptionsService.findSumOfConsumptionsBySiteIdAndTime(
+                    priorPriorDate,
+                    priorDate,
+                    currentSite
+                );
+
             const currentConsumptionsData = currentConsumptionsResponse["data"];
-            const previousConsumptionsData = previousConsumptionsResponse["data"];
+            const previousConsumptionsData =
+                previousConsumptionsResponse["data"];
 
             const totalCurrentElectricityDemand = currentConsumptionsData[0];
             const totalCurrentGasDemand = currentConsumptionsData[1];
@@ -88,128 +105,154 @@ function Insights() {
 
             // calculate percentage
             const electricityPercentage = Math.round(
-                (totalCurrentElectricityDemand - totalPreviousElectricityDemand) / totalPreviousElectricityDemand * 100
+                ((totalCurrentElectricityDemand -
+                    totalPreviousElectricityDemand) /
+                    totalPreviousElectricityDemand) *
+                    100
             );
             const gasPercentage = Math.round(
-                (totalCurrentGasDemand - totalPreviousGasDemand) / totalPreviousGasDemand * 100
+                ((totalCurrentGasDemand - totalPreviousGasDemand) /
+                    totalPreviousGasDemand) *
+                    100
             );
             const emissionsPercentage = Math.round(
-                (totalCurrentEmissions - totalPreviousEmissions) / totalPreviousEmissions * 100
+                ((totalCurrentEmissions - totalPreviousEmissions) /
+                    totalPreviousEmissions) *
+                    100
             );
             const costPercentage = Math.round(
-                (totalCurrentCosts - totalPreviousCosts) / totalPreviousCosts * 100
+                ((totalCurrentCosts - totalPreviousCosts) /
+                    totalPreviousCosts) *
+                    100
             );
 
             // add plus or minus symbol and change colour
             if (electricityPercentage <= 0) {
-                const stringElectricityPercentage = String(electricityPercentage);
+                const stringElectricityPercentage = String(
+                    electricityPercentage
+                );
                 finalConsumptions.push(stringElectricityPercentage);
-            }
-            else {
-                const stringElectricityPercentage = "+" + String(electricityPercentage);
+            } else {
+                const stringElectricityPercentage =
+                    "+" + String(electricityPercentage);
                 finalConsumptions.push(stringElectricityPercentage);
                 setIsElectricityPositive(true);
-            };
+            }
 
             if (gasPercentage <= 0) {
                 const stringGasPercentage = String(gasPercentage);
                 finalConsumptions.push(stringGasPercentage);
-            }
-            else {
+            } else {
                 const stringGasPercentage = "+" + String(gasPercentage);
                 finalConsumptions.push(stringGasPercentage);
                 setIsGasPositive(true);
-            };
+            }
 
             if (emissionsPercentage <= 0) {
                 const stringEmissionsPercentage = String(emissionsPercentage);
                 finalConsumptions.push(stringEmissionsPercentage);
-            }
-            else {
-                const stringEmissionsPercentage = "+" + String(emissionsPercentage);
+            } else {
+                const stringEmissionsPercentage =
+                    "+" + String(emissionsPercentage);
                 finalConsumptions.push(stringEmissionsPercentage);
                 setIsEmissionsPositive(true);
-            };
+            }
 
             if (costPercentage <= 0) {
                 const stringCostPercentage = String(costPercentage);
                 finalConsumptions.push(stringCostPercentage);
-            }
-            else {
+            } else {
                 const stringCostPercentage = "+" + String(costPercentage);
                 finalConsumptions.push(stringCostPercentage);
                 setIsCostPositive(true);
-            };
+            }
 
             setConsumptionsList(finalConsumptions);
-        }
+        };
         findSumOfConsumptionsBySiteIdAndTime();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-  return (
-      <Container fluid className="justify-content-center">
+    return (
+        <Container fluid className="justify-content-center">
             <Col className="d-flex insightsCol">
+                <Card
+                    className="insightsCard flex-fill"
+                    data-testid="insightsCost"
+                >
+                    <Card.Title>Total Costs</Card.Title>
+                    <Card.Body>
+                        {insightsList[0]}
+                        <b
+                            className="percentageNeutral"
+                            style={{
+                                backgroundColor: isCostPositive
+                                    ? "darkred"
+                                    : "green",
+                            }}
+                        >
+                            {consumptionsList[3]}%
+                        </b>
+                        {insightsList[1]}
+                    </Card.Body>
+                </Card>
 
-            <Card className="insightsCard flex-fill" data-testid="insightsCost">
-                <Card.Title>Total Costs</Card.Title>
-                <Card.Body>
-                    {insightsList[0]} 
-                    <b className="percentageNeutral" 
-                    style={{
-                        backgroundColor: isCostPositive ? 'darkred' : 'green',
-                    }}>
-                        {consumptionsList[3]}%
-                    </b>
-                    {insightsList[1]}
-                </Card.Body>
-            </Card>
+                <Card className="insightsCard flex-fill">
+                    <Card.Title>Electricity Insight</Card.Title>
+                    <Card.Body>
+                        {insightsList[2]}
+                        <b
+                            className="percentageNeutral"
+                            style={{
+                                backgroundColor: isElectricityPositive
+                                    ? "darkred"
+                                    : "green",
+                            }}
+                        >
+                            {consumptionsList[0]}%
+                        </b>
+                        {insightsList[3]}
+                    </Card.Body>
+                </Card>
 
-            <Card className="insightsCard flex-fill">
-            <Card.Title>Electricity Insight</Card.Title>
-                <Card.Body>
-                    {insightsList[2]} 
-                    <b className="percentageNeutral" 
-                    style={{
-                        backgroundColor: isElectricityPositive ? 'darkred' : 'green',
-                    }}>
-                        {consumptionsList[0]}%
-                    </b>
-                    {insightsList[3]}
-                </Card.Body>
-            </Card>
+                <Card className="insightsCard flex-fill">
+                    <Card.Title>Gas Insight</Card.Title>
+                    <Card.Body>
+                        {insightsList[4]}
+                        <b
+                            className="percentageNeutral"
+                            style={{
+                                backgroundColor: isGasPositive
+                                    ? "darkred"
+                                    : "green",
+                            }}
+                        >
+                            {consumptionsList[1]}%
+                        </b>
+                        {insightsList[5]}
+                    </Card.Body>
+                </Card>
 
-            <Card className="insightsCard flex-fill">
-            <Card.Title>Gas Insight</Card.Title>
-                <Card.Body>
-                    {insightsList[4]} 
-                    <b className="percentageNeutral" 
-                    style={{
-                        backgroundColor: isGasPositive ? 'darkred' : 'green',
-                    }}>
-                        {consumptionsList[1]}%
-                    </b>
-                    {insightsList[5]}
-                </Card.Body>
-            </Card>
-
-            <Card className="insightsCard flex-fill">
-            <Card.Title>CO2 Emissions Insight</Card.Title>
-                <Card.Body>
-                    {insightsList[6]} 
-                    <b className="percentageNeutral" 
-                    style={{
-                        backgroundColor: isEmissionsPositive ? 'darkred' : 'green',
-                    }}>
-                        {consumptionsList[2]}%
-                    </b>
-                    {insightsList[7]}
-                </Card.Body>
-            </Card>
+                <Card className="insightsCard flex-fill">
+                    <Card.Title>CO2 Emissions Insight</Card.Title>
+                    <Card.Body>
+                        {insightsList[6]}
+                        <b
+                            className="percentageNeutral"
+                            style={{
+                                backgroundColor: isEmissionsPositive
+                                    ? "darkred"
+                                    : "green",
+                            }}
+                        >
+                            {consumptionsList[2]}%
+                        </b>
+                        {insightsList[7]}
+                    </Card.Body>
+                </Card>
             </Col>
-      </Container>
-
-  );
-};
+        </Container>
+    );
+}
 
 export default Insights;
