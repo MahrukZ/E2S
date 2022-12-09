@@ -13,8 +13,6 @@ import users from "./routes/users/users.routes";
 import sites from "./routes/sites/sites.routes";
 import { Router } from "express";
 import { EmailCronJob } from "./emailConfig/emailScheduler";
-import cron from "node-cron";
-import { sendEmail } from "./emailConfig/sendEmail";
 
 // config
 dotenv.config();
