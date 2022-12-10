@@ -57,7 +57,7 @@ function UserTable() {
 
     return (
         <>
-            <Container>
+            <Container className="d-flex align-items-end flex-column">
                 <AddUser setUsersList={setUsersList} />
                 <Table id="userTable" striped bordered hover>
                     <thead>
@@ -75,6 +75,7 @@ function UserTable() {
 
                     <tbody>{userManagementData}</tbody>
                 </Table>
+                <AddUser setUsersList={setUsersList} />
             </Container>
         </>
     );

@@ -70,7 +70,11 @@ function AddUser({ setUsersList }: IAddUserProp) {
 
     return (
         <>
-            <Button variant="outline-success" onClick={handleShow}>
+            <Button
+                className="mb-4"
+                variant="outline-success"
+                onClick={handleShow}
+            >
                 Add User <FaPlus />
             </Button>
 
