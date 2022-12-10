@@ -1,11 +1,23 @@
 import { useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { FaPlus } from "react-icons/fa";
+import { OrganisationsService } from "../../../../services/organisations.service";
+import { UserManagementService } from "../../../../services/userManagement.service";
 import { UsersService } from "../../../../services/users.service";
+import { IOrganisation } from "../siteManagement/Organisations";
 import { IUser } from "./UserTable";
 
-function AddUser() {
-    const [show, setShow] = useState(false);
+interface IAddUserProp {
+    setUsersList: any;
+}
+
+function AddUser({ setUsersList }: IAddUserProp) {
+    const [email, setEmail] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [orgId, setOrgId] = useState(0);
+    const [role, setRole] = useState("");
+    const [password, setPassword] = useState("");
     const [user, setUser] = useState<IUser>({
         userId: 0,
         firstName: "",
@@ -15,18 +27,27 @@ function AddUser() {
         password: "",
         orgId: 0,
     });
-
-    const [email, setEmail] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [org, setOrg] = useState("");
-    const [role, setRole] = useState("");
-    const [password, setPassword] = useState("");
-
-    const handleShow = () => setShow(true);
-    const handleClose = () => setShow(false);
+    const [show, setShow] = useState(false);
+    const [orgsList, setOrgsList] = useState<IOrganisation[]>([]);
 
     const usersService = new UsersService();
+    const userManagementService = new UserManagementService();
+    const organisationsService = new OrganisationsService();
+
+    const getAllOrganisations = async () => {
+        try {
+            const orgs = await organisationsService.getAllOrganisations();
+            setOrgsList(orgs.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const handleShow = () => {
+        setShow(true);
+        getAllOrganisations();
+    };
+    const handleClose = () => setShow(false);
 
     const handleCreateUser = async () => {
         try {
@@ -36,14 +57,17 @@ function AddUser() {
                 lastName,
                 role,
                 password,
-                orgId: 1
+                orgId,
             });
             await usersService.createUser(user);
+            const users = await userManagementService.getAllUserManagements();
+            setUsersList(users.data);
             setShow(false);
         } catch (err) {
             console.log(err);
         }
     };
+
     return (
         <>
             <Button variant="outline-success" onClick={handleShow}>
@@ -113,14 +137,21 @@ function AddUser() {
                             <Col>
                                 <Form.Group className="mb-3" controlId="org">
                                     <Form.Label>Organisation</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="e.g. Cardiff University"
-                                        autoFocus
+                                    <Form.Select
+                                        className="mb-3"
                                         onChange={(e: any) => {
-                                            setOrg(e.target.value);
+                                            setOrgId(e.target.value);
                                         }}
-                                    />
+                                    >
+                                        {orgsList.map((org, index) => (
+                                            <option
+                                                key={index}
+                                                value={org.orgId}
+                                            >
+                                                {org.name}
+                                            </option>
+                                        ))}
+                                    </Form.Select>
                                 </Form.Group>
                             </Col>
 
@@ -132,7 +163,6 @@ function AddUser() {
                                         setRole(e.target.value);
                                     }}
                                 >
-                                    <option>Select a Role</option>
                                     <option value="director of estates">
                                         Director of Estates
                                     </option>

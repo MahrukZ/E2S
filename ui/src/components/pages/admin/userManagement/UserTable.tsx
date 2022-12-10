@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container, Table } from "react-bootstrap";
 import { UserManagementService } from "../../../../services/userManagement.service";
+import AddUser from "./AddUser";
 import DeleteBtn from "./DeleteBtn";
 
 export interface IUser {
@@ -57,6 +58,7 @@ function UserTable() {
     return (
         <>
             <Container>
+                <AddUser setUsersList={setUsersList} />
                 <Table id="userTable" striped bordered hover>
                     <thead>
                         <tr>
