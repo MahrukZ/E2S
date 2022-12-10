@@ -177,6 +177,7 @@ function ReportsInsights({ betweenDates, currentSite }: IReportsInsightsProp) {
             });
         };
         findSumOfConsumptionsBySiteIdAndTime();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         electricityInsightsList,
         gasInsightsList,
