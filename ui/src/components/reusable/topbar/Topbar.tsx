@@ -93,8 +93,6 @@ function Topbar({ setCurrentSite, currentSite, topbarTitle }: TopbarProps) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log("location: ", location.pathname);
-
     if (["/sign-in"].includes(location.pathname)) {
         return <></>;
     }

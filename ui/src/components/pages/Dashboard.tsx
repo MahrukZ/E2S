@@ -1,8 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect } from "react";
 import { Container } from "react-bootstrap";
+import DashboardInsights from "../reusable/insights/DashboardInsights";
 import DashboardGraphs from "../reusable/graphs/DashboardGraphs";
-import Insights from "../reusable/insights/Insights";
 
 interface DashboardProps {
     currentSite: any;
@@ -21,7 +21,7 @@ function Dashboard({ currentSite, setTopbarTitle }: DashboardProps) {
             className="d-flex flex-column"
             data-testid="dashboardContainer"
         >
-            <Insights currentSite={currentSite} />
+            <DashboardInsights currentSite={currentSite} />
             <DashboardGraphs currentSite={currentSite} />
         </Container>
     );

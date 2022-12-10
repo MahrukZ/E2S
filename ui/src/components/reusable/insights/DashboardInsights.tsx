@@ -7,8 +7,12 @@ import { Container, Col } from "react-bootstrap";
 import "./Insights.css";
 import Insight, { IInsightData } from "./Insight";
 
-function DashboardInsights() {
-    const currentSiteId = 1;
+interface DashboardInsightsProps {
+    currentSite: any;
+}
+
+function DashboardInsights({ currentSite }: DashboardInsightsProps) {
+    const currentSiteId = currentSite;
 
     const [costsInsight, setCostsInsight] = useState<IInsightData>({
         title: "",

@@ -71,7 +71,7 @@ function ReportsGraphs({ betweenDates, currentSite }: IReportsGraphsProp) {
                 await consumptionsService.findAllConsumptionsBySiteIdAndTime(
                     firstDayOfLastWeek,
                     lastDayOfLastWeek,
-                    currentSiteId
+                    currentSite
                 );
 
             const currentConsumptionsData = currentConsumptionsResponse["data"];
