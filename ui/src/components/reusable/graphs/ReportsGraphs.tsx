@@ -13,8 +13,6 @@ interface IReportsGraphsProp {
 }
 
 function ReportsGraphs({ betweenDates, currentSite }: IReportsGraphsProp) {
-    const currentSiteId = currentSite;
-
     const [electricityGraph, setElectricityGraph] = useState<ISingleGraph>({
         xData: [],
         yData: [],

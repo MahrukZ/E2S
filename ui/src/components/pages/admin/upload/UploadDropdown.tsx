@@ -16,6 +16,7 @@ function UploadDropdown({ setSelectedId }: UploadDropDownProps) {
     const siteService = new SitesService();
 
     const [allSites, setAllSites] = useState<ISite[]>([]);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [selectedOption, setSelectedOption] = useState<number>();
 
     const selectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

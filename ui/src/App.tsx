@@ -1,5 +1,5 @@
 import Axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 
@@ -22,13 +22,7 @@ const App: React.FunctionComponent = () => {
     Axios.defaults.withCredentials = true;
 
     const [currentSite, setCurrentSite] = useState<number>(1);
-    const [value, setValue] = useState(currentSite);
     const [topbarTitle, setTopbarTitle] = useState("");
-    const [topbarValue, setTopbarValue] = useState(topbarTitle);
-    useEffect(() => {
-        setValue(currentSite);
-        setTopbarValue(topbarTitle);
-    }, [currentSite]);
 
     //Defines the paths of each page
     //This file should only have the topbar and sidebar
