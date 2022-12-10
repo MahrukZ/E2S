@@ -4,6 +4,7 @@ import { FaPlus } from "react-icons/fa";
 import { OrganisationsService } from "../../../../services/organisations.service";
 import { UserManagementService } from "../../../../services/userManagement.service";
 import { UsersService } from "../../../../services/users.service";
+import Message from "../../../reusable/alerts/Message";
 import { IOrganisation } from "../siteManagement/Organisations";
 import { IUser } from "./UserTable";
 
@@ -17,6 +18,7 @@ function AddUser({ setUsersList }: IAddUserProp) {
     const [lastName, setLastName] = useState("");
     const [orgId, setOrgId] = useState(0);
     const [role, setRole] = useState("");
+    const [tempPassword, setTempPassword] = useState("");
     const [password, setPassword] = useState("");
     const [user, setUser] = useState<IUser>({
         userId: 0,
@@ -28,6 +30,7 @@ function AddUser({ setUsersList }: IAddUserProp) {
         orgId: 0,
     });
     const [show, setShow] = useState(false);
+    const [error, setError] = useState("");
     const [orgsList, setOrgsList] = useState<IOrganisation[]>([]);
 
     const usersService = new UsersService();
@@ -50,21 +53,43 @@ function AddUser({ setUsersList }: IAddUserProp) {
     const handleClose = () => setShow(false);
 
     const handleCreateUser = async () => {
-        try {
-            setUser({
-                email,
-                firstName,
-                lastName,
-                role,
-                password,
-                orgId,
-            });
-            await usersService.createUser(user);
-            const users = await userManagementService.getAllUserManagements();
-            setUsersList(users.data);
-            setShow(false);
-        } catch (err) {
-            console.log(err);
+        let valid: boolean = true;
+        if (
+            email.length <= 0 ||
+            firstName.length <= 0 ||
+            lastName.length <= 0 ||
+            password.length <= 0 ||
+            role.length <= 0
+        ) {
+            setError("Fill in all required fields!");
+            valid = false;
+        }
+        if (orgId == 0) {
+            setError("Select an organisation for this user!");
+        }
+        if (password !== tempPassword) {
+            setError("Passwords do not match!");
+            valid = false;
+        }
+        if (valid) {
+            setError("");
+            try {
+                setUser({
+                    email,
+                    firstName,
+                    lastName,
+                    role,
+                    password,
+                    orgId,
+                });
+                await usersService.createUser(user);
+                const users =
+                    await userManagementService.getAllUserManagements();
+                setUsersList(users.data);
+                setShow(false);
+            } catch (err) {
+                console.log(err);
+            }
         }
     };
 
@@ -90,7 +115,7 @@ function AddUser({ setUsersList }: IAddUserProp) {
                 <Modal.Body>
                     <Form>
                         <Form.Group className="mb-3" controlId="email">
-                            <Form.Label>Email</Form.Label>
+                            <Form.Label>Email*</Form.Label>
                             <Form.Control
                                 type="email"
                                 placeholder="e.g. john_doe@example.com"
@@ -107,7 +132,7 @@ function AddUser({ setUsersList }: IAddUserProp) {
                                     className="mb-3"
                                     controlId="firstName"
                                 >
-                                    <Form.Label>First Name</Form.Label>
+                                    <Form.Label>First Name*</Form.Label>
                                     <Form.Control
                                         type="text"
                                         placeholder="e.g. John"
@@ -124,7 +149,7 @@ function AddUser({ setUsersList }: IAddUserProp) {
                                     className="mb-3"
                                     controlId="lastName"
                                 >
-                                    <Form.Label>Last Name</Form.Label>
+                                    <Form.Label>Last Name*</Form.Label>
                                     <Form.Control
                                         type="text"
                                         placeholder="e.g. Doe"
@@ -140,13 +165,16 @@ function AddUser({ setUsersList }: IAddUserProp) {
                         <Row>
                             <Col>
                                 <Form.Group className="mb-3" controlId="org">
-                                    <Form.Label>Organisation</Form.Label>
+                                    <Form.Label>Organisation*</Form.Label>
                                     <Form.Select
                                         className="mb-3"
                                         onChange={(e: any) => {
                                             setOrgId(e.target.value);
                                         }}
                                     >
+                                        <option value="0">
+                                            Select an Organisation
+                                        </option>
                                         {orgsList.map((org, index) => (
                                             <option
                                                 key={index}
@@ -160,13 +188,14 @@ function AddUser({ setUsersList }: IAddUserProp) {
                             </Col>
 
                             <Col>
-                                <Form.Label>Role</Form.Label>
+                                <Form.Label>Role*</Form.Label>
                                 <Form.Select
                                     className="mb-3"
                                     onChange={(e: any) => {
                                         setRole(e.target.value);
                                     }}
                                 >
+                                    <option>Select a Role</option>
                                     <option value="director of estates">
                                         Director of Estates
                                     </option>
@@ -186,11 +215,14 @@ function AddUser({ setUsersList }: IAddUserProp) {
                                         controlId="password"
                                     >
                                         <Form.Label>
-                                            Temporary Password
+                                            Temporary Password*
                                         </Form.Label>
                                         <Form.Control
                                             type="password"
                                             autoFocus
+                                            onChange={(e: any) => {
+                                                setTempPassword(e.target.value);
+                                            }}
                                         />
                                     </Form.Group>
                                 </Col>
@@ -201,7 +233,7 @@ function AddUser({ setUsersList }: IAddUserProp) {
                                         controlId="confirmPassword"
                                     >
                                         <Form.Label>
-                                            Confirm Password
+                                            Confirm Password*
                                         </Form.Label>
                                         <Form.Control
                                             type="password"
@@ -215,6 +247,9 @@ function AddUser({ setUsersList }: IAddUserProp) {
                             </Row>
                         </Row>
                     </Form>
+                    {error.length > 0 && (
+                        <Message message={error} type="danger" />
+                    )}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="outline-secondary" onClick={handleClose}>
