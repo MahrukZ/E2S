@@ -32,23 +32,11 @@ function SignInForm() {
             }
         };
         redirect();
-        // reference. sign in on enter
-        // taken from https://bobbyhadz.com/blog/react-detect-enter-key-press
-        const keyDownHandler = (event: any) => {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                signIn();
-            }
-        };
-        document.addEventListener("keydown", keyDownHandler);
-        return () => {
-            document.removeEventListener("keydown", keyDownHandler);
-        };
-        // end of reference
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const signIn = async () => {
+    const signIn = async (e: any) => {
+        e.preventDefault();
         let valid: boolean = true;
         if (emailAddress.length > 44) {
             setError("Email address is too long");
@@ -88,7 +76,7 @@ function SignInForm() {
                                 Sign In to E<sup>2</sup>S Dashboard
                             </span>
                         </h1>
-                        <Form>
+                        <Form onSubmit={signIn}>
                             <Form.Group
                                 className="mb-3"
                                 controlId="emailAddress"
@@ -122,6 +110,7 @@ function SignInForm() {
                                     variant="primary"
                                     onClick={signIn}
                                     className="mb-3 signInBtn"
+                                    type="submit"
                                 >
                                     Sign In
                                 </Button>
