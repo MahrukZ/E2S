@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
+import { Container, Table } from "react-bootstrap";
 import { UserManagementService } from "../../../../services/userManagement.service";
 import DeleteBtn from "./DeleteBtn";
 
@@ -47,14 +47,16 @@ function UserTable() {
                 <td>{data.noSitesManaged}</td>
                 <td>{data.role}</td>
                 <td>EDIT</td>
-                <td>{DeleteBtn(data.userId)}</td>
+                <td>
+                    <DeleteBtn id={data.userId} setUsersList={setUsersList} />
+                </td>
             </tr>
         );
     });
 
     return (
         <>
-            <div className="container">
+            <Container>
                 <Table id="userTable" striped bordered hover>
                     <thead>
                         <tr>
@@ -71,7 +73,7 @@ function UserTable() {
 
                     <tbody>{userManagementData}</tbody>
                 </Table>
-            </div>
+            </Container>
         </>
     );
 }
