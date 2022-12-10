@@ -1,14 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
-import { Container, Nav, Navbar, Row, Col } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { SitesAndUsersService } from "../../../services/sitesAndUsers.service";
 import { UserManagementService } from "../../../services/userManagement.service";
 import { UsersService } from "../../../services/users.service";
 import AccountDropdown from "./AccountDropdown";
 import SiteDropdown from "./SiteDropdown";
-import TopbarTitle from "./TopbarTitle";
 import "./Topbar.css";
+import TopbarTitle from "./TopbarTitle";
 
 export interface IUser {
     userId: number;
