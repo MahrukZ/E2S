@@ -16,6 +16,11 @@ export class UsersService {
         return await response.data;
     }
 
+    public async findUserByEmail(email: string): Promise<any> {
+        const response = await axios.get(`/api/user/${email}`);
+        return await response.data;
+    }
+
     public async signIn(email: string, password: string): Promise<any> {
         const response = await axios.post(`/sign-in`, {
             email: email,

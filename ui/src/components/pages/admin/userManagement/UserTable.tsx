@@ -3,6 +3,7 @@ import { Container, Table } from "react-bootstrap";
 import { UserManagementService } from "../../../../services/userManagement.service";
 import AddUser from "./AddUser";
 import DeleteBtn from "./DeleteBtn";
+import EditBtn from "./EditBtn";
 
 export interface IUser {
     userId?: number;
@@ -47,7 +48,9 @@ function UserTable() {
                 <td>{data.organisation}</td>
                 <td>{data.noSitesManaged}</td>
                 <td>{data.role}</td>
-                <td>EDIT</td>
+                <td>
+                    <EditBtn userEmail={data.email} setUsersList={setUsersList} />
+                </td>
                 <td>
                     <DeleteBtn id={data.userId} setUsersList={setUsersList} />
                 </td>
