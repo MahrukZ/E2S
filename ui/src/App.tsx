@@ -1,5 +1,5 @@
 import Axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 
@@ -33,7 +33,6 @@ const App: React.FunctionComponent = () => {
                     setCurrentSite={setCurrentSite}
                     currentSite={currentSite}
                     topbarTitle={topbarTitle}
-                    key={topbarTitle}
                 />
                 <Sidebar />
                 <Routes>

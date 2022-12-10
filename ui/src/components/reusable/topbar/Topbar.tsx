@@ -7,6 +7,7 @@ import { UserManagementService } from "../../../services/userManagement.service"
 import { UsersService } from "../../../services/users.service";
 import AccountDropdown from "./AccountDropdown";
 import SiteDropdown from "./SiteDropdown";
+import TopbarTitle from "./TopbarTitle";
 import "./Topbar.css";
 
 export interface IUser {
@@ -101,9 +102,12 @@ function Topbar({ setCurrentSite, currentSite, topbarTitle }: TopbarProps) {
             <Navbar data-testid="topbar" className="py-0" id="topbar">
                 <Container>
                     <Nav id="titleNav">
-                        <h2 className="me-5" id="pageTitle">
-                            {topbarTitle}
-                        </h2>
+                        <div className="me-5" id="pageTitle">
+                            <TopbarTitle
+                                topbarTitle={topbarTitle}
+                                key={topbarTitle}
+                            />
+                        </div>
                     </Nav>
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
