@@ -17,6 +17,10 @@ router.get("/api/user-management/:id", async (req, res) => {
     userManagementController.findUserManagementByUserId(req, res);
 });
 
+router.get("/api/user/:email", async (req, res) => {
+    userController.findUserByEmail(req, res);
+});
+
 router.post("/api/user", async (req, res) => {
     userController.createUser(req, res);
 });

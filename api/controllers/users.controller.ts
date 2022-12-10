@@ -8,6 +8,25 @@ export class UserController {
         this.userService = new UserService();
     }
 
+    async findUserByEmail(req: Request, res: Response): Promise<any> {
+        return this.userService
+            .findUserByEmail(req.params.email)
+            .then((data) => {
+                res.status(200).json({
+                    message: "Success",
+                    status: 200,
+                    data,
+                });
+            })
+            .catch((err) => {
+                res.status(500).json({
+                    message:
+                        err.message || "server error: failed to fetch user.",
+                    status: 500,
+                });
+            });
+    }
+
     async getAllUsers(req: Request, res: Response): Promise<any> {
         return this.userService
             .getAllUsers()
@@ -93,8 +112,7 @@ export class UserController {
             .catch((err) => {
                 res.status(500).json({
                     message:
-                        err.message ||
-                        "server error: failed to update user.",
+                        err.message || "server error: failed to update user.",
                     status: 500,
                 });
             });

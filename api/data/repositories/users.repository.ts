@@ -55,7 +55,7 @@ export class UserRepository {
         try {
             data = await this.userRepository.findAll({
                 where: {
-                    email: email,
+                    email,
                 },
             });
         } catch (err) {
