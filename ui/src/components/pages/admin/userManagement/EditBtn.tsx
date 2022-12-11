@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
-import { FaEdit, FaPlus } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
 import { OrganisationsService } from "../../../../services/organisations.service";
 import { UserManagementService } from "../../../../services/userManagement.service";
 import { UsersService } from "../../../../services/users.service";
@@ -14,11 +14,6 @@ interface IEditUserProp {
 }
 
 function EditUser({ userEmail, setUsersList }: IEditUserProp) {
-    const [email, setEmail] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [orgId, setOrgId] = useState(0);
-    const [role, setRole] = useState("");
     const [tempPassword, setTempPassword] = useState("");
     const [password, setPassword] = useState("");
     const [user, setUser] = useState<IUser>({
@@ -42,7 +37,6 @@ function EditUser({ userEmail, setUsersList }: IEditUserProp) {
         try {
             const userData = await usersService.findUserByEmail(userEmail);
             const orgs = await organisationsService.getAllOrganisations();
-            console.log(userData.data[0])
             setUser(userData.data[0]);
             setOrgsList(orgs.data);
         } catch (err) {
@@ -58,19 +52,6 @@ function EditUser({ userEmail, setUsersList }: IEditUserProp) {
 
     const handleEditUser = async () => {
         let valid: boolean = true;
-        if (
-            email.length <= 0 ||
-            firstName.length <= 0 ||
-            lastName.length <= 0 ||
-            password.length <= 0 ||
-            role.length <= 0
-        ) {
-            setError("Fill in all required fields!");
-            valid = false;
-        }
-        if (orgId == 0) {
-            setError("Select an organisation for this user!");
-        }
         if (password !== tempPassword) {
             setError("Passwords do not match!");
             valid = false;
@@ -78,14 +59,6 @@ function EditUser({ userEmail, setUsersList }: IEditUserProp) {
         if (valid) {
             setError("");
             try {
-                setUser({
-                    email,
-                    firstName,
-                    lastName,
-                    role,
-                    password,
-                    orgId,
-                });
                 await usersService.updateUser(user);
                 const users =
                     await userManagementService.getAllUserManagements();
@@ -110,19 +83,19 @@ function EditUser({ userEmail, setUsersList }: IEditUserProp) {
                 backdrop="static"
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Add User</Modal.Title>
+                    <Modal.Title>Edit User</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
                         <Form.Group className="mb-3" controlId="email">
-                            <Form.Label>Email*</Form.Label>
+                            <Form.Label>Email</Form.Label>
                             <Form.Control
                                 type="email"
                                 placeholder="e.g. john_doe@example.com"
-                                value={user.email}
+                                defaultValue={user.email}
                                 autoFocus
                                 onChange={(e: any) => {
-                                    setEmail(e.target.value);
+                                    setUser({ ...user, email: e.target.value });
                                 }}
                             />
                         </Form.Group>
@@ -133,14 +106,17 @@ function EditUser({ userEmail, setUsersList }: IEditUserProp) {
                                     className="mb-3"
                                     controlId="firstName"
                                 >
-                                    <Form.Label>First Name*</Form.Label>
+                                    <Form.Label>First Name</Form.Label>
                                     <Form.Control
                                         type="text"
                                         placeholder="e.g. John"
-                                        value={user.firstName}
+                                        defaultValue={user.firstName}
                                         autoFocus
                                         onChange={(e: any) => {
-                                            setFirstName(e.target.value);
+                                            setUser({
+                                                ...user,
+                                                firstName: e.target.value,
+                                            });
                                         }}
                                     />
                                 </Form.Group>
@@ -151,14 +127,17 @@ function EditUser({ userEmail, setUsersList }: IEditUserProp) {
                                     className="mb-3"
                                     controlId="lastName"
                                 >
-                                    <Form.Label>Last Name*</Form.Label>
+                                    <Form.Label>Last Name</Form.Label>
                                     <Form.Control
                                         type="text"
                                         placeholder="e.g. Doe"
-                                        value={user.lastName}
+                                        defaultValue={user.lastName}
                                         autoFocus
                                         onChange={(e: any) => {
-                                            setLastName(e.target.value);
+                                            setUser({
+                                                ...user,
+                                                lastName: e.target.value,
+                                            });
                                         }}
                                     />
                                 </Form.Group>
@@ -168,49 +147,65 @@ function EditUser({ userEmail, setUsersList }: IEditUserProp) {
                         <Row>
                             <Col>
                                 <Form.Group className="mb-3" controlId="org">
-                                    <Form.Label>Organisation*</Form.Label>
-                                    <Form.Select
-                                        className="mb-3"
-                                        value={user.orgId}
-                                        onChange={(e: any) => {
-                                            setOrgId(e.target.value);
-                                        }}
-                                    >
-                                        <option value="0">
-                                            Select an Organisation
-                                        </option>
-                                        {orgsList.map((org, index) => (
-                                            <option
-                                                key={index}
-                                                value={org.orgId}
-                                            >
-                                                {org.name}
+                                    <Form.Label>Organisation</Form.Label>
+                                    {user.orgId! !== 0 && (
+                                        <Form.Select
+                                            className="mb-3"
+                                            defaultValue={user.orgId}
+                                            onChange={(e: any) => {
+                                                setUser({
+                                                    ...user,
+                                                    orgId: parseInt(e.target.value),
+                                                });
+                                            }}
+                                        >
+                                            <option value="0">
+                                                Select an Organisation
                                             </option>
-                                        ))}
-                                    </Form.Select>
+                                            {orgsList.map((org, index) => (
+                                                <option
+                                                    key={index}
+                                                    value={org.orgId}
+                                                >
+                                                    {org.name}
+                                                </option>
+                                            ))}
+                                        </Form.Select>
+                                    )}
+                                    <Form.Text>
+                                        Cannot find your Organisation?
+                                        <a href="/admin/upload">
+                                            Create an Organisation
+                                        </a>
+                                    </Form.Text>
                                 </Form.Group>
                             </Col>
 
                             <Col>
-                                <Form.Label>Role*</Form.Label>
-                                <Form.Select
-                                    className="mb-3"
-                                    value={user.role}
-                                    onChange={(e: any) => {
-                                        setRole(e.target.value);
-                                    }}
-                                >
-                                    <option>Select a Role</option>
-                                    <option value="director of estates">
-                                        Director of Estates
-                                    </option>
-                                    <option value="facility energy manager">
-                                        Facility Energy Manager
-                                    </option>
-                                    <option value="administrator">
-                                        Administrator
-                                    </option>
-                                </Form.Select>
+                                <Form.Label>Role</Form.Label>
+                                {user.role!.length > 0 && (
+                                    <Form.Select
+                                        className="mb-3"
+                                        defaultValue={user.role}
+                                        onChange={(e: any) => {
+                                            setUser({
+                                                ...user,
+                                                role: e.target.value,
+                                            });
+                                        }}
+                                    >
+                                        <option>Select a Role</option>
+                                        <option value="director of estates">
+                                            Director of Estates
+                                        </option>
+                                        <option value="facility energy manager">
+                                            Facility Energy Manager
+                                        </option>
+                                        <option value="administrator">
+                                            Administrator
+                                        </option>
+                                    </Form.Select>
+                                )}
                             </Col>
 
                             <Row>
@@ -220,7 +215,7 @@ function EditUser({ userEmail, setUsersList }: IEditUserProp) {
                                         controlId="password"
                                     >
                                         <Form.Label>
-                                            Temporary Password*
+                                            Temporary Password
                                         </Form.Label>
                                         <Form.Control
                                             type="password"
@@ -238,12 +233,16 @@ function EditUser({ userEmail, setUsersList }: IEditUserProp) {
                                         controlId="confirmPassword"
                                     >
                                         <Form.Label>
-                                            Confirm Password*
+                                            Confirm Password
                                         </Form.Label>
                                         <Form.Control
                                             type="password"
                                             autoFocus
                                             onChange={(e: any) => {
+                                                setUser({
+                                                    ...user,
+                                                    password: e.target.value,
+                                                });
                                                 setPassword(e.target.value);
                                             }}
                                         />
@@ -260,8 +259,8 @@ function EditUser({ userEmail, setUsersList }: IEditUserProp) {
                     <Button variant="outline-secondary" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button variant="success" onClick={handleEditUser}>
-                        Add
+                    <Button variant="primary" onClick={handleEditUser}>
+                        Edit
                     </Button>
                 </Modal.Footer>
             </Modal>
