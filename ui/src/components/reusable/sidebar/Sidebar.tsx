@@ -3,11 +3,13 @@ import { Link, useLocation } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import "./Sidebar.css";
 import * as FaIcons from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import logo from "./../../../assets/images/Cardiff_University_logo.png";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
+import { UsersService } from "../../../services/users.service";
+import { AdminSidebarData } from "./AdminSidebarData";
 
 //css in this file due to custom headings with links
 
@@ -120,8 +122,31 @@ const ImageLink = styled(Link)``;
 const Sidebar: React.FunctionComponent = () => {
     const [close, setClose] = useState(false);
     const showSidebar = () => setClose(!close);
+    const [useSidebarData, setUseSidebarData] = useState(SidebarData);
 
     const location = useLocation();
+    const usersService = new UsersService();
+
+    const getCurrentUserId = async (): Promise<number> => {
+        const checkSignIn = await usersService.checkSignIn();
+        if (checkSignIn["loggedIn"] === true) {
+            return checkSignIn.user.userId;
+        } else {
+            return 0;
+        }
+    };
+
+    useEffect(() => {
+        const setUser = async () => {
+            const userId: any = await getCurrentUserId();
+
+            if (userId === 11) {
+                setUseSidebarData(AdminSidebarData);
+            }
+        };
+        setUser();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     if (["/sign-in"].includes(location.pathname)) {
         return <></>;
@@ -145,7 +170,7 @@ const Sidebar: React.FunctionComponent = () => {
                 </MenuIconOpen>
                 <ReactTooltip anchorId="menuOpen" />
 
-                {SidebarData.map((item, index) => {
+                {useSidebarData.map((item, index) => {
                     item.title.split(" ");
 
                     return (
@@ -193,7 +218,7 @@ const Sidebar: React.FunctionComponent = () => {
                     </MenuIconClose>
                 </TopSideBarClose>
 
-                {SidebarData.map((item, index) => {
+                {useSidebarData.map((item, index) => {
                     return (
                         <MenuItems key={index}>
                             <MenuItemLinks to={item.path}>
