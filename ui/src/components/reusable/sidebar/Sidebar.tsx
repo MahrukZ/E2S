@@ -1,14 +1,14 @@
 import React from 'react'
+import "react-tooltip/dist/react-tooltip.css";
 import { Link, useLocation } from 'react-router-dom'
 import { SidebarData } from './SidebarData'
 import "./Sidebar.css";
 import * as FaIcons from "react-icons/fa";
-
 import { useState } from "react";
-
 import styled from "styled-components";
-
 import logo from "./../../../assets/images/Cardiff_University_logo.png";
+import { Tooltip as ReactTooltip } from "react-tooltip";
+
 
 //css in this file due to custom headings with links
 
@@ -128,14 +128,21 @@ const Sidebar: React.FunctionComponent = () => {
     
     return (
         <>
-
             {/*The collapsed sidebar which only shows the icons*/}
-            <CollapsedSideBar data-testid="collapsedSideBar" className='onTop'>
-            
-            <MenuIconOpen data-testid="menuIconOpen" to="#" onClick={showSidebar}>
-                    <FaIcons.FaBars />
-                </MenuIconOpen>
-            
+            <CollapsedSideBar
+                data-testid="collapsedSideBar"
+                className="onTop"
+            >
+                <ReactTooltip data-tooltip-content="Open menu icon">
+                    <MenuIconOpen
+                        data-testid="menuIconOpen"
+                        to="#"
+                        onClick={showSidebar}
+                    >
+                        <FaIcons.FaBars />
+                    </MenuIconOpen>
+                </ReactTooltip>
+
                 {SidebarData.map((item, index) => {
                     return (
                         <MenuItems key={index}>
@@ -143,43 +150,50 @@ const Sidebar: React.FunctionComponent = () => {
                                 {item.icon}
                             </CollapsedMenuItemLinks>
                         </MenuItems>
-                    )
+                    );
                 })}
-
             </CollapsedSideBar>
 
             {/*The expanded sidebar which shows the icons, text and picture*/}
-            <SidebarMenu data-testid="sidebarMenu" className='onTop' close={close}>
-
+            <SidebarMenu
+                data-testid="sidebarMenu"
+                className="onTop"
+                close={close}
+            >
                 <TopSideBarClose>
-                
-                {/* Image placed inside ui/src so that it is accessible */}
-                <ImageLink to={'/'} >
-                <img className="imageLogo" width={50} height={50} src={logo} alt="logo" />
-                </ImageLink>
+                    {/* Image placed inside ui/src so that it is accessible */}
+                    <ImageLink to={"/"}>
+                        <img
+                            className="imageLogo"
+                            width={50}
+                            height={50}
+                            src={logo}
+                            alt="logo"
+                        />
+                    </ImageLink>
 
-          <MenuIconClose
-            data-testid="menuIconClose"
-            to="#"
-            onClick={showSidebar}
-          >
-            <FaIcons.FaTimes />
-          </MenuIconClose>
-        </TopSideBarClose>
+                    <MenuIconClose
+                        data-testid="menuIconClose"
+                        to="#"
+                        onClick={showSidebar}
+                    >
+                        <FaIcons.FaTimes />
+                    </MenuIconClose>
+                </TopSideBarClose>
 
-        {SidebarData.map((item, index) => {
-          return (
-            <MenuItems key={index}>
-              <MenuItemLinks to={item.path}>
-                {item.icon}
-                <h1 id="sidebarHeadings">{item.title}</h1>
-              </MenuItemLinks>
-            </MenuItems>
-          );
-        })}
-      </SidebarMenu>
-    </>
-  );
+                {SidebarData.map((item, index) => {
+                    return (
+                        <MenuItems key={index}>
+                            <MenuItemLinks to={item.path}>
+                                {item.icon}
+                                <h1 id="sidebarHeadings">{item.title}</h1>
+                            </MenuItemLinks>
+                        </MenuItems>
+                    );
+                })}
+            </SidebarMenu>
+        </>
+    );
 };
 
 export default Sidebar;
