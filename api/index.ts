@@ -11,6 +11,7 @@ import sitesAndUsers from "./routes/sitesAndUsers/sitesAndusers.routes";
 import insights from "./routes/insights/insights.routes";
 import users from "./routes/users/users.routes";
 import sites from "./routes/sites/sites.routes";
+import organisations from "./routes/organisations/organisations.routes";
 import uploadFile from "./routes/uploadFile/uploadFile.routes"
 import { Router } from "express";
 import { sendEmail } from "./emailConfig/sendEmail";
@@ -133,6 +134,7 @@ routes.use(consumptions);
 routes.use(insights);
 routes.use(sites);
 routes.use(sitesAndUsers);
+routes.use(organisations);
 routes.use(uploadFile);
 
 app.use(routes);
