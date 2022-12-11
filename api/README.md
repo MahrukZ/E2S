@@ -35,6 +35,12 @@ npm i
 - `cookie-parser` package - Parse Cookie header and populate req.cookies with an object keyed by the cookie names. **Learn more [here](https://www.npmjs.com/package/cookie-parser)**
 - `express-session` package - A module used to create express sessions. **Learn more [here](https://www.npmjs.com/package/express-session)**
 - `jsonwebtoken` package - Create and decode JWTs. **Learn more [here](https://www.npmjs.com/package/jsonwebtoken)**
+- `googleapis` package - Node.js client library for using Google APIs. Support for authorization and authentication with OAuth 2.0. **Learn more [here](https://www.npmjs.com/package/googleapis)**
+- `multer` package - Multer is a node.js middleware for handling multipart/form-data. **Learn more [here](https://www.npmjs.com/package/multer)**
+- `nodemailer` package - Node js module used to send email. **Learn more [here](https://www.npmjs.com/package/nodemailer)**
+- `nodecron` package - Create and schedule jobs. **Learn more [here](https://www.npmjs.com/package/cron)**
+- `pdf-to-base64` package - Generate a base64 from pdf url. **Learn more [here](https://www.npmjs.com/package/pdf-to-base64)**
+
 
 ###### _devDependencies:_
 
