@@ -25,9 +25,9 @@ function SignInForm() {
             const signInRes = await usersService.checkSignIn();
             if (signInRes["loggedIn"] === true) {
                 if (signInRes["user"].role !== "administrator") {
-                    navigate("/");
+                    navigate("/dashboard");
                 } else if (signInRes["user"].role === "administrator") {
-                    navigate("/admin/user-management");
+                    navigate("/admin/overview");
                 }
             }
         };

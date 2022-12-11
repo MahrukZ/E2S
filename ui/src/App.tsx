@@ -66,7 +66,7 @@ function App () {
                             }
                         />
                         <Route
-                            path="/"
+                            path="/dashboard"
                             element={
                                 <Dashboard
                                     setTopbarTitle={setTopbarTitle}

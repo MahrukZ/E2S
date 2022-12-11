@@ -204,7 +204,7 @@ function Sidebar() {
                 <Tooltip anchorId="menuClose" />
                 <TopSideBarClose>
                     {/* Image placed inside ui/src so that it is accessible */}
-                    <ImageLink to={"/"}>
+                    <ImageLink to={"/dashboard"}>
                         <img
                             className="imageLogo"
                             width={50}

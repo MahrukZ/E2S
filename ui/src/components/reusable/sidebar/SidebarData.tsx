@@ -7,7 +7,7 @@ import * as FaIcons from "react-icons/fa";
 export const SidebarData = [
   {
     title: "Dashboard",
-    path: "/",
+    path: "/dashboard",
     icon: <FaIcons.FaChartArea size="35" />,
   },
   {
