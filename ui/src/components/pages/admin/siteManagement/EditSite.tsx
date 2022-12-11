@@ -6,11 +6,10 @@ import { SiteManagementService } from "../../../../services/siteManagement.servi
 import { SitesService } from "../../../../services/sites.service";
 import Message from "../../../reusable/alerts/Message";
 import { IOrganisation } from "../siteManagement/Organisations";
-import Upload from "../upload/Upload";
+import Upload from "./upload/Upload";
 import { ISite } from "./SiteTable";
 
 interface IEditSiteProp {
-    // userEmail: string; use site id for this?
     siteId: any;
     setSitesList: any;
 }
