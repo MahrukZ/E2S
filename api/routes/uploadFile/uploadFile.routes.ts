@@ -1,9 +1,11 @@
 import uploadFile from "../../emailConfig/saveFile";
 import express from "express";
+import { sendEmail } from "../../emailConfig/sendEmail";
 const router = express.Router();
 
 router.post("/uploadFile", uploadFile.single("file"), (req, res, next) => {
   try {
+    sendEmail();
     return res.status(201).json({
       message: "File uplodeded successfully",
     });

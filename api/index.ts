@@ -13,7 +13,7 @@ import users from "./routes/users/users.routes";
 import sites from "./routes/sites/sites.routes";
 import uploadFile from "./routes/uploadFile/uploadFile.routes"
 import { Router } from "express";
-import { EmailCronJob } from "./emailConfig/emailScheduler";
+import { sendEmail } from "./emailConfig/sendEmail";
 
 // config
 dotenv.config();
@@ -136,8 +136,6 @@ routes.use(sitesAndUsers);
 routes.use(uploadFile);
 
 app.use(routes);
-
-EmailCronJob();
 
 // port listen
 app.listen(port, () => {
