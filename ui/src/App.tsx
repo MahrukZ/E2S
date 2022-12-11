@@ -14,8 +14,9 @@ import Dashboard from "./components/pages/Dashboard";
 
 import SiteManagementPage from "./components/pages/admin/siteManagement/SiteManagementPage";
 import UserManagementPage from "./components/pages/admin/userManagement/UserManagementPage";
+import OverviewPage from "./components/pages/admin/overview/OverviewPage";
 
-const App: React.FunctionComponent = () => {
+function App () {
     Axios.defaults.withCredentials = true;
 
     const [currentSite, setCurrentSite] = useState<number>(1);
@@ -77,6 +78,14 @@ const App: React.FunctionComponent = () => {
                     </Route>
                     {/* admin routes */}
                     <Route element={<AdminRoutes />}>
+                        <Route
+                            path="/admin/overview"
+                            element={
+                                <OverviewPage
+                                    setTopbarTitle={setTopbarTitle}
+                                />
+                            }
+                        />
                         <Route
                             path="/admin/site-management"
                             element={
