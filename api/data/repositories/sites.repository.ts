@@ -51,20 +51,23 @@ export class SiteRepository {
         return data;
     }
 
-    // async updateSite(site: ISite): Promise<ISite> {
-    //     let data = {};
-    //     try {
-    //         data = await this.siteRepository.update({...site}, {
-    //             where: {
-    //                 site_id: site.siteId
-    //             }
-    //         });
-    //     } catch(err) {
-    //         console.error(err);
-    //         throw (err);
-    //     }
-    //     return data;
-    // }
+    async updateSite(site: ISite): Promise<ISite> {
+        let data = {};
+        try {
+            data = await this.siteRepository.update(
+                { ...site },
+                {
+                    where: {
+                        site_id: site.siteId,
+                    },
+                }
+            );
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
+        return data;
+    }
 
     async findSiteById(siteId: number): Promise<ISite> {
         let data = [];

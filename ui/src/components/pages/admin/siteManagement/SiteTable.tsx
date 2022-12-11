@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { Container, Table } from "react-bootstrap";
-import { SitesService } from "../../../../services/sites.service";
 import { SiteManagementService } from "../../../../services/siteManagement.service";
-import DeleteSite from "./DeleteSite";
 import AddSite from "./AddSite";
-// import DeleteUser from "./DeleteUser";
-// import EditUser from "./EditUser";
+import DeleteSite from "./DeleteSite";
+import EditSite from "./EditSite";
 
 export interface ISite {
     siteId?: number;
@@ -35,7 +33,6 @@ export interface IUserManagement {
 
 function SiteTable() {
     const [sitesList, setSitesList] = useState<ISiteManagement[]>([]);
-    const sitesService = new SitesService();
     const siteManagementService = new SiteManagementService();
 
     useEffect(() => {
@@ -55,16 +52,12 @@ function SiteTable() {
                 <td>{data.location}</td>
                 <td>{data.organisation}</td>
                 <td>{data.numberOfUsers}</td>
-                {/* <td>{data.email}</td>
-                <td>{data.organisation}</td>
-                <td>{data.noSitesManaged}</td>
-                <td>{data.role}</td> */}
-                {/* <td>
-                    <EditUser
-                        userEmail={data.email}
-                        setUsersList={setUsersList}
+                <td>
+                    <EditSite
+                        siteId={data.siteId}
+                        setSitesList={setSitesList}
                     />
-                </td> */}
+                </td>
                 <td>
                     <DeleteSite id={data.siteId} setSitesList={setSitesList} />
                 </td>

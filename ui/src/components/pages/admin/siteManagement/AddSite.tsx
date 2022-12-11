@@ -4,7 +4,6 @@ import { FaPlus } from "react-icons/fa";
 import { OrganisationsService } from "../../../../services/organisations.service";
 import { SiteManagementService } from "../../../../services/siteManagement.service";
 import { SitesService } from "../../../../services/sites.service";
-import { UserManagementService } from "../../../../services/userManagement.service";
 import Message from "../../../reusable/alerts/Message";
 import { IOrganisation } from "../siteManagement/Organisations";
 import { ISite } from "./SiteTable";
@@ -14,8 +13,6 @@ interface IAddSiteProp {
 }
 
 function AddSite({ setSitesList }: IAddSiteProp) {
-    const [tempPassword, setTempPassword] = useState("");
-    const [password, setPassword] = useState("");
     const [site, setSite] = useState<ISite>({
         siteId: 0,
         name: "",
@@ -27,7 +24,6 @@ function AddSite({ setSitesList }: IAddSiteProp) {
     const [orgsList, setOrgsList] = useState<IOrganisation[]>([]);
 
     const sitesService = new SitesService();
-    const userManagementService = new UserManagementService();
     const organisationsService = new OrganisationsService();
     const siteManagementService = new SiteManagementService();
 

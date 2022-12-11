@@ -64,22 +64,23 @@ export class SiteController {
             });
     }
 
-    // async updateSite(req: Request, res: Response): Promise<any> {
-    //     return (this.siteService.updateSite(req.body)
-    //         .then(data => {
-    //             res.status(200).json({
-    //                 message: `Successfully updated 1 record.`,
-    //                 status: 200,
-    //             });
-    //         })
-    //         .catch(err => {
-    //             res.status(500).json({
-    //                 message: err.message || "server error: failed to update site.",
-    //                 status: 500
-    //             });
-    //         })
-    //     );
-    // };
+    async updateSite(req: Request, res: Response): Promise<any> {
+        return this.siteService
+            .updateSite(req.body)
+            .then((data) => {
+                res.status(200).json({
+                    message: `Successfully updated 1 record.`,
+                    status: 200,
+                });
+            })
+            .catch((err) => {
+                res.status(500).json({
+                    message:
+                        err.message || "server error: failed to update site.",
+                    status: 500,
+                });
+            });
+    }
 
     async findSiteById(req: Request, res: Response): Promise<any> {
         return this.siteService

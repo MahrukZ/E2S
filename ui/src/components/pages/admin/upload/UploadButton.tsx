@@ -24,6 +24,7 @@ interface UploadButtonProps {
 function UploadButton({ file, selectedId }: UploadButtonProps) {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const [isDisabled, setDisabled] = useState(false);
 
     const sitesService = new SitesService();
     const consumptionsService = new ConsumptionsService();
@@ -65,6 +66,7 @@ function UploadButton({ file, selectedId }: UploadButtonProps) {
                 consumptionsService.bulkCreateConsumptions(array);
                 setError("");
                 setSuccess("Successfully uploaded data!");
+                setDisabled(true);
             } else {
                 setSuccess("");
                 setError(
@@ -96,6 +98,7 @@ function UploadButton({ file, selectedId }: UploadButtonProps) {
                 data-testid="uploadBtn"
                 variant="outline-primary"
                 onClick={handleUpload}
+                disabled={isDisabled}
             >
                 <FaUpload /> Upload Data
             </Button>

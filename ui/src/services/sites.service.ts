@@ -20,4 +20,9 @@ export class SitesService {
         const response = await axios.post(`/api/site`, site);
         return await response.data;
     }
+
+    public async updateSite(site: ISite): Promise<any> {
+        const response = await axios.put(`/api/site`, site);
+        return await response.data;
+    }
 }

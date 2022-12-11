@@ -22,9 +22,9 @@ router.post("/api/site", async (req, res) => {
     siteController.createSite(req, res);
 });
 
-// router.put("/api/site", async (req, res) => {
-//     siteController.updateSite(req, res);
-// });
+router.put("/api/site", async (req, res) => {
+    siteController.updateSite(req, res);
+});
 
 router.delete("/api/delete-site/:id", async (req, res) => {
     siteController.deleteSite(req, res);

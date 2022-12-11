@@ -20,9 +20,9 @@ export class SiteService {
         return await this.siteRepository.getAllSites();
     }
 
-    // async updateSite(site: ISite) {
-    //     return await this.siteRepository.updateSite(site);
-    // }
+    async updateSite(site: ISite) {
+        return await this.siteRepository.updateSite(site);
+    }
 
     async findSiteById(siteId: number) {
         return await this.siteRepository.findSiteById(siteId);

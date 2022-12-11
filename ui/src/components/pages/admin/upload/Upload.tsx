@@ -2,14 +2,15 @@ import { useState } from "react";
 import { Form } from "react-bootstrap";
 import Message from "../../../reusable/alerts/Message";
 import UploadButton from "./UploadButton";
-import UploadDropdown from "./UploadDropdown";
 
-function Upload() {
+interface UploadProps {
+    siteId: number;
+}
+
+function Upload({ siteId }: UploadProps) {
     const [csvFile, setCsvFile] = useState();
     const [fileExt, setFileExt] = useState("");
     const [error, setError] = useState("");
-
-    const [selectedId, setSelectedId] = useState<number>(1);
 
     const allowedExtensions = ["csv"];
 
@@ -44,9 +45,8 @@ function Upload() {
                 />
             </Form.Group>
             {allowedExtensions.includes(fileExt) && (
-                <UploadButton file={csvFile} selectedId={selectedId} />
+                <UploadButton file={csvFile} selectedId={siteId} />
             )}
-            <UploadDropdown setSelectedId={setSelectedId} />
             {error.length > 0 && <Message message={error} type="danger" />}
         </div>
     );

@@ -13,7 +13,7 @@ function UploadPage({ setTopbarTitle }: UploadPageProps) {
     }, []);
     return (
         <div data-testid="uploadElement" className="container">
-            <Upload />
+            <Upload siteId={0} />
         </div>
     );
 }

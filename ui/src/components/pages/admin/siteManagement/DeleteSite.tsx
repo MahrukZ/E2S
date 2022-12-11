@@ -2,9 +2,8 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FaTrash } from "react-icons/fa";
-import { SitesService } from "../../../../services/sites.service";
-import { UsersService } from "../../../../services/users.service";
 import { SiteManagementService } from "../../../../services/siteManagement.service";
+import { SitesService } from "../../../../services/sites.service";
 
 interface IDeleteBtnProp {
     id: any;
