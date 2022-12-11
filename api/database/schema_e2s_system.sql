@@ -87,7 +87,7 @@ ALTER TABLE `organisations`
 ADD FOREIGN KEY (`logo_id`) REFERENCES `logos`(`logo_id`);
 
 ALTER TABLE `users`
-ADD FOREIGN KEY (`org_id`) REFERENCES `organisations`(`org_id`);
+ADD FOREIGN KEY (`org_id`) REFERENCES `organisations`(`org_id`) ON DELETE CASCADE;
 
 ALTER TABLE `sites`
 ADD FOREIGN KEY (`org_id`) REFERENCES `organisations`(`org_id`);
@@ -111,7 +111,7 @@ ALTER TABLE `sites_has_users`
 ADD FOREIGN KEY (`site_id`) REFERENCES `sites`(`site_id`);
 
 ALTER TABLE `sites_has_users`
-ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`);
+ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE;
 
 -- VIEWS -- 
 
