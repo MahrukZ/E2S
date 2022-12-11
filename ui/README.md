@@ -45,6 +45,7 @@ npm i
 - `prettier` package - Prettier is a code formatter and enforces a consistent style. **Learn more [here](https://prettier.io/)**
 - `jsPDF` package - A library to generate PDFs in JavaScript. **Learn more [here](https://www.npmjs.com/package/jspdf)**
 - `html2canvas` package - The script renders the current page as a canvas image, by reading the DOM and the different styles applied to the elements. **Learn more [here](https://www.npmjs.com/package/html2canvas)**
+- `react-loader` package - Loader animations. **Learn more [here](https://www.npmjs.com/package/react-loading)**
 
 ## Available Scripts
 
