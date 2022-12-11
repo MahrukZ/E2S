@@ -83,6 +83,7 @@ function AddUser({ setUsersList }: IAddUserProp) {
     return (
         <>
             <Button
+                id="addUserBtn"
                 className="mb-4"
                 variant="outline-success"
                 onClick={handleShow}
