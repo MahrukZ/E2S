@@ -11,7 +11,7 @@ export class SitesService {
     }
 
     public async deleteSite(siteId: number): Promise<any> {
-        const response = await axios.delete(`/api/site/${siteId}`);
+        const response = await axios.delete(`/api/delete-site/${siteId}`);
         return await response.data;
     }
 }
