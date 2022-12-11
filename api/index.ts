@@ -14,7 +14,7 @@ import sites from "./routes/sites/sites.routes";
 import organisations from "./routes/organisations/organisations.routes";
 import uploadFile from "./routes/uploadFile/uploadFile.routes"
 import { Router } from "express";
-import { sendEmail } from "./emailConfig/sendEmail";
+import { EmailCronJob } from "./emailConfig/weekly/emailScheduler";
 
 // config
 dotenv.config();
@@ -138,6 +138,8 @@ routes.use(organisations);
 routes.use(uploadFile);
 
 app.use(routes);
+
+EmailCronJob();
 
 // port listen
 app.listen(port, () => {
