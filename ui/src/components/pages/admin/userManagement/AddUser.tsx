@@ -13,11 +13,6 @@ interface IAddUserProp {
 }
 
 function AddUser({ setUsersList }: IAddUserProp) {
-    const [email, setEmail] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [orgId, setOrgId] = useState(0);
-    const [role, setRole] = useState("");
     const [tempPassword, setTempPassword] = useState("");
     const [password, setPassword] = useState("");
     const [user, setUser] = useState<IUser>({
@@ -55,16 +50,16 @@ function AddUser({ setUsersList }: IAddUserProp) {
     const handleCreateUser = async () => {
         let valid: boolean = true;
         if (
-            email.length <= 0 ||
-            firstName.length <= 0 ||
-            lastName.length <= 0 ||
-            password.length <= 0 ||
-            role.length <= 0
+            user.email!.length <= 0 ||
+            user.firstName!.length <= 0 ||
+            user.lastName!.length <= 0 ||
+            user.password!.length <= 0 ||
+            user.role!.length <= 0
         ) {
             setError("Fill in all required fields!");
             valid = false;
         }
-        if (orgId == 0) {
+        if (user.orgId == 0) {
             setError("Select an organisation for this user!");
         }
         if (password !== tempPassword) {
@@ -74,14 +69,6 @@ function AddUser({ setUsersList }: IAddUserProp) {
         if (valid) {
             setError("");
             try {
-                setUser({
-                    email,
-                    firstName,
-                    lastName,
-                    role,
-                    password,
-                    orgId,
-                });
                 await usersService.createUser(user);
                 const users =
                     await userManagementService.getAllUserManagements();
@@ -121,7 +108,7 @@ function AddUser({ setUsersList }: IAddUserProp) {
                                 placeholder="e.g. john_doe@example.com"
                                 autoFocus
                                 onChange={(e: any) => {
-                                    setEmail(e.target.value);
+                                    setUser({ ...user, email: e.target.value });
                                 }}
                             />
                         </Form.Group>
@@ -138,7 +125,10 @@ function AddUser({ setUsersList }: IAddUserProp) {
                                         placeholder="e.g. John"
                                         autoFocus
                                         onChange={(e: any) => {
-                                            setFirstName(e.target.value);
+                                            setUser({
+                                                ...user,
+                                                firstName: e.target.value,
+                                            });
                                         }}
                                     />
                                 </Form.Group>
@@ -155,7 +145,10 @@ function AddUser({ setUsersList }: IAddUserProp) {
                                         placeholder="e.g. Doe"
                                         autoFocus
                                         onChange={(e: any) => {
-                                            setLastName(e.target.value);
+                                            setUser({
+                                                ...user,
+                                                lastName: e.target.value,
+                                            });
                                         }}
                                     />
                                 </Form.Group>
@@ -169,7 +162,10 @@ function AddUser({ setUsersList }: IAddUserProp) {
                                     <Form.Select
                                         className="mb-3"
                                         onChange={(e: any) => {
-                                            setOrgId(e.target.value);
+                                            setUser({
+                                                ...user,
+                                                orgId: parseInt(e.target.value),
+                                            });
                                         }}
                                     >
                                         <option value="0">
@@ -198,7 +194,10 @@ function AddUser({ setUsersList }: IAddUserProp) {
                                 <Form.Select
                                     className="mb-3"
                                     onChange={(e: any) => {
-                                        setRole(e.target.value);
+                                        setUser({
+                                            ...user,
+                                            role: e.target.value,
+                                        });
                                     }}
                                 >
                                     <option>Select a Role</option>
@@ -245,6 +244,10 @@ function AddUser({ setUsersList }: IAddUserProp) {
                                             type="password"
                                             autoFocus
                                             onChange={(e: any) => {
+                                                setUser({
+                                                    ...user,
+                                                    password: e.target.value,
+                                                });
                                                 setPassword(e.target.value);
                                             }}
                                         />

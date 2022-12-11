@@ -174,7 +174,7 @@ function EditUser({ userEmail, setUsersList }: IEditUserProp) {
                                     )}
                                     <Form.Text>
                                         Cannot find your Organisation?
-                                        <a href="/admin/upload">
+                                        <a href="">
                                             Create an Organisation
                                         </a>
                                     </Form.Text>
