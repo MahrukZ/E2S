@@ -1,14 +1,13 @@
-import React from 'react'
-import "react-tooltip/dist/react-tooltip.css";
-import { Link, useLocation } from 'react-router-dom'
-import { SidebarData } from './SidebarData'
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { SidebarData } from "./SidebarData";
 import "./Sidebar.css";
 import * as FaIcons from "react-icons/fa";
 import { useState } from "react";
 import styled from "styled-components";
 import logo from "./../../../assets/images/Cardiff_University_logo.png";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-
+import "react-tooltip/dist/react-tooltip.css";
 
 //css in this file due to custom headings with links
 
@@ -18,8 +17,9 @@ const CollapsedSideBar = styled.div`
     background-color: #417285;
     position: fixed;
     top: 0;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
-`
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25),
+        0 6px 20px 0 rgba(0, 0, 0, 0.25);
+`;
 
 const MenuIconOpen = styled(Link)`
     background-color: #203841:     
@@ -42,9 +42,9 @@ const MenuIconClose = styled(Link)`
     color: #ffffff;
     margin-left: 6.5rem;
     &:hover {
-        color: #0F242C;
+        color: #0f242c;
     }
-`
+`;
 
 const TopSideBarClose = styled.div`
     display: flex;
@@ -55,77 +55,78 @@ const TopSideBarClose = styled.div`
     margin-right: 1rem;
     margin-bottom: 1rem;
     color: #ffffff;
-`
+`;
 
-const SidebarMenu = styled.div<{close: boolean}>`
+const SidebarMenu = styled.div<{ close: boolean }>`
     width: 250px;
     height: 100vh;
     background-color: #417285;
     position: fixed;
     top: 0;
-    left: ${({ close}) => close ? '0' : '-100%'};
-    transition: .3s;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
-`
+    left: ${({ close }) => (close ? "0" : "-100%")};
+    transition: 0.3s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25),
+        0 6px 20px 0 rgba(0, 0, 0, 0.25);
+`;
 
 const MenuItems = styled.li`
-  list-style: none;
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  width: 100%;
-  height: 90px;
-  padding: 1rem 0 1.25rem;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    height: 90px;
+    padding: 1rem 0 1.25rem;
 `;
 
 const MenuItemLinks = styled(Link)`
-  display: flex;
-  align-items: center;
-  padding: 0 2rem;
-  font-size: 11px;
-  text-decoration: none;
-  color: #ffffff;
-  margin: 0 1rem;
-
-  &:hover {
-    background-color: #ffffff;
-    color: #0f242c;
-    width: 100%;
-    height: 100%;
-    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    font-size: 11px;
+    text-decoration: none;
+    color: #ffffff;
     margin: 0 1rem;
-  }
+
+    &:hover {
+        background-color: #ffffff;
+        color: #0f242c;
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        margin: 0 1rem;
+    }
 `;
 
 const CollapsedMenuItemLinks = styled(Link)`
-  display: flex;
-  align-items: center;
-  padding: 0 2rem;
-  font-size: 11px;
-  text-decoration: none;
-  color: #ffffff;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    font-size: 11px;
+    text-decoration: none;
+    color: #ffffff;
 
-  &:hover {
-    background-color: #ffffff;
-    color: #0f242c;
-    width: 100%;
-    height: 100%;
-    border-radius: 3px;
-  }
+    &:hover {
+        background-color: #ffffff;
+        color: #0f242c;
+        width: 100%;
+        height: 100%;
+        border-radius: 3px;
+    }
 `;
 
 const ImageLink = styled(Link)``;
 
 const Sidebar: React.FunctionComponent = () => {
-    const [close, setClose] = useState(false)
-    const showSidebar = () => setClose(!close)
+    const [close, setClose] = useState(false);
+    const showSidebar = () => setClose(!close);
 
     const location = useLocation();
-    
-    if(["/sign-in"].includes(location.pathname)) {
-        return <></> 
-    };
-    
+
+    if (["/sign-in"].includes(location.pathname)) {
+        return <></>;
+    }
+
     return (
         <>
             {/*The collapsed sidebar which only shows the icons*/}
@@ -133,22 +134,30 @@ const Sidebar: React.FunctionComponent = () => {
                 data-testid="collapsedSideBar"
                 className="onTop"
             >
-                <ReactTooltip data-tooltip-content="Open menu icon">
-                    <MenuIconOpen
-                        data-testid="menuIconOpen"
-                        to="#"
-                        onClick={showSidebar}
-                    >
-                        <FaIcons.FaBars />
-                    </MenuIconOpen>
-                </ReactTooltip>
+                <MenuIconOpen
+                    data-testid="menuIconOpen"
+                    to="#"
+                    onClick={showSidebar}
+                    data-tooltip-content="Open sidebar"
+                    id="menuOpen"
+                >
+                    <FaIcons.FaBars />
+                </MenuIconOpen>
+                <ReactTooltip anchorId="menuOpen" />
 
                 {SidebarData.map((item, index) => {
+                    item.title.split(" ");
+
                     return (
                         <MenuItems key={index}>
-                            <CollapsedMenuItemLinks to={item.path}>
+                            <CollapsedMenuItemLinks
+                                data-tooltip-content={item.title}
+                                to={item.path}
+                                id={item.title.split(" ")[0]}
+                            >
                                 {item.icon}
                             </CollapsedMenuItemLinks>
+                            <ReactTooltip anchorId={item.title.split(" ")[0]} />
                         </MenuItems>
                     );
                 })}
@@ -160,6 +169,7 @@ const Sidebar: React.FunctionComponent = () => {
                 className="onTop"
                 close={close}
             >
+                <ReactTooltip anchorId="menuClose" />
                 <TopSideBarClose>
                     {/* Image placed inside ui/src so that it is accessible */}
                     <ImageLink to={"/"}>
@@ -176,6 +186,8 @@ const Sidebar: React.FunctionComponent = () => {
                         data-testid="menuIconClose"
                         to="#"
                         onClick={showSidebar}
+                        data-tooltip-content="Close sidebar"
+                        id="menuClose"
                     >
                         <FaIcons.FaTimes />
                     </MenuIconClose>
