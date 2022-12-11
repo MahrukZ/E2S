@@ -7,7 +7,7 @@ const mockUsersList = {
     list: [],
 };
 
-test("should render 'delete user' button element", () => {
+test("should render delete button element", () => {
     // Given
     render(<DeleteUser id={1} setUsersList={mockUsersList} />);
 

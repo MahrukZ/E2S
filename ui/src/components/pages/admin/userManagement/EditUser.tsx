@@ -72,7 +72,11 @@ function EditUser({ userEmail, setUsersList }: IEditUserProp) {
 
     return (
         <>
-            <Button variant="outline-primary" onClick={handleShow}>
+            <Button
+                id="editUserBtn"
+                variant="outline-primary"
+                onClick={handleShow}
+            >
                 <FaEdit />
             </Button>
 
@@ -155,7 +159,9 @@ function EditUser({ userEmail, setUsersList }: IEditUserProp) {
                                             onChange={(e: any) => {
                                                 setUser({
                                                     ...user,
-                                                    orgId: parseInt(e.target.value),
+                                                    orgId: parseInt(
+                                                        e.target.value
+                                                    ),
                                                 });
                                             }}
                                         >
@@ -174,9 +180,7 @@ function EditUser({ userEmail, setUsersList }: IEditUserProp) {
                                     )}
                                     <Form.Text>
                                         Cannot find your Organisation?
-                                        <a href="">
-                                            Create an Organisation
-                                        </a>
+                                        <a href="">Create an Organisation</a>
                                     </Form.Text>
                                 </Form.Group>
                             </Col>
