@@ -59,7 +59,7 @@ function AddUser({ setUsersList }: IAddUserProp) {
             setError("Fill in all required fields!");
             valid = false;
         }
-        if (user.orgId == 0) {
+        if (user.orgId === 0) {
             setError("Select an organisation for this user!");
         }
         if (password !== tempPassword) {
@@ -84,7 +84,7 @@ function AddUser({ setUsersList }: IAddUserProp) {
         <>
             <Button
                 id="addUserBtn"
-                className="mb-4"
+                className="mt-4 mb-4"
                 variant="outline-success"
                 onClick={handleShow}
             >
@@ -183,7 +183,7 @@ function AddUser({ setUsersList }: IAddUserProp) {
                                     </Form.Select>
                                     <Form.Text>
                                         Cannot find your Organisation?
-                                        <a href="">
+                                        <a href="/admin/site-management">
                                             Create an Organisation
                                         </a>
                                     </Form.Text>

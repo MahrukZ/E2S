@@ -180,7 +180,9 @@ function EditUser({ userEmail, setUsersList }: IEditUserProp) {
                                     )}
                                     <Form.Text>
                                         Cannot find your Organisation?
-                                        <a href="">Create an Organisation</a>
+                                        <a href="/admin/site-management">
+                                            Create an Organisation
+                                        </a>
                                     </Form.Text>
                                 </Form.Group>
                             </Col>
