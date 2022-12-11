@@ -11,7 +11,8 @@ import SignIn from "./components/pages/signIn/SignIn";
 import AdminRoutes from "../src/routes/AdminRoutes";
 import ProtectedRoutes from "../src/routes/ProtectedRoutes";
 import Dashboard from "./components/pages/Dashboard";
-import UploadPage from "./components/pages/admin/upload/UploadPage";
+
+import SiteManagementPage from "./components/pages/admin/siteManagement/SiteManagementPage";
 import UserManagementPage from "./components/pages/admin/userManagement/UserManagementPage";
 
 const App: React.FunctionComponent = () => {
@@ -79,7 +80,9 @@ const App: React.FunctionComponent = () => {
                         <Route
                             path="/admin/site-management"
                             element={
-                                <UploadPage setTopbarTitle={setTopbarTitle} />
+                                <SiteManagementPage
+                                    setTopbarTitle={setTopbarTitle}
+                                />
                             }
                         />
                         <Route
@@ -91,10 +94,7 @@ const App: React.FunctionComponent = () => {
                             }
                         />
                     </Route>
-                    <Route
-                        path="/sign-in"
-                        element={<SignIn />}
-                    />
+                    <Route path="/sign-in" element={<SignIn />} />
                 </Routes>
             </Router>
         </>

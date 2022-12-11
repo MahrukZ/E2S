@@ -90,25 +90,25 @@ ALTER TABLE `users`
 ADD FOREIGN KEY (`org_id`) REFERENCES `organisations`(`org_id`) ON DELETE CASCADE;
 
 ALTER TABLE `sites`
-ADD FOREIGN KEY (`org_id`) REFERENCES `organisations`(`org_id`);
+ADD FOREIGN KEY (`org_id`) REFERENCES `organisations`(`org_id`) ON DELETE CASCADE;
 
 ALTER TABLE `bills`
-ADD FOREIGN KEY (`site_id`) REFERENCES `sites`(`site_id`);
+ADD FOREIGN KEY (`site_id`) REFERENCES `sites`(`site_id`) ON DELETE CASCADE;
 
 ALTER TABLE `bills`
 ADD FOREIGN KEY (`supplier_id`) REFERENCES `suppliers`(`supplier_id`);
 
 ALTER TABLE `reports`
-ADD FOREIGN KEY (`site_id`) REFERENCES `sites`(`site_id`);
+ADD FOREIGN KEY (`site_id`) REFERENCES `sites`(`site_id`) ON DELETE CASCADE;
 
 ALTER TABLE `consumptions`
-ADD FOREIGN KEY (`site_id`) REFERENCES `sites`(`site_id`);
+ADD FOREIGN KEY (`site_id`) REFERENCES `sites`(`site_id`) ON DELETE CASCADE;
 
 ALTER TABLE `consumptions`
 ADD FOREIGN KEY (`org_id`) REFERENCES `organisations`(`org_id`);
 
 ALTER TABLE `sites_has_users`
-ADD FOREIGN KEY (`site_id`) REFERENCES `sites`(`site_id`);
+ADD FOREIGN KEY (`site_id`) REFERENCES `sites`(`site_id`) ON DELETE CASCADE;
 
 ALTER TABLE `sites_has_users`
 ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE;
@@ -122,7 +122,7 @@ JOIN organisations o
 ON u.org_id = o.org_id;
 
 CREATE VIEW site_management AS
-SELECT s.site_id, s.location, o.name AS `organisation`, (SELECT COUNT(*) FROM sites_has_users shu WHERE s.site_id = shu.site_id)  AS `number_of_users`
+SELECT s.site_id, s.name, s.location, o.org_id, o.name AS `organisation`, (SELECT COUNT(*) FROM sites_has_users shu WHERE s.site_id = shu.site_id)  AS `number_of_users`
 FROM sites s
 INNER JOIN organisations o
 ON s.org_id = o.org_id;
