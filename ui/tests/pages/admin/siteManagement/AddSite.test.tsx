@@ -7,7 +7,7 @@ const mockSitesList = {
     list: [],
 };
 
-test("should render 'add user' button element", () => {
+test("should render 'add site' button element", () => {
     // Given
     render(<AddSite setSitesList={mockSitesList} />);
 
