@@ -1,7 +1,7 @@
 import React from "react";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import UploadButton from "../../../../src/components/pages/admin/upload/UploadButton";
+import UploadButton from "../../../../../src/components/pages/admin/siteManagement/upload/UploadButton";
 
 test("should render upload button element", () => {
     // Given
