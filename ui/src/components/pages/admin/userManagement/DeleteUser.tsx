@@ -32,7 +32,7 @@ function DeleteUser({ id, setUsersList }: IDeleteBtnProp) {
 
     return (
         <>
-            <Button variant="outline-danger" onClick={handleShow}>
+            <Button id="deleteUserBtn" variant="outline-danger" onClick={handleShow}>
                 <FaTrash />
             </Button>
 
