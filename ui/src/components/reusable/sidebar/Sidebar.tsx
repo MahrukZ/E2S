@@ -162,10 +162,7 @@ function Sidebar() {
     return (
         <>
             {/*The collapsed sidebar which only shows the icons*/}
-            <CollapsedSideBar
-                data-testid="collapsedSideBar"
-                className="onTop"
-            >
+            <CollapsedSideBar data-testid="collapsedSideBar" className="onTop">
                 <MenuIconOpen
                     data-testid="menuIconOpen"
                     to="#"
@@ -204,15 +201,29 @@ function Sidebar() {
                 <Tooltip anchorId="menuClose" />
                 <TopSideBarClose>
                     {/* Image placed inside ui/src so that it is accessible */}
-                    <ImageLink to={"/dashboard"}>
-                        <img
-                            className="imageLogo"
-                            width={50}
-                            height={50}
-                            src={logo}
-                            alt="logo"
-                        />
-                    </ImageLink>
+                    {useSidebarData === SidebarData && (
+                        <ImageLink to={"/dashboard"}>
+                            <img
+                                className="imageLogo"
+                                width={50}
+                                height={50}
+                                src={logo}
+                                alt="logo"
+                            />
+                        </ImageLink>
+                    )}
+
+                    {useSidebarData === AdminSidebarData && (
+                        <ImageLink to={"/admin/overview"}>
+                            <img
+                                className="imageLogo"
+                                width={50}
+                                height={50}
+                                src={logo}
+                                alt="logo"
+                            />
+                        </ImageLink>
+                    )}
 
                     <MenuIconClose
                         data-testid="menuIconClose"
