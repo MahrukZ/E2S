@@ -11,3 +11,7 @@
 #topbarRow {
     max-width: 100%;
 }
+
+.onTop {
+  z-index: 999;
+}

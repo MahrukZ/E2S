@@ -2,19 +2,15 @@ import Axios from "axios";
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
-
 import Sidebar from "./components/reusable/sidebar/Sidebar";
 import Topbar from "./components/reusable/topbar/Topbar";
-
 import BillValidation from "./components/pages/BillValidation";
 import CostForecast from "./components/pages/CostForecast";
 import Reports from "./components/pages/Reports";
 import SignIn from "./components/pages/signIn/SignIn";
-
 import AdminRoutes from "../src/routes/AdminRoutes";
 import ProtectedRoutes from "../src/routes/ProtectedRoutes";
 import Dashboard from "./components/pages/Dashboard";
-
 import UploadPage from "./components/pages/admin/upload/UploadPage";
 import UserManagementPage from "./components/pages/admin/userManagement/UserManagementPage";
 
@@ -48,7 +44,7 @@ const App: React.FunctionComponent = () => {
                             }
                         />
                         <Route
-                            path="/billvalidation"
+                            path="/bill-validation"
                             element={
                                 <BillValidation
                                     setTopbarTitle={setTopbarTitle}
@@ -58,7 +54,7 @@ const App: React.FunctionComponent = () => {
                             }
                         />
                         <Route
-                            path="/costforecast"
+                            path="/cost-forecast"
                             element={
                                 <CostForecast
                                     setTopbarTitle={setTopbarTitle}
@@ -95,7 +91,10 @@ const App: React.FunctionComponent = () => {
                             }
                         />
                     </Route>
-                    <Route path="/sign-in" element={<SignIn />} />
+                    <Route
+                        path="/sign-in"
+                        element={<SignIn />}
+                    />
                 </Routes>
             </Router>
         </>

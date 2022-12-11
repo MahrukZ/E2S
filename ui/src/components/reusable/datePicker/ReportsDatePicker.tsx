@@ -9,6 +9,8 @@ import "./ReportsDatePicker.css";
 import ReportsInsights from "../insights/ReportsInsights";
 import ReportsGraphs from "../graphs/ReportsGraphs";
 import PdfDownloadBtn from "../buttons/PdfDownloadBtn";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 
 export interface IReportsDateRange {
     dateRange: Range[];
@@ -55,7 +57,10 @@ function ReportsDatePicker({ currentSite }: ReportsDatePickerProps) {
                 className="d-flex calendarContainer justify-content-center"
                 data-testid="reportsDatePickerElement"
             >
-                <Container id="reportData" className="flex-fill reportsData">
+                <Container
+                    id="reportData"
+                    className="flex-fill reportsData"
+                >
                     <ReportsInsights
                         betweenDates={dateRange}
                         currentSite={currentSite}
@@ -66,11 +71,17 @@ function ReportsDatePicker({ currentSite }: ReportsDatePickerProps) {
                     />
                 </Container>
                 <Card className="flex-shrink-1 datePickerCard">
+                    <Tooltip anchorId="downloadButton0" />
                     <Container className="justify-content-center d-flex mb-4">
-                        <PdfDownloadBtn
-                            downloadFileName="YourReport"
-                            rootElementId="reportData"
-                        />
+                        <div
+                            id="downloadButton0"
+                            data-tooltip-content="Download the report generated on the left as a PDF"
+                        >
+                            <PdfDownloadBtn
+                                downloadFileName="YourReport"
+                                rootElementId="reportData"
+                            />
+                        </div>
                     </Container>
                     <Card.Header>
                         Select a date range to view your report
@@ -90,11 +101,17 @@ function ReportsDatePicker({ currentSite }: ReportsDatePickerProps) {
                         staticRanges={[]}
                         inputRanges={[]}
                     />
+                    <Tooltip anchorId="downloadButton1" />
                     <Container className="justify-content-center d-flex position-absolute bottom-0 mb-4">
-                        <PdfDownloadBtn
-                            downloadFileName="YourReport"
-                            rootElementId="reportData"
-                        />
+                        <div
+                            id="downloadButton1"
+                            data-tooltip-content="Download the report generated on the left as a PDF"
+                        >
+                            <PdfDownloadBtn
+                                downloadFileName="YourReport"
+                                rootElementId="reportData"
+                            />
+                        </div>
                     </Container>
                 </Card>
             </Col>

@@ -32,6 +32,7 @@ function Topbar({ setCurrentSite, currentSite, topbarTitle }: TopbarProps) {
         userId: 0,
         name: "",
     });
+    const [isNotAdmin, setIsNotAdmin] = useState(true);
 
     const location = useLocation();
 
@@ -88,6 +89,9 @@ function Topbar({ setCurrentSite, currentSite, topbarTitle }: TopbarProps) {
                         " " +
                         String(userJSON["data"][0]["lastName"]),
                 });
+                if (userJSON["data"][0]["role"] === "administrator") {
+                    setIsNotAdmin(false);
+                }
             }
         };
         getUser();
@@ -99,10 +103,17 @@ function Topbar({ setCurrentSite, currentSite, topbarTitle }: TopbarProps) {
     }
     return (
         <>
-            <Navbar data-testid="topbar" className="py-0" id="topbar">
+            <Navbar
+                data-testid="topbar"
+                className="py-0"
+                id="topbar"
+            >
                 <Container>
                     <Nav id="titleNav">
-                        <div className="me-5" id="pageTitle">
+                        <div
+                            className="me-5"
+                            id="pageTitle"
+                        >
                             <TopbarTitle
                                 topbarTitle={topbarTitle}
                                 key={topbarTitle}
@@ -111,13 +122,13 @@ function Topbar({ setCurrentSite, currentSite, topbarTitle }: TopbarProps) {
                     </Nav>
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
-                        <Nav id="siteDropdownNav">
+                        {isNotAdmin && <Nav id="siteDropdownNav">
                             <SiteDropdown
                                 sites={siteList}
                                 currentSite={currentSite}
                                 setCurrentSite={setCurrentSite}
                             />
-                        </Nav>
+                        </Nav>}
                         <Nav id="accountDropdownNav">
                             <AccountDropdown user={user} />
                         </Nav>

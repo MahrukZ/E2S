@@ -34,6 +34,7 @@ npm i
 - `plotly` package - Plotly is a Javascript data visualization library. **Learn more [here](https://plotly.com/javascript/react/)**
 - `react-date-range` package - Contains date range picker **Learn more [here](https://www.npmjs.com/package/react-date-range)**
 - `date-fns` package - Toolset for manipulating JavaScript dates in a browser & Node.js **Learn more [here](https://www.npmjs.com/package/date-fns)**
+- `react-tooltips` package - Toolset for creating tooltips **Learn more [here](https://www.npmjs.com/package/react-tooltips)**
 
 
 ###### _devDependencies:_
