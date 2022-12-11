@@ -8,7 +8,7 @@ test("should render site table element", () => {
     render(<SiteTable />);
 
     // When
-    const siteTableElement = document.getElementById("userTable");
+    const siteTableElement = document.getElementById("siteTable");
 
     // Then
     expect(siteTableElement).toBeInTheDocument();

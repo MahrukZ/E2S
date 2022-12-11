@@ -69,7 +69,7 @@ function SiteTable() {
         <>
             <Container className="d-flex align-items-end flex-column">
                 <AddSite setSitesList={setSitesList} />
-                <Table id="userTable" striped bordered hover>
+                <Table id="siteTable" striped bordered hover>
                     <thead>
                         <tr>
                             <th>#</th>
