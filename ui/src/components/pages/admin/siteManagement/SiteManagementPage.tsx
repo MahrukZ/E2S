@@ -8,7 +8,7 @@ interface SiteManagementPageProps {
 function SiteManagementPage({ setTopbarTitle }: SiteManagementPageProps) {
     useEffect(() => {
         setTopbarTitle("Site Managment");
-        document.title = "Admin/Site Management";
+        document.title = "Admin - Site Management";
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
