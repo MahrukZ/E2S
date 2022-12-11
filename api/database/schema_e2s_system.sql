@@ -122,7 +122,7 @@ JOIN organisations o
 ON u.org_id = o.org_id;
 
 CREATE VIEW site_management AS
-SELECT s.site_id, s.location, o.name AS `organisation`, (SELECT COUNT(*) FROM sites_has_users shu WHERE s.site_id = shu.site_id)  AS `number_of_users`
+SELECT s.site_id, s.name, s.location, o.org_id, o.name AS `organisation`, (SELECT COUNT(*) FROM sites_has_users shu WHERE s.site_id = shu.site_id)  AS `number_of_users`
 FROM sites s
 INNER JOIN organisations o
 ON s.org_id = o.org_id;

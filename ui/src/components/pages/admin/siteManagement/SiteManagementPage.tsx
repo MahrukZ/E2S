@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import SiteTable from "./SiteTable";
 
 interface SiteManagementPageProps {
     setTopbarTitle: any;
@@ -12,7 +13,7 @@ function SiteManagementPage({ setTopbarTitle }: SiteManagementPageProps) {
     }, []);
     return (
         <div className="text-center">
-            <h1>Site Management</h1>
+            <SiteTable />{" "}
         </div>
     );
 }

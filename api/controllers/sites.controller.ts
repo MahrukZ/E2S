@@ -2,12 +2,11 @@ import { Request, Response } from "express";
 import { SiteService } from "../services/sites.service";
 
 export class SiteController {
-  private siteService: SiteService;
+    private siteService: SiteService;
 
-  constructor() {
-    this.siteService = new SiteService();
-  }
-
+    constructor() {
+        this.siteService = new SiteService();
+    }
 
     // Unused Methods
     // async createSite(req: Request, res: Response): Promise<any> {
@@ -28,40 +27,42 @@ export class SiteController {
     //     );
     // };
 
-    // async deleteSite(req: Request, res: Response): Promise<any> {
-    //     return (this.siteService.deleteSite(parseInt(req.params.id))
-    //         .then(data => {
-    //             res.status(202).json({
-    //                 message: `Successfully deleted 1 record.`,
-    //                 status: 202,
-    //             });
-    //         })
-    //         .catch(err => {
-    //             res.status(500).json({
-    //                 message: err.message || "server error: failed to delete site.",
-    //                 status: 500
-    //             });
-    //         })
-    //     );
-    // };
+    async deleteSite(req: Request, res: Response): Promise<any> {
+        return this.siteService
+            .deleteSite(parseInt(req.params.id))
+            .then((data) => {
+                res.status(202).json({
+                    message: `Successfully deleted 1 record.`,
+                    status: 202,
+                });
+            })
+            .catch((err) => {
+                res.status(500).json({
+                    message:
+                        err.message || "server error: failed to delete site.",
+                    status: 500,
+                });
+            });
+    }
 
     async getAllSites(req: Request, res: Response): Promise<any> {
-        return (this.siteService.getAllSites()
-            .then(data => {
+        return this.siteService
+            .getAllSites()
+            .then((data) => {
                 res.status(200).json({
-                    message: 'Success',
+                    message: "Success",
                     status: 200,
-                    data
+                    data,
                 });
             })
-            .catch (err => {
+            .catch((err) => {
                 res.status(500).json({
-                    message: err.message || "server error: failed to fetch sites.",
-                    status: 500
+                    message:
+                        err.message || "server error: failed to fetch sites.",
+                    status: 500,
                 });
-            })
-        );
-    };
+            });
+    }
 
     // async updateSite(req: Request, res: Response): Promise<any> {
     //     return (this.siteService.updateSite(req.body)
@@ -81,20 +82,22 @@ export class SiteController {
     // };
 
     async findSiteById(req: Request, res: Response): Promise<any> {
-        return (this.siteService.findSiteById(parseInt(req.params.id))
-            .then(data => {
+        return this.siteService
+            .findSiteById(parseInt(req.params.id))
+            .then((data) => {
                 res.status(200).json({
-                    message: 'Success',
+                    message: "Success",
                     status: 200,
-                    data    
+                    data,
                 });
             })
-            .catch(err => {
+            .catch((err) => {
                 res.status(500).json({
-                    message: err.message || "server error: failed to fetch site by Id.",
-                    status: 500
+                    message:
+                        err.message ||
+                        "server error: failed to fetch site by Id.",
+                    status: 500,
                 });
-            })
-        );
-    };
+            });
+    }
 }

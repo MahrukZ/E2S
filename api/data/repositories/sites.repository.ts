@@ -7,13 +7,13 @@ export class SiteRepository {
 
     constructor() {
         this.db = connect();
-        this.db.Sequelize.sync({}) 
+        this.db.Sequelize.sync({})
             .then(() => {
                 console.log("Sync db.");
             })
-            .catch((err: { message: string; }) => {
+            .catch((err: { message: string }) => {
                 console.log("Failed to sync db: " + err.message);
-            });   
+            });
         this.siteRepository = this.db.Sequelize.getRepository(Sites);
     }
 
@@ -28,19 +28,19 @@ export class SiteRepository {
     //     return data;
     // }
 
-    // async deleteSite(siteId: number): Promise<ISite> {
-    //     let data = {};
-    //     try {
-    //         data = await this.siteRepository.destroy({
-    //             where: {
-    //                 site_id: siteId
-    //             }
-    //         });
-    //     } catch(err) {
-    //         throw new Error("Failed to delete site." || err);
-    //     }
-    //     return data;
-    // }
+    async deleteSite(siteId: number): Promise<ISite> {
+        let data = {};
+        try {
+            data = await this.siteRepository.destroy({
+                where: {
+                    site_id: siteId,
+                },
+            });
+        } catch (err) {
+            throw new Error("Failed to delete site." || err);
+        }
+        return data;
+    }
 
     async getAllSites(): Promise<ISite[]> {
         let data = [];
@@ -72,9 +72,9 @@ export class SiteRepository {
         try {
             data = await this.siteRepository.findAll({
                 where: {
-                    siteId
-                  }
-              });
+                    siteId,
+                },
+            });
         } catch (err) {
             throw new Error("Failed to get sites and users." || err);
         }
