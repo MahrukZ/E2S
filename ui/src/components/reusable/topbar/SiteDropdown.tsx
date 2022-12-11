@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import { ISiteAndUser } from "./Topbar";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
+import "./Topbar.css";
 
 interface SiteDropownProps {
     sites: ISiteAndUser[];
@@ -35,16 +38,22 @@ function SiteDropdown({
     }, []);
 
     return (
-        <div>
+        <div className="onTop">
+            <Tooltip anchorId="siteDropdown" />
             <Form.Select
                 onChange={selectChange}
                 data-testid="siteDropdown"
                 id="siteDropdown"
                 size="sm"
                 className="mt-1 mb-1"
+                data-tooltip-content="Choose the site you want to see data for"
             >
                 {sites.map((site, index) => (
-                    <option data-testid={index} key={index} value={site.siteId}>
+                    <option
+                        data-testid={index}
+                        key={index}
+                        value={site.siteId}
+                    >
                         {site.siteName}
                     </option>
                 ))}
