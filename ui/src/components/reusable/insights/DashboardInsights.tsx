@@ -8,249 +8,241 @@ import "./Insights.css";
 import Insight, { IInsightData } from "./Insight";
 
 interface DashboardInsightsProps {
-    currentSite: any;
+  currentSite: any;
 }
 
 function DashboardInsights({ currentSite }: DashboardInsightsProps) {
-    const currentSiteId = currentSite;
+  const currentSiteId = currentSite;
 
-    const [costsInsight, setCostsInsight] = useState<IInsightData>({
-        title: "",
-        insightList: [],
-        percentage: "",
-        isPositive: false,
-    });
+  const [isLoading, setLoading] = useState<Boolean>(false);
 
-    const [electricityInsight, setElectricityInsight] = useState<IInsightData>({
-        title: "",
-        insightList: [],
-        percentage: "",
-        isPositive: false,
-    });
+  const [costsInsight, setCostsInsight] = useState<IInsightData>({
+    title: "",
+    insightList: [],
+    percentage: "",
+    isPositive: false,
+  });
 
-    const [gasInsight, setGasInsight] = useState<IInsightData>({
-        title: "",
-        insightList: [],
-        percentage: "",
-        isPositive: false,
-    });
+  const [electricityInsight, setElectricityInsight] = useState<IInsightData>({
+    title: "",
+    insightList: [],
+    percentage: "",
+    isPositive: false,
+  });
 
-    const [emissionsInsight, setEmissionsInsight] = useState<IInsightData>({
-        title: "",
-        insightList: [],
-        percentage: "",
-        isPositive: false,
-    });
+  const [gasInsight, setGasInsight] = useState<IInsightData>({
+    title: "",
+    insightList: [],
+    percentage: "",
+    isPositive: false,
+  });
 
-    // Initialize services
-    const insightsService = new InsightsService();
-    const sitesService = new SitesService();
-    const consumptionsService = new ConsumptionsService();
+  const [emissionsInsight, setEmissionsInsight] = useState<IInsightData>({
+    title: "",
+    insightList: [],
+    percentage: "",
+    isPositive: false,
+  });
 
-    useEffect(() => {
-        let costsInsightsList: String[] = [];
-        let electricityInsightsList: String[] = [];
-        let gasInsightsList: String[] = [];
-        let emissionsInsightsList: String[] = [];
+  // Initialize services
+  const insightsService = new InsightsService();
+  const sitesService = new SitesService();
+  const consumptionsService = new ConsumptionsService();
 
-        const getAllInsights = async () => {
-            let finalInsights: String[] = [];
-            let insightsList: String[] = [];
+  useEffect(() => {
+    let costsInsightsList: String[] = [];
+    let electricityInsightsList: String[] = [];
+    let gasInsightsList: String[] = [];
+    let emissionsInsightsList: String[] = [];
 
-            const insightsTemplates = await insightsService.getInsights();
-            // Currently just has 1 as the siteId, this will need to be changed
-            const siteData = await sitesService.findSiteById(currentSiteId);
+    const getAllInsights = async () => {
+      let finalInsights: String[] = [];
+      let insightsList: String[] = [];
+      setLoading(true);
+      
 
-            const currentSite = siteData["data"][0]["name"];
+      const insightsTemplates = await insightsService.getInsights();
+      // Currently just has 1 as the siteId, this will need to be changed
+      const siteData = await sitesService.findSiteById(currentSiteId);
 
-            // Replace [site] in the template with site name
-            for (let i = 0; i < 4; i++) {
-                const currentInsight0: string = String(
-                    insightsTemplates["data"][i]["description"]
-                );
+      const currentSite = siteData["data"][0]["name"];
 
-                const insightToAdd0 = currentInsight0.replace(
-                    "[site]",
-                    currentSite
-                );
+      // Replace [site] in the template with site name
+      for (let i = 0; i < 4; i++) {
+        const currentInsight0: string = String(
+          insightsTemplates["data"][i]["description"]
+        );
 
-                insightsList.push(insightToAdd0);
-            }
+        const insightToAdd0 = currentInsight0.replace("[site]", currentSite);
 
-            // Split the insight template in half so the data can go into the middle
-            for (let i = 0; i < insightsList.length; i++) {
-                const currentInsight1: string = String(insightsList[i]);
+        insightsList.push(insightToAdd0);
+      }
 
-                const splitted = currentInsight1.split("[data]");
+      // Split the insight template in half so the data can go into the middle
+      for (let i = 0; i < insightsList.length; i++) {
+        const currentInsight1: string = String(insightsList[i]);
 
-                finalInsights.push(splitted[0]);
-                finalInsights.push(splitted[1]);
-            }
-            costsInsightsList = [finalInsights[0], finalInsights[1]];
-            electricityInsightsList = [finalInsights[2], finalInsights[3]];
-            gasInsightsList = [finalInsights[4], finalInsights[5]];
-            emissionsInsightsList = [finalInsights[6], finalInsights[7]];
-        };
-        getAllInsights();
+        const splitted = currentInsight1.split("[data]");
 
-        const findSumOfConsumptionsBySiteIdAndTime = async () => {
-            let costPct: String = "";
-            let electricityPct: String = "";
-            let gasPct: String = "";
-            let emissionsPct: String = "";
+        finalInsights.push(splitted[0]);
+        finalInsights.push(splitted[1]);
+      }
+      costsInsightsList = [finalInsights[0], finalInsights[1]];
+      electricityInsightsList = [finalInsights[2], finalInsights[3]];
+      gasInsightsList = [finalInsights[4], finalInsights[5]];
+      emissionsInsightsList = [finalInsights[6], finalInsights[7]];
+      setLoading(false);
+    };
+    getAllInsights();
 
-            // Sets the colour based on whether the change or positive or negative
-            let isCostPositive = false;
-            let isElectricityPositive = false;
-            let isGasPositive = false;
-            let isEmissionsPositive = false;
+    const findSumOfConsumptionsBySiteIdAndTime = async () => {
+      let costPct: String = "";
+      let electricityPct: String = "";
+      let gasPct: String = "";
+      let emissionsPct: String = "";
 
-            const now = new Date();
-            const priorDate = new Date(new Date().setDate(now.getDate() - 7));
-            const priorPriorDate = new Date(
-                new Date().setDate(now.getDate() - 14)
-            );
+      // Sets the colour based on whether the change or positive or negative
+      let isCostPositive = false;
+      let isElectricityPositive = false;
+      let isGasPositive = false;
+      let isEmissionsPositive = false;
 
-            const currentConsumptionsResponse =
-                await consumptionsService.findSumOfConsumptionsBySiteIdAndTime(
-                    priorDate,
-                    now,
-                    currentSiteId
-                );
-            const previousConsumptionsResponse =
-                await consumptionsService.findSumOfConsumptionsBySiteIdAndTime(
-                    priorPriorDate,
-                    priorDate,
-                    currentSiteId
-                );
+      const now = new Date();
+      const priorDate = new Date(new Date().setDate(now.getDate() - 7));
+      const priorPriorDate = new Date(new Date().setDate(now.getDate() - 14));
 
-            const currentConsumptionsData = currentConsumptionsResponse["data"];
-            const previousConsumptionsData =
-                previousConsumptionsResponse["data"];
+      const currentConsumptionsResponse =
+        await consumptionsService.findSumOfConsumptionsBySiteIdAndTime(
+          priorDate,
+          now,
+          currentSiteId
+        );
+      const previousConsumptionsResponse =
+        await consumptionsService.findSumOfConsumptionsBySiteIdAndTime(
+          priorPriorDate,
+          priorDate,
+          currentSiteId
+        );
 
-            const totalCurrentElectricityDemand = currentConsumptionsData[0];
-            const totalCurrentGasDemand = currentConsumptionsData[1];
-            const totalCurrentEmissions = currentConsumptionsData[2];
-            const totalCurrentCosts = currentConsumptionsData[3];
+      const currentConsumptionsData = currentConsumptionsResponse["data"];
+      const previousConsumptionsData = previousConsumptionsResponse["data"];
 
-            const totalPreviousElectricityDemand = previousConsumptionsData[0];
-            const totalPreviousGasDemand = previousConsumptionsData[1];
-            const totalPreviousEmissions = previousConsumptionsData[2];
-            const totalPreviousCosts = previousConsumptionsData[3];
+      const totalCurrentElectricityDemand = currentConsumptionsData[0];
+      const totalCurrentGasDemand = currentConsumptionsData[1];
+      const totalCurrentEmissions = currentConsumptionsData[2];
+      const totalCurrentCosts = currentConsumptionsData[3];
 
-            // calculate percentage
-            const electricityPercentage = Math.round(
-                ((totalCurrentElectricityDemand -
-                    totalPreviousElectricityDemand) /
-                    totalPreviousElectricityDemand) *
-                    100
-            );
-            const gasPercentage = Math.round(
-                ((totalCurrentGasDemand - totalPreviousGasDemand) /
-                    totalPreviousGasDemand) *
-                    100
-            );
-            const emissionsPercentage = Math.round(
-                ((totalCurrentEmissions - totalPreviousEmissions) /
-                    totalPreviousEmissions) *
-                    100
-            );
-            const costPercentage = Math.round(
-                ((totalCurrentCosts - totalPreviousCosts) /
-                    totalPreviousCosts) *
-                    100
-            );
+      const totalPreviousElectricityDemand = previousConsumptionsData[0];
+      const totalPreviousGasDemand = previousConsumptionsData[1];
+      const totalPreviousEmissions = previousConsumptionsData[2];
+      const totalPreviousCosts = previousConsumptionsData[3];
 
-            // add plus or minus symbol and change colour
-            if (electricityPercentage <= 0) {
-                const stringElectricityPercentage = String(
-                    electricityPercentage
-                );
-                electricityPct = stringElectricityPercentage;
-            } else {
-                const stringElectricityPercentage =
-                    "+" + String(electricityPercentage);
-                electricityPct = stringElectricityPercentage;
-                isElectricityPositive = true;
-            }
+      // calculate percentage
+      const electricityPercentage = Math.round(
+        ((totalCurrentElectricityDemand - totalPreviousElectricityDemand) /
+          totalPreviousElectricityDemand) *
+          100
+      );
+      const gasPercentage = Math.round(
+        ((totalCurrentGasDemand - totalPreviousGasDemand) /
+          totalPreviousGasDemand) *
+          100
+      );
+      const emissionsPercentage = Math.round(
+        ((totalCurrentEmissions - totalPreviousEmissions) /
+          totalPreviousEmissions) *
+          100
+      );
+      const costPercentage = Math.round(
+        ((totalCurrentCosts - totalPreviousCosts) / totalPreviousCosts) * 100
+      );
 
-            if (gasPercentage <= 0) {
-                const stringGasPercentage = String(gasPercentage);
-                gasPct = stringGasPercentage;
-            } else {
-                const stringGasPercentage = "+" + String(gasPercentage);
-                gasPct = stringGasPercentage;
-                isGasPositive = true;
-            }
+      // add plus or minus symbol and change colour
+      if (electricityPercentage <= 0) {
+        const stringElectricityPercentage = String(electricityPercentage);
+        electricityPct = stringElectricityPercentage;
+      } else {
+        const stringElectricityPercentage = "+" + String(electricityPercentage);
+        electricityPct = stringElectricityPercentage;
+        isElectricityPositive = true;
+      }
 
-            if (emissionsPercentage <= 0) {
-                const stringEmissionsPercentage = String(emissionsPercentage);
-                emissionsPct = stringEmissionsPercentage;
-            } else {
-                const stringEmissionsPercentage =
-                    "+" + String(emissionsPercentage);
-                emissionsPct = stringEmissionsPercentage;
-                isEmissionsPositive = true;
-            }
+      if (gasPercentage <= 0) {
+        const stringGasPercentage = String(gasPercentage);
+        gasPct = stringGasPercentage;
+      } else {
+        const stringGasPercentage = "+" + String(gasPercentage);
+        gasPct = stringGasPercentage;
+        isGasPositive = true;
+      }
 
-            if (costPercentage <= 0) {
-                const stringCostPercentage = String(costPercentage);
-                costPct = stringCostPercentage;
-            } else {
-                const stringCostPercentage = "+" + String(costPercentage);
-                costPct = stringCostPercentage;
-                isCostPositive = true;
-            }
+      if (emissionsPercentage <= 0) {
+        const stringEmissionsPercentage = String(emissionsPercentage);
+        emissionsPct = stringEmissionsPercentage;
+      } else {
+        const stringEmissionsPercentage = "+" + String(emissionsPercentage);
+        emissionsPct = stringEmissionsPercentage;
+        isEmissionsPositive = true;
+      }
 
-            setCostsInsight({
-                title: "Total Costs",
-                insightList: costsInsightsList,
-                percentage: costPct,
-                isPositive: isCostPositive,
-            });
+      if (costPercentage <= 0) {
+        const stringCostPercentage = String(costPercentage);
+        costPct = stringCostPercentage;
+      } else {
+        const stringCostPercentage = "+" + String(costPercentage);
+        costPct = stringCostPercentage;
+        isCostPositive = true;
+      }
 
-            setElectricityInsight({
-                title: "Electricity Insight",
-                insightList: electricityInsightsList,
-                percentage: electricityPct,
-                isPositive: isElectricityPositive,
-            });
+      setCostsInsight({
+        title: "Total Costs",
+        insightList: costsInsightsList,
+        percentage: costPct,
+        isPositive: isCostPositive,
+      });
 
-            setGasInsight({
-                title: "Gas Insight",
-                insightList: gasInsightsList,
-                percentage: gasPct,
-                isPositive: isGasPositive,
-            });
+      setElectricityInsight({
+        title: "Electricity Insight",
+        insightList: electricityInsightsList,
+        percentage: electricityPct,
+        isPositive: isElectricityPositive,
+      });
 
-            setEmissionsInsight({
-                title: "CO2 Emissions Insight",
-                insightList: emissionsInsightsList,
-                percentage: emissionsPct,
-                isPositive: isEmissionsPositive,
-            });
-        };
-        findSumOfConsumptionsBySiteIdAndTime();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+      setGasInsight({
+        title: "Gas Insight",
+        insightList: gasInsightsList,
+        percentage: gasPct,
+        isPositive: isGasPositive,
+      });
 
-    return (
-        <Container
-            fluid
-            className="justify-content-center"
-            data-testid="dashboardInsights"
-        >
-            <Col className="d-flex insightsCol">
-                <Insight insightData={costsInsight} />
+      setEmissionsInsight({
+        title: "CO2 Emissions Insight",
+        insightList: emissionsInsightsList,
+        percentage: emissionsPct,
+        isPositive: isEmissionsPositive,
+      });
+    };
+    findSumOfConsumptionsBySiteIdAndTime();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-                <Insight insightData={electricityInsight} />
+  return (
+    <Container
+      fluid
+      className="justify-content-center"
+      data-testid="dashboardInsights"
+    >
+      <Col className="d-flex insightsCol">
+        <Insight insightData={costsInsight} isLoading={isLoading} />
 
-                <Insight insightData={gasInsight} />
+        <Insight insightData={electricityInsight} isLoading={isLoading} />
 
-                <Insight insightData={emissionsInsight} />
-            </Col>
-        </Container>
-    );
+        <Insight insightData={gasInsight} isLoading={isLoading} />
+
+        <Insight insightData={emissionsInsight} isLoading={isLoading} />
+      </Col>
+    </Container>
+  );
 }
 
 export default DashboardInsights;
