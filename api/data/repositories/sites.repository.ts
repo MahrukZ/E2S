@@ -17,16 +17,15 @@ export class SiteRepository {
         this.siteRepository = this.db.Sequelize.getRepository(Sites);
     }
 
-    //Unused Methods
-    // async createSite(site: ISite): Promise<ISite> {
-    //     let data = {};
-    //     try {
-    //         data = await this.siteRepository.create(site);
-    //     } catch(err) {
-    //         throw new Error("Failed to create site." || err);
-    //     }
-    //     return data;
-    // }
+    async createSite(site: ISite): Promise<ISite> {
+        let data = {};
+        try {
+            data = await this.siteRepository.create(site);
+        } catch (err) {
+            throw new Error("Failed to create site." || err);
+        }
+        return data;
+    }
 
     async deleteSite(siteId: number): Promise<ISite> {
         let data = {};

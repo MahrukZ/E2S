@@ -3,7 +3,7 @@ import { Container, Table } from "react-bootstrap";
 import { SitesService } from "../../../../services/sites.service";
 import { SiteManagementService } from "../../../../services/siteManagement.service";
 import DeleteSite from "./DeleteSite";
-// import AddUser from "./AddUser";
+import AddSite from "./AddSite";
 // import DeleteUser from "./DeleteUser";
 // import EditUser from "./EditUser";
 
@@ -12,7 +12,6 @@ export interface ISite {
     name?: string;
     location?: string;
     orgId?: number;
-    orgName?: string;
 }
 
 export interface ISiteManagement {
@@ -76,7 +75,7 @@ function SiteTable() {
     return (
         <>
             <Container className="d-flex align-items-end flex-column">
-                {/* <AddUser setUsersList={setUsersList} /> */}
+                <AddSite setSitesList={setSitesList} />
                 <Table id="userTable" striped bordered hover>
                     <thead>
                         <tr>
@@ -85,18 +84,13 @@ function SiteTable() {
                             <th>Location</th>
                             <th>Organisation</th>
                             <th>Number Of Users</th>
-
-                            {/* <th>Email Address</th>
-                            <th>Organisation</th>
-                            <th>No Of Sites Managed</th>
-                            <th>Role</th> */}
                             <th colSpan={2}>Actions</th>
                         </tr>
                     </thead>
 
                     <tbody>{siteData}</tbody>
                 </Table>
-                {/* <AddUser setUsersList={setUsersList} /> */}
+                <AddSite setSitesList={setSitesList} />
             </Container>
         </>
     );

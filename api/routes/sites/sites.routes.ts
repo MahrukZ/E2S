@@ -18,9 +18,9 @@ router.get("/api/site-managements", async (req, res) => {
     siteManagmentController.getAllSiteManagements(req, res);
 });
 
-// router.post("/api/site", async (req, res) => {
-//     siteController.createSite(req, res);
-// });
+router.post("/api/site", async (req, res) => {
+    siteController.createSite(req, res);
+});
 
 // router.put("/api/site", async (req, res) => {
 //     siteController.updateSite(req, res);

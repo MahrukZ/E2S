@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ISite } from "../components/pages/admin/siteManagement/SiteTable";
 
 export class SitesService {
     public async getSites(): Promise<any> {
@@ -12,6 +13,11 @@ export class SitesService {
 
     public async deleteSite(siteId: number): Promise<any> {
         const response = await axios.delete(`/api/delete-site/${siteId}`);
+        return await response.data;
+    }
+
+    public async createSite(site: ISite): Promise<any> {
+        const response = await axios.post(`/api/site`, site);
         return await response.data;
     }
 }

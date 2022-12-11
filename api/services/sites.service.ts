@@ -8,10 +8,9 @@ export class SiteService {
         this.siteRepository = new SiteRepository();
     }
 
-    // Unused methods
-    // async createSite(site: ISite) {
-    //     return await this.siteRepository.createSite(site);
-    // }
+    async createSite(site: ISite) {
+        return await this.siteRepository.createSite(site);
+    }
 
     async deleteSite(siteId: number) {
         return await this.siteRepository.deleteSite(siteId);

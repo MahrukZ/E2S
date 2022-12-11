@@ -8,24 +8,24 @@ export class SiteController {
         this.siteService = new SiteService();
     }
 
-    // Unused Methods
-    // async createSite(req: Request, res: Response): Promise<any> {
-    //     return (this.siteService.createSite(req.body)
-    //         .then(data => {
-    //             res.status(201).json({
-    //                 message: 'Created',
-    //                 status: 201,
-    //                 data
-    //             });
-    //         })
-    //         .catch(err => {
-    //             res.status(500).json({
-    //                 message: err.message || "server error: failed to create site.",
-    //                 status: 500
-    //             });
-    //         })
-    //     );
-    // };
+    async createSite(req: Request, res: Response): Promise<any> {
+        return this.siteService
+            .createSite(req.body)
+            .then((data) => {
+                res.status(201).json({
+                    message: "Created",
+                    status: 201,
+                    data,
+                });
+            })
+            .catch((err) => {
+                res.status(500).json({
+                    message:
+                        err.message || "server error: failed to create site.",
+                    status: 500,
+                });
+            });
+    }
 
     async deleteSite(req: Request, res: Response): Promise<any> {
         return this.siteService
