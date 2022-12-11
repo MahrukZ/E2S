@@ -17,12 +17,12 @@ export const SidebarData = [
   },
   {
     title: "Cost Forecast",
-    path: "/costforecast",
+    path: "/cost-forecast",
     icon: <FaIcons.FaChartLine size="35" />,
   },
   {
     title: "Bill Validation",
-    path: "/billvalidation",
+    path: "/bill-validation",
     icon: <FaIcons.FaMoneyCheckAlt size="35" />,
   },
 ];

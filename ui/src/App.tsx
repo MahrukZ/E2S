@@ -44,7 +44,7 @@ const App: React.FunctionComponent = () => {
                             }
                         />
                         <Route
-                            path="/billvalidation"
+                            path="/bill-validation"
                             element={
                                 <BillValidation
                                     setTopbarTitle={setTopbarTitle}
@@ -54,7 +54,7 @@ const App: React.FunctionComponent = () => {
                             }
                         />
                         <Route
-                            path="/costforecast"
+                            path="/cost-forecast"
                             element={
                                 <CostForecast
                                     setTopbarTitle={setTopbarTitle}
