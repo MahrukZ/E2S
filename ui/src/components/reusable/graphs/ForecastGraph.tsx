@@ -6,8 +6,12 @@ import "./Graph.css";
 import DoubleGraph, { IDoubleGraph } from "./DoubleGraph";
 import { addDays } from "date-fns";
 
-function ForecastGraph() {
-    const currentSiteId = 1;
+interface ForecastGraphProps {
+    currentSite: any;
+}
+
+function ForecastGraph({ currentSite }: ForecastGraphProps) {
+    const currentSiteId = currentSite;
 
     const [costsGraph, setCostsGraph] = useState<IDoubleGraph>({
         xData0: [],

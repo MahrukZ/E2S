@@ -102,7 +102,7 @@ describe("SitesAndUsersRepository", () => {
       });
     });
 
-    it("should not fins sites and users when there is no Id provided", async () => {
+    it("should not find sites and users when there is no Id provided", async () => {
       // Given
       // When
       const mErrorMessage = new Error("Failed to delete insights.");

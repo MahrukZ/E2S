@@ -1,3 +1,13 @@
 #topbar {
-  background-color: #73a6ba;
+    background-color: #73a6ba;
+    max-width: 100%;
+}
+
+#pageTitle {
+    color: white;
+    margin-right: 50%;
+}
+
+#topbarRow {
+    max-width: 100%;
 }
