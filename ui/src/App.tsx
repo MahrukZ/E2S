@@ -17,6 +17,7 @@ import Dashboard from "./components/pages/Dashboard";
 
 import UploadPage from "./components/pages/admin/upload/UploadPage";
 import UserManagementPage from "./components/pages/admin/userManagement/UserManagementPage";
+import SiteManagementPage from "./components/pages/admin/siteManagement/SiteManagementPage";
 
 const App: React.FunctionComponent = () => {
     Axios.defaults.withCredentials = true;
@@ -84,6 +85,14 @@ const App: React.FunctionComponent = () => {
                             path="/admin/site-management"
                             element={
                                 <UploadPage setTopbarTitle={setTopbarTitle} />
+                            }
+                        />
+                        <Route
+                            path="/admin/site-management-full"
+                            element={
+                                <SiteManagementPage
+                                    setTopbarTitle={setTopbarTitle}
+                                />
                             }
                         />
                         <Route
