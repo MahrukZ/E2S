@@ -7,7 +7,7 @@ import "jest-canvas-mock";
 
 test("should render the graph container", () => {
     // Given
-    render(<ForecastGraph />);
+    render(<ForecastGraph currentSite={1} />);
 
     // When
     const graphContainerElement = screen.getByTestId("graphContainer");

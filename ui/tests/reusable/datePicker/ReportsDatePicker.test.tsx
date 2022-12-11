@@ -7,7 +7,7 @@ import "jest-canvas-mock";
 
 test("should render reports date picker element", () => {
     // Given
-    render(<ReportsDatePicker />);
+    render(<ReportsDatePicker currentSite={1} />);
 
     // When
     const reportsDatePickerElement = screen.getByTestId(

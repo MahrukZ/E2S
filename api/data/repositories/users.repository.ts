@@ -50,17 +50,17 @@ export class UserRepository {
     return data;
   }
 
-  async findUserByEmail(email: string): Promise<IUser> {
-    let data = [];
-    try {
-      data = await this.userRepository.findAll({
-        where: {
-          email: email,
-        },
-      });
-    } catch (err) {
-      throw new Error("Failed to find user" || err);
-    }
-    return data;
-  }
+//   async findUserByEmail(email: string): Promise<IUser> {
+//     let data = [];
+//     try {
+//       data = await this.userRepository.findAll({
+//         where: {
+//           email: email,
+//         },
+//       });
+//     } catch (err) {
+//       throw new Error("Failed to find user" || err);
+//     }
+//     return data;
+//   }
 }

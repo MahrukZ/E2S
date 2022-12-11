@@ -1,14 +1,13 @@
-import React from 'react';
-import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
-import DashboardGraphs from '../../../src/components/reusable/graphs/DashboardGraphs';
+import React from "react";
+import "@testing-library/jest-dom";
+import { render, screen } from "@testing-library/react";
+import DashboardGraphs from "../../../src/components/reusable/graphs/DashboardGraphs";
 import "jest";
-import 'jest-canvas-mock';
+import "jest-canvas-mock";
 
-
-test('should render the graph container', () => {
+test("should render the graph container", () => {
     // Given
-    render(<DashboardGraphs />);
+    render(<DashboardGraphs currentSite={1} />);
 
     // When
     const graphContainerElement = screen.getByTestId("graphContainer");

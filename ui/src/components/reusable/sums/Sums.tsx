@@ -8,10 +8,11 @@ import { SitesService } from "../../../services/sites.service";
 
 interface ISumsProps {
     betweenDates: ISums;
+    currentSite: any;
 }
 
-function Sums({ betweenDates }: ISumsProps) {
-    const currentSiteId = 1;
+function Sums({ betweenDates, currentSite }: ISumsProps) {
+    const currentSiteId = currentSite;
 
     const [consumptionsList, setConsumptionsList] = useState<String[]>([]);
     const [siteName, setSiteName] = useState<String>();
