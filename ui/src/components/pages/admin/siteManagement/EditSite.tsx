@@ -157,7 +157,7 @@ function EditSite({ siteId, setSitesList }: IEditSiteProp) {
                                         </Form.Select>
                                     )}
                                     <Form.Text>
-                                        Cannot find your Organisation?
+                                        Cannot find your Organisation?&nbsp;
                                         <a href="/admin/site-management">
                                             Create an Organisation
                                         </a>
