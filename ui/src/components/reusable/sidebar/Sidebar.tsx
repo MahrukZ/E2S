@@ -6,7 +6,7 @@ import * as FaIcons from "react-icons/fa";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import logo from "./../../../assets/images/Cardiff_University_logo.png";
-import { Tooltip as ReactTooltip } from "react-tooltip";
+import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { UsersService } from "../../../services/users.service";
 import { UserManagementService } from "../../../services/userManagement.service";
@@ -175,7 +175,7 @@ const Sidebar: React.FunctionComponent = () => {
                 >
                     <FaIcons.FaBars />
                 </MenuIconOpen>
-                <ReactTooltip anchorId="menuOpen" />
+                <Tooltip anchorId="menuOpen" />
 
                 {useSidebarData.map((item, index) => {
                     item.title.split(" ");
@@ -189,7 +189,7 @@ const Sidebar: React.FunctionComponent = () => {
                             >
                                 {item.icon}
                             </CollapsedMenuItemLinks>
-                            <ReactTooltip anchorId={item.title.split(" ")[0]} />
+                            <Tooltip anchorId={item.title.split(" ")[0]} />
                         </MenuItems>
                     );
                 })}
@@ -201,7 +201,7 @@ const Sidebar: React.FunctionComponent = () => {
                 className="onTop"
                 close={close}
             >
-                <ReactTooltip anchorId="menuClose" />
+                <Tooltip anchorId="menuClose" />
                 <TopSideBarClose>
                     {/* Image placed inside ui/src so that it is accessible */}
                     <ImageLink to={"/"}>

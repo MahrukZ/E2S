@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import { ISiteAndUser } from "./Topbar";
-import { Tooltip as ReactTooltip } from "react-tooltip";
+import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import "./Topbar.css";
 
@@ -39,7 +39,7 @@ function SiteDropdown({
 
     return (
         <div className="onTop">
-            <ReactTooltip anchorId="siteDropdown" />
+            <Tooltip anchorId="siteDropdown" />
             <Form.Select
                 onChange={selectChange}
                 data-testid="siteDropdown"

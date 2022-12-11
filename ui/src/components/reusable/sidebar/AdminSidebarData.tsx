@@ -6,6 +6,11 @@ import * as FaIcons from "react-icons/fa";
 }
 export const AdminSidebarData = [
     {
+        title: "Overview",
+        path: "/admin/",
+        icon: <FaIcons.FaChartPie size="35" />,
+    },
+    {
         title: "User Management",
         path: "/admin/user-management",
         icon: <FaIcons.FaUsers size="35" />,

@@ -9,7 +9,7 @@ import "./ReportsDatePicker.css";
 import ReportsInsights from "../insights/ReportsInsights";
 import ReportsGraphs from "../graphs/ReportsGraphs";
 import PdfDownloadBtn from "../buttons/PdfDownloadBtn";
-import { Tooltip as ReactTooltip } from "react-tooltip";
+import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 
 export interface IReportsDateRange {
@@ -71,7 +71,7 @@ function ReportsDatePicker({ currentSite }: ReportsDatePickerProps) {
                     />
                 </Container>
                 <Card className="flex-shrink-1 datePickerCard">
-                    <ReactTooltip anchorId="downloadButton0" />
+                    <Tooltip anchorId="downloadButton0" />
                     <Container className="justify-content-center d-flex mb-4">
                         <div
                             id="downloadButton0"
@@ -101,7 +101,7 @@ function ReportsDatePicker({ currentSite }: ReportsDatePickerProps) {
                         staticRanges={[]}
                         inputRanges={[]}
                     />
-                    <ReactTooltip anchorId="downloadButton1" />
+                    <Tooltip anchorId="downloadButton1" />
                     <Container className="justify-content-center d-flex position-absolute bottom-0 mb-4">
                         <div
                             id="downloadButton1"
