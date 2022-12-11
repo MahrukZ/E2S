@@ -8,11 +8,11 @@ export const AdminSidebarData = [
     {
         title: "User Management",
         path: "/admin/user-management",
-        icon: <FaIcons.FaChartArea size="35" />,
+        icon: <FaIcons.FaUsers size="35" />,
     },
     {
         title: "Site Management",
         path: "/admin/site-management",
-        icon: <FaIcons.FaScroll size="35" />,
+        icon: <FaIcons.FaBuilding size="35" />,
     },
 ];

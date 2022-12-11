@@ -9,6 +9,7 @@ import logo from "./../../../assets/images/Cardiff_University_logo.png";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { UsersService } from "../../../services/users.service";
+import { UserManagementService } from "../../../services/userManagement.service";
 import { AdminSidebarData } from "./AdminSidebarData";
 
 //css in this file due to custom headings with links
@@ -126,6 +127,7 @@ const Sidebar: React.FunctionComponent = () => {
 
     const location = useLocation();
     const usersService = new UsersService();
+    const userManagementService = new UserManagementService();
 
     const getCurrentUserId = async (): Promise<number> => {
         const checkSignIn = await usersService.checkSignIn();
@@ -139,9 +141,14 @@ const Sidebar: React.FunctionComponent = () => {
     useEffect(() => {
         const setUser = async () => {
             const userId: any = await getCurrentUserId();
-
-            if (userId === 11) {
-                setUseSidebarData(AdminSidebarData);
+            if (userId) {
+                const userJSON =
+                    await userManagementService.findUserManagementByUserId(
+                        userId
+                    );
+                if (userJSON["data"][0]["role"] === "administrator") {
+                    setUseSidebarData(AdminSidebarData);
+                }
             }
         };
         setUser();
