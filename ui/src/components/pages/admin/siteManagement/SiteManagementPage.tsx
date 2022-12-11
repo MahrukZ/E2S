@@ -12,7 +12,7 @@ function SiteManagementPage({ setTopbarTitle }: SiteManagementPageProps) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
-        <div className="text-center">
+        <div data-testid="siteManagement" className="text-center">
             <SiteTable />{" "}
         </div>
     );

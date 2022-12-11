@@ -15,9 +15,8 @@ import AdminRoutes from "../src/routes/AdminRoutes";
 import ProtectedRoutes from "../src/routes/ProtectedRoutes";
 import Dashboard from "./components/pages/Dashboard";
 
-import UploadPage from "./components/pages/admin/upload/UploadPage";
-import UserManagementPage from "./components/pages/admin/userManagement/UserManagementPage";
 import SiteManagementPage from "./components/pages/admin/siteManagement/SiteManagementPage";
+import UserManagementPage from "./components/pages/admin/userManagement/UserManagementPage";
 
 const App: React.FunctionComponent = () => {
     Axios.defaults.withCredentials = true;
@@ -83,12 +82,6 @@ const App: React.FunctionComponent = () => {
                     <Route element={<AdminRoutes />}>
                         <Route
                             path="/admin/site-management"
-                            element={
-                                <UploadPage setTopbarTitle={setTopbarTitle} />
-                            }
-                        />
-                        <Route
-                            path="/admin/site-management-full"
                             element={
                                 <SiteManagementPage
                                     setTopbarTitle={setTopbarTitle}
