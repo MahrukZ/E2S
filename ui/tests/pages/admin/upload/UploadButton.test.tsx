@@ -4,12 +4,12 @@ import { render, screen } from "@testing-library/react";
 import UploadButton from "../../../../src/components/pages/admin/upload/UploadButton";
 
 test("should render upload button element", () => {
-  // Given
-  render(<UploadButton file="" />);
+    // Given
+    render(<UploadButton selectedId={1} file="" />);
 
-  // When
-  const buttonElement = screen.getByTestId("uploadBtn");
+    // When
+    const buttonElement = screen.getByTestId("uploadBtn");
 
-  // Then
-  expect(buttonElement).toBeInTheDocument();
+    // Then
+    expect(buttonElement).toBeInTheDocument();
 });

@@ -5,7 +5,7 @@ import DashboardInsights from "../../../src/components/reusable/insights/Dashboa
 
 test("should render dashboard insight", () => {
     // Given
-    render(<DashboardInsights />);
+    render(<DashboardInsights currentSite={1} />);
     // When
     const insightElement = screen.getByTestId("dashboardInsights");
     // Then

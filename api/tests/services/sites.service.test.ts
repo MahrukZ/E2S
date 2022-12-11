@@ -4,7 +4,8 @@ import { SiteService } from "../../services/sites.service";
 
 jest.mock('../../data/repositories/sites.repository', () => {
     const mSiteRepo = { 
-        findSiteById: jest.fn()
+        findSiteById: jest.fn(),
+        getAllSites: jest.fn()
     };
     return {
         SiteRepository: jest.fn(() => mSiteRepo)
@@ -43,5 +44,42 @@ describe('SiteService', () => {
             expect(fetchSpy).toHaveBeenCalledWith(siteId);
         });
     });
+
+      describe("SiteService.getAllSites", () => {
+    it("should return all sites", async () => {
+      // Given
+      const mSites: ISite[] = [
+                {
+                    siteId: 1,
+                    name: "Abacws",
+                    location: "Cathays",
+                    orgId: 1
+                },
+                {
+                    siteId: 2,
+                    name: "National Software Academy",
+                    location: "Newport",
+                    orgId: 1
+                },
+                {
+                    siteId: 3,
+                    name: "Queens Building",
+                    location: "Cardiff",
+                    orgId: 1
+                }
+      ];
+      const getSpy = jest
+        .spyOn(repository, "getAllSites")
+        .mockResolvedValue(mSites);
+
+      // When
+      const result = await service.getAllSites();
+
+      // Then
+      expect(result).toEqual(mSites);
+      expect(getSpy).toHaveBeenCalledTimes(1);
+      expect(getSpy).toHaveBeenCalledWith();
+    });
+  });
 
 });

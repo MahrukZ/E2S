@@ -16,7 +16,7 @@ const mockData = {
 
 test("should render reports insight", () => {
     // Given
-    render(<ReportsInsights betweenDates={mockData}/>);
+    render(<ReportsInsights currentSite={1} betweenDates={mockData} />);
     // When
     const insightElement = screen.getByTestId("reportsInsights");
     // Then

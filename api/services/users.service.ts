@@ -15,7 +15,7 @@ export class UserService {
         return await this.userRepository.signIn(email, password);
     }
 
-    async findUserByEmail(email: string) {
-        return await this.userRepository.findUserByEmail(email);
-    }
+    // async findUserByEmail(email: string) {
+    //     return await this.userRepository.findUserByEmail(email);
+    // }
 }

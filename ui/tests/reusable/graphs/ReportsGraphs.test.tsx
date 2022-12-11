@@ -7,16 +7,18 @@ import "jest-canvas-mock";
 import { addDays } from "date-fns";
 
 const mockData = {
-    dateRange: [        {
+    dateRange: [
+        {
             startDate: addDays(new Date(), -7),
             endDate: new Date(),
             key: "selection",
-        }],
+        },
+    ],
 };
 
 test("should render the reports graph container", () => {
     // Given
-    render(<ReportsGraphs betweenDates={mockData} />);
+    render(<ReportsGraphs currentSite={1} betweenDates={mockData} />);
 
     // When
     const graphContainerElement = screen.getByTestId("graphContainer");

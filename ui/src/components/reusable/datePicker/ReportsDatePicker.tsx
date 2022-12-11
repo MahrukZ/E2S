@@ -14,7 +14,11 @@ export interface IReportsDateRange {
     dateRange: Range[];
 }
 
-function ReportsDatePicker() {
+interface ReportsDatePickerProps {
+    currentSite: any;
+}
+
+function ReportsDatePicker({ currentSite }: ReportsDatePickerProps) {
     const now = new Date();
     const firstDayOfTheWeek = now.getDate() - now.getDay() + 1;
     const lastDayOfTheWeek = firstDayOfTheWeek + 6;
@@ -52,8 +56,14 @@ function ReportsDatePicker() {
                 data-testid="reportsDatePickerElement"
             >
                 <Container id="reportData" className="flex-fill reportsData">
-                    <ReportsInsights betweenDates={dateRange} />
-                    <ReportsGraphs betweenDates={dateRange} />
+                    <ReportsInsights
+                        betweenDates={dateRange}
+                        currentSite={currentSite}
+                    />
+                    <ReportsGraphs
+                        betweenDates={dateRange}
+                        currentSite={currentSite}
+                    />
                 </Container>
                 <Card className="flex-shrink-1 datePickerCard">
                     <Container className="justify-content-center d-flex mb-4">

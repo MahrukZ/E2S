@@ -42,15 +42,15 @@ export class SiteRepository {
     //     return data;
     // }
 
-    // async getAllSites(): Promise<ISite[]> {
-    //     let data = [];
-    //     try {
-    //         data = await this.siteRepository.findAll();
-    //     } catch (err) {
-    //         throw new Error("Failed to get all sites." || err);
-    //     }
-    //     return data;
-    // }
+    async getAllSites(): Promise<ISite[]> {
+        let data = [];
+        try {
+            data = await this.siteRepository.findAll();
+        } catch (err) {
+            throw new Error("Failed to get all sites." || err);
+        }
+        return data;
+    }
 
     // async updateSite(site: ISite): Promise<ISite> {
     //     let data = {};

@@ -9,11 +9,10 @@ import { IReportsDateRange } from "../datePicker/ReportsDatePicker";
 
 interface IReportsGraphsProp {
     betweenDates: IReportsDateRange;
+    currentSite: any;
 }
 
-function ReportsGraphs({ betweenDates }: IReportsGraphsProp) {
-    const currentSiteId = 1;
-
+function ReportsGraphs({ betweenDates, currentSite }: IReportsGraphsProp) {
     const [electricityGraph, setElectricityGraph] = useState<ISingleGraph>({
         xData: [],
         yData: [],
@@ -70,7 +69,7 @@ function ReportsGraphs({ betweenDates }: IReportsGraphsProp) {
                 await consumptionsService.findAllConsumptionsBySiteIdAndTime(
                     firstDayOfLastWeek,
                     lastDayOfLastWeek,
-                    currentSiteId
+                    currentSite
                 );
 
             const currentConsumptionsData = currentConsumptionsResponse["data"];
