@@ -36,7 +36,7 @@ export const sendEmail = async () => {
         const mailSettings = {
           from: "testuser15689@gmail.com>",
           // add your email to test the email service
-          to: "zulfiqarm1@cardiff.ac.uk",
+          to: "",
           subject: "Your weekly report is attached",
           attachments: [
             {
