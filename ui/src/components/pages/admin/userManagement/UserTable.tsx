@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Container, Table } from "react-bootstrap";
 import { UserManagementService } from "../../../../services/userManagement.service";
 import AddUser from "./AddUser";
-import DeleteBtn from "./DeleteBtn";
-import EditBtn from "./EditBtn";
+import DeleteUser from "./DeleteUser";
+import EditUser from "./EditUser";
 
 export interface IUser {
     userId?: number;
@@ -49,10 +49,13 @@ function UserTable() {
                 <td>{data.noSitesManaged}</td>
                 <td>{data.role}</td>
                 <td>
-                    <EditBtn userEmail={data.email} setUsersList={setUsersList} />
+                    <EditUser
+                        userEmail={data.email}
+                        setUsersList={setUsersList}
+                    />
                 </td>
                 <td>
-                    <DeleteBtn id={data.userId} setUsersList={setUsersList} />
+                    <DeleteUser id={data.userId} setUsersList={setUsersList} />
                 </td>
             </tr>
         );

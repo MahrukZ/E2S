@@ -10,7 +10,7 @@ interface IDeleteBtnProp {
     setUsersList: any;
 }
 
-function DeleteBtn({ id, setUsersList }: IDeleteBtnProp) {
+function DeleteUser({ id, setUsersList }: IDeleteBtnProp) {
     const [show, setShow] = useState(false);
 
     const handleShow = () => setShow(true);
@@ -62,4 +62,4 @@ function DeleteBtn({ id, setUsersList }: IDeleteBtnProp) {
     );
 }
 
-export default DeleteBtn;
+export default DeleteUser;
