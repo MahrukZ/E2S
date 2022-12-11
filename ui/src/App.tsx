@@ -1,6 +1,6 @@
 import Axios from "axios";
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Sidebar from "./components/reusable/sidebar/Sidebar";
 import Topbar from "./components/reusable/topbar/Topbar";
@@ -36,6 +36,20 @@ function App () {
                 <Routes>
                     <Route element={<ProtectedRoutes />}>
                         <Route
+                            path="/"
+                            element={<Navigate to="/dashboard" />}
+                        />
+                        <Route
+                            path="/dashboard"
+                            element={
+                                <Dashboard
+                                    setTopbarTitle={setTopbarTitle}
+                                    currentSite={currentSite}
+                                    key={currentSite}
+                                />
+                            }
+                        />
+                        <Route
                             path="/reports"
                             element={
                                 <Reports
@@ -65,25 +79,13 @@ function App () {
                                 />
                             }
                         />
-                        <Route
-                            path="/dashboard"
-                            element={
-                                <Dashboard
-                                    setTopbarTitle={setTopbarTitle}
-                                    currentSite={currentSite}
-                                    key={currentSite}
-                                />
-                            }
-                        />
                     </Route>
                     {/* admin routes */}
                     <Route element={<AdminRoutes />}>
                         <Route
                             path="/admin/overview"
                             element={
-                                <OverviewPage
-                                    setTopbarTitle={setTopbarTitle}
-                                />
+                                <OverviewPage setTopbarTitle={setTopbarTitle} />
                             }
                         />
                         <Route
