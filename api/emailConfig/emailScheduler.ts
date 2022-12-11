@@ -1,16 +1,15 @@
 import { sendEmail } from "./sendEmail";
 import cron from "node-cron";
 
-// uncomment the following to test the email being send after each minute
-// "*/1 * * * *"
-// "0 0 6 * * 1"
+// Uncomment the following and paste it in the cron.schedule() to send the email at noon on monday
+// "0 0 12 ? * MON" 
 
 export const EmailCronJob = () => {
-  cron.schedule("0 0 6 * * 1", function () {
+  cron.schedule("*/5 * * * *", function () {
     sendEmail()
-      .then((emailResponse) =>
-        console.log("Email successfully send..", emailResponse)
-      )
-      .catch((error) => console.log(error.message));
+      .then(() => console.log("Email successfully send"))
+      .catch((error) => {
+        console.log(error);
+      });
   });
 };

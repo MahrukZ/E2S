@@ -1,5 +1,6 @@
 import { google } from "googleapis";
 import nodemailer from "nodemailer";
+const pdfToBase64 = require("pdf-to-base64");
 
 const CLIENT_ID =
   "756325392326-fade03emr8dot73dao9v90up5sm42tnk.apps.googleusercontent.com";
@@ -18,7 +19,6 @@ oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 export const sendEmail = async () => {
   try {
     const accessToken = await oAuth2Client.getAccessToken();
-
     const transport = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -31,22 +31,27 @@ export const sendEmail = async () => {
       },
     });
 
-    const mailSettings = {
-      sender: "testuser15689@gmail.com>",
-      recipient: "zulfiqarm1@cardiff.ac.uk",
-      subject: "Your weekly report is attached",
-      // need to provide the required file path
-      // attachments: [
-      //   {
-      //     filename: "file1.pdf",
-      //     filePath: process.cwd() + "file1.pdf",
-      //     contentType: "application/pdf",
-      //   },
-      // ],
-    };
-
-    const emailResponse = await transport.sendMail(mailSettings);
-    return emailResponse;
+    pdfToBase64(process.cwd() + "/uploads/report.pdf")
+      .then(async (response: any) => {
+        const mailSettings = {
+          from: "testuser15689@gmail.com>",
+          // add your email to test the email service
+          to: "zulfiqarm1@cardiff.ac.uk",
+          subject: "Your weekly report is attached",
+          attachments: [
+            {
+              filename: "report.pdf",
+              content: response,
+              encoding: "base64",
+            },
+          ],
+        };
+        const emailResponse = await transport.sendMail(mailSettings);
+        return emailResponse;
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
   } catch (error) {
     return error;
   }
