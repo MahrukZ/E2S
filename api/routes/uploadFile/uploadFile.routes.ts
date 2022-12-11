@@ -1,6 +1,6 @@
-import uploadFile from "../../emailConfig/saveFile";
+import uploadFile from "../../emailConfig/emailOnDownload/saveFile";
 import express from "express";
-import { sendEmail } from "../../emailConfig/sendEmail";
+import { sendEmail } from "../../emailConfig/emailOnDownload/sendEmail";
 const router = express.Router();
 
 router.post("/uploadFile", uploadFile.single("file"), (req, res, next) => {
