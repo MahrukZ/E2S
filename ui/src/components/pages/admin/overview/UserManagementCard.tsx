@@ -37,7 +37,7 @@ function UserManagementCard() {
     }, [numOfUsers, numOfOrgs]);
 
     return (
-        <Col>
+        <Col id="userManagementCol">
             <a href="/admin/user-management">
                 <Card className="cardStyle">
                     <Card.Title className="cardContent">
