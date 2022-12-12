@@ -1,6 +1,19 @@
-.card-col {
+.cardStyle {
     align-items:center;
     background-color: #73A6BA;
     color: #FFFFFF;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
+    transition: transform .2s;
+}
+
+a {
+    text-decoration: none;
+}
+
+.cardStyle:hover {
+    transform: scale(1.1);
+}
+
+.cardBody {
+    color: #203841;
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 import { FaUsers } from "react-icons/fa";
 import { OrganisationsService } from "../../../../services/organisations.service";
 import { UserManagementService } from "../../../../services/userManagement.service";
@@ -34,29 +34,31 @@ function UserManagementCol() {
 
     return (
         <Col>
-            <Card className="flex-fill card-col">
-                <Card.Title>
-                    <h1>
-                        <FaUsers /> User Management
-                    </h1>
-                </Card.Title>
-                <Card.Text>
-                    <h6>View and Edit Users</h6>
-                </Card.Text>
-                <Card.Body>
-                    <Row>
-                        <Col>
-                            <h3>Users</h3>
-                            <h4>{numOfUsers}</h4>
-                        </Col>
-                        <div className="vr" />
-                        <Col className="data">
-                            <h3>Organisations</h3>
-                            <h4>{numOfOrgs}</h4>
-                        </Col>
-                    </Row>
-                </Card.Body>
-            </Card>
+            <a href="/admin/user-management">
+                <Card className="cardStyle">
+                    <Card.Title>
+                        <h1>
+                            <FaUsers /> User Management
+                        </h1>
+                    </Card.Title>
+                    <Card.Text>
+                        <h6>View and Edit Users</h6>
+                    </Card.Text>
+                    <Card.Body className="cardBody">
+                        <Row>
+                            <Col>
+                                <h3>Users</h3>
+                                <h4>{numOfUsers}</h4>
+                            </Col>
+                            <div className="vr" />
+                            <Col className="data">
+                                <h3>Organisations</h3>
+                                <h4>{numOfOrgs}</h4>
+                            </Col>
+                        </Row>
+                    </Card.Body>
+                </Card>
+            </a>
         </Col>
     );
 }
