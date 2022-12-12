@@ -66,8 +66,23 @@ export class UserRepository {
 
     async createUser(user: IUser): Promise<IUser> {
         let data = {};
+
+        let hashedPassword: string = "";
+        await bcrypt.hash(user.password!, 10).then((res) => {
+            hashedPassword = res;
+        });
+
+        const newUser: IUser = {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            role: user.role,
+            password: hashedPassword,
+            orgId: user.orgId,
+        };
+
         try {
-            data = await this.userRepository.create(user);
+            data = await this.userRepository.create(newUser);
         } catch (err) {
             throw new Error("Failed to create user." || err);
         }
@@ -90,9 +105,24 @@ export class UserRepository {
 
     async updateUser(user: IUser): Promise<IUser> {
         let data = {};
+
+        let hashedPassword: string = "";
+        await bcrypt.hash(user.password!, 10).then((res) => {
+            hashedPassword = res;
+        });
+
+        const updateUser: IUser = {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            role: user.role,
+            password: hashedPassword,
+            orgId: user.orgId,
+        };
+        
         try {
             data = await this.userRepository.update(
-                { ...user },
+                { ...updateUser },
                 {
                     where: {
                         user_id: user.userId,
