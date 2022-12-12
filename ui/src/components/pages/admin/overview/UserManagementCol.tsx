@@ -36,7 +36,7 @@ function UserManagementCol() {
         <Col>
             <a href="/admin/user-management">
                 <Card className="cardStyle">
-                    <Card.Title>
+                    <Card.Title className="cardContent">
                         <h1>
                             <FaUsers /> User Management
                         </h1>
