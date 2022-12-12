@@ -148,7 +148,7 @@ function AddSite({ setSitesList }: IAddSiteProp) {
                                     </Form.Select>
                                     <Form.Text>
                                         Cannot find your Organisation?&nbsp;
-                                        <a href="/admin/site-management">
+                                        <a href="/admin/organisation-management">
                                             Create an Organisation
                                         </a>
                                     </Form.Text>

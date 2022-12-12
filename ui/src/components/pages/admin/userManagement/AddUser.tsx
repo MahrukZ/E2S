@@ -183,7 +183,7 @@ function AddUser({ setUsersList }: IAddUserProp) {
                                     </Form.Select>
                                     <Form.Text>
                                         Cannot find your Organisation?
-                                        <a href="/admin/site-management">
+                                        <a href="/admin/organisation-management">
                                             Create an Organisation
                                         </a>
                                     </Form.Text>
