@@ -1,6 +1,6 @@
 import Axios from "axios";
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Sidebar from "./components/reusable/sidebar/Sidebar";
 import Topbar from "./components/reusable/topbar/Topbar";
@@ -14,8 +14,10 @@ import Dashboard from "./components/pages/Dashboard";
 
 import SiteManagementPage from "./components/pages/admin/siteManagement/SiteManagementPage";
 import UserManagementPage from "./components/pages/admin/userManagement/UserManagementPage";
+import OverviewPage from "./components/pages/admin/overview/OverviewPage";
+import OrganisationPage from "./components/pages/admin/siteManagement/OrganisationPage";
 
-const App: React.FunctionComponent = () => {
+function App () {
     Axios.defaults.withCredentials = true;
 
     const [currentSite, setCurrentSite] = useState<number>(1);
@@ -34,6 +36,20 @@ const App: React.FunctionComponent = () => {
                 <Sidebar />
                 <Routes>
                     <Route element={<ProtectedRoutes />}>
+                        <Route
+                            path="/"
+                            element={<Navigate to="/dashboard" />}
+                        />
+                        <Route
+                            path="/dashboard"
+                            element={
+                                <Dashboard
+                                    setTopbarTitle={setTopbarTitle}
+                                    currentSite={currentSite}
+                                    key={currentSite}
+                                />
+                            }
+                        />
                         <Route
                             path="/reports"
                             element={
@@ -64,19 +80,15 @@ const App: React.FunctionComponent = () => {
                                 />
                             }
                         />
-                        <Route
-                            path="/"
-                            element={
-                                <Dashboard
-                                    setTopbarTitle={setTopbarTitle}
-                                    currentSite={currentSite}
-                                    key={currentSite}
-                                />
-                            }
-                        />
                     </Route>
                     {/* admin routes */}
                     <Route element={<AdminRoutes />}>
+                        <Route
+                            path="/admin/overview"
+                            element={
+                                <OverviewPage setTopbarTitle={setTopbarTitle} />
+                            }
+                        />
                         <Route
                             path="/admin/site-management"
                             element={
@@ -89,6 +101,14 @@ const App: React.FunctionComponent = () => {
                             path="/admin/user-management"
                             element={
                                 <UserManagementPage
+                                    setTopbarTitle={setTopbarTitle}
+                                />
+                            }
+                        />
+                        <Route
+                            path="/admin/organisation-management"
+                            element={
+                                <OrganisationPage
                                     setTopbarTitle={setTopbarTitle}
                                 />
                             }

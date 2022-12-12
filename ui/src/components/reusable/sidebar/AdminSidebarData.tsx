@@ -7,7 +7,7 @@ import * as FaIcons from "react-icons/fa";
 export const AdminSidebarData = [
     {
         title: "Overview",
-        path: "/admin/",
+        path: "/admin/overview",
         icon: <FaIcons.FaChartPie size="35" />,
     },
     {

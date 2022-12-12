@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IOrganisation } from "../components/pages/admin/siteManagement/Organisations";
+import { IOrganisation } from "../components/pages/admin/siteManagement/OrganisationPage";
 
 export class OrganisationsService {
     public async createOrganisation(org: IOrganisation): Promise<any> {

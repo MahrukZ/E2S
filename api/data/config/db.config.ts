@@ -8,6 +8,7 @@ import { Consumptions } from "../models/consumptions.model";
 import { Users } from "../models/users.model";
 import { SiteManagement } from "../models/siteManagement.model";
 import { Organisations } from "../models/organisations.model";
+import { SitesHasUsers } from "../models/sitesHasUsers.model";
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ export const connect = () => {
     sequelize.addModels([Insights]);
     sequelize.addModels([Sites]);
     sequelize.addModels([SitesAndUsers]);
+    sequelize.addModels([SitesHasUsers]);
     sequelize.addModels([UserManagement]);
     sequelize.addModels([Consumptions]);
     sequelize.addModels([Users]);

@@ -12,7 +12,7 @@ test("should render 'add site' button element", () => {
     render(<AddSite setSitesList={mockSitesList} />);
 
     // When
-    const addSiteBtnElement = document.getElementById("addUserBtn");
+    const addSiteBtnElement = document.getElementById("addSiteBtn");
 
     // Then
     expect(addSiteBtnElement).toBeInTheDocument();

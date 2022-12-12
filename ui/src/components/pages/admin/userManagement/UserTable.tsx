@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Table } from "react-bootstrap";
+import ReactLoading from "react-loading";
 import { UserManagementService } from "../../../../services/userManagement.service";
 import AddUser from "./AddUser";
 import DeleteUser from "./DeleteUser";
@@ -26,13 +27,16 @@ export interface IUserManagement {
 }
 
 function UserTable() {
+    const [isLoading, setLoading] = useState<Boolean>(false);
     const [usersList, setUsersList] = useState<IUserManagement[]>([]);
     const userManagementService = new UserManagementService();
 
     useEffect(() => {
+        setLoading(true);
         const getAllUsers = async () => {
             const users = await userManagementService.getAllUserManagements();
             setUsersList(users.data);
+            setLoading(false);
         };
         getAllUsers();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -63,24 +67,37 @@ function UserTable() {
 
     return (
         <>
-            <Container className="d-flex align-items-end flex-column">
+            <Container
+                id="userTable"
+                className="d-flex align-items-end flex-column"
+            >
                 <AddUser setUsersList={setUsersList} />
-                <Table id="userTable" striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email Address</th>
-                            <th>Organisation</th>
-                            <th>No Of Sites Managed</th>
-                            <th>Role</th>
-                            <th colSpan={2}>Actions</th>
-                        </tr>
-                    </thead>
+                {isLoading ? (
+                    <ReactLoading
+                        className="loaderAlignment"
+                        type="bars"
+                        color="#203841"
+                        height={"40%"}
+                        width={"40%"}
+                    />
+                ) : (
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email Address</th>
+                                <th>Organisation</th>
+                                <th>No Of Sites Managed</th>
+                                <th>Role</th>
+                                <th colSpan={2}>Actions</th>
+                            </tr>
+                        </thead>
 
-                    <tbody>{userManagementData}</tbody>
-                </Table>
+                        <tbody>{userManagementData}</tbody>
+                    </Table>
+                )}
                 <AddUser setUsersList={setUsersList} />
             </Container>
         </>

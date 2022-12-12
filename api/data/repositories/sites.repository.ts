@@ -82,4 +82,18 @@ export class SiteRepository {
         }
         return data;
     }
+
+    async findSitesByOrgId(orgId: number): Promise<ISite> {
+        let data = [];
+        try {
+            data = await this.siteRepository.findAll({
+                where: {
+                    orgId,
+                },
+            });
+        } catch (err) {
+            throw new Error("Failed to get sites by org id." || err);
+        }
+        return data;
+    }
 }

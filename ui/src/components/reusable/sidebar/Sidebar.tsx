@@ -5,7 +5,7 @@ import "./Sidebar.css";
 import * as FaIcons from "react-icons/fa";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import logo from "./../../../assets/images/Cardiff_University_logo.png";
+import logo from "./../../../assets/images/E2S_logo.png";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { UsersService } from "../../../services/users.service";
@@ -120,7 +120,7 @@ const CollapsedMenuItemLinks = styled(Link)`
 
 const ImageLink = styled(Link)``;
 
-const Sidebar: React.FunctionComponent = () => {
+function Sidebar() {
     const [close, setClose] = useState(false);
     const showSidebar = () => setClose(!close);
     const [useSidebarData, setUseSidebarData] = useState(SidebarData);
@@ -162,10 +162,7 @@ const Sidebar: React.FunctionComponent = () => {
     return (
         <>
             {/*The collapsed sidebar which only shows the icons*/}
-            <CollapsedSideBar
-                data-testid="collapsedSideBar"
-                className="onTop"
-            >
+            <CollapsedSideBar data-testid="collapsedSideBar" className="onTop">
                 <MenuIconOpen
                     data-testid="menuIconOpen"
                     to="#"
@@ -204,15 +201,29 @@ const Sidebar: React.FunctionComponent = () => {
                 <Tooltip anchorId="menuClose" />
                 <TopSideBarClose>
                     {/* Image placed inside ui/src so that it is accessible */}
-                    <ImageLink to={"/"}>
-                        <img
-                            className="imageLogo"
-                            width={50}
-                            height={50}
-                            src={logo}
-                            alt="logo"
-                        />
-                    </ImageLink>
+                    {useSidebarData === SidebarData && (
+                        <ImageLink to={"/dashboard"}>
+                            <img
+                                className="imageLogo"
+                                width={50}
+                                height={50}
+                                src={logo}
+                                alt="logo"
+                            />
+                        </ImageLink>
+                    )}
+
+                    {useSidebarData === AdminSidebarData && (
+                        <ImageLink to={"/admin/overview"}>
+                            <img
+                                className="imageLogo"
+                                width={50}
+                                height={50}
+                                src={logo}
+                                alt="logo"
+                            />
+                        </ImageLink>
+                    )}
 
                     <MenuIconClose
                         data-testid="menuIconClose"

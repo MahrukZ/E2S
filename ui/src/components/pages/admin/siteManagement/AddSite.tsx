@@ -5,7 +5,7 @@ import { OrganisationsService } from "../../../../services/organisations.service
 import { SiteManagementService } from "../../../../services/siteManagement.service";
 import { SitesService } from "../../../../services/sites.service";
 import Message from "../../../reusable/alerts/Message";
-import { IOrganisation } from "../siteManagement/Organisations";
+import { IOrganisation } from "./OrganisationPage";
 import { ISite } from "./SiteTable";
 
 interface IAddSiteProp {
@@ -68,7 +68,7 @@ function AddSite({ setSitesList }: IAddSiteProp) {
     return (
         <>
             <Button
-                id="addUserBtn"
+                id="addSiteBtn"
                 className="mt-4 mb-4"
                 variant="outline-success"
                 onClick={handleShow}
@@ -148,7 +148,7 @@ function AddSite({ setSitesList }: IAddSiteProp) {
                                     </Form.Select>
                                     <Form.Text>
                                         Cannot find your Organisation?&nbsp;
-                                        <a href="/admin/site-management">
+                                        <a href="/admin/organisation-management">
                                             Create an Organisation
                                         </a>
                                     </Form.Text>
