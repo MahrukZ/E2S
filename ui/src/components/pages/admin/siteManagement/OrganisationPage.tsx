@@ -52,7 +52,7 @@ function OrganisationPage({ setTopbarTitle }: OrganisationPageProps) {
     }, []);
 
     return (
-        <Container className="mt-5">
+        <Container data-testid="orgContainer" className="mt-5">
             <Form>
                 <Form.Group className="mb-3">
                     <Form.Label>Organisation Name*</Form.Label>
