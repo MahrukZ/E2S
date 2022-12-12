@@ -13,7 +13,7 @@ function SiteManagementPage({ setTopbarTitle }: SiteManagementPageProps) {
     }, []);
     return (
         <div data-testid="siteManagement" className="text-center">
-            <SiteTable />{" "}
+            <SiteTable />
         </div>
     );
 }

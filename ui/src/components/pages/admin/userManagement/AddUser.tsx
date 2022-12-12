@@ -5,7 +5,7 @@ import { OrganisationsService } from "../../../../services/organisations.service
 import { UserManagementService } from "../../../../services/userManagement.service";
 import { UsersService } from "../../../../services/users.service";
 import Message from "../../../reusable/alerts/Message";
-import { IOrganisation } from "../siteManagement/Organisations";
+import { IOrganisation } from "../siteManagement/OrganisationPage";
 import { IUser } from "./UserTable";
 
 interface IAddUserProp {

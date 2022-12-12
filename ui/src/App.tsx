@@ -15,6 +15,7 @@ import Dashboard from "./components/pages/Dashboard";
 import SiteManagementPage from "./components/pages/admin/siteManagement/SiteManagementPage";
 import UserManagementPage from "./components/pages/admin/userManagement/UserManagementPage";
 import OverviewPage from "./components/pages/admin/overview/OverviewPage";
+import OrganisationPage from "./components/pages/admin/siteManagement/OrganisationPage";
 
 function App () {
     Axios.defaults.withCredentials = true;
@@ -100,6 +101,14 @@ function App () {
                             path="/admin/user-management"
                             element={
                                 <UserManagementPage
+                                    setTopbarTitle={setTopbarTitle}
+                                />
+                            }
+                        />
+                        <Route
+                            path="/admin/organisation-management"
+                            element={
+                                <OrganisationPage
                                     setTopbarTitle={setTopbarTitle}
                                 />
                             }

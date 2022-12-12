@@ -5,7 +5,7 @@ import { OrganisationsService } from "../../../../services/organisations.service
 import { SiteManagementService } from "../../../../services/siteManagement.service";
 import { SitesService } from "../../../../services/sites.service";
 import Message from "../../../reusable/alerts/Message";
-import { IOrganisation } from "../siteManagement/Organisations";
+import { IOrganisation } from "./OrganisationPage";
 import { ISite } from "./SiteTable";
 
 interface IAddSiteProp {
