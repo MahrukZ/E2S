@@ -55,15 +55,13 @@ function DashboardInsights({ currentSite }: DashboardInsightsProps) {
         let gasInsightsList: String[] = [];
         let emissionsInsightsList: String[] = [];
 
-        const getAllInsights = async () => {
+        const findSumOfConsumptionsBySiteIdAndTime = async () => {
             let finalInsights: String[] = [];
             let insightsList: String[] = [];
             setLoading(true);
 
             const insightsTemplates = await insightsService.getInsights();
-            // Currently just has 1 as the siteId, this will need to be changed
             const siteData = await sitesService.findSiteById(currentSiteId);
-
             const currentSite = siteData["data"][0]["name"];
 
             // Replace [site] in the template with site name
@@ -93,11 +91,7 @@ function DashboardInsights({ currentSite }: DashboardInsightsProps) {
             electricityInsightsList = [finalInsights[2], finalInsights[3]];
             gasInsightsList = [finalInsights[4], finalInsights[5]];
             emissionsInsightsList = [finalInsights[6], finalInsights[7]];
-            setLoading(false);
-        };
-        getAllInsights();
 
-        const findSumOfConsumptionsBySiteIdAndTime = async () => {
             let costPct: String = "";
             let electricityPct: String = "";
             let gasPct: String = "";
@@ -233,6 +227,7 @@ function DashboardInsights({ currentSite }: DashboardInsightsProps) {
                 percentage: emissionsPct,
                 isPositive: isEmissionsPositive,
             });
+            setLoading(false);
         };
         findSumOfConsumptionsBySiteIdAndTime();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -245,16 +240,25 @@ function DashboardInsights({ currentSite }: DashboardInsightsProps) {
             data-testid="dashboardInsights"
         >
             <Col className="d-flex insightsCol">
-                <Insight insightData={costsInsight} isLoading={isLoading} />
+                <Insight
+                    insightData={costsInsight}
+                    isLoading={isLoading}
+                />
 
                 <Insight
                     insightData={electricityInsight}
                     isLoading={isLoading}
                 />
 
-                <Insight insightData={gasInsight} isLoading={isLoading} />
+                <Insight
+                    insightData={gasInsight}
+                    isLoading={isLoading}
+                />
 
-                <Insight insightData={emissionsInsight} isLoading={isLoading} />
+                <Insight
+                    insightData={emissionsInsight}
+                    isLoading={isLoading}
+                />
             </Col>
         </Container>
     );
