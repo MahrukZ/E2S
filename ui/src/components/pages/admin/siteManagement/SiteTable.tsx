@@ -5,6 +5,7 @@ import { SiteManagementService } from "../../../../services/siteManagement.servi
 import AddSite from "./AddSite";
 import DeleteSite from "./DeleteSite";
 import EditSite from "./EditSite";
+import "./SiteManagement.css";
 
 export interface ISite {
     siteId?: number;

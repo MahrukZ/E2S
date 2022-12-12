@@ -1,0 +1,10 @@
+.sitesListRow {
+    height: 150px;
+    overflow: auto;
+    border: 1px solid #203841;
+    margin-left: 10px;
+}
+
+#userTable {
+    margin-left: 100px;
+}

@@ -79,8 +79,10 @@ CREATE TABLE IF NOT EXISTS `consumptions` (
   );
   
   CREATE TABLE IF NOT EXISTS `sites_has_users` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `site_id` INT NOT NULL,
-  `user_id` INT NOT NULL
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (`id`)
   );
 
 ALTER TABLE `organisations`

@@ -5,6 +5,7 @@ import { UserManagementService } from "../../../../services/userManagement.servi
 import AddUser from "./AddUser";
 import DeleteUser from "./DeleteUser";
 import EditUser from "./EditUser";
+import "./UserManagement.css";
 
 export interface IUser {
     userId?: number;

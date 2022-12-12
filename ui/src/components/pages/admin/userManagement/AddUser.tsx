@@ -2,11 +2,15 @@ import { useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { FaPlus } from "react-icons/fa";
 import { OrganisationsService } from "../../../../services/organisations.service";
+import { SitesService } from "../../../../services/sites.service";
 import { UserManagementService } from "../../../../services/userManagement.service";
 import { UsersService } from "../../../../services/users.service";
 import Message from "../../../reusable/alerts/Message";
 import { IOrganisation } from "../siteManagement/OrganisationPage";
+import { ISite } from "../siteManagement/SiteTable";
 import { IUser } from "./UserTable";
+import "./UserManagement.css";
+import { SitesHasUsersService } from "../../../../services/sitesHasUsers.service";
 
 interface IAddUserProp {
     setUsersList: any;
@@ -27,15 +31,21 @@ function AddUser({ setUsersList }: IAddUserProp) {
     const [show, setShow] = useState(false);
     const [error, setError] = useState("");
     const [orgsList, setOrgsList] = useState<IOrganisation[]>([]);
+    const [sitesList, setSitesList] = useState<ISite[]>([]);
+    const [sitesHasUsersList, setSitesHasUsersList] = useState<[]>([]);
 
     const usersService = new UsersService();
     const userManagementService = new UserManagementService();
     const organisationsService = new OrganisationsService();
+    const siteService = new SitesService();
+    const sitesHasUsersService = new SitesHasUsersService();
 
     const getAllOrganisations = async () => {
         try {
             const orgs = await organisationsService.getAllOrganisations();
+            const sites = await siteService.getSites();
             setOrgsList(orgs.data);
+            setSitesList(sites.data);
         } catch (err) {
             console.log(err);
         }
@@ -46,6 +56,19 @@ function AddUser({ setUsersList }: IAddUserProp) {
         getAllOrganisations();
     };
     const handleClose = () => setShow(false);
+
+    const handleChecked = (e: any) => {
+        let tempSitesHasUsersList: any = sitesHasUsersList;
+        let isChecked = e.target.checked;
+
+        if (isChecked === true) {
+            tempSitesHasUsersList.push(e.target.id);
+        } else if (isChecked === false) {
+            const index = tempSitesHasUsersList.indexOf(e.target.id);
+            tempSitesHasUsersList.splice(index, 1);
+        }
+        setSitesHasUsersList(tempSitesHasUsersList);
+    };
 
     const handleCreateUser = async () => {
         let valid: boolean = true;
@@ -70,6 +93,15 @@ function AddUser({ setUsersList }: IAddUserProp) {
             setError("");
             try {
                 await usersService.createUser(user);
+
+                const u = await usersService.findUserByEmail(user.email!);
+                for (let i = 0; i < sitesHasUsersList.length; i++) {
+                    await sitesHasUsersService.createSitesHasUsers({
+                        siteId: parseInt(sitesHasUsersList[i]),
+                        userId: u["data"][0]["userId"],
+                    });
+                }
+
                 const users =
                     await userManagementService.getAllUserManagements();
                 setUsersList(users.data);
@@ -215,11 +247,27 @@ function AddUser({ setUsersList }: IAddUserProp) {
                             </Col>
 
                             <Row>
+                                <Form.Label>List of Sites Managed</Form.Label>
+                                <div className="sitesListRow">
+                                    <Form.Group className="mb-3">
+                                        {sitesList.map((site, index) => (
+                                            <Form.Check
+                                                key={index}
+                                                type="checkbox"
+                                                id={String(site.siteId)}
+                                                label={site.name}
+                                                onChange={(e) =>
+                                                    handleChecked(e)
+                                                }
+                                            />
+                                        ))}
+                                    </Form.Group>
+                                </div>
+                            </Row>
+
+                            <Row className="mt-3 mb-3">
                                 <Col>
-                                    <Form.Group
-                                        className="mb-3"
-                                        controlId="password"
-                                    >
+                                    <Form.Group controlId="password">
                                         <Form.Label>
                                             Temporary Password*
                                         </Form.Label>
@@ -234,10 +282,7 @@ function AddUser({ setUsersList }: IAddUserProp) {
                                 </Col>
 
                                 <Col>
-                                    <Form.Group
-                                        className="mb-3"
-                                        controlId="confirmPassword"
-                                    >
+                                    <Form.Group controlId="confirmPassword">
                                         <Form.Label>
                                             Confirm Password*
                                         </Form.Label>

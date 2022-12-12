@@ -74,43 +74,43 @@ INSERT INTO `sites`
 VALUES(null, 'Darlington Economic Campus', 'Feethams', 3);
 
 INSERT INTO `sites_has_users`
-VALUES(1, 1);
+VALUES(NULL, 1, 1);
 INSERT INTO `sites_has_users`
-VALUES(2, 1);
+VALUES(NULL, 2, 1);
 INSERT INTO `sites_has_users`
-VALUES(1, 3);
+VALUES(NULL, 1, 3);
 INSERT INTO `sites_has_users`
-VALUES(2, 3);
+VALUES(NULL, 2, 3);
 INSERT INTO `sites_has_users`
-VALUES(3, 1);
+VALUES(NULL, 3, 1);
 INSERT INTO `sites_has_users`
-VALUES(2, 2);
+VALUES(NULL, 2, 2);
 INSERT INTO `sites_has_users`
-VALUES(4, 4);
+VALUES(NULL, 4, 4);
 INSERT INTO `sites_has_users`
-VALUES(5, 4);
+VALUES(NULL, 5, 4);
 INSERT INTO `sites_has_users`
-VALUES(6, 4);
+VALUES(NULL, 6, 4);
 INSERT INTO `sites_has_users`
-VALUES(4, 5);
+VALUES(NULL, 4, 5);
 INSERT INTO `sites_has_users`
-VALUES(5, 5);
+VALUES(NULL, 5, 5);
 INSERT INTO `sites_has_users`
-VALUES(6, 6);
+VALUES(NULL, 6, 6);
 INSERT INTO `sites_has_users`
-VALUES(7, 7);
+VALUES(NULL, 7, 7);
 INSERT INTO `sites_has_users`
-VALUES(8, 7);
+VALUES(NULL, 8, 7);
 INSERT INTO `sites_has_users`
-VALUES(9, 7);
+VALUES(NULL, 9, 7);
 INSERT INTO `sites_has_users`
-VALUES(7, 8);
+VALUES(NULL, 7, 8);
 INSERT INTO `sites_has_users`
-VALUES(8, 8);
+VALUES(NULL, 8, 8);
 INSERT INTO `sites_has_users`
-VALUES(9, 8);
+VALUES(NULL, 9, 8);
 INSERT INTO `sites_has_users`
-VALUES(9, 9);
+VALUES(NULL, 9, 9);
 
 INSERT INTO `suppliers`
 VALUES(null, 'British Gas');
