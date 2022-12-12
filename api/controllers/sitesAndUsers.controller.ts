@@ -47,24 +47,4 @@ export class SitesAndUsersController {
                 });
             });
     }
-
-    async createSitesAndUsers(req: Request, res: Response): Promise<any> {
-        return this.sitesAndUsersService
-            .createSitesAndUsers(req.body)
-            .then((data) => {
-                res.status(201).json({
-                    message: "Created",
-                    status: 201,
-                    data,
-                });
-            })
-            .catch((err) => {
-                res.status(500).json({
-                    message:
-                        err.message ||
-                        "server error: failed to create sites and users.",
-                    status: 500,
-                });
-            });
-    }
 }

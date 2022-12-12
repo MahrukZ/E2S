@@ -41,14 +41,4 @@ export class SitesAndUsersRepository {
         }
         return data;
     }
-
-    async createSitesAndUsers(sitesAndUsers: ISitesAndUser): Promise<ISitesAndUser[]> {
-        let data = [];
-        try {
-            data = await this.sitesAndUsersRepository.create(sitesAndUsers);
-        } catch (err) {
-            throw new Error("Failed to create sites and users." || err);
-        }
-        return data;
-    }
 }
