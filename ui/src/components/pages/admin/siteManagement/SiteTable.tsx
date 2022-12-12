@@ -71,7 +71,10 @@ function SiteTable() {
 
     return (
         <>
-            <Container className="d-flex align-items-end flex-column">
+            <Container
+                id="siteTable"
+                className="d-flex align-items-end flex-column"
+            >
                 <AddSite setSitesList={setSitesList} />
                 {isLoading ? (
                     <ReactLoading
@@ -82,7 +85,7 @@ function SiteTable() {
                         width={"40%"}
                     />
                 ) : (
-                    <Table id="siteTable" striped bordered hover>
+                    <Table striped bordered hover>
                         <thead>
                             <tr>
                                 <th>#</th>

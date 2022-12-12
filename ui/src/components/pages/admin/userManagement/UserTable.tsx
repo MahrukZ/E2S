@@ -67,7 +67,10 @@ function UserTable() {
 
     return (
         <>
-            <Container className="d-flex align-items-end flex-column">
+            <Container
+                id="userTable"
+                className="d-flex align-items-end flex-column"
+            >
                 <AddUser setUsersList={setUsersList} />
                 {isLoading ? (
                     <ReactLoading
@@ -78,7 +81,7 @@ function UserTable() {
                         width={"40%"}
                     />
                 ) : (
-                    <Table id="userTable" striped bordered hover>
+                    <Table striped bordered hover>
                         <thead>
                             <tr>
                                 <th>#</th>
