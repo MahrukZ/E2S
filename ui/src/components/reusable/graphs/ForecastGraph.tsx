@@ -5,12 +5,14 @@ import { ConsumptionsService } from "../../../services/consumptions.service";
 import "./Graph.css";
 import DoubleGraph, { IDoubleGraph } from "./DoubleGraph";
 import { addDays } from "date-fns";
+import ReactLoading from "react-loading";
 
 interface ForecastGraphProps {
     currentSite: any;
 }
 
 function ForecastGraph({ currentSite }: ForecastGraphProps) {
+    const [isLoading, setLoading] = useState<Boolean>(false);
     const currentSiteId = currentSite;
 
     const [costsGraph, setCostsGraph] = useState<IDoubleGraph>({
@@ -31,6 +33,7 @@ function ForecastGraph({ currentSite }: ForecastGraphProps) {
         const consumptionsService = new ConsumptionsService();
 
         const findAllConsumptionsBySiteIdAndTime = async () => {
+            setLoading(true);
             let timeData = [];
             let totalCostData = [];
             let predictedCostData = [];
@@ -103,6 +106,7 @@ function ForecastGraph({ currentSite }: ForecastGraphProps) {
                 name0: "Last 365 days",
                 name1: "Predicted next 365 days",
             });
+            setLoading(false);
         };
 
         findAllConsumptionsBySiteIdAndTime();
@@ -116,25 +120,35 @@ function ForecastGraph({ currentSite }: ForecastGraphProps) {
             data-testid="graphContainer"
         >
             <Col className="d-flex graphContainer">
-                <DoubleGraph graphData={costsGraph} />
+                <DoubleGraph graphData={costsGraph} isLoading={isLoading} />
                 <Card className="costsCard">
                     <Card.Title>Total Costs:</Card.Title>
-                    <Card.Body>
-                        <br></br>
-                        <p>
-                            <b>Last 365 days total cost: </b>
-                        </p>
-                        <p>
-                            <b>£ {yearCosts[0]}</b>
-                        </p>
-                        <br></br>
-                        <p>
-                            <b>Next 365 days predicted cost:</b>
-                        </p>
-                        <p>
-                            <b>£ {yearCosts[1]}</b>
-                        </p>
-                    </Card.Body>
+                    {isLoading ? (
+                        <ReactLoading
+                            className="loaderAlignment"
+                            type="spin"
+                            color="#FFFFFF"
+                            height={"20%"}
+                            width={"20%"}
+                        />
+                    ) : (
+                        <Card.Body>
+                            <br></br>
+                            <p>
+                                <b>Last 365 days total cost: </b>
+                            </p>
+                            <p>
+                                <b>£ {yearCosts[0]}</b>
+                            </p>
+                            <br></br>
+                            <p>
+                                <b>Next 365 days predicted cost:</b>
+                            </p>
+                            <p>
+                                <b>£ {yearCosts[1]}</b>
+                            </p>
+                        </Card.Body>
+                    )}
                 </Card>
             </Col>
         </Container>

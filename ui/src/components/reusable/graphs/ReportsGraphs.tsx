@@ -13,6 +13,7 @@ interface IReportsGraphsProp {
 }
 
 function ReportsGraphs({ betweenDates, currentSite }: IReportsGraphsProp) {
+    const [isLoading, setLoading] = useState<Boolean>(false);
     const [electricityGraph, setElectricityGraph] = useState<ISingleGraph>({
         xData: [],
         yData: [],
@@ -53,6 +54,7 @@ function ReportsGraphs({ betweenDates, currentSite }: IReportsGraphsProp) {
         const consumptionsService = new ConsumptionsService();
 
         const findAllConsumptionsBySiteIdAndTime = async () => {
+            setLoading(true);
             let electricityData = [];
             let gasData = [];
             let emissionsData = [];
@@ -147,9 +149,11 @@ function ReportsGraphs({ betweenDates, currentSite }: IReportsGraphsProp) {
                 name0: "Electricity",
                 name1: "Gas",
             });
+            setLoading(false);
         };
 
         findAllConsumptionsBySiteIdAndTime();
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [betweenDates]);
 
@@ -159,13 +163,13 @@ function ReportsGraphs({ betweenDates, currentSite }: IReportsGraphsProp) {
             className="justify-content-center"
             data-testid="graphContainer"
         >
-            <SingleGraph graphData={electricityGraph} />
+            <SingleGraph graphData={electricityGraph} isLoading={isLoading} />
 
-            <SingleGraph graphData={gasGraph} />
+            <SingleGraph graphData={gasGraph} isLoading={isLoading} />
 
-            <SingleGraph graphData={emissionsGraph} />
+            <SingleGraph graphData={emissionsGraph} isLoading={isLoading} />
 
-            <DoubleGraph graphData={costsGraph} />
+            <DoubleGraph graphData={costsGraph} isLoading={isLoading} />
         </Container>
     );
 }
