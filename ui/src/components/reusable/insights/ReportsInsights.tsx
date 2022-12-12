@@ -13,6 +13,8 @@ interface IReportsInsightsProp {
 }
 
 function ReportsInsights({ betweenDates, currentSite }: IReportsInsightsProp) {
+    const [isLoading, setLoading] = useState<Boolean>(false);
+
     const currentSiteId = currentSite;
 
     const [costsInsight, setCostsInsight] = useState<IInsightData>({
@@ -58,6 +60,7 @@ function ReportsInsights({ betweenDates, currentSite }: IReportsInsightsProp) {
         const getAllInsights = async () => {
             let finalInsights: String[] = [];
             let insightsList: String[] = [];
+            setLoading(true);
 
             const insightsTemplates = await insightsService.getInsights();
             // Currently just has 1 as the siteId, this will need to be changed
@@ -102,6 +105,7 @@ function ReportsInsights({ betweenDates, currentSite }: IReportsInsightsProp) {
             setElectricityInsightsList([finalInsights[2], finalInsights[3]]);
             setGasInsightsList([finalInsights[4], finalInsights[5]]);
             setEmissionsInsightsList([finalInsights[6], finalInsights[7]]);
+            setLoading(false);
         };
         getAllInsights();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -119,6 +123,7 @@ function ReportsInsights({ betweenDates, currentSite }: IReportsInsightsProp) {
         let totalCosts: string;
 
         const findSumOfConsumptionsBySiteIdAndTime = async () => {
+            setLoading(true);
             const lastWeekConsumptionsResponse =
                 await consumptionsService.findSumOfConsumptionsBySiteIdAndTime(
                     from,
@@ -175,6 +180,7 @@ function ReportsInsights({ betweenDates, currentSite }: IReportsInsightsProp) {
                 insightList: emissionsInsightsList,
                 data: totalEmissions,
             });
+            setLoading(false);
         };
         findSumOfConsumptionsBySiteIdAndTime();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -192,13 +198,13 @@ function ReportsInsights({ betweenDates, currentSite }: IReportsInsightsProp) {
             className="justify-content-center d-flex"
             data-testid="reportsInsights"
         >
-            <Insight insightData={costsInsight} />
+            <Insight insightData={costsInsight} isLoading={isLoading} />
 
-            <Insight insightData={electricityInsight} />
+            <Insight insightData={electricityInsight} isLoading={isLoading} />
 
-            <Insight insightData={gasInsight} />
+            <Insight insightData={gasInsight} isLoading={isLoading} />
 
-            <Insight insightData={emissionsInsight} />
+            <Insight insightData={emissionsInsight} isLoading={isLoading} />
         </Container>
     );
 }

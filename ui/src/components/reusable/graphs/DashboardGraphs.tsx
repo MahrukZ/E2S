@@ -11,6 +11,8 @@ interface DashboardGraphsProps {
 }
 
 function DashboardGraphs({ currentSite }: DashboardGraphsProps) {
+    const [isLoading, setLoading] = useState<Boolean>(false);
+
     const [electricityGraph, setElectricityGraph] = useState<ISingleGraph>({
         xData: [],
         yData: [],
@@ -63,6 +65,7 @@ function DashboardGraphs({ currentSite }: DashboardGraphsProps) {
 
             const now = new Date();
             const priorDate = new Date(new Date().setDate(now.getDate() - 30));
+            setLoading(true);
 
             const currentConsumptionsResponse =
                 await consumptionsService.findAllConsumptionsBySiteIdAndTime(
@@ -149,6 +152,7 @@ function DashboardGraphs({ currentSite }: DashboardGraphsProps) {
                 name0: "Electricity",
                 name1: "Gas",
             });
+            setLoading(false);
         };
 
         findAllConsumptionsBySiteIdAndTime();
@@ -162,15 +166,18 @@ function DashboardGraphs({ currentSite }: DashboardGraphsProps) {
             data-testid="graphContainer"
         >
             <Col className="d-flex graphContainer">
-                <SingleGraph graphData={electricityGraph} />
+                <SingleGraph
+                    graphData={electricityGraph}
+                    isLoading={isLoading}
+                />
 
-                <SingleGraph graphData={gasGraph} />
+                <SingleGraph graphData={gasGraph} isLoading={isLoading} />
 
-                <SingleGraph graphData={emissionsGraph} />
+                <SingleGraph graphData={emissionsGraph} isLoading={isLoading} />
             </Col>
 
             <Col className="d-flex graphContainer">
-                <DoubleGraph graphData={costsGraph} />
+                <DoubleGraph graphData={costsGraph} isLoading={isLoading} />
             </Col>
         </Container>
     );

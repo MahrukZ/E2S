@@ -5,6 +5,7 @@ import { ISums } from "./../datePicker/DatePicker";
 import "./Sums.css";
 import { ConsumptionsService } from "../../../services/consumptions.service";
 import { SitesService } from "../../../services/sites.service";
+import ReactLoading from "react-loading";
 
 interface ISumsProps {
     betweenDates: ISums;
@@ -12,6 +13,7 @@ interface ISumsProps {
 }
 
 function Sums({ betweenDates, currentSite }: ISumsProps) {
+    const [isLoading, setLoading] = useState<Boolean>(false);
     const currentSiteId = currentSite;
 
     const [consumptionsList, setConsumptionsList] = useState<String[]>([]);
@@ -23,6 +25,7 @@ function Sums({ betweenDates, currentSite }: ISumsProps) {
 
     useEffect(() => {
         const findSumOfConsumptionsBySiteIdAndTime = async () => {
+            setLoading(true);
             let finalConsumptions: String[] = [];
 
             let stringElectricityDemand: String;
@@ -85,6 +88,7 @@ function Sums({ betweenDates, currentSite }: ISumsProps) {
             setDateRange([from, to]);
             setConsumptionsList(finalConsumptions);
             setSiteName(currentSite);
+            setLoading(false);
         };
         findSumOfConsumptionsBySiteIdAndTime();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -95,24 +99,34 @@ function Sums({ betweenDates, currentSite }: ISumsProps) {
             <Card.Title>
                 Between {dateRange[0]} and {dateRange[1]} {siteName} had:
             </Card.Title>
-            <Card.Body>
-                <p></p>
-                <p>
-                    <b>Electricity Demand: {consumptionsList[0]} kWh</b>
-                </p>
-                <p>
-                    <b>Gas Demand: {consumptionsList[1]} kWh</b>
-                </p>
-                <p>
-                    <b>Electricity Costs: £ {consumptionsList[3]}</b>
-                </p>
-                <p>
-                    <b>Gas Costs: £ {consumptionsList[4]}</b>
-                </p>
-                <p>
-                    <b>Total Costs: £ {consumptionsList[2]}</b>
-                </p>
-            </Card.Body>
+            {isLoading ? (
+                <ReactLoading
+                    className="loaderAlignment"
+                    type="spin"
+                    color="#FFFFFF"
+                    height={"20%"}
+                    width={"20%"}
+                />
+            ) : (
+                <Card.Body>
+                    <p></p>
+                    <p>
+                        <b>Electricity Demand: {consumptionsList[0]} kWh</b>
+                    </p>
+                    <p>
+                        <b>Gas Demand: {consumptionsList[1]} kWh</b>
+                    </p>
+                    <p>
+                        <b>Electricity Costs: £ {consumptionsList[3]}</b>
+                    </p>
+                    <p>
+                        <b>Gas Costs: £ {consumptionsList[4]}</b>
+                    </p>
+                    <p>
+                        <b>Total Costs: £ {consumptionsList[2]}</b>
+                    </p>
+                </Card.Body>
+            )}
         </Card>
     );
 }

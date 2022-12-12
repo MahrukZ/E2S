@@ -14,6 +14,8 @@ interface DashboardInsightsProps {
 function DashboardInsights({ currentSite }: DashboardInsightsProps) {
     const currentSiteId = currentSite;
 
+    const [isLoading, setLoading] = useState<Boolean>(false);
+
     const [costsInsight, setCostsInsight] = useState<IInsightData>({
         title: "",
         insightList: [],
@@ -56,6 +58,7 @@ function DashboardInsights({ currentSite }: DashboardInsightsProps) {
         const getAllInsights = async () => {
             let finalInsights: String[] = [];
             let insightsList: String[] = [];
+            setLoading(true);
 
             const insightsTemplates = await insightsService.getInsights();
             // Currently just has 1 as the siteId, this will need to be changed
@@ -90,6 +93,7 @@ function DashboardInsights({ currentSite }: DashboardInsightsProps) {
             electricityInsightsList = [finalInsights[2], finalInsights[3]];
             gasInsightsList = [finalInsights[4], finalInsights[5]];
             emissionsInsightsList = [finalInsights[6], finalInsights[7]];
+            setLoading(false);
         };
         getAllInsights();
 
@@ -241,13 +245,16 @@ function DashboardInsights({ currentSite }: DashboardInsightsProps) {
             data-testid="dashboardInsights"
         >
             <Col className="d-flex insightsCol">
-                <Insight insightData={costsInsight} />
+                <Insight insightData={costsInsight} isLoading={isLoading} />
 
-                <Insight insightData={electricityInsight} />
+                <Insight
+                    insightData={electricityInsight}
+                    isLoading={isLoading}
+                />
 
-                <Insight insightData={gasInsight} />
+                <Insight insightData={gasInsight} isLoading={isLoading} />
 
-                <Insight insightData={emissionsInsight} />
+                <Insight insightData={emissionsInsight} isLoading={isLoading} />
             </Col>
         </Container>
     );
