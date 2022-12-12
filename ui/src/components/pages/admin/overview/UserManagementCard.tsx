@@ -33,6 +33,7 @@ function UserManagementCard() {
             }
         };
         getTotalNumOfOrganisations();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [numOfUsers, numOfOrgs]);
 
     return (
