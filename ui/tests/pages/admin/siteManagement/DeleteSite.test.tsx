@@ -12,7 +12,7 @@ test("should render delete button element", () => {
     render(<DeleteSite id={1} setSitesList={mockSiteList} />);
 
     // When
-    const deleteSiteBtnElement = document.getElementById("deleteUserBtn");
+    const deleteSiteBtnElement = document.getElementById("deleteSiteBtn");
 
     // Then
     expect(deleteSiteBtnElement).toBeInTheDocument();

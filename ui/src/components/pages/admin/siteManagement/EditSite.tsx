@@ -66,7 +66,7 @@ function EditSite({ siteId, setSitesList }: IEditSiteProp) {
     return (
         <>
             <Button
-                id="editUserBtn"
+                id="editSiteBtn"
                 variant="outline-primary"
                 onClick={handleShow}
             >

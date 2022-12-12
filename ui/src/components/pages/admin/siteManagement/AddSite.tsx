@@ -68,7 +68,7 @@ function AddSite({ setSitesList }: IAddSiteProp) {
     return (
         <>
             <Button
-                id="addUserBtn"
+                id="addSiteBtn"
                 className="mt-4 mb-4"
                 variant="outline-success"
                 onClick={handleShow}

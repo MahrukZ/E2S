@@ -13,7 +13,7 @@ test("should render edit button element", () => {
     render(<EditSite siteId={mockId} setSitesList={mockSiteList} />);
 
     // When
-    const editSiteBtnElement = document.getElementById("editUserBtn");
+    const editSiteBtnElement = document.getElementById("editSiteBtn");
 
     // Then
     expect(editSiteBtnElement).toBeInTheDocument();

@@ -33,7 +33,7 @@ function DeleteSite({ id, setSitesList }: IDeleteBtnProp) {
     return (
         <>
             <Button
-                id="deleteUserBtn"
+                id="deleteSiteBtn"
                 variant="outline-danger"
                 onClick={handleShow}
             >
