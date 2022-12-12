@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import UserManagementCol from "./UserManagementCol";
+import { Container, Row } from "react-bootstrap";
+import UserManagementCard from "./UserManagementCard";
 import "./OverviewCols.css";
+import SiteManagementCard from "./SiteManagementCard";
 
 interface OverviewPageProps {
     setTopbarTitle: any;
@@ -16,8 +17,8 @@ function OverviewPage({ setTopbarTitle }: OverviewPageProps) {
     return (
         <Container className="mt-5">
             <Row className="cardRow">
-                <UserManagementCol />
-                <Col>Site Management</Col>
+                <UserManagementCard />
+                <SiteManagementCard />
             </Row>
         </Container>
     );
