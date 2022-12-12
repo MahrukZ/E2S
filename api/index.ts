@@ -8,6 +8,7 @@ import jwt from "jsonwebtoken";
 import cors from "cors";
 import consumptions from "./routes/consumptions/consumptions.routes";
 import sitesAndUsers from "./routes/sitesAndUsers/sitesAndusers.routes";
+import sitesHasUsers from "./routes/sitesHasUsers/sitesHasUsers.routes";
 import insights from "./routes/insights/insights.routes";
 import users from "./routes/users/users.routes";
 import sites from "./routes/sites/sites.routes";
@@ -134,6 +135,7 @@ routes.use(consumptions);
 routes.use(insights);
 routes.use(sites);
 routes.use(sitesAndUsers);
+routes.use(sitesHasUsers);
 routes.use(organisations);
 routes.use(uploadFile);
 
