@@ -15,7 +15,6 @@ function SiteManagementCard() {
                 const sites =
                     await siteManagementService.getAllSiteManagements();
                 setNumOfSites(sites.data.length);
-                console.log(sites.data);
             } catch (err) {
                 console.log(err);
             }
