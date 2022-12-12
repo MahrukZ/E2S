@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import UserManagementCol from "./UserManagementCol";
 
 interface OverviewPageProps {
     setTopbarTitle: any;
@@ -11,9 +13,12 @@ function OverviewPage({ setTopbarTitle }: OverviewPageProps) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
-        <div data-testid="overview" className="text-center">
-            <h1>Overview</h1>
-        </div>
+        <Container className="mt-4">
+            <Row>
+                <UserManagementCol />
+                <Col>Site Management</Col>
+            </Row>
+        </Container>
     );
 }
 
