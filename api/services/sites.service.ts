@@ -27,4 +27,8 @@ export class SiteService {
     async findSiteById(siteId: number) {
         return await this.siteRepository.findSiteById(siteId);
     }
+
+    async findSitesByOrgId(orgId: number) {
+        return await this.siteRepository.findSitesByOrgId(orgId);
+    }
 }

@@ -34,4 +34,8 @@ router.get("/api/site/:id", async (req, res) => {
     siteController.findSiteById(req, res);
 });
 
+router.get("/api/sites/:orgId", async (req, res) => {
+    siteController.findSitesByOrgId(req, res);
+});
+
 export default router;

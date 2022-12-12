@@ -43,8 +43,15 @@ function AddUser({ setUsersList }: IAddUserProp) {
     const getAllOrganisations = async () => {
         try {
             const orgs = await organisationsService.getAllOrganisations();
-            const sites = await siteService.getSites();
             setOrgsList(orgs.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const findSitesByOrgId = async (orgId: number) => {
+        try {
+            const sites = await siteService.findSitesByOrgId(orgId);
             setSitesList(sites.data);
         } catch (err) {
             console.log(err);
@@ -199,6 +206,9 @@ function AddUser({ setUsersList }: IAddUserProp) {
                                                 ...user,
                                                 orgId: parseInt(e.target.value),
                                             });
+                                            findSitesByOrgId(
+                                                parseInt(e.target.value)
+                                            );
                                         }}
                                     >
                                         <option value="0">

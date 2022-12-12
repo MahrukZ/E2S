@@ -101,4 +101,24 @@ export class SiteController {
                 });
             });
     }
+
+    async findSitesByOrgId(req: Request, res: Response): Promise<any> {
+        return this.siteService
+            .findSitesByOrgId(parseInt(req.params.orgId))
+            .then((data) => {
+                res.status(200).json({
+                    message: "Success",
+                    status: 200,
+                    data,
+                });
+            })
+            .catch((err) => {
+                res.status(500).json({
+                    message:
+                        err.message ||
+                        "server error: failed to fetch site by org id.",
+                    status: 500,
+                });
+            });
+    }
 }
