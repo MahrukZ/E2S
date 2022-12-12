@@ -3,18 +3,22 @@ import { Card, Col, Row } from "react-bootstrap";
 import { FaBuilding } from "react-icons/fa";
 import { SiteManagementService } from "../../../../services/siteManagement.service";
 import "./OverviewCols.css";
+import ReactLoading from "react-loading";
 
 function SiteManagementCard() {
     const [numOfSites, setNumOfSites] = useState(0);
+    const [isLoading, setLoading] = useState<Boolean>(false);
 
     const siteManagementService = new SiteManagementService();
 
     useEffect(() => {
         const getTotalNumOfSitesAndLocations = async () => {
+            setLoading(true);
             try {
                 const sites =
                     await siteManagementService.getAllSiteManagements();
                 setNumOfSites(sites.data.length);
+                setLoading(false);
             } catch (err) {
                 console.log(err);
             }
@@ -39,7 +43,17 @@ function SiteManagementCard() {
                         <Row>
                             <Col>
                                 <h3>Sites</h3>
-                                <h4>{numOfSites}</h4>
+                                {isLoading ? (
+                                    <ReactLoading
+                                        className="loaderAlignment"
+                                        type="spin"
+                                        color="#203841"
+                                        height={"40%"}
+                                        width={"40%"}
+                                    />
+                                ) : (
+                                    <h4>{numOfSites}</h4>
+                                )}
                             </Col>
                         </Row>
                     </Card.Body>
