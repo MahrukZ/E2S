@@ -24,7 +24,7 @@ function SiteManagementCard() {
     }, [numOfSites]);
 
     return (
-        <Col>
+        <Col id="siteManagementCol">
             <a href="/admin/site-management">
                 <Card className="cardStyle">
                     <Card.Title className="cardContent">
