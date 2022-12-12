@@ -41,25 +41,28 @@ function ReportsInsights({ betweenDates, currentSite }: IReportsInsightsProp) {
         data: "",
     });
 
-    const [costsInsightsList, setCostsInsightsList] = useState<String[]>([]);
-    const [electricityInsightsList, setElectricityInsightsList] = useState<
-        String[]
-    >([]);
-    const [gasInsightsList, setGasInsightsList] = useState<String[]>([]);
-    const [emissionsInsightsList, setEmissionsInsightsList] = useState<
-        String[]
-    >([]);
-
     useEffect(() => {
         const insightsService = new InsightsService();
         const sitesService = new SitesService();
+        const consumptionsService = new ConsumptionsService();
 
         const from: Date = betweenDates.dateRange[0]["startDate"]!;
         const to: Date = betweenDates.dateRange[0]["endDate"]!;
 
-        const getAllInsights = async () => {
+        let totalElectricityDemand: string;
+        let totalGasDemand: string;
+        let totalEmissions: string;
+        let totalCosts: string;
+
+        const findSumOfConsumptionsBySiteIdAndTime = async () => {
             let finalInsights: String[] = [];
             let insightsList: String[] = [];
+
+            let costsInsightsList: String[] = [];
+            let electricityInsightsList: String[] = [];
+            let gasInsightsList: String[] = [];
+            let emissionsInsightsList: String[] = [];
+
             setLoading(true);
 
             const insightsTemplates = await insightsService.getInsights();
@@ -101,29 +104,12 @@ function ReportsInsights({ betweenDates, currentSite }: IReportsInsightsProp) {
                 finalInsights.push(splitted[0]);
                 finalInsights.push(splitted[1]);
             }
-            setCostsInsightsList([finalInsights[0], finalInsights[1]]);
-            setElectricityInsightsList([finalInsights[2], finalInsights[3]]);
-            setGasInsightsList([finalInsights[4], finalInsights[5]]);
-            setEmissionsInsightsList([finalInsights[6], finalInsights[7]]);
-            setLoading(false);
-        };
-        getAllInsights();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [betweenDates]);
 
-    useEffect(() => {
-        const consumptionsService = new ConsumptionsService();
+            costsInsightsList = [finalInsights[0], finalInsights[1]];
+            electricityInsightsList = [finalInsights[2], finalInsights[3]];
+            gasInsightsList = [finalInsights[4], finalInsights[5]];
+            emissionsInsightsList = [finalInsights[6], finalInsights[7]];
 
-        const from: Date = betweenDates.dateRange[0]["startDate"]!;
-        const to: Date = betweenDates.dateRange[0]["endDate"]!;
-
-        let totalElectricityDemand: string;
-        let totalGasDemand: string;
-        let totalEmissions: string;
-        let totalCosts: string;
-
-        const findSumOfConsumptionsBySiteIdAndTime = async () => {
-            setLoading(true);
             const lastWeekConsumptionsResponse =
                 await consumptionsService.findSumOfConsumptionsBySiteIdAndTime(
                     from,
@@ -185,10 +171,10 @@ function ReportsInsights({ betweenDates, currentSite }: IReportsInsightsProp) {
         findSumOfConsumptionsBySiteIdAndTime();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
-        electricityInsightsList,
-        gasInsightsList,
-        emissionsInsightsList,
-        costsInsightsList,
+        // electricityInsightsList,
+        // gasInsightsList,
+        // emissionsInsightsList,
+        // costsInsightsList,
         betweenDates,
     ]);
 
@@ -198,13 +184,25 @@ function ReportsInsights({ betweenDates, currentSite }: IReportsInsightsProp) {
             className="justify-content-center d-flex"
             data-testid="reportsInsights"
         >
-            <Insight insightData={costsInsight} isLoading={isLoading} />
+            <Insight
+                insightData={costsInsight}
+                isLoading={isLoading}
+            />
 
-            <Insight insightData={electricityInsight} isLoading={isLoading} />
+            <Insight
+                insightData={electricityInsight}
+                isLoading={isLoading}
+            />
 
-            <Insight insightData={gasInsight} isLoading={isLoading} />
+            <Insight
+                insightData={gasInsight}
+                isLoading={isLoading}
+            />
 
-            <Insight insightData={emissionsInsight} isLoading={isLoading} />
+            <Insight
+                insightData={emissionsInsight}
+                isLoading={isLoading}
+            />
         </Container>
     );
 }
