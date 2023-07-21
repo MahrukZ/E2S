@@ -4,11 +4,11 @@
 
 ## Table of Contents
 
-- [About](#about)
-
 - [Description](#description)
 
-- [Requirements](#requirements)
+- [Key Features](#key-features)
+
+- [Benefits](#benefits)
 
 - [Tech Stack](#tech-stack)
 
@@ -17,42 +17,49 @@
 - [Clone Repository](#clone-repository)
 
 - [Installation](#installation)
-
-- [Documentation](#documentation)
-
-  
-
-## About
-
   
 
 ### Description
 
   
+E2S (Energy Efficiency Software) is a cutting-edge Software as a Service (SaaS) web application that aims to revolutionize energy management for businesses and organizations. It centralizes energy data from various sources and provides insightful data visualization tools to help users understand and optimize their energy usage effectively. E2S is designed to empower customers with valuable insights, enabling them to identify energy-saving opportunities, reduce energy costs, and minimize their carbon footprint.
 
-Lorem Ipsum
 
-  
+### Key Features
+- Centralized Energy Data: E2S gathers and consolidates energy data streams from different sources, providing users with a unified view of their energy consumption and performance.
 
-### Requirements
+- Data Visualization: The application presents energy data in the form of interactive and intuitive energy flow diagrams, making it easier for users to analyze trends and patterns.
 
-  
+- Cost Forecasting: E2S offers a powerful cost forecasting feature that estimates future energy costs by analyzing historical data, supplier forecasts, and temperature-based consumption patterns.
 
-To read the requirements for this project, see [requirements](https://git.cardiff.ac.uk/c2061455/team_2_e2s/-/requirements_management/requirements).
+- Weekly Email Reports: Users receive weekly email reports summarizing their energy consumption, costs, and providing valuable insights to identify potential energy-saving opportunities.
 
-  
+
+### Benefits
+- Save Money: By utilizing E2S's cost forecasting and insights, businesses can make informed decisions to optimize energy usage, leading to significant cost savings on site energy expenses.
+
+- Reduce Carbon Emissions: E2S empowers organizations to reduce their carbon footprint by identifying and implementing energy-saving strategies.
+
+- Time Savings: Facility energy managers can streamline their energy management tasks with E2S, as it automates regular reporting and provides key information directly through weekly email reports.
+
+
+
 
 ### Tech Stack
 
   
+**_Features_**
+- MySQL Database: The project utilizes MySQL as the database management system to store and manage application data efficiently.
 
-To read about our proposed tech stack, see the [tech stack page](https://git.cardiff.ac.uk/c2061455/team_2_e2s/-/wikis/Proposed-Tech-Stack) of our Wiki.
+- Node.js/Express.js Backend: The backend of the application is built using Node.js and Express.js, providing a RESTful API to handle data requests and interactions with the database.
+
+- React with TypeScript Frontend: The frontend is developed using React with TypeScript, ensuring type safety and enhanced code quality throughout the application.
 
   
 
 ## Getting started
 
-  
+To run E2S on your local machine, follow these steps:
 
 ### Clone Repository
 
@@ -111,11 +118,3 @@ All passwords on the database are hashed with bcrypt. The un-hashed user passwor
 - And select the boxes next to Format on paste and Format on save
 
 - Make sure javaScript format enable is selected as well
-
-  
-
-## Documentation
-
-- Visit the GitLab [Wiki](https://git.cardiff.ac.uk/c2061455/team_2_e2s/-/wikis/home) produced by the contributors of this repository.
-
-- Here are some links to helpful documentation and resources [here](https://git.cardiff.ac.uk/c2061455/team_2_e2s/-/wikis/Learning-Resources).
