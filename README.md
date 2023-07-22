@@ -8,6 +8,8 @@
 
 - [Key Features](#key-features)
 
+- [Architecture](#architecture)
+
 - [Benefits](#benefits)
 
 - [Tech Stack](#tech-stack)
@@ -43,6 +45,24 @@ E2S (Energy Efficiency Software) is a cutting-edge Software as a Service (SaaS) 
 - Time Savings: Facility energy managers can streamline their energy management tasks with E2S, as it automates regular reporting and provides key information directly through weekly email reports.
 
 
+### Architecture
+
+The C4 diagram for our project covers three levels: the context, containers, and components. These levels allow us to map out the structure of our project and provide an understanding of how our files should be named and organized. At this level of detail, we have everything we need to start writing code in our preferred Integrated Development Environment (IDE).
+
+**C4 Levels Explained**
+
+
+- **Context Level**: 
+This level provides an overview of our project's high-level context, including external systems or users interacting with our application. It helps us understand the system's boundaries and external dependencies.
+
+- **Containers Level**: 
+The containers level focuses on the major architectural building blocks of our application. It outlines the different subsystems or services that make up our project and the interactions between them. This level aids in defining the high-level structure of our application.
+
+- **Components Level**: 
+At this level, we break down the containers into their individual components or classes. It gives us a more detailed view of the internal structure of each container. This level helps with understanding the relationships and responsibilities of each component.
+
+
+![Team 2 C4 Architecture (1)](https://github.com/Mahrukhz/E2S/assets/68380691/34929ffa-93bc-49fb-ae45-1de1f3c85b59)
 
 
 ### Tech Stack
@@ -69,7 +89,7 @@ Clone the repository:
 
 ```
 
-git clone https://git.cardiff.ac.uk/c2061455/team_2_e2s.git
+git clone https://github.com/Mahrukhz/E2S.git
 
 ```
 
@@ -87,18 +107,12 @@ git clone https://git.cardiff.ac.uk/c2061455/team_2_e2s.git
 
 - To setup your machine to work on the user interface, consult to the `README.md` in `/ui` directory.
 
-  
-
-**_If your machine is not yet configured:_**
-
-- Consult the Wiki for instructions on how to [set up your machine](https://git.cardiff.ac.uk/c2061455/team_2_e2s/-/wikis/Setting-Up-Your-Machine)
 
 ## Site Accounts
 All passwords on the database are hashed with bcrypt. The un-hashed user passwords are below:
 - Martin James: martin12345
 - Rhy Jones: rhy12345
 - James Ohay: james12345
-- Helen Wilkins: helen12345
 - Max Norris: max12345
 - Johnny Bravo: johnny12345
 - Jade Pierce: jade12345
